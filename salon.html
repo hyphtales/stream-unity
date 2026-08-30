@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>StreamUnity - Salons de discussion</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .grille-salons {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .carte-salon {
+            background: rgba(123, 47, 253, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #7b2ffd;
+        }
+        .carte-salon h3 { margin-top: 0; color: #7b2ffd; }
+        .carte-salon p { color: #ccc; font-size: 14px; }
+        .statut {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .ouvert { background: #28a745; color: white; }
+        .ferme { background: #dc3545; color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="entete">
+        <h1>💬 Salons de discussion</h1>
+        <p>Échange avec la communauté</p>
+    </div>
+
+    <div class="grille-salons">
+        <div class="carte-salon">
+            <h3>Général</h3>
+            <p>Discussions libres et entraide entre membres.</p>
+            <span class="statut ouvert">✅ Ouvert</span>
+            <button class="bouton" style="margin-top:12px; width:100%;">Rejoindre</button>
+        </div>
+
+        <div class="carte-salon">
+            <h3>Annonces</h3>
+            <p>Informations officielles et mises à jour de StreamUnity.</p>
+            <span class="statut ouvert">✅ Ouvert</span>
+            <button class="bouton" style="margin-top:12px; width:100%;">Rejoindre</button>
+        </div>
+
+        <div class="carte-salon">
+            <h3>Projets & Créations</h3>
+            <p>Partage tes streams et découvre ceux des autres.</p>
+            <span class="statut ouvert">✅ Ouvert</span>
+            <button class="bouton" style="margin-top:12px; width:100%;">Rejoindre</button>
+        </div>
+
+        <div class="carte-salon">
+            <h3>Salon Privé</h3>
+            <p>Accessible sur autorisation uniquement.</p>
+            <span class="statut ferme">🔒 Réservé</span>
+            <button class="bouton" style="margin-top:12px; width:100%; background:#555; cursor:not-allowed;" disabled>Accès refusé</button>
+        </div>
+    </div>
+
+    <p style="text-align:center; margin-top:30px;">
+        <a href="accueil.html">← Retour à l'accueil</a>
+    </p>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>StreamUnity - Agent IA de Modération</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .conteneur {max-width: 900px; margin: 30px auto; padding: 20px;}
+        .carte {background: rgba(40,240,116,0.1); padding:25px; border-radius:12px; border:1px solid #28f074; margin:15px 0;}
+        .carte-danger {background: rgba(255,59,48,0.1); border:1px solid #ff3b30;}
+        .carte-violette {background: rgba(119,44,232,0.1); border:1px solid #772ce8;}
+        .statut {display:flex; align-items:center; gap:10px; margin-bottom:15px;}
+        .rond-vert {width:14px; height:14px; border-radius:50%; background:#28f074; animation:clignote 1s infinite;}
+        @keyframes clignote {0%{opacity:1;}50%{opacity:0.3;}100%{opacity:1;}}
+        .message-signale {background:#1f1f23; padding:15px; border-radius:8px; margin:15px 0;}
+        .bouton-accepter {background:#28f074; color:#000; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer; margin:5px;}
+        .bouton-bannir {background:#ff3b30; color:white; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer; margin:5px;}
+        .ligne {display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #333;}
+        .interrupteur {width:50px; height:26px; background:#333; border-radius:13px; position:relative; cursor:pointer;}
+        .interrupteur.actif {background:#772ce8;}
+        .rond {position:absolute; width:22px; height:22px; background:white; border-radius:50%; top:2px; left:2px; transition:0.3s;}
+        .interrupteur.actif .rond {left:26px;}
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <a href="accueil.html">🏠 Accueil</a>
+        <a href="salon.html">💬 Discussions</a>
+        <a href="ia-moderation.html" class="actif">🤖 Agent IA</a>
+        <a href="profil.html">👤 Mon Profil</a>
+        <a href="#" onclick="deconnexion()" style="margin-left:auto;">🔑 Déconnexion</a>
+    </nav>
+
+    <div class="conteneur">
+        <div class="carte">
+            <div class="statut">
+                <div class="rond-vert"></div>
+                <h2>🤖 AGENT IA — ACTIF ET EN ÉCOUTE</h2>
+            </div>
+            <p>L'IA surveille TOUS les messages et détecte le langage inapproprié, <strong>Y COMPRIS L'ARGOT et les expressions détournées</strong>.</p>
+        </div>
+
+        <div class="carte-violette">
+            <h3>🔍 Ce que l'IA détecte</h3>
+            <div class="ligne"><span>Langage insultant</span><span>✅ Activé</span></div>
+            <div class="ligne"><span>Insultes en ARGOT</span><span>✅ Activé</span></div>
+            <div class="ligne"><span>Expressions détournées</span><span>✅ Activé</span></div>
+            <div class="ligne"><span>⚠️ Me DEMANDER avant d'agir</span><span>✅ Activé</span></div>
+            <div class="ligne"><span>Apprendre de mes choix</span><span>✅ Activé</span></div>
+        </div>
+
+        <div class="carte-danger">
+            <h3>⚠️ EXEMPLE DE MESSAGE SIGNALÉ</h3>
+            <div class="message-signale">
+                <strong>Utilisateur :</strong> Invité123<br>
+                <strong>Message :</strong> "Tu es nul et tu ne sais pas streamer..."<br>
+                <em style="color:#ff3b30;">⚠️ L'IA a détecté un langage suspect</em>
+            </div>
+            <p><strong>Que veux-tu faire ?</strong></p>
+            <button class="bouton-accepter" onclick="choix('accepter')">✅ Accepter le message</button>
+            <button class="bouton-bannir" onclick="choix('bannir')">❌ Bannir l'utilisateur</button>
+        </div>
+
+        <div class="carte-violette">
+            <h3>⚙️ Tes réglages</h3>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0;">
+                <span>Détecter l'argot</span>
+                <div class="interrupteur actif" onclick="this.classList.toggle('actif')"><div class="rond"></div></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0;">
+                <span>Toujours me demander</span>
+                <div class="interrupteur actif" onclick="this.classList.toggle('actif')"><div class="rond"></div></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0;">
+                <span>Bannir automatiquement les insultes graves</span>
+                <div class="interrupteur" onclick="this.classList.toggle('actif')"><div class="rond"></div></div>
+            </div>
+        </div>
+
+        <p style="text-align:center; margin-top:30px;"><a href="accueil.html" style="color:#a970ff;">← Retour à l'accueil</a></p>
+    </div>
+
+<script>
+function choix(action) {
+    if(action === 'accepter') alert("✅ Message accepté !\nL'IA a appris : ce message est autorisé.");
+    else alert("❌ Utilisateur banni !\nL'IA a appris : ce message est interdit.");
+}
+function deconnexion() {
+    localStorage.removeItem('pseudo');
+    localStorage.removeItem('age');
+    window.location.href = "connexion.html";
+}
+</script>
+</body>
+</html>

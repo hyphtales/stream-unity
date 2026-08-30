@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>StreamUnity - Accueil</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .grille {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 15px;
+            padding: 15px;
+            height: calc(100vh - 70px);
+        }
+        .menu-gauche {
+            background: #252538;
+            border-radius: 12px;
+            padding: 15px;
+        }
+        .contenu {
+            background: #252538;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .lien-menu {
+            display: block;
+            padding: 10px 12px;
+            margin: 4px 0;
+            border-radius: 6px;
+            color: #e0e0ff;
+            text-decoration: none;
+        }
+        .lien-menu:hover {
+            background: #38385c;
+            color: white;
+        }
+        .carte {
+            background: #2f2f46;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="entete">
+        <h1>🎮 StreamUnity</h1>
+        <p id="nom-utilisateur">Bienvenue sur StreamUnity</p>
+        <p style="text-align:right; margin-top:-40px;">
+            <a href="#" onclick="deconnexion()">🔒 Déconnexion</a>
+        </p>
+    </div>
+    <div class="grille">
+        <div class="menu-gauche">
+            <a href="accueil.html" class="lien-menu">🏠 Accueil</a>
+            <a href="salon.html" class="lien-menu">💬 Salons de discussion</a>
+            <a href="stream.html" class="lien-menu">📺 Streams en direct</a>
+            <a href="profil.html" class="lien-menu">👤 Mon Profil</a>
+            <a href="abonnements.html" class="lien-menu">💜 Abonnements</a>
+            <a href="regles.html" class="lien-menu">📜 Règles & Confidentialité</a>
+            <a href="revenus.html" class="lien-menu">💰 Revenus</a>
+        </div>
+        <div class="contenu">
+            <h2>Bienvenue sur StreamUnity 🎉</h2>
+            <p style="margin:15px 0; color:#ccc;">Ta communauté & ton streaming, réunis.</p>
+            <div class="carte">
+                <h3>📺 Streams en direct</h3>
+                <p>Regarde ou diffuse du contenu. Les sous-titres et traductions arrivent bientôt !</p>
+                <a href="stream.html" class="bouton">Voir les streams</a>
+            </div>
+            <div class="carte">
+                <h3>💬 Salons de discussion</h3>
+                <p>Échange avec la communauté. Les messages privés et salons privés demandent une autorisation.</p>
+                <a href="salon.html" class="bouton">Rejoindre un salon</a>
+            </div>
+            <div class="carte">
+                <h3>✅ Nos engagements</h3>
+                <ul style="margin-left:20px; color:#ccc;">
+                    <li>Tes données ne sont JAMAIS revendues</li>
+                    <li>Tu peux récupérer ton contenu à tout moment</li>
+                    <li>90% des revenus te reviennent</li>
+                    <li>Toute sanction est expliquée et contestable</li>
+                    <li>L'IA propose, TU décides</li>
+                    <li>Aide aux petits créateurs</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<script>
+window.onload = function() {
+    let pseudo = localStorage.getItem('pseudo');
+    if(pseudo) {
+        document.getElementById('nom-utilisateur').textContent = "Bienvenue, " + pseudo + " !";
+    } else {
+        document.getElementById('nom-utilisateur').textContent = "Bienvenue, invité !";
+    }
+};
+function deconnexion() {
+    localStorage.removeItem('pseudo');
+    localStorage.removeItem('age');
+    window.location.href = "connexion.html";
+}
+</script>
+</body>
+</html>

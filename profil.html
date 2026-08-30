@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>StreamUnity - Mon Profil</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .conteneur {max-width: 900px; margin: 30px auto; padding: 20px;}
+        .entete-profil {display: flex; align-items: center; gap: 25px; margin-bottom: 30px; background: rgba(119,44,232,0.1); padding: 25px; border-radius: 12px;}
+        .avatar {width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #772ce8, #9147ff); display: flex; align-items: center; justify-content: center; font-size: 48px;}
+        .niveau {font-size: 28px; font-weight: bold; color: #772ce8;}
+        .barre-niveau {height: 12px; background: #2f2f35; border-radius: 6px; margin-top: 8px;}
+        .progression {height: 100%; background: linear-gradient(90deg, #772ce8, #9147ff); border-radius: 6px; width: 65%;}
+        .grille-badges {display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-top: 20px;}
+        .badge {background: #1f1f23; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid transparent; transition: all 0.2s;}
+        .badge.debloque {border-color: #772ce8; background: rgba(119,44,232,0.15);}
+        .badge.verrouille {opacity: 0.5; border-color: #444;}
+        .badge-emoji {font-size: 32px; margin-bottom: 8px;}
+        .grille-revenus {display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;}
+        .carte-revenus {background: rgba(119,44,232,0.1); padding: 25px; border-radius: 12px;}
+        .gros-chiffre {font-size: 42px; font-weight: bold; color: #772ce8;}
+        .part-createur {color: #28f074; font-weight: bold;}
+        .part-plateforme {color: #888;}
+        .bouton-offrir {background: #28f074; color: #000; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px;}
+        .bouton-offrir:hover {background: #4dff91;}
+    </style>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <a href="accueil.html">🏠 Accueil</a>
+        <a href="stream.html">📺 Streams</a>
+        <a href="salon.html">💬 Discussions</a>
+        <a href="abonnements.html">💜 Abonnements</a>
+        <a href="profil.html" class="actif">👤 Mon Profil</a>
+        <a href="#" onclick="deconnexion()" style="margin-left:auto;">🔑 Déconnexion</a>
+    </nav>
+
+    <div class="conteneur">
+
+        <!-- En-tête Profil -->
+        <div class="entete-profil">
+            <div class="avatar">👤</div>
+            <div style="flex:1;">
+                <h1 id="pseudo-affiche">Utilisateur</h1>
+                <div class="niveau">Niveau <span id="niveau-num">3</span> — Fidèle</div>
+                <div class="barre-niveau"><div class="progression"></div></div>
+                <small>65% vers le Niveau 4</small>
+            </div>
+            <button class="bouton-offrir" onclick="offrirRecompense()">🎁 Offrir une récompense</button>
+        </div>
+
+        <!-- Répartition des revenus -->
+        <h2>💰 Tes Revenus</h2>
+        <div class="grille-revenus">
+            <div class="carte-revenus">
+                <h3>Total gagné</h3>
+                <div class="gros-chiffre">0,00 €</div>
+                <p style="color:#888;">Tes gains depuis ton inscription</p>
+                <hr style="border:none; border-top:1px solid #333; margin:15px 0;">
+                <p class="part-createur">✅ À toi : 90%</p>
+                <p class="part-plateforme">⚙️ Frais plateforme : 10%</p>
+                <p style="font-size:12px; color:#888; margin-top:10px;">Sur Twitch : 50-70% pour toi<br>Sur StreamUnity : <strong>90% pour toi !</strong></p>
+            </div>
+            <div class="carte-revenus">
+                <h3>Statut</h3>
+                <p style="font-size:18px; color:#28f074; font-weight:bold;">✨ Créateur vérifié</p>
+                <p>Tu peux créer des streams et gagner des revenus</p>
+                <button class="bouton" style="width:100%; margin-top:15px;">📊 Voir détails des paiements</button>
+            </div>
+        </div>
+
+        <!-- Tes Badges -->
+        <h2 style="margin-top:40px;">🏅 Tes Badges</h2>
+        <div class="grille-badges">
+            <div class="badge debloque">
+                <div class="badge-emoji">🎉</div>
+                <div><strong>Premier pas</strong></div>
+                <small style="color:#888;">Premier message</small>
+            </div>
+            <div class="badge debloque">
+                <div class="badge-emoji">💬</div>
+                <div><strong>Bavard</strong></div>
+                <small style="color:#888;">100 messages</small>
+            </div>
+            <div class="badge debloque">
+                <div class="badge-emoji">🔥</div>
+                <div><strong>Toujours là</strong></div>
+                <small style="color:#888;">30 jours actif</small>
+            </div>
+            <div class="badge debloque">
+                <div class="badge-emoji">💜</div>
+                <div><strong>Supporter</strong></div>
+                <small style="color:#888;">Abonné</small>
+            </div>
+            <div class="badge verrouille">
+                <div class="badge-emoji">⭐</div>
+                <div><strong>Étoile montante</strong></div>
+                <small style="color:#888;">500 messages</small>
+            </div>
+            <div class="badge verrouille">
+                <div class="badge-emoji">👑</div>
+                <div><strong>Légende</strong></div>
+                <small style="color:#888;">Niveau maximum</small>
+            </div>
+        </div>
+
+        <!-- L'Agent IA de Modération -->
+        <h2 style="margin-top:40px;">🤖 Agent IA de Modération</h2>
+        <div style="background:rgba(40,240,116,0.1); padding:20px; border-radius:12px; border:1px solid #28f074;">
+            <p style="color:#28f074; font-weight:bold;">✅ IA ACTIVÉE ET EN ÉCOUTE</p>
+            <p>L'IA surveille les messages et détecte le langage inapproprié, y compris l'argot et les expressions détournées.</p>
+            <p style="color:#888; font-size:14px;">Quand un message est signalé, <strong>elle te demande :</strong><br>
+            <em>"⚠️ Ce message pourrait être inapproprié. Accepter ou Bannir ?"</em></p>
+            <label style="display:block; margin-top:10px;"><input type="checkbox" checked> Activer la détection de l'argot</label>
+            <label style="display:block;"><input type="checkbox" checked> Me demander avant de bannir</label>
+        </div>
+
+        <p style="text-align:center; margin-top:40px;"><a href="accueil.html" style="color:#a970ff;">← Retour à l'accueil</a></p>
+    </div>
+
+<script>
+window.onload = function() {
+    let pseudo = localStorage.getItem('pseudo');
+    if(pseudo) document.getElementById('pseudo-affiche').textContent = pseudo;
+};
+
+function offrirRecompense() {
+    alert("🎁 Fonctionnalité : Tu peux offrir un badge, un accès VIP ou une récompense à qui tu veux !\n\n→ Sélectionne un utilisateur → choisis ce que tu offres → valide !");
+}
+
+function deconnexion() {
+    localStorage.removeItem('pseudo');
+    localStorage.removeItem('age');
+    window.location.href = "connexion.html";
+}
+</script>
+
+</body>
+</html>

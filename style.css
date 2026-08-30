@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #2a0854, #4b1b8c);
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.entete {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(123, 47, 253, 0.3);
+}
+
+.entete h1 {
+    color: #7b2ffd;
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.entete p {
+    color: #d4bfff;
+    font-size: 15px;
+}
+
+.bouton {
+    background: linear-gradient(90deg, #7b2ffd, #9b2ffd);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.bouton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(123, 47, 253, 0.4);
+}
+
+.bouton-vert {
+    background: linear-gradient(90deg, #28a745, #34ce57);
+}
+
+input, select {
+    width: 100%;
+    padding: 10px 12px;
+    margin: 6px 0 14px 0;
+    border: 2px solid rgba(123, 47, 253, 0.3);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    color: white;
+    font-size: 14px;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: #7b2ffd;
+}
+
+label {
+    color: #d4bfff;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+a {
+    color: #b794ff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #7b2ffd;
+    text-decoration: underline;
+}

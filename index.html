@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>StreamUnity - Connexion</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .boite { width: 380px; }
+        .onglets { display: flex; margin-bottom: 20px; }
+        .onglet {
+            flex: 1; padding: 10px; text-align: center;
+            cursor: pointer; border-bottom: 3px solid transparent;
+        }
+        .onglet.actif {
+            border-bottom: 3px solid #7b2ffd;
+            color: #7b2ffd; font-weight: bold;
+        }
+        .cache { display: none; }
+        .avertissement {
+            background: rgba(123,47,253,0.15);
+            padding: 12px; border-radius: 8px;
+            margin: 15px 0; font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="boite">
+    <h1 style="text-align:center; color:#7b2ffd; margin-bottom:10px;">StreamUnity</h1>
+    <p style="text-align:center; color:#aaa; margin-bottom:25px;">Communauté & Streaming</p>
+
+    <div class="onglets">
+        <div class="onglet actif" onclick="voirConnexion()">Connexion</div>
+        <div class="onglet" onclick="voirInscription()">S'inscrire</div>
+    </div>
+
+    <div id="form-connexion">
+        <label>E-mail ou identifiant</label>
+        <input type="text" id="email" placeholder="ton@email.com">
+
+        <label>Mot de passe</label>
+        <input type="password" id="mdp" placeholder="••••••••••">
+
+        <button class="bouton" style="width:100%; margin-top:8px;" onclick="seConnecter()">Se connecter</button>
+        <p style="text-align:center; margin-top:15px; font-size:14px; color:#aaa;">
+            <a href="#">Mot de passe oublié ?</a>
+        </p>
+    </div>
+
+    <div id="form-inscription" class="cache">
+        <label>Choisis un identifiant</label>
+        <input type="text" id="pseudo" placeholder="Ton pseudo">
+
+        <label>E-mail</label>
+        <input type="email" id="email-insc" placeholder="ton@email.com">
+
+        <label>Mot de passe (10 caractères minimum)</label>
+        <input type="password" id="mdp-insc" placeholder="Au moins 1 majuscule + 1 chiffre">
+
+        <label>Âge</label>
+        <select id="age">
+            <option value="">Choisis ton âge</option>
+            <option value="-13">Moins de 13 ans — interdit</option>
+            <option value="13-15">13 à 15 ans (accord parental)</option>
+            <option value="15-17">15 à 17 ans (limité)</option>
+            <option value="18+">18 ans et plus</option>
+        </select>
+
+        <div class="avertissement">
+            ⚠️ Moins de 13 ans : inscription interdite.<br>
+            13-15 ans : accord parental obligatoire.<br>
+            15-17 ans : compte limité, pas de revenus sans accord.<br>
+            🔒 Tes données ne seront JAMAIS revendues.
+        </div>
+
+        <label style="display:flex; gap:8px; align-items:center;">
+            <input type="checkbox" id="accepte" style="width:auto;">
+            J'accepte les règles et la confidentialité
+        </label>
+
+        <button class="bouton bouton-vert" style="width:100%; margin-top:12px;" onclick="creerCompte()">Créer mon compte</button>
+    </div>
+</div>
+
+<script>
+function voirConnexion(){
+    document.getElementById('form-connexion').classList.remove('cache');
+    document.getElementById('form-inscription').classList.add('cache');
+    document.querySelectorAll('.onglet')[0].classList.add('actif');
+    document.querySelectorAll('.onglet')[1].classList.remove('actif');
+}
+function voirInscription(){
+    document.getElementById('form-connexion').classList.add('cache');
+    document.getElementById('form-inscription').classList.remove('cache');
+    document.querySelectorAll('.onglet')[0].classList.remove('actif');
+    document.querySelectorAll('.onglet')[1].classListList.add('actif');
+}
+
+function verifierMotDePasse(mdp, pseudo){
+    if(mdp.length < 10) return "Minimum 10 caractères";
+    if(!/[A-Z]/.test(mdp)) return "Au moins une majuscule";
+    if(!/[a-z]/.test(mdp)) return "Au moins une minuscule";
+    if(!/[0-9]/.test(mdp)) return "Au moins un chiffre";
+    if(pseudo && mdp.toLowerCase().includes(pseudo.toLowerCase().replace(/\s/g,''))) return "Ne prends pas ton pseudo en mot de passe";
+    return "OK";
+}
+
+function creerCompte(){
+    let pseudo = document.getElementById('pseudo').value.trim();
+    let mdp = document.getElementById('mdp-insc').value;
+    let age = document.getElementById('age').value;
+    let accepte = document.getElementById('accepte').checked;
+
+    let verif = verifierMotDePasse(mdp, pseudo);
+    if(verif !== "OK") { alert("Mot de passe invalide : " + verif); return; }
+    if(!pseudo) { alert("Indique un pseudo"); return; }
+    if(!age) { alert("Indique ton âge"); return; }
+    if(age === "-13") { alert("L'inscription est interdite aux moins de 13 ans."); return; }
+    if(!accepte) { alert("Tu dois accepter les règles."); return; }
+
+    localStorage.setItem('pseudo', pseudo);
+    localStorage.setItem('age', age);
+    alert("Compte créé ! Bienvenue sur StreamUnity 🎉");
+    window.location.href = "accueil.html";
+}
+
+function seConnecter(){
+    let pseudo = localStorage.getItem('pseudo');
+    if(pseudo) {
+        alert("Bon retour parmi nous, " + pseudo + " !");
+        window.location.href = "accueil.html";
+    } else {
+        alert("Aucun compte trouvé. Crée-en un d'abord !");
+        voirInscription();
+    }
+}
+</script>
+
+</body>
+</html>
