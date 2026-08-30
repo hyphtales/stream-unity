@@ -2,104 +2,80 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>StreamUnity - Accueil</title>
+    <title>StreamUnity — Accueil</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .grille {
-            display: grid;
-            grid-template-columns: 220px 1fr;
-            gap: 15px;
-            padding: 15px;
-            height: calc(100vh - 70px);
-        }
-        .menu-gauche {
-            background: #252538;
-            border-radius: 12px;
-            padding: 15px;
-        }
-        .contenu {
-            background: #252538;
-            border-radius: 12px;
-            padding: 20px;
-        }
-        .lien-menu {
-            display: block;
-            padding: 10px 12px;
-            margin: 4px 0;
-            border-radius: 6px;
-            color: #e0e0ff;
-            text-decoration: none;
-        }
-        .lien-menu:hover {
-            background: #38385c;
-            color: white;
-        }
-        .carte {
-            background: #2f2f46;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 10px 0;
-        }
+        * {outline: none; box-sizing: border-box; margin: 0; padding: 0;}
+        body {background: linear-gradient(135deg, #2a1060, #1a0840); color: white; font-family: sans-serif; min-height: 100vh;}
+        
+        /* --- MENU DE NAVIGATION --- */
+        .menu {background: rgba(0,0,0,0.3); padding: 15px; text-align: center; position: sticky; top: 0; z-index: 100;}
+        .menu a {display: inline-block; color: #ddd; text-decoration: none; padding: 10px 18px; margin: 0 5px; border-radius: 8px; transition: all 0.2s; font-size: 15px;}
+        .menu a:hover, .menu a.actif {background: #9147ff; color: white; font-weight: bold;}
+
+        /* --- CONTENU PRINCIPAL --- */
+        .conteneur {max-width: 900px; margin: 40px auto; padding: 20px; text-align: center;}
+        .conteneur h1 {font-size: 42px; margin-bottom: 10px; background: linear-gradient(90deg, #a970ff, #ff70c0); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+        .sous-titre {color: #aaa; font-size: 18px; margin-bottom: 40px;}
+        
+        /* --- CARTES --- */
+        .grille {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;}
+        .carte {background: rgba(255,255,255,0.05); border: 2px solid #5533aa; border-radius: 15px; padding: 25px; transition: all 0.3s; text-decoration: none; color: white; display: block;}
+        .carte:hover {border-color: #9147ff; transform: translateY(-5px); box-shadow: 0 0 20px rgba(145,71,255,0.3);}
+        .carte-icone {font-size: 40px; margin-bottom: 15px;}
+        .carte-titre {font-size: 20px; font-weight: bold; margin-bottom: 8px;}
+        .carte-texte {color: #aaa; font-size: 14px;}
     </style>
 </head>
 <body>
-    <div class="entete">
+
+    <!-- 📌 MENU AVEC LES DEUX NOUVEAUX LIENS -->
+    <nav class="menu">
+        <a href="accueil.html" class="actif">🏠 Accueil</a>
+        <a href="profil.html">👤 Profil</a>
+        <a href="abonnements.html">💜 Abonnements</a>
+        <a href="partenaire.html">🏅 Partenaires</a>
+        <a href="parametres.html">⚙️ Paramètres</a>
+        <a href="salon.html">💬 Chat</a>
+    </nav>
+
+    <!-- 📢 CONTENU PRINCIPAL -->
+    <div class="conteneur">
         <h1>🎮 StreamUnity</h1>
-        <p id="nom-utilisateur">Bienvenue sur StreamUnity</p>
-        <p style="text-align:right; margin-top:-40px;">
-            <a href="#" onclick="deconnexion()">🔒 Déconnexion</a>
-        </p>
-    </div>
-    <div class="grille">
-        <div class="menu-gauche">
-            <a href="accueil.html" class="lien-menu">🏠 Accueil</a>
-            <a href="salon.html" class="lien-menu">💬 Salons de discussion</a>
-            <a href="stream.html" class="lien-menu">📺 Streams en direct</a>
-            <a href="profil.html" class="lien-menu">👤 Mon Profil</a>
-            <a href="abonnements.html" class="lien-menu">💜 Abonnements</a>
-            <a href="regles.html" class="lien-menu">📜 Règles & Confidentialité</a>
-            <a href="revenus.html" class="lien-menu">💰 Revenus</a>
-        </div>
-        <div class="contenu">
-            <h2>Bienvenue sur StreamUnity 🎉</h2>
-            <p style="margin:15px 0; color:#ccc;">Ta communauté & ton streaming, réunis.</p>
-            <div class="carte">
-                <h3>📺 Streams en direct</h3>
-                <p>Regarde ou diffuse du contenu. Les sous-titres et traductions arrivent bientôt !</p>
-                <a href="stream.html" class="bouton">Voir les streams</a>
-            </div>
-            <div class="carte">
-                <h3>💬 Salons de discussion</h3>
-                <p>Échange avec la communauté. Les messages privés et salons privés demandent une autorisation.</p>
-                <a href="salon.html" class="bouton">Rejoindre un salon</a>
-            </div>
-            <div class="carte">
-                <h3>✅ Nos engagements</h3>
-                <ul style="margin-left:20px; color:#ccc;">
-                    <li>Tes données ne sont JAMAIS revendues</li>
-                    <li>Tu peux récupérer ton contenu à tout moment</li>
-                    <li>90% des revenus te reviennent</li>
-                    <li>Toute sanction est expliquée et contestable</li>
-                    <li>L'IA propose, TU décides</li>
-                    <li>Aide aux petits créateurs</li>
-                </ul>
-            </div>
+        <p class="sous-titre">Ta plateforme de jeux, de streams et de communauté</p>
+
+        <div class="grille">
+            <a href="profil.html" class="carte">
+                <div class="carte-icone">👤</div>
+                <div class="carte-titre">Ton Profil</div>
+                <div class="carte-texte">Modifie tes infos, ton avatar et tes réseaux</div>
+            </a>
+
+            <a href="abonnements.html" class="carte">
+                <div class="carte-icone">💜</div>
+                <div class="carte-titre">Abonnements</div>
+                <div class="carte-texte">Soutiens la plateforme et débloque des avantages</div>
+            </a>
+
+            <a href="partenaire.html" class="carte">
+                <div class="carte-icone">🏅</div>
+                <div class="carte-titre">Partenaires</div>
+                <div class="carte-texte">Découvre nos partenaires ou rejoins-nous</div>
+            </a>
+
+            <a href="parametres.html" class="carte">
+                <div class="carte-icone">⚙️</div>
+                <div class="carte-titre">Paramètres</div>
+                <div class="carte-texte">Connecte tes comptes, manettes et règle l'affichage</div>
+            </a>
+
+            <a href="salon.html" class="carte">
+                <div class="carte-icone">💬</div>
+                <div class="carte-titre">Discussions</div>
+                <div class="carte-texte">Viens discuter avec la communauté</div>
+            </a>
         </div>
     </div>
-<script>
-window.onload = function() {
-    let pseudo = localStorage.getItem('pseudo');
-    if(pseudo) {
-        document.getElementById('nom-utilisateur').textContent = "Bienvenue, " + pseudo + " !";
-    } else {
-        document.getElementById('nom-utilisateur').textContent = "Bienvenue, invité !";
-    }
-};
-function deconnexion() {
-    localStorage.removeItem('pseudo');
-    localStorage.removeItem('age');
-    window.location.href = "connexion.html";
-}
-</script>
+
 </body>
 </html>
