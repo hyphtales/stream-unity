@@ -6,15 +6,28 @@
     <link rel="stylesheet" href="style.css">
     <style>
         * {outline: none; box-sizing: border-box;}
+        body {background: #121217; color: white; font-family: sans-serif; margin: 0; padding: 0;}
         .conteneur {max-width: 900px; margin: 30px auto; padding: 20px;}
-        .entete-profil {display: flex; align-items: center; gap: 25px; margin-bottom: 30px; background: rgba(119,44,232,0.1); padding: 25px; border-radius: 12px; flex-wrap: wrap;}
+        .entete-profil {display: flex; align-items: flex-start; gap: 25px; margin-bottom: 30px; background: rgba(119,44,232,0.1); padding: 25px; border-radius: 12px; flex-wrap: wrap; position: relative;}
         
-        .avatar {width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #772ce8, #9147ff); display: flex; align-items: center; justify-content: center; overflow: hidden; border: 3px solid #9147ff;}
+        .avatar-container {position: relative; cursor: pointer;}
+        .avatar {width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #772ce8, #9147ff); display: flex; align-items: center; justify-content: center; overflow: hidden; border: 4px solid #9147ff;}
         .avatar img {width: 100%; height: 100%; object-fit: cover;}
-        .avatar-texte {font-size: 48px; color: white;}
+        .avatar-texte {font-size: 50px; color: white;}
+        .modifier-avatar {position: absolute; bottom: 0; right: 0; background: #9147ff; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: white;}
+        #choisir-avatar {display: none;}
 
-        .niveau {font-size: 28px; font-weight: bold; color: #772ce8;}
-        .barre-niveau {height: 12px; background: #2f2f35; border-radius: 6px; margin-top: 8px;}
+        .info-profil {flex: 1; min-width: 250px;}
+        .ligne-editable {display: flex; align-items: center; gap: 10px; margin: 8px 0;}
+        .champ-affiche {font-size: 28px; font-weight: bold; color: white;}
+        .champ-editable {background: #2a1060; border: 2px solid #5533aa; border-radius: 6px; padding: 8px 12px; color: white; font-size: 18px; width: 100%; max-width: 300px;}
+        .btn-modifier {background: none; border: none; color: #cc88ff; cursor: pointer; font-size: 16px; padding: 4px 8px; border-radius: 4px; transition: all 0.2s;}
+        .btn-modifier:hover {background: #442288;}
+        .btn-valider {background: #28f074; color: #000; border: none; padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; margin-left: 8px;}
+        .btn-annuler {background: #ff4444; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-left: 8px;}
+
+        .niveau {font-size: 18px; color: #772ce8; margin-top: 8px;}
+        .barre-niveau {height: 12px; background: #2f2f35; border-radius: 6px; margin-top: 8px; width: 250px;}
         .progression {height: 100%; background: linear-gradient(90deg, #772ce8, #9147ff); border-radius: 6px; width: 65%;}
         
         .grille-badges {display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px;}
@@ -30,24 +43,13 @@
         .part-plateforme {color: #888;}
         
         .bouton-offrir {background: #28f074; color: #000; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: all 0.2s;}
-        .bouton-offrir:hover, .bouton-offrir:focus {background: #4dff91; transform: scale(1.02);}
+        .bouton-offrir:hover {background: #4dff91; transform: scale(1.02);}
         .bouton {background: linear-gradient(90deg, #772ce8, #9147ff); color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: all 0.2s;}
-        .bouton:hover, .bouton:focus {opacity: 0.9; transform: scale(1.02);}
-        button, .montant-btn, .paiement-option, .onglet {cursor: pointer; transition: all 0.2s;}
-        button:focus, .montant-btn:focus, .onglet:focus {outline: 2px solid #cc88ff; outline-offset: 2px;}
-
-        .paiement-option {border: 1px solid transparent; border-radius: 10px; padding: 14px 18px; margin: 8px 0; background: #2b1055; display: flex; align-items: center; gap: 12px;}
-        .paiement-option:hover {background: #3b1a7a; border-left: 3px solid #9147ff; padding-left: 15px;}
-        .paiement-option.selectionne {background: #4b2090; border-left: 4px solid #cc88ff; box-shadow: 0 0 15px #cc88ff40;}
-
-        .montant-btn {border: 2px solid #772ce8; border-radius: 8px; padding: 10px 18px; background: #5522aa; color: white; font-weight: bold;}
-        .montant-btn:hover, .montant-btn:focus {border-color: #cc88ff; background: #6b2ed9;}
-        .montant-btn.selectionne {background: #772ce8; border-color: #cc88ff; box-shadow: 0 0 10px #cc88ff60;}
+        .bouton:hover {opacity: 0.9; transform: scale(1.02);}
 
         .section-messages {margin-top: 40px;}
         .onglets {display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 2px solid #333;}
-        .onglet {padding: 10px 20px; border-bottom: 3px solid transparent; transition: all 0.2s;}
-        .onglet:hover, .onglet:focus {color: #cc88ff;}
+        .onglet {padding: 10px 20px; border-bottom: 3px solid transparent; cursor: pointer;}
         .onglet.actif {border-bottom-color: #9147ff; color: #cc88ff; font-weight: bold;}
         .zone-chat {background: #1a1a1f; border: 2px solid #333; border-radius: 10px; padding: 15px; height: 200px; overflow-y: auto; margin-bottom: 10px;}
         .message {padding: 6px 10px; margin: 4px 0; border-radius: 6px;}
@@ -60,7 +62,6 @@
         .champ-saisie {display: flex; gap: 10px;}
         .champ-saisie input {flex:1; padding: 10px; border-radius: 6px; border: 2px solid #5533aa; background: #221144; color: white; font-size: 14px;}
         .champ-saisie input:disabled {background: #333; border-color: #555; cursor: not-allowed; opacity: 0.5;}
-        .champ-saisie input:focus {border-color: #9147ff; outline: none;}
         .info-chuchotement {color: #44ccff; font-size: 13px; margin-top: 8px; display: none;}
         .statut-mod {margin-top: 10px; padding: 8px 12px; border-radius: 6px; font-size: 13px;}
         .statut-mod.ok {background: #28f07422; color: #28f074;}
@@ -68,38 +69,97 @@
         .statut-mod.banni {background: #ff000033; color: #ff6666; font-weight: bold;}
         .statut-mod.grave {background: #ff000044; color: #ff4444; font-weight: bold; border: 1px solid #ff0000;}
 
+        .section-bio {margin-top: 25px; background: rgba(42,16,96,0.3); padding: 20px; border-radius: 10px;}
+        .zone-bio {min-height: 80px; white-space: pre-wrap; color: #ddd; line-height: 1.6;}
+        .editeur-bio {width: 100%; min-height: 80px; background: #2a1060; border: 2px solid #5533aa; border-radius: 6px; padding: 12px; color: white; resize: vertical; font-size: 14px;}
+
         .modal-fond {display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 999; justify-content: center; align-items: center;}
-        .modal-boite {background: linear-gradient(135deg, #2a1060, #1a0840); border: 2px solid #9945ff; border-radius: 16px; padding: 30px; max-width: 500px; width: 90%; color: white; box-shadow: 0 0 30px #9945ff60;}
-        .modal-boite h2 {color: #cc88ff; margin-top: 0;}
-        .fermer {float: right; background: none; border: none; color: #cc88ff; font-size: 24px; cursor: pointer; transition: all 0.2s;}
-        .fermer:hover, .fermer:focus {color: white; transform: scale(1.2);}
-        .montant-boutons {display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap;}
-        .badge-4x {margin-left: auto; color: #44ff88; font-size: 13px; font-weight: bold;}
-        .valider-btn {margin-top: 20px; width: 100%; padding: 12px; background: linear-gradient(90deg, #772ce8, #9147ff); border: none; border-radius: 8px; color: white; font-weight: bold; font-size: 16px; cursor: pointer; transition: all 0.2s;}
-        .valider-btn:hover, .valider-btn:focus {opacity: 0.95; transform: scale(1.01);}
-        .historique-ligne {padding: 12px 8px; border-bottom: 1px solid #6633bb40; text-align: center; color: #aaa;}
+        .modal-boite {background: linear-gradient(135deg, #2a1060, #1a0840); border: 2px solid #9945ff; border-radius: 16px; padding: 30px; max-width: 500px; width: 90%; color: white;}
+        .fermer {float: right; background: none; border: none; color: #cc88ff; font-size: 24px; cursor: pointer;}
+        .valider-btn {margin-top: 20px; width: 100%; padding: 12px; background: linear-gradient(90deg, #772ce8, #9147ff); border: none; border-radius: 8px; color: white; font-weight: bold; font-size: 16px; cursor: pointer;}
+        .pseudo-affiche {display: flex; align-items: center; gap: 10px; flex-wrap: wrap;}
     </style>
 </head>
 <body>
-    <nav class="nav-bar">
-        <a href="accueil.html">🏠 Accueil</a>
-        <a href="stream.html">📺 Streams</a>
-        <a href="salon.html">💬 Discussions</a>
-        <a href="abonnements.html">💜 Abonnements</a>
-        <a href="profil.html" class="actif">👤 Mon Profil</a>
-        <a href="#" onclick="deconnexion()" style="margin-left:auto;">🔑 Déconnexion</a>
+    <nav class="nav-bar" style="background: #1a1a1f; padding: 15px 20px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+        <a href="accueil.html" style="color: #a970ff; text-decoration: none;">🏠 Accueil</a>
+        <a href="stream.html" style="color: #a970ff; text-decoration: none;">📺 Streams</a>
+        <a href="salon.html" style="color: #a970ff; text-decoration: none;">💬 Discussions</a>
+        <a href="abonnements.html" style="color: #a970ff; text-decoration: none;">💜 Abonnements</a>
+        <a href="profil.html" class="actif" style="color: white; font-weight: bold; text-decoration: none;">👤 Mon Profil</a>
+        <a href="#" onclick="deconnexion()" style="margin-left:auto; color: #ff6666; text-decoration: none;">🔑 Déconnexion</a>
     </nav>
 
     <div class="conteneur">
         <div class="entete-profil">
-            <div class="avatar"><span class="avatar-texte">👤</span></div>
-            <div style="flex:1;">
-                <h1 id="pseudo-affiche">Utilisateur</h1>
-                <div class="niveau">Niveau <span id="niveau-num">3</span> — Fidèle</div>
-                <div class="barre-niveau"><div class="progression"></div></div>
-                <small>65% vers le Niveau 4</small>
+            <!-- 📸 AVATAR MODIFIABLE -->
+            <div class="avatar-container" onclick="document.getElementById('choisir-avatar').click()">
+                <div class="avatar" id="avatar-affiche">
+                    <span class="avatar-texte">👤</span>
+                </div>
+                <div class="modifier-avatar">✏️</div>
+                <input type="file" id="choisir-avatar" accept="image/*" onchange="changerAvatar(event)">
             </div>
+
+            <!-- 👤 INFOS PROFIL MODIFIABLES -->
+            <div class="info-profil">
+                <div class="pseudo-affiche">
+                    <h1 class="champ-affiche" id="pseudo-affiche">Utilisateur</h1>
+                    <button class="btn-modifier" onclick="editerPseudo()">✏️</button>
+                </div>
+
+                <div class="ligne-editable" id="zone-pseudo-edit" style="display:none;">
+                    <input type="text" id="pseudo-input" class="champ-editable" placeholder="Ton pseudo">
+                    <button class="btn-valider" onclick="sauvegarderPseudo()">✅</button>
+                    <button class="btn-annuler" onclick="annulerEdition('pseudo')">❌</button>
+                </div>
+
+                <div class="ligne-editable">
+                    <span style="color:#aaa;">Prénom :</span>
+                    <span id="prenom-affiche">—</span>
+                    <button class="btn-modifier" onclick="editerChamp('prenom')">✏️</button>
+                </div>
+                <div class="ligne-editable" id="zone-prenom-edit" style="display:none;">
+                    <input type="text" id="prenom-input" class="champ-editable" placeholder="Ton prénom">
+                    <button class="btn-valider" onclick="sauvegarderChamp('prenom')">✅</button>
+                    <button class="btn-annuler" onclick="annulerEdition('prenom')">❌</button>
+                </div>
+
+                <div class="ligne-editable">
+                    <span style="color:#aaa;">Nom :</span>
+                    <span id="nom-affiche">—</span>
+                    <button class="btn-modifier" onclick="editerChamp('nom')">✏️</button>
+                </div>
+                <div class="ligne-editable" id="zone-nom-edit" style="display:none;">
+                    <input type="text" id="nom-input" class="champ-editable" placeholder="Ton nom">
+                    <button class="btn-valider" onclick="sauvegarderChamp('nom')">✅</button>
+                    <button class="btn-annuler" onclick="annulerEdition('nom')">❌</button>
+                </div>
+
+                <div class="niveau">Niveau 3 — Fidèle</div>
+                <div class="barre-niveau"><div class="progression"></div></div>
+                <small style="color:#aaa;">65% vers le Niveau 4</small>
+            </div>
+
             <button class="bouton-offrir" onclick="ouvrirRecompense()">🎁 Offrir une récompense</button>
+        </div>
+
+        <!-- 📝 BIOGRAPHIE MODIFIABLE -->
+        <div class="section-bio">
+            <h3 style="margin-top:0; display:flex; justify-content:space-between; align-items:center;">
+                Biographie
+                <button class="btn-modifier" onclick="editerBio()">✏️ Modifier</button>
+            </h3>
+            <div class="zone-bio" id="bio-affiche">
+                <em style="color:#888;">Aucune biographie pour l'instant... Clique sur "Modifier" pour en écrire une !</em>
+            </div>
+            <div id="zone-bio-edit" style="display:none; margin-top:10px;">
+                <textarea class="editeur-bio" id="bio-input" placeholder="Présente-toi ! Qui es-tu ? Qu'est-ce que tu fais ?"></textarea>
+                <div style="margin-top:10px;">
+                    <button class="btn-valider" onclick="sauvegarderBio()">✅ Sauvegarder</button>
+                    <button class="btn-annuler" onclick="annulerBio()">❌ Annuler</button>
+                </div>
+            </div>
         </div>
 
         <h2>💰 Tes Revenus</h2>
@@ -111,26 +171,24 @@
                 <hr style="border:none; border-top:1px solid #333; margin:15px 0;">
                 <p class="part-createur">✅ À toi : 90%</p>
                 <p class="part-plateforme">⚙️ Frais de la plateforme : 10%</p>
-                <p style="font-size:12px; color:#888; margin-top:10px;">Sur Twitch : 50-70% pour toi<br>Sur StreamUnity : <strong>90% pour toi !</strong></p>
             </div>
             <div class="carte-revenus">
                 <h3>Statut</h3>
                 <p style="font-size:18px; color:#28f074; font-weight:bold;">✨ Créateur vérifié</p>
-                <p>Tu peux créer des streams et gagner des revenus</p>
-                <button class="bouton" style="width:100%; margin-top:15px;" onclick="ouvrirHistorique()">📊 Voir détails des paiements</button>
+                <button class="bouton" style="width:100%; margin-top:15px;" onclick="ouvrirHistorique()">📊 Historique des paiements</button>
             </div>
         </div>
 
         <div class="section-messages">
             <h2>💬 Tes Messages</h2>
             <div class="onglets">
-                <div class="onglet actif" onclick="choisirOnglet('public')" tabindex="0">📢 Chat du stream</div>
-                <div class="onglet" onclick="choisirOnglet('prive')" tabindex="0">🤫 Messages privés</div>
+                <div class="onglet actif" onclick="choisirOnglet('public')">📢 Chat du stream</div>
+                <div class="onglet" onclick="choisirOnglet('prive')">🤫 Messages privés</div>
             </div>
             <div class="zone-chat" id="zone-chat">
-                <div class="message public"><strong>StreamerPro :</strong> Bienvenue sur le chat ! On discute pendant le stream 🎉</div>
-                <div class="message public"><strong>Toi :</strong> Salut tout le monde ! 👋</div>
-                <div class="message prive"><span class="etiquette-prive">💬 PRIVÉ</span><strong>Amie :</strong> Tu regardes quoi ? 😉</div>
+                <div class="message public"><strong>StreamerPro :</strong> Bienvenue ! 👋</div>
+                <div class="message public"><strong id="msg-pseudo">Utilisateur :</strong> Salut tout le monde !</div>
+                <div class="message prive"><span class="etiquette-prive">💬 PRIVÉ</span><strong>Amie :</strong> Salut ! 😉</div>
             </div>
             
             <div id="statut-mod" class="statut-mod ok">✅ IA de modération active — Aucun avertissement</div>
@@ -144,42 +202,30 @@
 
         <h2 style="margin-top:40px;">🏅 Tes Badges</h2>
         <div class="grille-badges">
-            <div class="badge debloque"><div class="badge-emoji">🎉</div><div><strong>Premier pas</strong></div><small style="color:#888;">Premier message</small></div>
-            <div class="badge debloque"><div class="badge-emoji">💬</div><div><strong>Parleur</strong></div><small style="color:#888;">100 messages</small></div>
-            <div class="badge debloque"><div class="badge-emoji">🔥</div><div><strong>Assidu</strong></div><small style="color:#888;">30 jours actif</small></div>
-            <div class="badge debloque"><div class="badge-emoji">💜</div><div><strong>Supporter</strong></div><small style="color:#888;">Abonné</small></div>
-            <div class="badge verrouille"><div class="badge-emoji">⭐</div><div><strong>Étoile montante</strong></div><small style="color:#888;">500 messages</small></div>
-            <div class="badge verrouille"><div class="badge-emoji">👑</div><div><strong>Légende</strong></div><small style="color:#888;">Niveau maximum</small></div>
+            <div class="badge debloque"><div class="badge-emoji">🎉</div><div><strong>Premier pas</strong></div><small>Premier message</small></div>
+            <div class="badge debloque"><div class="badge-emoji">💬</div><div><strong>Parleur</strong></div><small>100 messages</small></div>
+            <div class="badge debloque"><div class="badge-emoji">🔥</div><div><strong>Assidu</strong></div><small>30 jours actif</small></div>
+            <div class="badge debloque"><div class="badge-emoji">💜</div><div><strong>Supporter</strong></div><small>Abonné</small></div>
+            <div class="badge verrouille"><div class="badge-emoji">⭐</div><div><strong>Étoile montante</strong></div><small>500 messages</small></div>
+            <div class="badge verrouille"><div class="badge-emoji">👑</div><div><strong>Légende</strong></div><small>Niveau maximum</small></div>
         </div>
 
-        <h2 style="margin-top:40px;">🤖 Agent de Modération</h2>
-        <div style="background:rgba(40,240,116,0.1); padding:20px; border-radius:12px; border:1px solid #28f074;">
-            <p style="color:#28f074; font-weight:bold;">✅ IA ACTIVÉE ET EN ÉCOUTE</p>
-            <p>L'IA surveille les messages et détecte le langage inapproprié.</p>
-            <p style="color:#ffcc00; font-size:14px;">⚠️ Mots grossiers : 2 avertissements → bannissement</p>
-            <p style="color:#ff4444; font-size:14px;">🚫 Menaces de mort / viol : BANNI IMMÉDIATEMENT — Pas de seconde chance</p>
-            <label style="display:block; margin-top:10px;"><input type="checkbox" id="toggle-mod" checked onchange="activerMod(this.checked)"> Activer la détection</label>
-        </div>
-
-        <p style="text-align:center; margin-top:40px;"><a href="accueil.html" style="color:#a970ff;">← Retour à l'accueil</a></p>
+        <p style="text-align:center; margin-top:40px;"><a href="accueil.html" style="color:#a970ff; text-decoration:none;">← Retour à l'accueil</a></p>
     </div>
 
+    <!-- 🎁 MODALES -->
     <div id="fenetre-recompense" class="modal-fond">
         <div class="modal-boite">
             <button class="fermer" onclick="fermerRecompense()">&times;</button>
             <h2>🎁 Offrir une récompense</h2>
             <p>Choisis un montant et un moyen de paiement.</p>
-            <div class="montant-boutons">
-                <button class="montant-btn" onclick="choisirMontant(this)">5 €</button>
-                <button class="montant-btn" onclick="choisirMontant(this)">10 €</button>
-                <button class="montant-btn" onclick="choisirMontant(this)">20 €</button>
-                <button class="montant-btn" onclick="choisirMontant(this)">50 €</button>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin:20px 0;">
+                <button class="montant-btn" style="border:2px solid #772ce8; border-radius:8px; padding:10px 18px; background:#5522aa; color:white; font-weight:bold; cursor:pointer;">5 €</button>
+                <button class="montant-btn" style="border:2px solid #772ce8; border-radius:8px; padding:10px 18px; background:#5522aa; color:white; font-weight:bold; cursor:pointer;">10 €</button>
+                <button class="montant-btn" style="border:2px solid #772ce8; border-radius:8px; padding:10px 18px; background:#5522aa; color:white; font-weight:bold; cursor:pointer;">20 €</button>
+                <button class="montant-btn" style="border:2px solid #772ce8; border-radius:8px; padding:10px 18px; background:#5522aa; color:white; font-weight:bold; cursor:pointer;">50 €</button>
             </div>
-            <h3 style="margin:25px 0 10px 0;">💳 Moyens de paiement</h3>
-            <div class="paiement-option" onclick="choisirPaiement(this)">💳 Carte Bancaire</div>
-            <div class="paiement-option" onclick="choisirPaiement(this)">🅿️ PayPal</div>
-            <div class="paiement-option" onclick="choisirPaiement(this)">💜 Klarna <span class="badge-4x">4x sans frais</span></div>
-            <button class="valider-btn" onclick="validerPaiement()">✅ Confirmer le paiement</button>
+            <button class="valider-btn" onclick="alert('Paiement confirmé ! ✅'); fermerRecompense()">✅ Confirmer</button>
         </div>
     </div>
 
@@ -187,43 +233,141 @@
         <div class="modal-boite">
             <button class="fermer" onclick="fermerHistorique()">&times;</button>
             <h2>📜 Historique des paiements</h2>
-            <div class="historique-ligne">— Aucun paiement pour l'instant —</div>
-            <p style="margin-top:20px; font-size:13px; color:#aaa; line-height:1.5;">
-                💡 Rappel : 90% des revenus te reviennent.<br>
-                Les 10% restants sont les frais de la plateforme.<br>
-                ✅ Aucuns frais supplémentaires.
-            </p>
+            <p style="text-align:center; color:#aaa;">— Aucun paiement pour l'instant —</p>
         </div>
     </div>
 
 <script>
-let modeChat = 'public';
-let pseudo = localStorage.getItem('pseudo') || 'Toi';
-let montantSelectionne = null;
+// ==========================================
+// 📦 DONNÉES DU PROFIL — SAUVEGARDÉES AUTOMATIQUEMENT
+// ==========================================
+let profil = {
+    pseudo: localStorage.getItem('pseudo') || 'Utilisateur',
+    prenom: localStorage.getItem('prenom') || '',
+    nom: localStorage.getItem('nom') || '',
+    bio: localStorage.getItem('bio') || '',
+    avatar: localStorage.getItem('avatar') || null
+};
 
-// ✅ VARIABLES
+// ==========================================
+// 🚀 CHARGER LE PROFIL AU DÉMARRAGE
+// ==========================================
+window.onload = function() {
+    appliquerProfil();
+};
+
+function appliquerProfil() {
+    document.getElementById('pseudo-affiche').textContent = profil.pseudo;
+    document.getElementById('msg-pseudo').textContent = `${profil.pseudo} :`;
+    document.getElementById('prenom-affiche').textContent = profil.prenom || '—';
+    document.getElementById('nom-affiche').textContent = profil.nom || '—';
+    
+    if (profil.bio) {
+        document.getElementById('bio-affiche').innerHTML = profil.bio.replace(/\n/g, '<br>');
+    } else {
+        document.getElementById('bio-affiche').innerHTML = '<em style="color:#888;">Aucune biographie...</em>';
+    }
+
+    if (profil.avatar) {
+        document.getElementById('avatar-affiche').innerHTML = `<img src="${profil.avatar}" alt="Avatar">`;
+    }
+}
+
+// ==========================================
+// 📸 CHANGER L'AVATAR
+// ==========================================
+function changerAvatar(event) {
+    const fichier = event.target.files[0];
+    if (fichier) {
+        const lecteur = new FileReader();
+        lecteur.onload = function(e) {
+            profil.avatar = e.target.result;
+            localStorage.setItem('avatar', profil.avatar);
+            appliquerProfil();
+        };
+        lecteur.readAsDataURL(fichier);
+    }
+}
+
+// ==========================================
+// ✏️ MODIFIER LE PSEUDO
+// ==========================================
+function editerPseudo() {
+    document.getElementById('pseudo-affiche').style.display = 'none';
+    document.getElementById('zone-pseudo-edit').style.display = 'flex';
+    document.getElementById('pseudo-input').value = profil.pseudo;
+    document.getElementById('pseudo-input').focus();
+}
+
+function sauvegarderPseudo() {
+    const valeur = document.getElementById('pseudo-input').value.trim();
+    if (valeur) {
+        profil.pseudo = valeur;
+        localStorage.setItem('pseudo', valeur);
+        appliquerProfil();
+    }
+    document.getElementById('zone-pseudo-edit').style.display = 'none';
+    document.getElementById('pseudo-affiche').style.display = 'block';
+}
+
+// ==========================================
+// ✏️ MODIFIER PRÉNOM / NOM
+// ==========================================
+function editerChamp(champ) {
+    document.getElementById(`${champ}-affiche`).style.display = 'none';
+    document.getElementById(`zone-${champ}-edit`).style.display = 'flex';
+    document.getElementById(`${champ}-input`).value = profil[champ];
+    document.getElementById(`${champ}-input`).focus();
+}
+
+function sauvegarderChamp(champ) {
+    const valeur = document.getElementById(`${champ}-input`).value.trim();
+    profil[champ] = valeur;
+    localStorage.setItem(champ, valeur);
+    appliquerProfil();
+    document.getElementById(`zone-${champ}-edit`).style.display = 'none';
+    document.getElementById(`${champ}-affiche`).style.display = 'inline';
+}
+
+function annulerEdition(champ) {
+    document.getElementById(`zone-${champ}-edit`).style.display = 'none';
+    document.getElementById(`${champ}-affiche`).style.display = 'inline';
+}
+
+// ==========================================
+// 📝 MODIFIER LA BIOGRAPHIE
+// ==========================================
+function editerBio() {
+    document.getElementById('bio-affiche').style.display = 'none';
+    document.getElementById('zone-bio-edit').style.display = 'block';
+    document.getElementById('bio-input').value = profil.bio;
+    document.getElementById('bio-input').focus();
+}
+
+function sauvegarderBio() {
+    const valeur = document.getElementById('bio-input').value.trim();
+    profil.bio = valeur;
+    localStorage.setItem('bio', valeur);
+    appliquerProfil();
+    document.getElementById('zone-bio-edit').style.display = 'none';
+    document.getElementById('bio-affiche').style.display = 'block';
+}
+
+function annulerBio() {
+    document.getElementById('zone-bio-edit').style.display = 'none';
+    document.getElementById('bio-affiche').style.display = 'block';
+}
+
+// ==========================================
+// 💬 CHAT + MODÉRATION (comme avant)
+// ==========================================
+let modeChat = 'public';
 let avertissements = 0;
 let estBanni = false;
 let modActive = true;
 
-// ⚠️ MOTS GROSSIERS — 2 avertissements puis bannissement
-const motsGrossiers = [
-    "merde", "con", "conne", "idiot", "idiote", "imbécile",
-    "salopard", "salope", "enfoiré", "enfoirée", "pute", "pd", "fdp",
-    "bâtard", "nique", "putain", "connard", "connasse"
-];
-
-// 🚫 VIOLENCE EXTRÊME — BANNI IMMÉDIATEMENT
-const motsViolenceGrave = [
-    "je vais te tuer", "je vais vous tuer", "je vais te buter", "je vais vous buter",
-    "je vais te crever", "va crever", "crève",
-    "viole", "violer", "viol", "je vais te violer",
-    "mort à toi", "je vais te faire la peau"
-];
-
-window.onload = function() {
-    document.getElementById('pseudo-affiche').textContent = pseudo;
-};
+const motsGrossiers = ["merde", "con", "conne", "idiot", "idiote", "imbécile", "salopard", "salope", "enfoiré", "pute", "pd", "fdp", "bâtard", "nique", "putain", "connard"];
+const motsViolenceGrave = ["je vais te tuer", "je vais vous tuer", "je vais te buter", "je vais te crever", "va crever", "viole", "violer", "viol", "je vais te violer", "mort à toi"];
 
 function activerMod(actif) {
     modActive = actif;
@@ -232,92 +376,56 @@ function activerMod(actif) {
 }
 
 function gererEntree(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault();
-        envoyerMessage();
-    }
+    if (event.key === 'Enter') { event.preventDefault(); envoyerMessage(); }
 }
 
-// ✅ VÉRIFIER LE MESSAGE
 function verifierMessage(texte) {
     if (!modActive) return { ok: true };
     const t = texte.toLowerCase();
-
-    // 🚫 D'ABORD VÉRIFIER LA VIOLENCE GRAVE
-    for (let mot of motsViolenceGrave) {
-        if (t.includes(mot)) {
-            return { ok: false, type: 'grave', mot: mot };
-        }
-    }
-
-    // ⚠️ PUIS VÉRIFIER LES MOTS GROSSIERS
-    for (let mot of motsGrossiers) {
-        if (t.includes(mot)) {
-            return { ok: false, type: 'avertissement', mot: mot };
-        }
-    }
-
+    for (let mot of motsViolenceGrave) if (t.includes(mot)) return { ok: false, type: 'grave', mot };
+    for (let mot of motsGrossiers) if (t.includes(mot)) return { ok: false, type: 'avertissement', mot };
     return { ok: true };
 }
 
-// ✅ ENVOYER UN MESSAGE
 function envoyerMessage() {
     let champ = document.getElementById('saisie-message');
     let texte = champ.value.trim();
     if (!texte) return;
 
-    // 🚫 SI DÉJÀ BANNI
-    if (estBanni) {
-        ajouterMessage("🚫 TU ES BANNI — Plus de droit d'écriture", 'banni');
-        champ.value = '';
-        return;
-    }
+    if (estBanni) { ajouterMessage("🚫 TU ES BANNI", 'banni'); champ.value = ''; return; }
 
-    // 🔍 VÉRIFICATION
     let verification = verifierMessage(texte);
-
     if (!verification.ok) {
-        // 🚫 VIOLENCE GRAVE → BANNI DIRECT
         if (verification.type === 'grave') {
             estBanni = true;
-            ajouterMessage(`🚫 BANNI IMMÉDIATEMENT — Menace ou violence détectée : "${verification.mot}"`, 'grave');
+            ajouterMessage(`🚫 BANNI IMMÉDIATEMENT — "${verification.mot}"`, 'grave');
             document.getElementById('statut-mod').className = 'statut-mod grave';
             document.getElementById('statut-mod').textContent = "🚫 BANNI — Violence détectée !";
-            champ.disabled = true;
-            document.getElementById('btn-envoyer').disabled = true;
-            champ.value = '';
-            return;
-        }
-
-        // ⚠️ MOT GROSSIER → AVERTISSEMENT
-        avertissements++;
-        if (avertissements >= 2) {
-            estBanni = true;
-            ajouterMessage("🚫 BANNI — 2 avertissements atteints. Plus de droit d'écriture.", 'banni');
-            document.getElementById('statut-mod').className = 'statut-mod banni';
-            document.getElementById('statut-mod').textContent = "🚫 BANNI — 2 avertissements !";
-            champ.disabled = true;
-            document.getElementById('btn-envoyer').disabled = true;
+            champ.disabled = true; document.getElementById('btn-envoyer').disabled = true;
         } else {
-            ajouterMessage(`⚠️ AVERTISSEMENT ${avertissements}/2 — Mot inapproprié détecté`, 'avertissement');
-            document.getElementById('statut-mod').className = 'statut-mod warn';
-            document.getElementById('statut-mod').textContent = `⚠️ ${avertissements}/2 avertissement(s) — Attention !`;
+            avertissements++;
+            if (avertissements >= 2) {
+                estBanni = true;
+                ajouterMessage("🚫 BANNI — 2 avertissements atteints", 'banni');
+                document.getElementById('statut-mod').className = 'statut-mod banni';
+                document.getElementById('statut-mod').textContent = "🚫 BANNI !";
+                champ.disabled = true; document.getElementById('btn-envoyer').disabled = true;
+            } else {
+                ajouterMessage(`⚠️ AVERTISSEMENT ${avertissements}/2 — "${verification.mot}"`, 'avertissement');
+                document.getElementById('statut-mod').className = 'statut-mod warn';
+                document.getElementById('statut-mod').textContent = `⚠️ ${avertissements}/2 — Attention !`;
+            }
         }
         champ.value = '';
         return;
     }
 
-    // ✅ MESSAGE AUTORISÉ → L'AFFICHER DANS LE BON CHAT
     let zone = document.getElementById('zone-chat');
     let nouveauMsg = document.createElement('div');
     nouveauMsg.classList.add('message', modeChat);
-    
-    if (modeChat === 'prive') {
-        nouveauMsg.innerHTML = `<span class="etiquette-prive">💬 PRIVÉ</span><strong>${pseudo} :</strong> ${texte}`;
-    } else {
-        nouveauMsg.innerHTML = `<strong>${pseudo} :</strong> ${texte}`;
-    }
-    
+    nouveauMsg.innerHTML = modeChat === 'prive'
+        ? `<span class="etiquette-prive">💬 PRIVÉ</span><strong>${profil.pseudo} :</strong> ${texte}`
+        : `<strong>${profil.pseudo} :</strong> ${texte}`;
     zone.appendChild(nouveauMsg);
     zone.scrollTop = zone.scrollHeight;
     champ.value = '';
@@ -332,69 +440,44 @@ function ajouterMessage(texte, type) {
     zone.scrollTop = zone.scrollHeight;
 }
 
-// ✅ CHANGER D'ONGLET PUBLIC / PRIVÉ
 function choisirOnglet(type) {
     modeChat = type;
-    
-    // Mettre à jour les onglets
     document.querySelectorAll('.onglet').forEach((o, i) => {
         o.classList.remove('actif');
-        if ((type === 'public' && i === 0) || (type === 'prive' && i === 1)) {
-            o.classList.add('actif');
-        }
+        if ((type === 'public' && i === 0) || (type === 'prive' && i === 1)) o.classList.add('actif');
     });
-
-    // Afficher/masquer les bons messages
     document.querySelectorAll('.message').forEach(msg => {
         if (msg.classList.contains('avertissement') || msg.classList.contains('banni') || msg.classList.contains('grave')) {
-            msg.style.display = ''; // toujours afficher les avertissements
+            msg.style.display = '';
         } else if (msg.classList.contains('public')) {
             msg.style.display = type === 'public' ? '' : 'none';
         } else if (msg.classList.contains('prive')) {
             msg.style.display = type === 'prive' ? '' : 'none';
         }
     });
-
-    // Info message privé
     document.getElementById('info-prive').style.display = type === 'prive' ? 'block' : 'none';
 }
 
-function choisirMontant(bouton) {
-    document.querySelectorAll('.montant-btn').forEach(b => b.classList.remove('selectionne'));
-    bouton.classList.add('selectionne');
-    montantSelectionne = bouton.textContent;
-}
-
-function choisirPaiement(option) {
-    document.querySelectorAll('.paiement-option').forEach(o => o.classList.remove('selectionne'));
-    option.classList.add('selectionne');
-}
-
-function validerPaiement() {
-    alert(montantSelectionne ? `Paiement de ${montantSelectionne} confirmé ! ✅` : 'Choisis un montant d\'abord !');
-    fermerRecompense();
-}
-
+// ==========================================
+// 🎁 MODALES
+// ==========================================
 function ouvrirRecompense() {document.getElementById("fenetre-recompense").style.display = "flex";}
-function fermerRecompense() {
-    document.getElementById("fenetre-recompense").style.display = "none";
-    document.querySelectorAll('.montant-btn').forEach(b => b.classList.remove('selectionne'));
-    document.querySelectorAll('.paiement-option').forEach(o => o.classList.remove('selectionne'));
-    montantSelectionne = null;
-}
+function fermerRecompense() {document.getElementById("fenetre-recompense").style.display = "none";}
 function ouvrirHistorique() {document.getElementById("fenetre-historique").style.display = "flex";}
 function fermerHistorique() {document.getElementById("fenetre-historique").style.display = "none";}
+function deconnexion() {
+    localStorage.removeItem('pseudo');
+    localStorage.removeItem('prenom');
+    localStorage.removeItem('nom');
+    localStorage.removeItem('bio');
+    localStorage.removeItem('avatar');
+    window.location.href = "index.html";
+}
 
 window.onclick = e => {
     if (e.target.id === "fenetre-recompense") fermerRecompense();
     if (e.target.id === "fenetre-historique") fermerHistorique();
 };
-
-function deconnexion() {
-    localStorage.removeItem('pseudo');
-    localStorage.removeItem('age');
-    window.location.href = "index.html";
-}
 </script>
 </body>
 </html>
