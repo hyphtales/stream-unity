@@ -5,6 +5,7 @@
     <title>StreamUnity - Mon Profil</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        * {outline: none; box-sizing: border-box;}
         .conteneur {max-width: 900px; margin: 30px auto; padding: 20px;}
         .entete-profil {display: flex; align-items: center; gap: 25px; margin-bottom: 30px; background: rgba(119,44,232,0.1); padding: 25px; border-radius: 12px; flex-wrap: wrap;}
         
@@ -34,7 +35,7 @@
         .barre-niveau {height: 12px; background: #2f2f35; border-radius: 6px; margin-top: 8px;}
         .progression {height: 100%; background: linear-gradient(90deg, #772ce8, #9147ff); border-radius: 6px; width: 65%;}
         
-        /* 🏅 BADges en 3 COLONNES */
+        /* 🏅 BADGES EN 3 COLONNES */
         .grille-badges {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -51,15 +52,51 @@
         .gros-chiffre {font-size: 42px; font-weight: bold; color: #772ce8;}
         .part-createur {color: #28f074; font-weight: bold;}
         .part-plateforme {color: #888;}
-        .bouton-offrir {background: #28f074; color: #000; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.2s;}
-        .bouton-offrir:hover {background: #4dff91;}
-        .bouton {background: linear-gradient(90deg, #772ce8, #9147ff); color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s;}
-        .bouton:hover {opacity: 0.9;}
+        
+        /* ✅ BOUTONS ACTIFS AU CLAVIER + SOURIS */
+        .bouton-offrir {
+            background: #28f074; color: #000; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: all 0.2s;
+        }
+        .bouton-offrir:hover, .bouton-offrir:focus {background: #4dff91; transform: scale(1.02);}
+        .bouton {
+            background: linear-gradient(90deg, #772ce8, #9147ff); color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: all 0.2s;
+        }
+        .bouton:hover, .bouton:focus {opacity: 0.9; transform: scale(1.02);}
+        button, .montant-btn, .paiement-option, .onglet {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        button:focus, .montant-btn:focus, .paiement-option:focus, .onglet:focus {
+            outline: 2px solid #cc88ff;
+            outline-offset: 2px;
+        }
+        .paiement-option {
+            border: 2px solid #772ce8;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 10px 0;
+            background: #3b1a7a80;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .paiement-option:hover, .paiement-option:focus {border-color: #cc88ff; background: #5522aa80;}
+        .montant-btn {
+            border: 2px solid #772ce8;
+            border-radius: 8px;
+            padding: 10px 18px;
+            background: #5522aa;
+            color: white;
+            font-weight: bold;
+        }
+        .montant-btn:hover, .montant-btn:focus {border-color: #cc88ff; background: #6b2ed9;}
+        .montant-btn.selectionne {background: #772ce8; border-color: #cc88ff; box-shadow: 0 0 10px #cc88ff60;}
 
         /* 💬 Chat Public / Chuchotements Privés */
         .section-messages {margin-top: 40px;}
         .onglets {display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 2px solid #333;}
-        .onglet {padding: 10px 20px; cursor: pointer; border-bottom: 3px solid transparent;}
+        .onglet {padding: 10px 20px; border-bottom: 3px solid transparent; transition: all 0.2s;}
+        .onglet:hover, .onglet:focus {color: #cc88ff;}
         .onglet.actif {border-bottom-color: #9147ff; color: #cc88ff; font-weight: bold;}
         .zone-chat {background: #1a1a1f; border: 2px solid #333; border-radius: 10px; padding: 15px; height: 200px; overflow-y: auto; margin-bottom: 10px;}
         .message {padding: 6px 10px; margin: 4px 0; border-radius: 6px;}
@@ -67,7 +104,8 @@
         .message.prive {background: #10406060; border-left: 3px solid #44ccff;}
         .etiquette-prive {color: #44ccff; font-size: 11px; font-weight: bold; margin-right: 8px;}
         .champ-saisie {display: flex; gap: 10px;}
-        .champ-saisie input {flex:1; padding: 10px; border-radius: 6px; border: 2px solid #5533aa; background: #221144; color: white;}
+        .champ-saisie input {flex:1; padding: 10px; border-radius: 6px; border: 2px solid #5533aa; background: #221144; color: white; font-size: 14px;}
+        .champ-saisie input:focus {border-color: #9147ff; outline: none;}
         .info-chuchotement {color: #44ccff; font-size: 13px; margin-top: 8px;}
 
         /* 🪟 Fenêtres modales */
@@ -99,31 +137,10 @@
             color: #cc88ff;
             font-size: 24px;
             cursor: pointer;
+            transition: all 0.2s;
         }
+        .fermer:hover, .fermer:focus {color: white; transform: scale(1.2);}
         .montant-boutons {display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap;}
-        .montant-btn {
-            padding: 10px 18px;
-            background: #5522aa;
-            border: 2px solid #772ce8;
-            border-radius: 8px;
-            color: white;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .montant-btn:hover {border-color: #cc88ff; background: #6b2ed9;}
-        .paiement-option {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 18px;
-            margin: 10px 0;
-            background: #3b1a7a80;
-            border: 2px solid #772ce8;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .paiement-option:hover {border-color: #cc88ff; background: #5522aa80;}
         .badge-4x {
             margin-left: auto;
             color: #44ff88;
@@ -141,7 +158,9 @@
             font-weight: bold;
             font-size: 16px;
             cursor: pointer;
+            transition: all 0.2s;
         }
+        .valider-btn:hover, .valider-btn:focus {opacity: 0.95; transform: scale(1.01);}
         .historique-ligne {
             padding: 12px 8px;
             border-bottom: 1px solid #6633bb40;
@@ -200,8 +219,8 @@
         <div class="section-messages">
             <h2>💬 Tes Messages</h2>
             <div class="onglets">
-                <div class="onglet actif" onclick="choisirOnglet('public')">📢 Chat du stream</div>
-                <div class="onglet" onclick="choisirOnglet('prive')">🤫 Chuchotements privés</div>
+                <div class="onglet actif" onclick="choisirOnglet('public')" tabindex="0">📢 Chat du stream</div>
+                <div class="onglet" onclick="choisirOnglet('prive')" tabindex="0">🤫 Chuchotements privés</div>
             </div>
             <div class="zone-chat" id="zone-chat">
                 <div class="message public">
@@ -215,7 +234,7 @@
                 </div>
             </div>
             <div class="champ-saisie">
-                <input type="text" id="saisie-message" placeholder="Écris ton message...">
+                <input type="text" id="saisie-message" placeholder="Écris ton message..." onkeydown="gererEntree(event)">
                 <button class="bouton" onclick="envoyerMessage()">Envoyer</button>
             </div>
             <p class="info-chuchotement" id="info-prive" style="display:none;">
@@ -275,38 +294,38 @@
     <!-- 🎁 FENÊTRE : OFFRIR UNE RÉCOMPENSE -->
     <div id="fenetre-recompense" class="modal-fond">
         <div class="modal-boite">
-            <button class="fermer" onclick="fermerRecompense()">&times;</button>
+            <button class="fermer" onclick="fermerRecompense()" tabindex="0">&times;</button>
             <h2>🎁 Offrir une récompense</h2>
             <p>Choisis un montant et un moyen de paiement <strong>(aucuns frais supplémentaires)</strong> :</p>
 
             <div class="montant-boutons">
-                <button class="montant-btn">5 €</button>
-                <button class="montant-btn">10 €</button>
-                <button class="montant-btn">20 €</button>
-                <button class="montant-btn">50 €</button>
+                <button class="montant-btn" onclick="choisirMontant(this)" tabindex="0">5 €</button>
+                <button class="montant-btn" onclick="choisirMontant(this)" tabindex="0">10 €</button>
+                <button class="montant-btn" onclick="choisirMontant(this)" tabindex="0">20 €</button>
+                <button class="montant-btn" onclick="choisirMontant(this)" tabindex="0">50 €</button>
             </div>
 
             <h3 style="margin:25px 0 10px 0;">💳 Moyens de paiement</h3>
 
-            <div class="paiement-option">
+            <div class="paiement-option" onclick="choisirPaiement(this)" tabindex="0">
                 💳 Carte Bancaire (Visa / Mastercard)
             </div>
-            <div class="paiement-option">
+            <div class="paiement-option" onclick="choisirPaiement(this)" tabindex="0">
                 🅿️ PayPal
             </div>
-            <div class="paiement-option">
+            <div class="paiement-option" onclick="choisirPaiement(this)" tabindex="0">
                 💜 Klarna
                 <span class="badge-4x">Paiement en 4x SANS FRAIS</span>
             </div>
 
-            <button class="valider-btn">✅ Confirmer le paiement</button>
+            <button class="valider-btn" onclick="validerPaiement()" tabindex="0">✅ Confirmer le paiement</button>
         </div>
     </div>
 
     <!-- 📜 FENÊTRE : HISTORIQUE DES PAIEMENTS -->
     <div id="fenetre-historique" class="modal-fond">
         <div class="modal-boite">
-            <button class="fermer" onclick="fermerHistorique()">&times;</button>
+            <button class="fermer" onclick="fermerHistorique()" tabindex="0">&times;</button>
             <h2>📜 Historique des paiements</h2>
 
             <div class="historique-ligne">
@@ -324,10 +343,19 @@
 <script>
 let modeChat = 'public';
 let pseudo = localStorage.getItem('pseudo') || 'Toi';
+let montantSelectionne = null;
 
 window.onload = function() {
     document.getElementById('pseudo-affiche').textContent = pseudo;
 };
+
+// ✅ ENVOYER UN MESSAGE AVEC LA TOUCHE ENTRÉE
+function gererEntree(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        envoyerMessage();
+    }
+}
 
 // 💬 Changer d'onglet : Public / Privé
 function choisirOnglet(type) {
@@ -360,12 +388,41 @@ function envoyerMessage() {
     champ.value = '';
 }
 
+// 💰 Sélectionner un montant
+function choisirMontant(bouton) {
+    document.querySelectorAll('.montant-btn').forEach(b => b.classList.remove('selectionne'));
+    bouton.classList.add('selectionne');
+    montantSelectionne = bouton.textContent;
+}
+
+// 💳 Sélectionner un moyen de paiement
+function choisirPaiement(option) {
+    document.querySelectorAll('.paiement-option').forEach(o => {
+        o.style.boxShadow = 'none';
+        o.style.borderColor = '#772ce8';
+    });
+    option.style.boxShadow = '0 0 12px #cc88ff60';
+    option.style.borderColor = '#cc88ff';
+}
+
+// ✅ Confirmer le paiement
+function validerPaiement() {
+    alert(montantSelectionne ? `Paiement de ${montantSelectionne} confirmé ! ✅` : 'Choisis un montant d\'abord !');
+    fermerRecompense();
+}
+
 // 🎁 Fenêtres récompenses & historique
 function ouvrirRecompense() {
     document.getElementById("fenetre-recompense").style.display = "flex";
 }
 function fermerRecompense() {
     document.getElementById("fenetre-recompense").style.display = "none";
+    document.querySelectorAll('.montant-btn').forEach(b => b.classList.remove('selectionne'));
+    document.querySelectorAll('.paiement-option').forEach(o => {
+        o.style.boxShadow = 'none';
+        o.style.borderColor = '#772ce8';
+    });
+    montantSelectionne = null;
 }
 function ouvrirHistorique() {
     document.getElementById("fenetre-historique").style.display = "flex";
@@ -373,6 +430,8 @@ function ouvrirHistorique() {
 function fermerHistorique() {
     document.getElementById("fenetre-historique").style.display = "none";
 }
+
+// Fermer si clic à l'extérieur
 window.onclick = e => {
     if (e.target.id === "fenetre-recompense") fermerRecompense();
     if (e.target.id === "fenetre-historique") fermerHistorique();
