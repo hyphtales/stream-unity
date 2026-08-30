@@ -9,17 +9,7 @@
         .conteneur {max-width: 900px; margin: 30px auto; padding: 20px;}
         .entete-profil {display: flex; align-items: center; gap: 25px; margin-bottom: 30px; background: rgba(119,44,232,0.1); padding: 25px; border-radius: 12px; flex-wrap: wrap;}
         
-        .avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #772ce8, #9147ff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border: 3px solid #9147ff;
-        }
+        .avatar {width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #772ce8, #9147ff); display: flex; align-items: center; justify-content: center; overflow: hidden; border: 3px solid #9147ff;}
         .avatar img {width: 100%; height: 100%; object-fit: cover;}
         .avatar-texte {font-size: 48px; color: white;}
 
@@ -46,27 +36,9 @@
         button, .montant-btn, .paiement-option, .onglet {cursor: pointer; transition: all 0.2s;}
         button:focus, .montant-btn:focus, .onglet:focus {outline: 2px solid #cc88ff; outline-offset: 2px;}
 
-        /* ✅ OPTIONS DE PAIEMENT — PLUS ASPECT "CHAMP À ÉCRIRE" */
-        .paiement-option {
-            border: 1px solid transparent;
-            border-radius: 10px;
-            padding: 14px 18px;
-            margin: 8px 0;
-            background: #2b1055;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .paiement-option:hover {
-            background: #3b1a7a;
-            border-left: 3px solid #9147ff;
-            padding-left: 15px;
-        }
-        .paiement-option.selectionne {
-            background: #4b2090;
-            border-left: 4px solid #cc88ff;
-            box-shadow: 0 0 15px #cc88ff40;
-        }
+        .paiement-option {border: 1px solid transparent; border-radius: 10px; padding: 14px 18px; margin: 8px 0; background: #2b1055; display: flex; align-items: center; gap: 12px;}
+        .paiement-option:hover {background: #3b1a7a; border-left: 3px solid #9147ff; padding-left: 15px;}
+        .paiement-option.selectionne {background: #4b2090; border-left: 4px solid #cc88ff; box-shadow: 0 0 15px #cc88ff40;}
 
         .montant-btn {border: 2px solid #772ce8; border-radius: 8px; padding: 10px 18px; background: #5522aa; color: white; font-weight: bold;}
         .montant-btn:hover, .montant-btn:focus {border-color: #cc88ff; background: #6b2ed9;}
@@ -81,11 +53,20 @@
         .message {padding: 6px 10px; margin: 4px 0; border-radius: 6px;}
         .message.public {background: #2a106060; border-left: 3px solid #9147ff;}
         .message.prive {background: #10406060; border-left: 3px solid #44ccff;}
+        .message.avertissement {background: #ffcc0022; border-left: 3px solid #ffcc00; color: #ffcc00; font-weight: bold;}
+        .message.banni {background: #ff000033; border-left: 4px solid #ff4444; color: #ff6666; font-weight: bold; text-align: center; padding: 15px;}
+        .message.grave {background: #ff000044; border: 2px solid #ff0000; color: #ff4444; font-weight: bold; text-align: center; padding: 15px;}
         .etiquette-prive {color: #44ccff; font-size: 11px; font-weight: bold; margin-right: 8px;}
         .champ-saisie {display: flex; gap: 10px;}
         .champ-saisie input {flex:1; padding: 10px; border-radius: 6px; border: 2px solid #5533aa; background: #221144; color: white; font-size: 14px;}
+        .champ-saisie input:disabled {background: #333; border-color: #555; cursor: not-allowed; opacity: 0.5;}
         .champ-saisie input:focus {border-color: #9147ff; outline: none;}
         .info-chuchotement {color: #44ccff; font-size: 13px; margin-top: 8px;}
+        .statut-mod {margin-top: 10px; padding: 8px 12px; border-radius: 6px; font-size: 13px;}
+        .statut-mod.ok {background: #28f07422; color: #28f074;}
+        .statut-mod.warn {background: #ffcc0022; color: #ffcc00;}
+        .statut-mod.banni {background: #ff000033; color: #ff6666; font-weight: bold;}
+        .statut-mod.grave {background: #ff000044; color: #ff4444; font-weight: bold; border: 1px solid #ff0000;}
 
         .modal-fond {display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 999; justify-content: center; align-items: center;}
         .modal-boite {background: linear-gradient(135deg, #2a1060, #1a0840); border: 2px solid #9945ff; border-radius: 16px; padding: 30px; max-width: 500px; width: 90%; color: white; box-shadow: 0 0 30px #9945ff60;}
@@ -111,9 +92,7 @@
 
     <div class="conteneur">
         <div class="entete-profil">
-            <div class="avatar">
-                <span class="avatar-texte">👤</span>
-            </div>
+            <div class="avatar"><span class="avatar-texte">👤</span></div>
             <div style="flex:1;">
                 <h1 id="pseudo-affiche">Utilisateur</h1>
                 <div class="niveau">Niveau <span id="niveau-num">3</span> — Fidèle</div>
@@ -131,7 +110,7 @@
                 <p style="color:#888;">Tes gains depuis ton inscription</p>
                 <hr style="border:none; border-top:1px solid #333; margin:15px 0;">
                 <p class="part-createur">✅ À toi : 90%</p>
-                <p class="part-plateforme">⚙️ Frais plateforme : 10%</p>
+                <p class="part-plateforme">⚙️ Frais de la plateforme : 10%</p>
                 <p style="font-size:12px; color:#888; margin-top:10px;">Sur Twitch : 50-70% pour toi<br>Sur StreamUnity : <strong>90% pour toi !</strong></p>
             </div>
             <div class="carte-revenus">
@@ -146,91 +125,73 @@
             <h2>💬 Tes Messages</h2>
             <div class="onglets">
                 <div class="onglet actif" onclick="choisirOnglet('public')" tabindex="0">📢 Chat du stream</div>
-                <div class="onglet" onclick="choisirOnglet('prive')" tabindex="0">🤫 Chuchotements privés</div>
+                <div class="onglet" onclick="choisirOnglet('prive')" tabindex="0">🤫 Messages privés</div>
             </div>
             <div class="zone-chat" id="zone-chat">
-                <div class="message public">
-                    <strong>StreamerPro :</strong> Bienvenue sur le chat ! On discute pendant le stream 🎉
-                </div>
-                <div class="message public">
-                    <strong>Toi :</strong> Salut tout le monde ! 👋
-                </div>
-                <div class="message prive" style="display:none;">
-                    <span class="etiquette-prive">💬 PRIVÉ</span><strong>Amie :</strong> Tu écoutes quoi ? 😉
-                </div>
+                <div class="message public"><strong>StreamerPro :</strong> Bienvenue sur le chat ! On discute pendant le stream 🎉</div>
+                <div class="message public"><strong>Toi :</strong> Salut tout le monde ! 👋</div>
+                <div class="message prive" style="display:none;"><span class="etiquette-privé">💬 PRIVÉ</span><strong>Amie :</strong> Tu regardes quoi ? 😉</div>
             </div>
+            
+            <div id="statut-mod" class="statut-mod ok">✅ IA de modération active — Aucun avertissement</div>
+            
             <div class="champ-saisie">
                 <input type="text" id="saisie-message" placeholder="Écris ton message..." onkeydown="gererEntree(event)">
-                <button class="bouton" onclick="envoyerMessage()">Envoyer</button>
+                <button class="bouton" onclick="envoyerMessage()" id="btn-envoyer">Envoyer</button>
             </div>
-            <p class="info-chuchotement" id="info-prive" style="display:none;">
-                💡 Les chuchotements privés restent SECRETS. Personne d'autre ne les voit.
-            </p>
+            <p class="info-chuchotement" id="info-prive" style="display:none;">💡 Les messages privés restent confidentiels.</p>
         </div>
 
         <h2 style="margin-top:40px;">🏅 Tes Badges</h2>
         <div class="grille-badges">
             <div class="badge debloque"><div class="badge-emoji">🎉</div><div><strong>Premier pas</strong></div><small style="color:#888;">Premier message</small></div>
-            <div class="badge debloque"><div class="badge-emoji">💬</div><div><strong>Bavard</strong></div><small style="color:#888;">100 messages</small></div>
-            <div class="badge debloque"><div class="badge-emoji">🔥</div><div><strong>Toujours là</strong></div><small style="color:#888;">30 jours actif</small></div>
+            <div class="badge debloque"><div class="badge-emoji">💬</div><div><strong>Parleur</strong></div><small style="color:#888;">100 messages</small></div>
+            <div class="badge debloque"><div class="badge-emoji">🔥</div><div><strong>Assidu</strong></div><small style="color:#888;">30 jours actif</small></div>
             <div class="badge debloque"><div class="badge-emoji">💜</div><div><strong>Supporter</strong></div><small style="color:#888;">Abonné</small></div>
             <div class="badge verrouille"><div class="badge-emoji">⭐</div><div><strong>Étoile montante</strong></div><small style="color:#888;">500 messages</small></div>
             <div class="badge verrouille"><div class="badge-emoji">👑</div><div><strong>Légende</strong></div><small style="color:#888;">Niveau maximum</small></div>
         </div>
 
-        <h2 style="margin-top:40px;">🤖 Agent IA de Modération</h2>
+        <h2 style="margin-top:40px;">🤖 Agent de Modération</h2>
         <div style="background:rgba(40,240,116,0.1); padding:20px; border-radius:12px; border:1px solid #28f074;">
             <p style="color:#28f074; font-weight:bold;">✅ IA ACTIVÉE ET EN ÉCOUTE</p>
-            <p>L'IA surveille les messages et détecte le langage inapproprié, y compris l'argot et les expressions détournées.</p>
-            <p style="color:#888; font-size:14px;">Quand un message est signalé :<br><em>"⚠️ Ce message pourrait être inapproprié. Accepter ou Bannir ?"</em></p>
-            <label style="display:block; margin-top:10px;"><input type="checkbox" checked> Activer la détection de l'argot</label>
-            <label style="display:block;"><input type="checkbox" checked> Me demander avant de bannir</label>
+            <p>L'IA surveille les messages et détecte le langage inapproprié.</p>
+            <p style="color:#ffcc00; font-size:14px;">⚠️ Mots grossiers : 2 avertissements → bannissement</p>
+            <p style="color:#ff4444; font-size:14px;">🚫 Menaces de mort / viol : BANNI IMMÉDIATEMENT — Pas de seconde chance</p>
+            <label style="display:block; margin-top:10px;"><input type="checkbox" id="toggle-mod" checked onchange="activerMod(this.checked)"> Activer la détection</label>
         </div>
 
         <p style="text-align:center; margin-top:40px;"><a href="accueil.html" style="color:#a970ff;">← Retour à l'accueil</a></p>
     </div>
 
-    <!-- 🎁 FENÊTRE RÉCOMPENSE -->
     <div id="fenetre-recompense" class="modal-fond">
         <div class="modal-boite">
             <button class="fermer" onclick="fermerRecompense()">&times;</button>
             <h2>🎁 Offrir une récompense</h2>
-            <p>Choisis un montant et un moyen de paiement <strong>(aucuns frais supplémentaires)</strong> :</p>
-
+            <p>Choisis un montant et un moyen de paiement.</p>
             <div class="montant-boutons">
                 <button class="montant-btn" onclick="choisirMontant(this)">5 €</button>
                 <button class="montant-btn" onclick="choisirMontant(this)">10 €</button>
                 <button class="montant-btn" onclick="choisirMontant(this)">20 €</button>
                 <button class="montant-btn" onclick="choisirMontant(this)">50 €</button>
             </div>
-
             <h3 style="margin:25px 0 10px 0;">💳 Moyens de paiement</h3>
-
-            <div class="paiement-option" onclick="choisirPaiement(this)">
-                💳 Carte Bancaire (Visa / Mastercard)
-            </div>
-            <div class="paiement-option" onclick="choisirPaiement(this)">
-                🅿️ PayPal
-            </div>
-            <div class="paiement-option" onclick="choisirPaiement(this)">
-                💜 Klarna
-                <span class="badge-4x">Paiement en 4x SANS FRAIS</span>
-            </div>
-
+            <div class="paiement-option" onclick="choisirPaiement(this)">💳 Carte Bancaire</div>
+            <div class="paiement-option" onclick="choisirPaiement(this)">🅿️ PayPal</div>
+            <div class="paiement-option" onclick="choisirPaiement(this)">💜 Klarna <span class="badge-4x">4x sans frais</span></div>
             <button class="valider-btn" onclick="validerPaiement()">✅ Confirmer le paiement</button>
         </div>
     </div>
 
-    <!-- 📜 HISTORIQUE -->
     <div id="fenetre-historique" class="modal-fond">
         <div class="modal-boite">
             <button class="fermer" onclick="fermerHistorique()">&times;</button>
             <h2>📜 Historique des paiements</h2>
             <div class="historique-ligne">— Aucun paiement pour l'instant —</div>
             <p style="margin-top:20px; font-size:13px; color:#aaa; line-height:1.5;">
-                💡 Rappel : 90% des montants perçus te reviennent.<br>
-                Les 10% restants sont les seuls frais de la plateforme.<br>
-                ✅ Aucuns frais sur les paiements.
+                💡 Rappel : 90% des revenus te reviennent.<br>
+                Les 10% restants sont les frais de la plateforme.<br>
+                ✅ Aucuns frais supplémentaires.
             </p>
         </div>
     </div>
@@ -240,16 +201,137 @@ let modeChat = 'public';
 let pseudo = localStorage.getItem('pseudo') || 'Toi';
 let montantSelectionne = null;
 
+// ✅ VARIABLES
+let avertissements = 0;
+let estBanni = false;
+let modActive = true;
+
+// ⚠️ MOTS GROSSIERS — 2 avertissements puis bannissement
+const motsGrossiers = [
+    "merde", "con", "conne", "idiot", "idiote", "imbécile", "imbécile",
+    "salopard", "salope", "enfoiré", "enfoirée", "pute", "pd", "fdp",
+    "bâtard", "nique", "putain", "connard", "connasse", "salopard"
+];
+
+// 🚫 VIOLENCE EXTRÊME — BANNI IMMÉDIATEMENT
+const motsViolenceGrave = [
+    "je vais te tuer", "je vais vous tuer", "je vais te buter", "je vais vous buter",
+    "je vais te crever", "je vais vous crever", "va crever", "crève",
+    "viole", "violer", "viol", "je vais te violer", "tu vas être violé",
+    "je vais te tuer", "mort à toi", "je vais te supprimer",
+    "je vais te faire la peau", "je vais vous tuer", "je vais te tuer"
+];
+
 window.onload = function() {
     document.getElementById('pseudo-affiche').textContent = pseudo;
 };
 
-// ✅ ENVOYER AVEC ENTRÉE
+function activerMod(actif) {
+    modActive = actif;
+    if (actif) {
+        document.getElementById('statut-mod').className = 'statut-mod ok';
+        document.getElementById('statut-mod').textContent = '✅ IA active — Aucun avertissement';
+    } else {
+        document.getElementById('statut-mod').className = 'statut-mod ok';
+        document.getElementById('statut-mod').textContent = 'ℹ️ IA désactivée';
+    }
+}
+
 function gererEntree(event) {
     if (event.key === 'Enter') {
         event.preventDefault();
         envoyerMessage();
     }
+}
+
+// ✅ VÉRIFIER LE MESSAGE
+function verifierMessage(texte) {
+    if (!modActive) return { ok: true };
+    const t = texte.toLowerCase();
+
+    // 🚫 D'ABORD VÉRIFIER LA VIOLENCE GRAVE
+    for (let mot of motsViolenceGrave) {
+        if (t.includes(mot)) {
+            return { ok: false, type: 'grave', mot: mot };
+        }
+    }
+
+    // ⚠️ PUIS VÉRIFIER LES MOTS GROSSIERS
+    for (let mot of motsGrossiers) {
+        if (t.includes(mot)) {
+            return { ok: false, type: 'avertissement', mot: mot };
+        }
+    }
+
+    return { ok: true };
+}
+
+// ✅ ENVOYER UN MESSAGE
+function envoyerMessage() {
+    let champ = document.getElementById('saisie-message');
+    let texte = champ.value.trim();
+    if (!texte) return;
+
+    // 🚫 SI DÉJÀ BANNI
+    if (estBanni) {
+        ajouterMessage("🚫 TU ES BANNI — Plus de droit d'écriture", 'banni');
+        champ.value = '';
+        return;
+    }
+
+    // 🔍 VÉRIFICATION
+    let verification = verifierMessage(texte);
+
+    if (!verification.ok) {
+        // 🚫 VIOLENCE GRAVE → BANNI DIRECT
+        if (verification.type === 'grave') {
+            estBanni = true;
+            ajouterMessage(`🚫 BANNI IMMÉDIATEMENT — Menace ou violence détectée : "${verification.mot}"`, 'grave');
+            document.getElementById('statut-mod').className = 'statut-mod grave';
+            document.getElementById('statut-mod').textContent = "🚫 BANNI — Violence détectée !";
+            champ.disabled = true;
+            document.getElementById('btn-envoyer').disabled = true;
+            champ.value = '';
+            return;
+        }
+
+        // ⚠️ MOT GROSSIER → AVERTISSEMENT
+        avertissements++;
+        if (avertissements >= 2) {
+            estBanni = true;
+            ajouterMessage("🚫 BANNI — 2 avertissements atteints. Plus de droit d'écriture.", 'banni');
+            document.getElementById('statut-mod').className = 'statut-mod banni';
+            document.getElementById('statut-mod').textContent = "🚫 BANNI — 2 avertissements !";
+            champ.disabled = true;
+            document.getElementById('btn-envoyer').disabled = true;
+        } else {
+            ajouterMessage(`⚠️ AVERTISSEMENT ${avertissements}/2 — Mot inapproprié : "${verification.mot}"`, 'avertissement');
+            document.getElementById('statut-mod').className = 'statut-mod warn';
+            document.getElementById('statut-mod').textContent = `⚠️ ${avertissements}/2 avertissement(s) — Attention !`;
+        }
+        champ.value = '';
+        return;
+    }
+
+    // ✅ MESSAGE AUTORISÉ
+    let zone = document.getElementById('zone-chat');
+    let nouveauMsg = document.createElement('div');
+    nouveauMsg.classList.add('message', modeChat);
+    nouveauMsg.innerHTML = modeChat === 'prive'
+        ? `<span class="etiquette-privé">💬 PRIVÉ</span><strong>${pseudo} :</strong> ${texte}`
+        : `<strong>${pseudo} :</strong> ${texte}`;
+    zone.appendChild(nouveauMsg);
+    zone.scrollTop = zone.scrollHeight;
+    champ.value = '';
+}
+
+function ajouterMessage(texte, type) {
+    let zone = document.getElementById('zone-chat');
+    let msg = document.createElement('div');
+    msg.classList.add('message', type);
+    msg.textContent = texte;
+    zone.appendChild(msg);
+    zone.scrollTop = zone.scrollHeight;
 }
 
 function choisirOnglet(type) {
@@ -259,25 +341,10 @@ function choisirOnglet(type) {
         if ((type==='public' && i===0) || (type==='prive' && i===1)) o.classList.add('actif');
     });
     document.querySelectorAll('.message').forEach(msg => {
-        msg.style.display = (type==='public' && msg.classList.contains('public')) ||
+        msg.style.display = (type==='public' && !msg.classList.contains('prive')) ||
                             (type==='prive' && msg.classList.contains('prive')) ? '' : 'none';
     });
     document.getElementById('info-prive').style.display = type==='prive' ? 'block' : 'none';
-}
-
-function envoyerMessage() {
-    let champ = document.getElementById('saisie-message');
-    let texte = champ.value.trim();
-    if (!texte) return;
-    let zone = document.getElementById('zone-chat');
-    let nouveauMsg = document.createElement('div');
-    nouveauMsg.classList.add('message', modeChat);
-    nouveauMsg.innerHTML = modeChat==='prive'
-        ? `<span class="etiquette-prive">💬 PRIVÉ</span><strong>${pseudo} :</strong> ${texte}`
-        : `<strong>${pseudo} :</strong> ${texte}`;
-    zone.appendChild(nouveauMsg);
-    zone.scrollTop = zone.scrollHeight;
-    champ.value = '';
 }
 
 function choisirMontant(bouton) {
@@ -286,11 +353,8 @@ function choisirMontant(bouton) {
     montantSelectionne = bouton.textContent;
 }
 
-// ✅ CHOISIR PAIEMENT — SIMPLE ET CLAIR
 function choisirPaiement(option) {
-    document.querySelectorAll('.paiement-option').forEach(o => {
-        o.classList.remove('selectionne');
-    });
+    document.querySelectorAll('.paiement-option').forEach(o => o.classList.remove('selectionne'));
     option.classList.add('selectionne');
 }
 
