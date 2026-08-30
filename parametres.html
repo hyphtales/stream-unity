@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>StreamUnity - Paramètres Complets</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {outline: none; box-sizing: border-box; margin: 0; padding: 0;}
+        body {background: linear-gradient(135deg, #2a1060, #1a0840); color: white; font-family: sans-serif; min-height: 100vh;}
+        .conteneur {max-width: 900px; margin: 30px auto; padding: 20px;}
+        .entete {text-align: center; margin-bottom: 40px;}
+        .entete h2 {font-size: 30px; margin-bottom: 8px;}
+        .entete p {color: #aaa; font-size: 16px;}
+        .onglets {display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;}
+        .onglet {padding: 10px 20px; background: #2f2f35; border: none; color: #aaa; border-radius: 8px; cursor: pointer; font-size: 15px; transition: all 0.2s;}
+        .onglet.actif {background: linear-gradient(90deg, #772ce8, #9147ff); color: white; font-weight: bold;}
+        .bloc {background: rgba(255,255,255,0.05); border-radius: 15px; padding: 25px; margin-bottom: 25px;}
+        .bloc h3 {margin-bottom: 20px; font-size: 20px; border-bottom: 1px solid #444; padding-bottom: 10px;}
+        .caché {display: none !important;}
+
+        /* --- Comptes & Plateformes --- */
+        .plateforme {display: flex; align-items: center; justify-content: space-between; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 10px; margin-bottom: 12px;}
+        .plateforme-info {display: flex; align-items: center; gap: 12px;}
+        .plateforme-icone {font-size: 28px;}
+        .plateforme-nom {font-weight: bold; font-size: 16px;}
+        .plateforme-desc {font-size: 13px; color: #888; margin-top: 3px;}
+        .btn-connecter {padding: 8px 16px; background: #2f2f35; color: white; border: none; border-radius: 6px; cursor: pointer; transition: all 0.2s; font-size: 14px;}
+        .btn-connecter.actif {background: #28a745;}
+
+        /* --- Manettes --- */
+        .mode-connexion {display: flex; gap: 12px; margin-bottom: 20px;}
+        .mode {flex: 1; padding: 12px; background: #2f2f35; border-radius: 8px; text-align: center; cursor: pointer; font-weight: bold; transition: all 0.2s;}
+        .mode.actif {background: #9147ff;}
+        .appareil {display: flex; align-items: center; justify-content: space-between; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 10px; margin-bottom: 12px; border-left: 4px solid #28f074;}
+        .appareil-info {display: flex; align-items: center; gap: 12px;}
+        .appareil-icone {font-size: 32px;}
+        .appareil-nom {font-weight: bold; font-size: 16px;}
+        .appareil-etat {font-size: 13px; color: #28f074; margin-top: 3px;}
+        .btn-deconnecter {padding: 6px 12px; background: #ff4444; color: white; border: none; border-radius: 6px; cursor: pointer; margin-left: 8px;}
+        .btn-rechercher {width: 100%; padding: 12px; background: linear-gradient(90deg, #772ce8, #9147ff); color: white; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; margin-top: 10px;}
+
+        /* --- Affichage & Réglages --- */
+        .reglage {display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #333;}
+        .reglage span {font-size: 15px;}
+        .select {padding: 8px 12px; background: #2a1060; border: 2px solid #5533aa; color: white; border-radius: 6px; min-width: 160px; font-size: 14px;}
+        .slider {width: 180px; height: 6px; cursor: pointer;}
+        .valeur {color: #999; font-size: 13px; margin-left: 10px;}
+
+        /* --- Bluetooth & Système --- */
+        .etat-bluetooth {color: #28f074; font-weight: bold;}
+        .info-appareil {color: #ccc; font-size: 14px;}
+
+        .lien-retour {text-align: center; margin-top: 30px;}
+        .lien-retour a {color: #a970ff; text-decoration: none; font-size: 15px;}
+    </style>
+</head>
+<body>
+    <div class="conteneur">
+        <div class="entete">
+            <h2>⚙️ Paramètres Complets</h2>
+            <p>Gère tes comptes, manettes et ton affichage</p>
+        </div>
+
+        <!-- ONGLETS -->
+        <div class="onglets">
+            <button class="onglet actif" onclick="choisirOnglet('comptes')">🎮 Mes Comptes</button>
+            <button class="onglet" onclick="choisirOnglet('manettes')">🎮 Mes Manettes</button>
+            <button class="onglet" onclick="choisirOnglet('affichage')">🖥️ Affichage</button>
+            <button class="onglet" onclick="choisirOnglet('systeme')">🔗 Système</button>
+        </div>
+
+        <!-- ==================================== -->
+        <!-- 🎮 BLOC MES COMPTES                 -->
+        <!-- ==================================== -->
+        <div id="bloc-comptes" class="bloc">
+            <h3>🎮 Connecter mes plateformes de jeux</h3>
+            <p style="color:#aaa; margin-bottom:15px;">Lie tes comptes pour retrouver ton profil et tes jeux automatiquement</p>
+
+            <div class="plateforme">
+                <div class="plateforme-info">
+                    <span class="plateforme-icone">🎮</span>
+                    <div>
+                        <div class="plateforme-nom">Steam</div>
+                        <div class="plateforme-desc">Bibliothèque, niveau, amis, succès</div>
+                    </div>
+                </div>
+                <button class="btn-connecter" onclick="connecter(this, 'Steam')">Connecter</button>
+            </div>
+
+            <div class="plateforme">
+                <div class="plateforme-info">
+                    <span class="plateforme-icone">🏔️</span>
+                    <div>
+                        <div class="plateforme-nom">Epic Games</div>
+                        <div class="plateforme-desc">Jeux, boutique et liste d'amis</div>
+                    </div>
+                </div>
+                <button class="btn-connecter" onclick="connecter(this, 'Epic Games')">Connecter</button>
+            </div>
+
+            <div class="plateforme">
+                <div class="plateforme-info">
+                    <span class="plateforme-icone">🟪</span>
+                    <div>
+                        <div class="plateforme-nom">PlayStation</div>
+                        <div class="plateforme-desc">Compte PSN, trophées, jeu en cours</div>
+                    </div>
+                </div>
+                <button class="btn-connecter" onclick="connecter(this, 'PlayStation')">Connecter</button>
+            </div>
+
+            <div class="plateforme">
+                <div class="plateforme-info">
+                    <span class="plateforme-icone">🟢</span>
+                    <div>
+                        <div class="plateforme-nom">Xbox</div>
+                        <div class="plateforme-desc">Gamerscore, succès et activité</div>
+                    </div>
+                </div>
+                <button class="btn-connecter" onclick="connecter(this, 'Xbox')">Connecter</button>
+            </div>
+
+            <div class="plateforme">
+                <div class="plateforme-info">
+                    <span class="plateforme-icone">🔴</span>
+                    <div>
+                        <div class="plateforme-nom">Nintendo Switch</div>
+                        <div class="plateforme-desc">Compte, amis et liste de jeux</div>
+                    </div>
+                </div>
+                <button class="btn-connecter" onclick="connecter(this, 'Nintendo')">Connecter</button>
+            </div>
+        </div>
+
+        <!-- ==================================== -->
+        <!-- 🎮 BLOC MANETTES                     -->
+        <!-- ==================================== -->
+        <div id="bloc-manettes" class="bloc caché">
+            <h3>🎮 Manettes & Périphériques</h3>
+            <p style="color:#aaa; margin-bottom:15px;">Branche en <strong>USB</strong> ou en <strong>Bluetooth</strong> → elle se détecte toute seule ✅</p>
+
+            <div class="mode-connexion">
+                <div class="mode actif" onclick="choisirModeConnexion('usb')">🔌 USB</div>
+                <div class="mode" onclick="choisirModeConnexion('bluetooth')">📡 Bluetooth</div>
+            </div>
+
+            <!-- 🟪 PS5 -->
+            <div class="appareil">
+                <div class="appareil-info">
+                    <span class="appareil-icone">🟪</span>
+                    <div>
+                        <div class="appareil-nom">Manette PlayStation 5 — DualSense</div>
+                        <div class="appareil-etat">✅ Connectée en USB — Batterie : 92%</div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn-connecter actif">Actif</button>
+                    <button class="btn-deconnecter" onclick="deconnecterManette(this)">Déconnecter</button>
+                </div>
+            </div>
+
+            <!-- 🟢 Xbox -->
+            <div class="appareil">
+                <div class="appareil-info">
+                    <span class="appareil-icone">🟢</span>
+                    <div>
+                        <div class="appareil-nom">Manette Xbox Series X / S</div>
+                        <div class="appareil-etat">✅ Connectée en Bluetooth — Batterie : 78%</div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn-connecter actif">Actif</button>
+                    <button class="btn-deconnecter" onclick="deconnecterManette(this)">Déconnecter</button>
+                </div>
+            </div>
+
+            <!-- 🔴 Switch Pro -->
+            <div class="appareil">
+                <div class="appareil-info">
+                    <span class="appareil-icone">🔴</span>
+                    <div>
+                        <div class="appareil-nom">Manette Nintendo Switch Pro</div>
+                        <div class="appareil-etat">✅ Connectée en USB — Batterie : 100%</div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn-connecter actif">Actif</button>
+                    <button class="btn-deconnecter" onclick="deconnecterManette(this)">Déconnecter</button>
+                </div>
+            </div>
+
+            <!-- 🎮 Joy-Con -->
+            <div class="appareil">
+                <div class="appareil-info">
+                    <span class="appareil-icone">🎮</span>
+                    <div>
+                        <div class="appareil-nom">Nintendo Joy-Con (Gauche + Droite)</div>
+                        <div class="appareil-etat">✅ Accouplés — Connectés en Bluetooth</div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn-connecter actif">Actif</button>
+                    <button class="btn-deconnecter" onclick="deconnecterManette(this)">Déconnecter</button>
+                </div>
+            </div>
+
+            <!-- Autre manette générique -->
+            <div class="appareil">
+                <div class="appareil-info">
+                    <span class="appareil-icone">🎮</span>
+                    <div>
+                        <div class="appareil-nom">Manette Générique / Autre</div>
+                        <div class="appareil-etat">✅ Compatible — USB ou Bluetooth</div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn-connecter actif">Actif</button>
+                    <button class="btn-deconnecter" onclick="deconnecterManette(this)">Déconnecter</button>
+                </div>
+            </div>
+
+            <button class="btn-rechercher" onclick="rechercherManettes()">🔍 Rechercher d'autres manettes...</button>
+        </div>
+
+        <!-- ==================================== -->
+        <!-- 🖥️ BLOC AFFICHAGE                    -->
+        <!-- ==================================== -->
+        <div id="bloc-affichage" class="bloc caché">
+            <h3>🖥️ Résolution & Affichage</h3>
+
+            <div class="reglage">
+                <span>📺 Résolution d'écran</span>
+                <select class="select" onchange="changerResolution(this.value)">
+                    <option value="auto">Automatique</option>
+                    <option value="720">HD — 1280 × 720</option>
+                    <option value="1080" selected>Full HD — 1920 × 1080</option>
+                    <option value="1440">2K — 2560 × 1440</option>
+                    <option value="2160">4K — 3840 × 2160</option>
+                </select>
+            </div>
+
+            <div class="reglage">
+                <span>💡 Luminosité <span class="valeur" id="val-lumiere">100%</span></span>
+                <input type="range" class="slider" min="20" max="100" value="100" oninput="changerLumiere(this.value)">
+            </div>
+
+            <div class="reglage">
+                <span>🎨 Mode d'affichage</span>
+                <select class="select">
+                    <option selected>Mode Sombre</option>
+                    <option>Mode Clair</option>
+                    <option>Contraste Élevé</option>
+                </select>
+            </div>
+
+            <div class="reglage">
+                <span>📐 Taille du texte</span>
+                <select class="select">
+                    <option>Petit</option>
+                    <option selected>Moyen</option>
+                    <option>Grand</option>
+                    <option>Très Grand</option>
+                </select>
+            </div>
+
+            <div class="reglage">
+                <span>🖥️ Mode d'écran</span>
+                <select class="select">
+                    <option>Pleine fenêtre</option>
+                    <option selected>Fenêtré</option>
+                    <option>Plein écran</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ==================================== -->
+        <!-- 🔗 BLOC SYSTÈME                      -->
+        <!-- ==================================== -->
+        <div id="bloc-systeme" class="bloc caché">
+            <h3>🔗 Bluetooth & Appareils</h3>
+
+            <div class="reglage">
+                <span>📡 Bluetooth</span>
+                <button class="btn-connecter actif" id="btn-bluetooth" onclick="basculerBluetooth(this)">Activé ✅</button>
+            </div>
+
+            <div class="reglage">
+                <span>🎮 Manettes détectées</span>
+                <span class="info-appareil">4 manettes connectées ✅</span>
+            </div>
+
+            <div class="reglage">
+                <span>🎧 Casques / Audio</span>
+                <span class="info-appareil">Casque sans fil + Micro connectés ✅</span>
+            </div>
+
+            <div class="reglage">
+                <span>🖱️ Souris & Clavier</span>
+                <span class="info-appareil">Détectés et prêts ✅</span>
+            </div>
+
+            <div class="reglage">
+                <span>📡 Autres appareils</span>
+                <button class="btn-connecter" onclick="rechercherAppareils()">Rechercher...</button>
+            </div>
+        </div>
+
+        <div class="lien-retour">
+            <a href="accueil.html">← Retour à l'accueil</a>
+        </div>
+    </div>
+
+<script>
+// --- Navigation entre onglets ---
+function choisirOnglet(nom) {
+    document.querySelectorAll('.onglet').forEach(b => b.classList.remove('actif'));
+    event.target.classList.add('actif');
+    document.getElementById('bloc-comptes').classList.toggle('caché', nom !== 'comptes');
+    document.getElementById('bloc-manettes').classList.toggle('caché', nom !== 'manettes');
+    document.getElementById('bloc-affichage').classList.toggle('caché', nom !== 'affichage');
+    document.getElementById('bloc-systeme').classList.toggle('caché', nom !== 'systeme');
+}
+
+// --- Connexion plateformes ---
+function connecter(btn, nom) {
+    btn.classList.toggle('actif');
+    if(btn.classList.contains('actif')) {
+        btn.innerText = '✅ Connecté';
+        alert(`✅ ${nom} est maintenant connecté !\n\nTon profil sera mis à jour.`);
+    } else {
+        btn.innerText = 'Connecter';
+    }
+}
+
+// --- Mode USB / Bluetooth ---
+function choisirModeConnexion(mode) {
+    document.querySelectorAll('.mode').forEach(m => m.classList.remove('actif'));
+    event.target.classList.add('actif');
+}
+
+// --- Déconnecter manette ---
+function deconnecterManette(btn) {
+    const bloc = btn.closest('.appareil');
+    bloc.style.opacity = '0.4';
+    bloc.style.borderLeftColor = '#ff4444';
+    alert('❌ Manette déconnectée');
+}
+
+// --- Rechercher manettes ---
+function rechercherManettes() {
+    alert('🔍 Recherche de manettes en cours...\n\nBranche ta manette en USB ou active le Bluetooth.\n\n✅ PlayStation, Xbox, Nintendo et toutes manettes génériques sont compatibles !');
+}
+
+// --- Résolution ---
+function changerResolution(val) {
+    const texte = val === 'auto' ? 'Automatique' : val + 'p';
+    alert(`✅ Résolution changée en ${texte}`);
+}
+
+// --- Luminosité ---
+function changerLumiere(val) {
+    document.getElementById('val-lumiere').innerText = val + '%';
+    document.body.style.opacity = 0.5 + (val / 200);
+}
+
+// --- Bluetooth ---
+function basculerBluetooth(btn) {
+    btn.classList.toggle('actif');
+    btn.innerText = btn.classList.contains('actif') ? 'Activé ✅' : 'Désactivé ❌';
+}
+
+// --- Rechercher appareils ---
+function rechercherAppareils() {
+    alert('🔍 Recherche d\'appareils en cours...\n\nAssurez-vous que vos manettes, casques et accessoires sont en mode association.\n\n✅ PlayStation, Xbox, Nintendo, et tous appareils Bluetooth fonctionnent !');
+}
+</script>
+</body>
+</html>
