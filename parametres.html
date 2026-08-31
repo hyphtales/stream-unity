@@ -31,6 +31,8 @@
         .profil.visible {display: block;}
         .profil img {width: 60px; height: 60px; border-radius: 50%; margin-right: 15px; vertical-align: middle;}
         .profil .pseudo {font-weight: bold; font-size: 17px; color: #00c853;}
+        .lien-chaine {display: inline-block; margin-top: 10px; padding: 8px 15px; background: #9147ff; color: white; text-decoration: none; border-radius: 6px; font-size: 14px;}
+        .lien-chaine:hover {background: #772ce8;}
         
         .btn-connecter {padding: 8px 18px; background: #772ce8; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px;}
         .btn-connecter:hover {background: #9147ff;}
@@ -52,7 +54,7 @@
     <div class="conteneur">
         <div class="entete">
             <h2>⚙️ Paramètres</h2>
-            <p>Connecte tes comptes en toute simplicité ✅</p>
+            <p>Connecte tes comptes et accède à tes chaînes ✅</p>
         </div>
 
         <!-- 🟪 TWITCH -->
@@ -74,6 +76,8 @@
                 <div style="display:inline-block; vertical-align:middle;">
                     <div class="pseudo">✅ <span id="twitch-pseudo">Compte Twitch</span></div>
                     <div style="color:#aaa; font-size:13px; margin-top:5px;">Connecté avec succès ✅</div>
+                    <!-- ✅ LIEN VERS TA CHAÎNE -->
+                    <a id="lien-chaine-twitch" href="#" target="_blank" class="lien-chaine">📺 Aller sur ma chaîne Twitch</a>
                 </div>
             </div>
         </div>
@@ -97,6 +101,7 @@
                 <div style="display:inline-block; vertical-align:middle;">
                     <div class="pseudo">✅ Compte TikTok</div>
                     <div style="color:#aaa; font-size:13px; margin-top:5px;">Connecté avec succès ✅</div>
+                    <a href="https://www.tiktok.com/" target="_blank" class="lien-chaine">🎵 Aller sur mon profil TikTok</a>
                 </div>
             </div>
         </div>
@@ -120,76 +125,52 @@
                 <div style="display:inline-block; vertical-align:middle;">
                     <div class="pseudo">✅ Compte X</div>
                     <div style="color:#aaa; font-size:13px; margin-top:5px;">Connecté avec succès ✅</div>
+                    <a href="https://x.com/" target="_blank" class="lien-chaine">🐦 Aller sur mon profil X</a>
                 </div>
             </div>
         </div>
     </div>
 
 <script>
-// ==========================================
-// 🔑 SEULS LES IDENTIFIANTS PUBLICS (PAS DE SECRET !)
-// ==========================================
 const TWITCH_CLIENT_ID = "9a7yzs5amc2s6tkgt7a4pus3q8ufju";
 const TIKTOK_CLIENT_ID = "awvk3dtnmwo0sfiz";
 const X_CLIENT_ID = "AlxrE0DF2StyI34dfmlt4C5eo";
 const REDIRECT_URI = "https://stream-unity.onrender.com/parametres.html";
 
-// ==========================================
-// 🚀 AU CHARGEMENT
-// ==========================================
 window.onload = function() {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
+    const etat = urlParams.get('state');
     
     if (code) {
-        // On a reçu un code = connexion réussie !
         localStorage.setItem("dernier_code", code);
-        // Détecter quelle plateforme s'est connectée
-        const etat = urlParams.get('state');
-        if (etat === 'twitch' || !etat) {
-            afficherConnecte('twitch');
-        } else if (etat === 'tiktok') {
-            afficherConnecte('tiktok');
-        } else if (etat === 'x') {
-            afficherConnecte('x');
-        }
-        // Nettoyer l'URL
+        if (etat === 'twitch') afficherConnecte('twitch');
+        else if (etat === 'tiktok') afficherConnecte('tiktok');
+        else if (etat === 'x') afficherConnecte('x');
+        else afficherConnecte('twitch');
         history.replaceState({}, document.title, REDIRECT_URI);
     }
     
-    // Restaurer les connexions sauvegardées
     if (localStorage.getItem("twitch_connecte") === "oui") afficherConnecte('twitch');
     if (localStorage.getItem("tiktok_connecte") === "oui") afficherConnecte('tiktok');
     if (localStorage.getItem("x_connecte") === "oui") afficherConnecte('x');
 };
 
-// ==========================================
-// 🟪 CONNEXION TWITCH
-// ==========================================
 function connecterTwitch() {
     const url = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=user:read:email&state=twitch`;
     window.location.href = url;
 }
 
-// ==========================================
-// 🎵 CONNEXION TIKTOK
-// ==========================================
 function connecterTikTok() {
     const url = `https://www.tiktok.com/auth/authorize?client_id=${TIKTOK_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=user.info.basic&state=tiktok`;
     window.location.href = url;
 }
 
-// ==========================================
-// 🐦 CONNEXION X
-// ==========================================
 function connecterX() {
     const url = `https://x.com/i/oauth2/authorize?client_id=${X_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=tweet.read%20users.read&state=x`;
     window.location.href = url;
 }
 
-// ==========================================
-// ✅ AFFICHER CONNECTÉ
-// ==========================================
 function afficherConnecte(plateforme) {
     const bouton = document.getElementById(`btn-${plateforme}`);
     const profil = document.getElementById(`profil-${plateforme}`);
@@ -199,6 +180,12 @@ function afficherConnecte(plateforme) {
     profil.classList.add("visible");
     
     localStorage.setItem(`${plateforme}_connecte`, "oui");
+    
+    // ✅ LIEN VERS TA CHAÎNE TWITCH
+    if (plateforme === 'twitch') {
+        const pseudo = localStorage.getItem("twitch_pseudo") || "ta-chaine";
+        document.getElementById("lien-chaine-twitch").href = `https://www.twitch.tv/${pseudo.toLowerCase()}`;
+    }
 }
 </script>
 
