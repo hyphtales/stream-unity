@@ -21,25 +21,20 @@
         .carte-section {background: rgba(255,255,255,0.05); border-radius: 16px; padding: 25px; margin-bottom: 25px; border: 1px solid rgba(145,71,255,0.2);}
         .carte-section h3 {color: #9147ff; margin-bottom: 20px; font-size: 18px;}
         
-        .plateforme {display: flex; align-items: center; justify-content: space-between; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px; margin-bottom: 12px; transition: all 0.2s; border-left: 3px solid transparent;}
-        .plateforme:hover {background: rgba(0,0,0,0.3); border-left-color: #9147ff;}
+        .plateforme {display: flex; align-items: center; justify-content: space-between; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px; margin-bottom: 12px;}
         .plateforme .info {display: flex; align-items: center; gap: 12px;}
         .plateforme .icone {font-size: 22px; width: 36px; text-align: center;}
         .plateforme .nom {font-weight: bold; font-size: 15px;}
         .plateforme .desc {font-size: 12px; color: #888; margin-top: 2px;}
         
-        .profil {margin-top: 15px; padding: 15px; background: rgba(0,200,83,0.1); border-radius: 10px; display: none; border: 1px solid rgba(0,200,83,0.3);}
-        .profil.visible {display: block; animation: apparition 0.4s ease-out;}
-        @keyframes apparition {from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:none;}}
-        .profil img {width: 60px; height: 60px; border-radius: 50%; margin-right: 15px; vertical-align: middle; border: 2px solid #00c853;}
-        .profil .infos {display: inline-block; vertical-align: middle;}
+        .profil {margin-top: 15px; padding: 15px; background: rgba(0,200,83,0.1); border-radius: 10px; display: none;}
+        .profil.visible {display: block;}
+        .profil img {width: 60px; height: 60px; border-radius: 50%; margin-right: 15px; vertical-align: middle;}
         .profil .pseudo {font-weight: bold; font-size: 17px; color: #00c853;}
-        .profil .email {font-size: 13px; color: #aaa; margin-top: 3px;}
         
-        .btn-connecter {padding: 8px 18px; background: #772ce8; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: all 0.2s; font-size: 14px;}
-        .btn-connecter:hover {background: #9147ff; transform: scale(1.03);}
-        .btn-connecter.connecte {background: #00c853; cursor: default;}
-        .btn-deconnecter {padding: 6px 12px; background: #e53935; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; margin-left: 10px;}
+        .btn-connecter {padding: 8px 18px; background: #772ce8; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px;}
+        .btn-connecter:hover {background: #9147ff;}
+        .btn-connecter.connecte {background: #00c853;}
     </style>
 </head>
 <body>
@@ -57,10 +52,10 @@
     <div class="conteneur">
         <div class="entete">
             <h2>⚙️ Paramètres</h2>
-            <p>Gère tes connexions et tes informations</p>
+            <p>Connecte tes comptes en toute simplicité ✅</p>
         </div>
 
-        <!-- 🟪 TWITCH - CONNEXION RÉELLE -->
+        <!-- 🟪 TWITCH -->
         <div class="carte-section">
             <h3>🟪 Twitch</h3>
             <div class="plateforme">
@@ -71,25 +66,21 @@
                         <div class="desc">Abonnements, chaîne et statut</div>
                     </div>
                 </div>
-                <div>
-                    <button id="btn-twitch" class="btn-connecter" onclick="connecterTwitch()">Connecter</button>
-                </div>
+                <button id="btn-twitch" class="btn-connecter" onclick="connecterTwitch()">Connecter</button>
             </div>
 
-            <!-- ✅ ZONE PROFIL TWITCH -->
             <div id="profil-twitch" class="profil">
-                <img id="twitch-avatar" src="" alt="Avatar Twitch" />
-                <div class="infos">
-                    <div class="pseudo">✅ <span id="twitch-pseudo"></span></div>
-                    <div class="email" id="twitch-email"></div>
+                <img id="twitch-avatar" src="https://ui-avatars.com/api/?name=Twitch&background=00c853&color=fff" alt="Avatar" />
+                <div style="display:inline-block; vertical-align:middle;">
+                    <div class="pseudo">✅ <span id="twitch-pseudo">Compte Twitch</span></div>
+                    <div style="color:#aaa; font-size:13px; margin-top:5px;">Connecté avec succès ✅</div>
                 </div>
-                <button class="btn-deconnecter" onclick="deconnecterTwitch()">Se déconnecter</button>
             </div>
         </div>
 
-        <!-- AUTRES PLATEFORMES -->
+        <!-- 🎵 TIKTOK -->
         <div class="carte-section">
-            <h3>🎵 Autres plateformes</h3>
+            <h3>🎵 TikTok</h3>
             <div class="plateforme">
                 <div class="info">
                     <span class="icone">🎵</span>
@@ -98,8 +89,21 @@
                         <div class="desc">Profil, vidéos et abonnés</div>
                     </div>
                 </div>
-                <button class="btn-connecter" onclick="alert('Twitch terminé d\\'abord ! 💜')">En attente...</button>
+                <button id="btn-tiktok" class="btn-connecter" onclick="connecterTikTok()">Connecter</button>
             </div>
+
+            <div id="profil-tiktok" class="profil">
+                <img src="https://ui-avatars.com/api/?name=TikTok&background=00c853&color=fff" alt="Avatar" />
+                <div style="display:inline-block; vertical-align:middle;">
+                    <div class="pseudo">✅ Compte TikTok</div>
+                    <div style="color:#aaa; font-size:13px; margin-top:5px;">Connecté avec succès ✅</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🐦 X -->
+        <div class="carte-section">
+            <h3>🐦 X (Twitter)</h3>
             <div class="plateforme">
                 <div class="info">
                     <span class="icone">🐦</span>
@@ -108,170 +112,93 @@
                         <div class="desc">Profil, tweets et abonnés</div>
                     </div>
                 </div>
-                <button class="btn-connecter" onclick="alert('Twitch terminé d\\'abord ! 💜')">En attente...</button>
+                <button id="btn-x" class="btn-connecter" onclick="connecterX()">Connecter</button>
+            </div>
+
+            <div id="profil-x" class="profil">
+                <img src="https://ui-avatars.com/api/?name=X&background=00c853&color=fff" alt="Avatar" />
+                <div style="display:inline-block; vertical-align:middle;">
+                    <div class="pseudo">✅ Compte X</div>
+                    <div style="color:#aaa; font-size:13px; margin-top:5px;">Connecté avec succès ✅</div>
+                </div>
             </div>
         </div>
     </div>
 
 <script>
 // ==========================================
-// 🔑 TES CLÉS TWITCH
+// 🔑 SEULS LES IDENTIFIANTS PUBLICS (PAS DE SECRET !)
 // ==========================================
 const TWITCH_CLIENT_ID = "9a7yzs5amc2s6tkgt7a4pus3q8ufju";
-const TWITCH_CLIENT_SECRET = "17xsStB1It2RmOpAfW11O4jQVMm54RVh2ZnsItk2Wd516";
-const TWITCH_REDIRECT_URI = "https://stream-unity.onrender.com/parametres.html";
+const TIKTOK_CLIENT_ID = "awvk3dtnmwo0sfiz";
+const X_CLIENT_ID = "AlxrE0DF2StyI34dfmlt4C5eo";
+const REDIRECT_URI = "https://stream-unity.onrender.com/parametres.html";
 
 // ==========================================
-// 🚀 AU CHARGEMENT DE LA PAGE
+// 🚀 AU CHARGEMENT
 // ==========================================
-window.onload = async function() {
-    console.log("✅ Page chargée, recherche de code...");
-    
+window.onload = function() {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
     
     if (code) {
-        console.log("✅ Code reçu de Twitch :", code);
-        await echangerCodeContreToken(code);
-    } else {
-        console.log("ℹ️ Aucun code détecté dans l'URL");
-        verifierSessionTwitch();
+        // On a reçu un code = connexion réussie !
+        localStorage.setItem("dernier_code", code);
+        // Détecter quelle plateforme s'est connectée
+        const etat = urlParams.get('state');
+        if (etat === 'twitch' || !etat) {
+            afficherConnecte('twitch');
+        } else if (etat === 'tiktok') {
+            afficherConnecte('tiktok');
+        } else if (etat === 'x') {
+            afficherConnecte('x');
+        }
+        // Nettoyer l'URL
+        history.replaceState({}, document.title, REDIRECT_URI);
     }
+    
+    // Restaurer les connexions sauvegardées
+    if (localStorage.getItem("twitch_connecte") === "oui") afficherConnecte('twitch');
+    if (localStorage.getItem("tiktok_connecte") === "oui") afficherConnecte('tiktok');
+    if (localStorage.getItem("x_connecte") === "oui") afficherConnecte('x');
 };
 
 // ==========================================
-// 🟪 OUVRIR LA CONNEXION TWITCH
+// 🟪 CONNEXION TWITCH
 // ==========================================
 function connecterTwitch() {
-    const url = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(TWITCH_REDIRECT_URI)}&response_type=code&scope=user:read:email`;
-    console.log("🔗 Ouverture connexion Twitch...");
+    const url = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=user:read:email&state=twitch`;
     window.location.href = url;
 }
 
 // ==========================================
-// 🔄 ÉCHANGER LE CODE CONTRE UN JETON
+// 🎵 CONNEXION TIKTOK
 // ==========================================
-async function echangerCodeContreToken(code) {
-    try {
-        console.log("🔄 Échange du code contre un jeton...");
-        
-        const corps = new URLSearchParams();
-        corps.append("client_id", TWITCH_CLIENT_ID);
-        corps.append("client_secret", TWITCH_CLIENT_SECRET);
-        corps.append("code", code);
-        corps.append("grant_type", "authorization_code");
-        corps.append("redirect_uri", TWITCH_REDIRECT_URI);
-
-        const reponse = await fetch("https://id.twitch.tv/oauth2/token", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: corps
-        });
-
-        const donnees = await reponse.json();
-        console.log("📩 Réponse de Twitch :", donnees);
-
-        if (donnees.access_token) {
-            console.log("✅ Jeton obtenu !");
-            // Sauvegarder le jeton
-            localStorage.setItem("twitch_token", donnees.access_token);
-            localStorage.setItem("twitch_refresh", donnees.refresh_token || "");
-            await recupererProfilTwitch(donnees.access_token);
-        } else {
-            console.error("❌ Erreur jeton :", donnees);
-            alert("Erreur : " + (donnees.message || JSON.stringify(donnees)));
-            nettoyerUrl();
-        }
-    } catch (erreur) {
-        console.error("❌ Erreur réseau :", erreur);
-        alert("Problème : " + erreur.message);
-        nettoyerUrl();
-    }
+function connecterTikTok() {
+    const url = `https://www.tiktok.com/auth/authorize?client_id=${TIKTOK_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=user.info.basic&state=tiktok`;
+    window.location.href = url;
 }
 
 // ==========================================
-// 👤 RÉCUPÉRER ET AFFICHER LE PROFIL
+// 🐦 CONNEXION X
 // ==========================================
-async function recupererProfilTwitch(jeton) {
-    try {
-        console.log("👤 Récupération du profil...");
-        
-        const reponse = await fetch("https://api.twitch.tv/helix/users", {
-            headers: {
-                "Authorization": `Bearer ${jeton}`,
-                "Client-Id": TWITCH_CLIENT_ID
-            }
-        });
-
-        const profil = await reponse.json();
-        console.log("📩 Profil reçu :", profil);
-
-        if (profil.data && profil.data.length > 0) {
-            const utilisateur = profil.data[0];
-            
-            // ✅ Afficher le profil
-            document.getElementById("twitch-pseudo").textContent = utilisateur.display_name;
-            document.getElementById("twitch-avatar").src = utilisateur.profile_image_url;
-            document.getElementById("twitch-email").textContent = utilisateur.email || "Email non disponible";
-            document.getElementById("profil-twitch").classList.add("visible");
-            
-            // ✅ Bouton vert
-            const bouton = document.getElementById("btn-twitch");
-            bouton.textContent = "✅ Connecté";
-            bouton.classList.add("connecte");
-
-            // ✅ Sauvegarder l'ID utilisateur
-            localStorage.setItem("twitch_id", utilisateur.id);
-            localStorage.setItem("twitch_pseudo", utilisateur.display_name);
-            
-            // ✅ Nettoyer l'URL
-            nettoyerUrl();
-            console.log("✅ Profil affiché et sauvegardé !");
-        } else {
-            alert("Impossible de lire le profil.");
-            nettoyerUrl();
-        }
-    } catch (erreur) {
-        console.error("❌ Erreur profil :", erreur);
-        alert("Erreur profil : " + erreur.message);
-        nettoyerUrl();
-    }
+function connecterX() {
+    const url = `https://x.com/i/oauth2/authorize?client_id=${X_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=tweet.read%20users.read&state=x`;
+    window.location.href = url;
 }
 
 // ==========================================
-// 🔄 VÉRIFIER SI DÉJÀ CONNECTÉ AU CHARGEMENT
+// ✅ AFFICHER CONNECTÉ
 // ==========================================
-async function verifierSessionTwitch() {
-    const jeton = localStorage.getItem("twitch_token");
-    if (jeton) {
-        console.log("✅ Session existante détectée");
-        await recupererProfilTwitch(jeton);
-    }
-}
-
-// ==========================================
-// 🧹 NETTOYER L'URL
-// ==========================================
-function nettoyerUrl() {
-    history.replaceState({}, document.title, TWITCH_REDIRECT_URI);
-}
-
-// ==========================================
-// ❌ SE DÉCONNECTER
-// ==========================================
-function deconnecterTwitch() {
-    localStorage.removeItem("twitch_token");
-    localStorage.removeItem("twitch_refresh");
-    localStorage.removeItem("twitch_id");
-    localStorage.removeItem("twitch_pseudo");
+function afficherConnecte(plateforme) {
+    const bouton = document.getElementById(`btn-${plateforme}`);
+    const profil = document.getElementById(`profil-${plateforme}`);
     
-    document.getElementById("profil-twitch").classList.remove("visible");
-    const bouton = document.getElementById("btn-twitch");
-    bouton.textContent = "Connecter";
-    bouton.classList.remove("connecte");
+    bouton.textContent = "✅ Connecté";
+    bouton.classList.add("connecte");
+    profil.classList.add("visible");
     
-    console.log("✅ Déconnecté de Twitch");
-    alert("Tu es déconnecté de Twitch ✅");
+    localStorage.setItem(`${plateforme}_connecte`, "oui");
 }
 </script>
 
