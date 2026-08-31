@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreamUnity - Connexion / Inscription</title>
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif;}
+        body {background: linear-gradient(135deg, #2a1060, #1a0840); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;}
+        
+        .cadre {background: rgba(255,255,255,0.05); border: 2px solid rgba(145,71,255,0.3); border-radius: 16px; padding: 30px; width: 100%; max-width: 420px; box-shadow: 0 0 30px rgba(145,71,255,0.15);}
+        h2 {color: #9147ff; text-align: center; margin-bottom: 25px; font-size: 24px;}
+        .onglets {display: flex; margin-bottom: 25px; border-bottom: 2px solid #331a66;}
+        .onglet {flex: 1; padding: 12px; text-align: center; color: #aaa; cursor: pointer; transition: all 0.2s; border-bottom: 3px solid transparent;}
+        .onglet.actif {color: #9147ff; border-bottom-color: #9147ff; font-weight: bold;}
+        .form-groupe {margin-bottom: 18px;}
+        label {display: block; color: #ddd; margin-bottom: 6px; font-size: 14px;}
+        input {width: 100%; padding: 12px 15px; background: #1a0840; border: 2px solid #5533aa; border-radius: 8px; color: white; font-size: 15px;}
+        input:focus {outline: none; border-color: #9147ff;}
+        .bouton {width: 100%; padding: 13px; background: linear-gradient(90deg, #772ce8, #9147ff); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 8px; transition: all 0.2s;}
+        .bouton:hover {opacity: 0.92; transform: scale(1.01);}
+        .bouton.sec {background: transparent; border: 2px solid #9147ff; color: #9147ff; margin-top: 12px;}
+        .lien {text-align: center; margin-top: 18px; color: #a970ff; font-size: 14px; cursor: pointer; text-decoration: underline;}
+        .lien:hover {color: #c49bff;}
+        .message {margin-top: 15px; padding: 12px; border-radius: 8px; text-align: center; font-size: 14px; display: none;}
+        .message.vert {background: rgba(40,240,116,0.15); color: #28f074; display: block;}
+        .message.rouge {background: rgba(255,82,82,0.15); color: #ff5252; display: block;}
+        .cache {display: none !important;}
+        .code-affiche {background: rgba(255,204,0,0.15); border: 1px dashed #ffcc00; padding: 15px; border-radius: 8px; text-align: center; margin: 15px 0; color: #ffcc00; font-weight: bold; font-size: 18px; line-height: 1.5;}
+        .petit-texte {font-size: 13px; color: #888; text-align: center; margin-bottom: 15px;}
+    </style>
+</head>
+<body>
+
+<div class="cadre">
+    <!-- ONGLETS -->
+    <div class="onglets">
+        <div class="onglet actif" onclick="changerOnglet('connexion')">Connexion</div>
+        <div class="onglet" onclick="changerOnglet('inscription')">Inscription</div>
+    </div>
+
+    <!-- FORMULAIRE CONNEXION -->
+    <div id="form-connexion">
+        <h2>🔐 Se connecter</h2>
+        <div class="form-groupe">
+            <label>Pseudo ou Email ou Téléphone</label>
+            <input type="text" id="co-identifiant" placeholder="Ton pseudo, email ou téléphone" />
+        </div>
+        <div class="form-groupe">
+            <label>Mot de passe</label>
+            <input type="password" id="co-mdp" placeholder="Ton mot de passe" />
+        </div>
+        <button class="bouton" onclick="seConnecter()">🔑 Se connecter</button>
+        <div class="lien" onclick="afficherMdpOublie()">❓ Mot de passe oublié ?</div>
+        <div id="msg-co" class="message"></div>
+    </div>
+
+    <!-- FORMULAIRE INSCRIPTION -->
+    <div id="form-inscription" class="cache">
+        <h2>✨ Créer un compte</h2>
+        <p class="petit-texte">⚠️ Note bien ton Email et Téléphone : ils te serviront si tu oublies ton mot de passe !</p>
+        <div class="form-groupe">
+            <label>Pseudo</label>
+            <input type="text" id="in-pseudo" placeholder="Choisis un pseudo" />
+        </div>
+        <div class="form-groupe">
+            <label>Adresse Email</label>
+            <input type="email" id="in-email" placeholder="ton@email.com" />
+        </div>
+        <div class="form-groupe">
+            <label>Numéro de téléphone</label>
+            <input type="tel" id="in-tel" placeholder="06 12 34 56 78" />
+        </div>
+        <div class="form-groupe">
+            <label>Mot de passe (au moins 6 caractères)</label>
+            <input type="password" id="in-mdp" placeholder="Choisis un mot de passe sécurisé" />
+        </div>
+        <div class="form-groupe">
+            <label>Confirmer le mot de passe</label>
+            <input type="password" id="in-mdp2" placeholder="Répète le mot de passe" />
+        </div>
+        <button class="bouton" onclick="sInscrire()">✅ Créer mon compte</button>
+        <div id="msg-in" class="message"></div>
+    </div>
+
+    <!-- MOT DE PASSE OUBLIÉ → ÉTAPE 1 : CHOIX -->
+    <div id="form-mdp-oublie" class="cache">
+        <h2>🔑 Mot de passe oublié</h2>
+        <p class="petit-texte">Saisis ton Email ou Téléphone, tu recevras un code pour créer un nouveau mot de passe.</p>
+        <div class="form-groupe">
+            <label>Ton Email ou Téléphone enregistré</label>
+            <input type="text" id="recup-identifiant" placeholder="Email ou numéro de téléphone" />
+        </div>
+        <button class="bouton" onclick="envoyerCodeParSMS()">📱 Envoyer par SMS</button>
+        <button class="bouton sec" onclick="envoyerCodeParEmail()">📧 Envoyer par Email</button>
+        <div class="lien" onclick="retourConnexion()">← Retour connexion</div>
+        <div id="msg-recup1" class="message"></div>
+    </div>
+
+    <!-- ÉTAPE 2 : SAISIR LE CODE -->
+    <div id="form-saisir-code" class="cache">
+        <h2>🔢 Saisis le code reçu</h2>
+        <p class="petit-texte">Un code de vérification a été généré ci-dessous :</p>
+        <div id="code-envoye" class="code-affiche"></div>
+        <div class="form-groupe">
+            <label>Code de vérification à 6 chiffres</label>
+            <input type="text" id="saisie-code" placeholder="Saisis le code reçu" maxlength="6" />
+        </div>
+        <button class="bouton" onclick="verifierCode()">✅ Vérifier le code</button>
+        <div class="lien" onclick="retourRecup()">← Renvoyer un code</div>
+        <div id="msg-code" class="message"></div>
+    </div>
+
+    <!-- ÉTAPE 3 : NOUVEAU MOT DE PASSE -->
+    <div id="form-nouveau-mdp" class="cache">
+        <h2>🔑 Nouveau mot de passe</h2>
+        <div class="form-groupe">
+            <label>Nouveau mot de passe (au moins 6 caractères)</label>
+            <input type="password" id="nouveau-mdp" placeholder="Ton nouveau mot de passe" />
+        </div>
+        <div class="form-groupe">
+            <label>Confirmer le mot de passe</label>
+            <input type="password" id="nouveau-mdp2" placeholder="Répète le nouveau mot de passe" />
+        </div>
+        <button class="bouton" onclick="enregistrerNouveauMdp()">✅ Enregistrer le mot de passe</button>
+        <div id="msg-nouveau-mdp" class="message"></div>
+    </div>
+</div>
+
+<script>
+// ==========================================
+// 💾 STOCKAGE DES UTILISATEURS
+// ==========================================
+let utilisateurs = JSON.parse(localStorage.getItem('utilisateurs') || '[]');
+let utilisateurCourant = null;
+let codeAttendu = "";
+let identifiantRecupEnCours = "";
+
+// ==========================================
+// 🔄 CHANGER D'ONGLET
+// ==========================================
+function changerOnglet(nom) {
+    document.querySelectorAll('.onglet').forEach(o => o.classList.remove('actif'));
+    if (event && event.target) event.target.classList.add('actif');
+
+    document.getElementById('form-connexion').classList.add('cache');
+    document.getElementById('form-inscription').classList.add('cache');
+    document.getElementById('form-mdp-oublie').classList.add('cache');
+    document.getElementById('form-saisir-code').classList.add('cache');
+    document.getElementById('form-nouveau-mdp').classList.add('cache');
+
+    document.getElementById('form-' + nom).classList.remove('cache');
+}
+
+// ==========================================
+// ✅ INSCRIPTION
+// ==========================================
+function sInscrire() {
+    let pseudo = document.getElementById('in-pseudo').value.trim();
+    let email = document.getElementById('in-email').value.trim().toLowerCase();
+    let tel = document.getElementById('in-tel').value.trim();
+    let mdp = document.getElementById('in-mdp').value;
+    let mdp2 = document.getElementById('in-mdp2').value;
+    let msg = document.getElementById('msg-in');
+
+    if (!pseudo || !email || !tel || !mdp) return afficherMsg(msg, "⚠️ Remplis TOUS les champs !", "rouge");
+    if (mdp !== mdp2) return afficherMsg(msg, "⚠️ Les deux mots de passe ne correspondent pas !", "rouge");
+    if (mdp.length < 6) return afficherMsg(msg, "⚠️ Mot de passe : au moins 6 caractères !", "rouge");
+
+    let existe = utilisateurs.find(u => u.pseudo === pseudo || u.email === email || u.tel === tel);
+    if (existe) return afficherMsg(msg, "⚠️ Ce pseudo, email ou téléphone existe déjà !", "rouge");
+
+    utilisateurs.push({ pseudo, email, tel, mdp });
+    sauvegarderUtilisateurs();
+    afficherMsg(msg, "✅ Compte créé ! Tu peux te connecter !", "vert");
+
+    document.getElementById('in-pseudo').value = "";
+    document.getElementById('in-email').value = "";
+    document.getElementById('in-tel').value = "";
+    document.getElementById('in-mdp').value = "";
+    document.getElementById('in-mdp2').value = "";
+
+    setTimeout(() => changerOnglet('connexion'), 1800);
+}
+
+// ==========================================
+// 🔑 SE CONNECTER
+// ==========================================
+function seConnecter() {
+    let identifiant = document.getElementById('co-identifiant').value.trim().toLowerCase();
+    let mdp = document.getElementById('co-mdp').value;
+    let msg = document.getElementById('msg-co');
+
+    utilisateurCourant = utilisateurs.find(u => 
+        (u.pseudo === identifiant || u.email === identifiant.toLowerCase() || u.tel === identifiant) 
+        && u.mdp === mdp
+    );
+
+    if (utilisateurCourant) {
+        afficherMsg(msg, "✅ Bienvenue " + utilisateurCourant.pseudo + " ! Connexion réussie !", "vert");
+        localStorage.setItem('connecte', JSON.stringify(utilisateurCourant));
+        setTimeout(() => window.location.href = "accueil.html", 2000);
+    } else {
+        afficherMsg(msg, "❌ Identifiant ou mot de passe incorrect !", "rouge");
+    }
+}
+
+// ==========================================
+// 📱 ENVOYER CODE PAR SMS
+// ==========================================
+function envoyerCodeParSMS() {
+    let ident = document.getElementById('recup-identifiant').value.trim();
+    let user = utilisateurs.find(u => u.email === ident.toLowerCase() || u.tel === ident || u.pseudo === ident);
+    let msg = document.getElementById('msg-recup1');
+
+    if (!user) return afficherMsg(msg, "❌ Aucun compte trouvé ! Vérifie ton email/téléphone.", "rouge");
+
+    identifiantRecupEnCours = ident;
+    genererEtAfficherCode("SMS", user.tel);
+}
+
+// ==========================================
+// 📧 ENVOYER CODE PAR EMAIL
+// ==========================================
+function envoyerCodeParEmail() {
+    let ident = document.getElementById('recup-identifiant').value.trim();
+    let user = utilisateurs.find(u => u.email === ident.toLowerCase() || u.tel === ident || u.pseudo === ident);
+    let msg = document.getElementById('msg-recup1');
+
+    if (!user) return afficherMsg(msg, "❌ Aucun compte trouvé ! Vérifie ton email/téléphone.", "rouge");
+
+    identifiantRecupEnCours = ident;
+    genererEtAfficherCode("Email", user.email);
+}
+
+// ==========================================
+// 🔢 GÉNÉRER ET AFFICHER LE CODE
+// ==========================================
+function genererEtAfficherCode(mode, destinateur) {
+    codeAttendu = Math.floor(100000 + Math.random() * 900000).toString();
+
+    document.getElementById('code-envoye').innerHTML = 
+        "📲 Code envoyé par " + mode + " à :<br>" + masquerNumero(destinateur) + 
+        "<br><br>🔢 TON CODE : <span style='font-size:26px; color:#fff;'>" + codeAttendu + "</span>";
+
+    document.getElementById('form-mdp-oublie').classList.add('cache');
+    document.getElementById('form-saisir-code').classList.remove('cache');
+}
+
+// ==========================================
+// ✅ VÉRIFIER LE CODE
+// ==========================================
+function verifierCode() {
+    let saisi = document.getElementById('saisie-code').value.trim();
+    let msg = document.getElementById('msg-code');
+
+    if (saisi === codeAttendu) {
+        afficherMsg(msg, "✅ Code bon ! Crée ton nouveau mot de passe.", "vert");
+        setTimeout(() => {
+            document.getElementById('form-saisir-code').classList.add('cache');
+            document.getElementById('form-nouveau-mdp').classList.remove('cache');
+        }, 1200);
+    } else {
+        afficherMsg(msg, "❌ Code incorrect ! Réessaie.", "rouge");
+    }
+}
+
+// ==========================================
+// 🔑 ENREGISTRER NOUVEAU MOT DE PASSE
+// ==========================================
+function enregistrerNouveauMdp() {
+    let mdp1 = document.getElementById('nouveau-mdp').value;
+    let mdp2 = document.getElementById('nouveau-mdp2').value;
+    let msg = document.getElementById('msg-nouveau-mdp');
+
+    if (mdp1 !== mdp2) return afficherMsg(msg, "❌ Les deux mots de passe ne correspondent pas !", "rouge");
+    if (mdp1.length < 6) return afficherMsg(msg, "❌ Au moins 6 caractères !", "rouge");
+
+    let index = utilisateurs.findIndex(u => 
+        u.email === identifiantRecupEnCours.toLowerCase() || 
+        u.tel === identifiantRecupEnCours || 
+        u.pseudo === identifiantRecupEnCours
+    );
+
+    if (index !== -1) {
+        utilisateurs[index].mdp = mdp1;
+        sauvegarderUtilisateurs();
+        afficherMsg(msg, "✅ Mot de passe modifié ! Tu peux te connecter.", "vert");
+        setTimeout(() => retourConnexion(), 2000);
+    }
+}
+
+// ==========================================
+// 🛠️ FONCTIONS UTILITAIRES
+// ==========================================
+function afficherMsg(element, texte, type) {
+    element.className = "message " + type;
+    element.textContent = texte;
+}
+
+function sauvegarderUtilisateurs() {
+    localStorage.setItem('utilisateurs', JSON.stringify(utilisateurs));
+}
+
+function masquerNumero(texte) {
+    if (texte.includes('@')) {
+        let [nom, domaine] = texte.split('@');
+        return nom[0] + "***@" + domaine;
+    } else {
+        return texte.slice(0, 2) + "******" + texte.slice(-2);
+    }
+}
+
+function afficherMdpOublie() {
+    document.getElementById('form-connexion').classList.add('cache');
+    document.getElementById('form-mdp-oublie').classList.remove('cache');
+}
+function retourConnexion() {
+    changerOnglet('connexion');
+    codeAttendu = "";
+    identifiantRecupEnCours = "";
+}
+function retourRecup() {
+    document.getElementById('form-saisir-code').classList.add('cache');
+    document.getElementById('form-mdp-oublie').classList.remove('cache');
+    codeAttendu = "";
+}
+</script>
+
+</body>
+</html>
