@@ -3,200 +3,546 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StreamUnity - Paramètres</title>
+    <title>StreamUnity — Paramètres</title>
     <link rel="stylesheet" href="style.css" />
     <style>
         * {outline: none; box-sizing: border-box; margin: 0; padding: 0;}
-        body {background: linear-gradient(135deg, #2a1060, #1a0840); color: white; font-family: sans-serif; min-height: 100vh;}
+        body {
+            background: #0f0f13;
+            color: #efeff1;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+        }
         
-        .menu {background: rgba(0,0,0,0.3); padding: 15px; text-align: center; position: sticky; top: 0; z-index: 100;}
-        .menu a {display: inline-block; color: #ddd; text-decoration: none; padding: 10px 18px; margin: 0 5px; border-radius: 8px; transition: all 0.2s; font-size: 15px;}
-        .menu a:hover, .menu a.actif {background: #9147ff; color: white; font-weight: bold;}
+        .menu {
+            background: #18181b;
+            padding: 14px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #2a2a32;
+        }
+        .menu a {
+            display: inline-block;
+            color: #adadb8;
+            text-decoration: none;
+            padding: 10px 16px;
+            margin: 0 4px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .menu a:hover, .menu a.actif {
+            background: #9147ff;
+            color: white;
+            font-weight: 600;
+        }
         
-        .conteneur {max-width: 800px; margin: 30px auto; padding: 20px;}
-        .entete {text-align: center; margin-bottom: 40px;}
-        .entete h2 {font-size: 28px; color: #9147ff; margin-bottom: 5px;}
-        .entete p {color: #aaa; font-size: 15px;}
+        .conteneur {max-width: 1000px; margin: 30px auto; padding: 20px;}
+        .entete-page {
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #2a2a32;
+        }
+        .entete-page h1 {font-size: 26px; color: #efeff1; margin-bottom: 5px;}
+        .entete-page p {color: #adadb8; font-size: 14px;}
         
-        .carte-section {background: rgba(255,255,255,0.05); border-radius: 16px; padding: 25px; margin-bottom: 25px; border: 1px solid rgba(145,71,255,0.2);}
-        .carte-section h3 {color: #9147ff; margin-bottom: 20px; font-size: 18px;}
+        .layout {display: flex; gap: 25px;}
         
-        .plateforme {display: flex; align-items: center; justify-content: space-between; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px; margin-bottom: 12px;}
-        .plateforme .info {display: flex; align-items: center; gap: 12px;}
-        .plateforme .icone {font-size: 22px; width: 36px; text-align: center;}
-        .plateforme .nom {font-weight: bold; font-size: 15px;}
-        .plateforme .desc {font-size: 12px; color: #888; margin-top: 2px;}
+        /* 📂 MENU DES PARAMÈTRES À GAUCHE */
+        .menu-param {
+            width: 240px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .lien-param {
+            padding: 12px 16px;
+            border-radius: 6px;
+            color: #adadb8;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.15s;
+            cursor: pointer;
+        }
+        .lien-param:hover {background: #1f1f23; color: #efeff1;}
+        .lien-param.actif {background: #9147ff; color: white; font-weight: 600;}
         
-        .profil {margin-top: 15px; padding: 15px; background: rgba(0,200,83,0.1); border-radius: 10px; display: block;}
-        .profil .pseudo {font-weight: bold; font-size: 17px; color: #00c853; margin-bottom: 8px;}
-        .lien-chaine {display: inline-block; padding: 10px 20px; background: #9147ff; color: white; text-decoration: none; border-radius: 6px; font-size: 15px; font-weight: bold;}
-        .lien-chaine:hover {background: #772ce8; transform: scale(1.03);}
+        /* 📄 CONTENU À DROITE */
+        .contenu-param {flex: 1;}
+        .section {
+            display: none;
+            background: #18181b;
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid #2a2a32;
+        }
+        .section.actif {display: block;}
+        .section h2 {font-size: 18px; color: #efeff1; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #2a2a32;}
         
-        .btn-connecter {padding: 8px 18px; background: #772ce8; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; text-decoration: none; display: inline-block; text-align: center;}
-        .btn-connecter:hover {background: #9147ff;}
-        .btn-connecter.connecte {background: #00c853;}
+        .groupe {margin-bottom: 20px;}
+        label {display: block; margin-bottom: 6px; color: #ccc; font-size: 14px;}
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 14px;
+            background: #0f0f13;
+            border: 1px solid #2a2a32;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+        }
+        input:focus, select:focus {border-color: #9147ff;}
+        
+        .ligne {display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #2a2a32;}
+        .ligne:last-child {border-bottom: none;}
+        .basique {color: #adadb8; font-size: 14px;}
+        .valeur {color: #efeff1; font-weight: 500;}
+        .btn-modif {
+            padding: 6px 12px;
+            background: #2a2a32;
+            color: #ddd;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+        .btn-modif:hover {background: #9147ff; color: white;}
+        
+        /* 💰 SOLDE BITS & MONNAIE */
+        .boite-solde {
+            background: linear-gradient(135deg, #9147ff, #772ce8);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .solde-titre {font-size: 14px; color: #ddd; margin-bottom: 8px;}
+        .solde-montant {font-size: 32px; font-weight: 700; color: white;}
+        .solde-bis {font-size: 15px; color: #efeff1; margin-top: 5px;}
+        
+        .grille-monnaie {display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;}
+        .carte-monnaie {
+            background: #1f1f23;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #2a2a32;
+        }
+        .carte-monnaie h3 {font-size: 14px; color: #adadb8; margin-bottom: 8px;}
+        .carte-monnaie .valeur {font-size: 22px; font-weight: 700; color: #ffc107;}
+        
+        .historique {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .historique th {
+            text-align: left;
+            padding: 10px;
+            color: #adadb8;
+            font-size: 13px;
+            border-bottom: 1px solid #2a2a32;
+        }
+        .historique td {
+            padding: 10px;
+            border-bottom: 1px solid #2a2a32;
+            font-size: 14px;
+            color: #ccc;
+        }
+        .historique .positif {color: #00c853; font-weight: 500;}
+        .historique .negatif {color: #ff5252; font-weight: 500;}
+        
+        /* Interrupteurs */
+        .interrupteur {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background: #333;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .interrupteur.actif {background: #9147ff;}
+        .interrupteur::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        .interrupteur.actif::after {transform: translateX(20px);}
     </style>
 </head>
 <body>
 
     <nav class="menu">
         <a href="accueil.html">🏠 Accueil</a>
-        <a href="stream.html">📺 Streams</a>
+        <a href="stream.html">📺 Streams & Musique</a>
         <a href="salon.html">💬 Discussions</a>
         <a href="abonnements.html">💜 Abonnements</a>
         <a href="profil.html">👤 Profil</a>
-        <a href="partenaire.html">🏅 Partenaires</a>
+        <a href="test.html">🧪 Test & Avis</a>
         <a href="parametres.html" class="actif">⚙️ Paramètres</a>
     </nav>
 
     <div class="conteneur">
-        <div class="entete">
-            <h2>⚙️ Paramètres</h2>
-            <p>Tous tes liens sont actifs et s'ouvrent en un clic ✅</p>
+        <div class="entete-page">
+            <h1>⚙️ Paramètres du compte</h1>
+            <p>Gère ton profil, ta sécurité, tes préférences, tes Bits et ta monnaie</p>
         </div>
 
-        <!-- 🟪 TWITCH -->
-        <div class="carte-section">
-            <h3>🟪 Twitch</h3>
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">📱</span>
-                    <div>
-                        <div class="nom">Twitch — Hyphtales</div>
-                        <div class="desc">Ta chaîne en direct</div>
+        <div class="layout">
+            <!-- 📂 MENU À GAUCHE -->
+            <nav class="menu-param">
+                <div class="lien-param actif" data-section="profil">👤 Profil</div>
+                <div class="lien-param" data-section="securite">🔐 Sécurité</div>
+                <div class="lien-param" data-section="apparence">🎨 Apparence</div>
+                <div class="lien-param" data-section="notifications">🔔 Notifications</div>
+                <div class="lien-param" data-section="monnaie">💰 Bits & Monnaie</div>
+                <div class="lien-param" data-section="confidentialite">🔒 Confidentialité</div>
+                <div class="lien-param" data-section="abonnements">💜 Abonnements</div>
+            </nav>
+
+            <!-- 📄 CONTENU DES SECTIONS -->
+            <div class="contenu-param">
+
+                <!-- 👤 PROFIL -->
+                <div id="section-profil" class="section actif">
+                    <h2>Informations du profil</h2>
+                    <div class="groupe">
+                        <label>Photo de profil</label>
+                        <div style="display:flex;align-items:center;gap:15px;">
+                            <div style="width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#9147ff,#772ce8);display:flex;align-items:center;justify-content:center;font-size:30px;">👤</div>
+                            <a href="#" class="btn-modif">Changer la photo</a>
+                        </div>
+                    </div>
+                    <div class="groupe">
+                        <label>Nom d'utilisateur</label>
+                        <input type="text" value="PseudoStreamer">
+                    </div>
+                    <div class="groupe">
+                        <label>Nom affiché</label>
+                        <input type="text" value="PseudoStreamer">
+                    </div>
+                    <div class="groupe">
+                        <label>Bio / Description</label>
+                        <textarea rows="3" placeholder="Présente-toi...">Bienvenue sur ma page ! 💜</textarea>
+                    </div>
+                    <div class="groupe">
+                        <label>Couleur de mon pseudo dans le chat</label>
+                        <input type="color" value="#9147ff" style="width:80px;height:40px;cursor:pointer;">
+                    </div>
+                    <div style="margin-top:10px;">
+                        <button style="padding:10px 20px;background:#9147ff;color:white;border:none;border-radius:6px;font-weight:600;cursor:pointer;">💾 Enregistrer les modifications</button>
                     </div>
                 </div>
-                <button id="btn-twitch" class="btn-connecter" onclick="connecterTwitch()">Connecter</button>
-            </div>
-            <div class="profil">
-                <div class="pseudo">✅ Hyphtales</div>
-                <a href="https://www.twitch.tv/Hyphtales" target="_blank" class="lien-chaine">📺 Aller sur ma chaîne Twitch</a>
-            </div>
-        </div>
 
-        <!-- 🎵 TIKTOK -->
-        <div class="carte-section">
-            <h3>🎵 TikTok</h3>
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">🎵</span>
-                    <div>
-                        <div class="nom">TikTok — @Hyphtales</div>
-                        <div class="desc">Tes vidéos et ton profil</div>
+                <!-- 🔐 SÉCURITÉ -->
+                <div id="section-securite" class="section">
+                    <h2>Sécurité et connexion</h2>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Adresse e-mail</div>
+                            <div class="valeur">mon******@email.com</div>
+                        </div>
+                        <a href="#" class="btn-modif">Modifier</a>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Mot de passe</div>
+                            <div class="valeur">••••••••••</div>
+                        </div>
+                        <a href="#" class="btn-modif">Changer</a>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Connexion en 2 étapes (SMS / Code)</div>
+                            <div class="valeur">Désactivée</div>
+                        </div>
+                        <a href="#" class="btn-modif">Activer</a>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Appareils connectés</div>
+                            <div class="valeur">2 appareils</div>
+                        </div>
+                        <a href="#" class="btn-modif">Voir</a>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Se déconnecter de tous les appareils</div>
+                            <div class="valeur">—</div>
+                        </div>
+                        <a href="#" class="btn-modif">Déconnecter</a>
                     </div>
                 </div>
-                <a href="https://www.tiktok.com/@Hyphtales" target="_blank" class="btn-connecter">🔗 Ouvrir</a>
-            </div>
-            <div class="profil">
-                <div class="pseudo">✅ @Hyphtales</div>
-                <a href="https://www.tiktok.com/@Hyphtales" target="_blank" class="lien-chaine">🎵 Aller sur mon profil TikTok</a>
-            </div>
-        </div>
 
-        <!-- 🐦 X -->
-        <div class="carte-section">
-            <h3>🐦 X (Twitter)</h3>
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">🐦</span>
-                    <div>
-                        <div class="nom">X — @Hyphtales</div>
-                        <div class="desc">Ton profil et tes posts</div>
+                <!-- 🎨 APPARENCE -->
+                <div id="section-apparence" class="section">
+                    <h2>Apparence et lecture</h2>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Thème</div>
+                            <div class="valeur">🌙 Mode sombre</div>
+                        </div>
+                        <select style="width:140px;">
+                            <option selected>Sombre</option>
+                            <option>Clair</option>
+                        </select>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Qualité vidéo par défaut</div>
+                            <div class="valeur">🔄 Auto</div>
+                        </div>
+                        <select style="width:140px;">
+                            <option selected>Auto</option>
+                            <option>1080p</option>
+                            <option>720p</option>
+                            <option>480p</option>
+                        </select>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Lecture automatique des streams</div>
+                            <div class="valeur">Démarrer tout seul</div>
+                        </div>
+                        <div class="interrupteur actif"></div>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Lecture en arrière-plan</div>
+                            <div class="valeur">Continuer si je change d'onglet</div>
+                        </div>
+                        <div class="interrupteur"></div>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Taille du texte</div>
+                            <div class="valeur">Normale</div>
+                        </div>
+                        <select style="width:140px;">
+                            <option>Petit</option>
+                            <option selected>Normal</option>
+                            <option>Grand</option>
+                        </select>
                     </div>
                 </div>
-                <a href="https://x.com/Hyphtales" target="_blank" class="btn-connecter">🔗 Ouvrir</a>
-            </div>
-            <div class="profil">
-                <div class="pseudo">✅ @Hyphtales</div>
-                <a href="https://x.com/Hyphtales" target="_blank" class="lien-chaine">🐦 Aller sur mon profil X</a>
-            </div>
-        </div>
 
-        <!-- 💬 DISCORD -->
-        <div class="carte-section">
-            <h3>💬 Discord</h3>
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">💬</span>
-                    <div>
-                        <div class="nom">Discord — Hyphtaes666</div>
-                        <div class="desc">Rejoindre ton serveur</div>
+                <!-- 🔔 NOTIFICATIONS -->
+                <div id="section-notifications" class="section">
+                    <h2>Notifications et alertes</h2>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Un streamer que je suis commence son stream</div>
+                            <div class="valeur">M'alerter</div>
+                        </div>
+                        <div class="interrupteur actif"></div>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Annonces et mises à jour de la plateforme</div>
+                            <div class="valeur">Je veux être prévenu</div>
+                        </div>
+                        <div class="interrupteur"></div>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Réponses et messages privés</div>
+                            <div class="valeur">M'alerter</div>
+                        </div>
+                        <div class="interrupteur actif"></div>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Recevoir par e-mail</div>
+                            <div class="valeur">Oui</div>
+                        </div>
+                        <div class="interrupteur actif"></div>
                     </div>
                 </div>
-                <a href="https://discord.com/users/Hyphtaes666" target="_blank" class="btn-connecter">🔗 Ouvrir</a>
-            </div>
-            <div class="profil">
-                <div class="pseudo">✅ Hyphtaes666</div>
-                <a href="https://discord.com/users/Hyphtaes666" target="_blank" class="lien-chaine">💬 Aller sur mon Discord</a>
-            </div>
-        </div>
 
-        <!-- 🎯 XBOX -->
-        <div class="carte-section">
-            <h3>🎯 Xbox</h3>
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">🎯</span>
-                    <div>
-                        <div class="nom">Xbox — Hyphtales</div>
-                        <div class="desc">Ton profil et tes jeux</div>
+                <!-- 💰 BITS & MONNAIE -->
+                <div id="section-monnaie" class="section">
+                    <h2>💰 Bits et Monnaie</h2>
+                    
+                    <div class="boite-solde">
+                        <div class="solde-titre">Solde total actuel</div>
+                        <div class="solde-montant">💜 4 580 Bits</div>
+                        <div class="solde-bis">≈ 45,80 €</div>
+                    </div>
+
+                    <div class="grille-monnaie">
+                        <div class="carte-monnaie">
+                            <h3>💜 Bits</h3>
+                            <div class="valeur">4 580</div>
+                        </div>
+                        <div class="carte-monnaie">
+                            <h3>🪙 Pièces</h3>
+                            <div class="valeur">1 250</div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex;gap:10px;margin-bottom:20px;">
+                        <button style="padding:10px 18px;background:linear-gradient(135deg,#9147ff,#772ce8);color:white;border:none;border-radius:6px;font-weight:600;cursor:pointer;">💜 Acheter des Bits</button>
+                        <button style="padding:10px 18px;background:#2a2a32;color:white;border:none;border-radius:6px;font-weight:600;cursor:pointer;">🪙 Acheter des Pièces</button>
+                        <button style="padding:10px 18px;background:#2a2a32;color:white;border:none;border-radius:6px;font-weight:600;cursor:pointer;">💵 Convertir</button>
+                    </div>
+
+                    <h3 style="font-size:15px; margin:20px 0 10px; color:#efeff1;">📋 Historique des transactions</h3>
+                    <table class="historique">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Montant</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>31 août 2026</td>
+                                <td>💜 Don à StreamerX</td>
+                                <td class="negatif">-500 Bits</td>
+                            </tr>
+                            <tr>
+                                <td>30 août 2026</td>
+                                <td>🪙 Achat de Pièces</td>
+                                <td class="positif">+1 000 Pièces</td>
+                            </tr>
+                            <tr>
+                                <td>28 août 2026</td>
+                                <td>💜 Achat de Bits</td>
+                                <td class="positif">+2 000 Bits</td>
+                            </tr>
+                            <tr>
+                                <td>25 août 2026</td>
+                                <td>💜 Abonnement offert</td>
+                                <td class="negatif">-1 500 Bits</td>
+                            </tr>
+                            <tr>
+                                <td>20 août 2026</td>
+                                <td>🎁 Récompense quotidienne</td>
+                                <td class="positif">+100 Bits</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 🔒 CONFIDENTIALITÉ -->
+                <div id="section-confidentialite" class="section">
+                    <h2>Confidentialité</h2>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Qui peut voir ce que je regarde</div>
+                            <div class="valeur">Tout le monde</div>
+                        </div>
+                        <select style="width:140px;">
+                            <option selected>Tout le monde</option>
+                            <option>Mes abonnés</option>
+                            <option>Personne</option>
+                        </select>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Afficher ma position / mon pays</div>
+                            <div class="valeur">Afficher</div>
+                        </div>
+                        <div class="interrupteur actif"></div>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Qui peut m'envoyer des messages</div>
+                            <div class="valeur">Tout le monde</div>
+                        </div>
+                        <select style="width:140px;">
+                            <option selected>Tout le monde</option>
+                            <option>Les streamers que je suis</option>
+                            <option>Personne</option>
+                        </select>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Historique des vues et recherches</div>
+                            <div class="valeur">Enregistré</div>
+                        </div>
+                        <div class="interrupteur actif"></div>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Supprimer mon historique</div>
+                            <div class="valeur">Effacer tout</div>
+                        </div>
+                        <a href="#" class="btn-modif">Supprimer</a>
                     </div>
                 </div>
-                <a href="https://www.xbox.com/fr-FR/user/Hyphtales" target="_blank" class="btn-connecter">🔗 Ouvrir</a>
-            </div>
-            <div class="profil">
-                <div class="pseudo">✅ Hyphtales</div>
-                <a href="https://www.xbox.com/fr-FR/user/Hyphtales" target="_blank" class="lien-chaine">🎯 Aller sur mon profil Xbox</a>
-            </div>
-        </div>
 
-        <!-- 🎮 PLAYSTATION -->
-        <div class="carte-section">
-            <h3>🎮 PlayStation</h3>
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">🎮</span>
-                    <div>
-                        <div class="nom">PlayStation — Kratos-tg99</div>
-                        <div class="desc">Ton profil et tes trophées</div>
+                <!-- 💜 ABONNEMENTS -->
+                <div id="section-abonnements" class="section">
+                    <h2>Mes abonnements et paiements</h2>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Abonnements actifs</div>
+                            <div class="valeur">3 abonnements en cours</div>
+                        </div>
+                        <a href="#" class="btn-modif">Voir tout</a>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Moyens de paiement enregistrés</div>
+                            <div class="valeur">1 carte bancaire</div>
+                        </div>
+                        <a href="#" class="btn-modif">Gérer</a>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Reçus et factures</div>
+                            <div class="valeur">Télécharger mes factures</div>
+                        </div>
+                        <a href="#" class="btn-modif">Accéder</a>
+                    </div>
+                    <div class="ligne">
+                        <div>
+                            <div class="basique">Renouvellement automatique</div>
+                            <div class="valeur">Activé</div>
+                        </div>
+                        <div class="interrupteur actif"></div>
                     </div>
                 </div>
-                <a href="https://psnprofiles.com/Kratos-tg99" target="_blank" class="btn-connecter">🔗 Ouvrir</a>
-            </div>
-            <div class="profil">
-                <div class="pseudo">✅ Kratos-tg99</div>
-                <a href="https://psnprofiles.com/Kratos-tg99" target="_blank" class="lien-chaine">🎮 Aller sur mon profil PlayStation</a>
+
             </div>
         </div>
-
     </div>
 
 <script>
-const TWITCH_CLIENT_ID = "9a7yzs5amc2s6tkgt7a4pus3q8ufju";
-const REDIRECT_URI = "https://stream-unity.onrender.com/parametres.html";
+// 📂 CHANGER DE SECTION DANS LES PARAMÈTRES
+const liensMenu = document.querySelectorAll('.lien-param');
+const sections = document.querySelectorAll('.section');
 
-window.onload = function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    const etat = urlParams.get('state');
-    
-    if (code && etat === 'twitch') {
-        document.getElementById("btn-twitch").textContent = "✅ Connecté";
-        document.getElementById("btn-twitch").classList.add("connecte");
-        localStorage.setItem("twitch_connecte", "oui");
-        history.replaceState({}, document.title, REDIRECT_URI);
-    }
-    
-    if (localStorage.getItem("twitch_connecte") === "oui") {
-        document.getElementById("btn-twitch").textContent = "✅ Connecté";
-        document.getElementById("btn-twitch").classList.add("connecte");
-    }
-};
+liensMenu.forEach(lien => {
+    lien.addEventListener('click', function() {
+        const nomSection = this.dataset.section;
+        
+        // Retirer "actif" partout
+        liensMenu.forEach(l => l.classList.remove('actif'));
+        sections.forEach(s => s.classList.remove('actif'));
+        
+        // Mettre "actif" sur la bonne section
+        this.classList.add('actif');
+        document.getElementById('section-' + nomSection).classList.add('actif');
+    });
+});
 
-function connecterTwitch() {
-    const url = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=user:read:email&state=twitch`;
-    window.location.href = url;
-}
+// ⚡ INTERRUPTEURS CLIQUABLES
+document.addEventListener('click', e => {
+    if (e.target.classList.contains('interrupteur')) {
+        e.target.classList.toggle('actif');
+    }
+});
 </script>
 
 </body>
