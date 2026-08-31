@@ -76,6 +76,7 @@
                 <div style="display:inline-block; vertical-align:middle;">
                     <div class="pseudo">✅ Hyphtales</div>
                     <div style="color:#aaa; font-size:13px; margin-top:5px;">Connecté avec succès ✅</div>
+                    <!-- ✅ LIEN QUI OUVRE TA CHAÎNE TWITCH -->
                     <a href="https://www.twitch.tv/Hyphtales" target="_blank" class="lien-chaine">📺 Aller sur ma chaîne Twitch</a>
                 </div>
             </div>
@@ -100,6 +101,7 @@
                 <div style="display:inline-block; vertical-align:middle;">
                     <div class="pseudo">✅ @Hyphtales</div>
                     <div style="color:#aaa; font-size:13px; margin-top:5px;">Connecté avec succès ✅</div>
+                    <!-- ✅ LIEN QUI OUVRE TON PROFIL TIKTOK -->
                     <a href="https://www.tiktok.com/@Hyphtales" target="_blank" class="lien-chaine">🎵 Aller sur mon profil TikTok</a>
                 </div>
             </div>
@@ -124,6 +126,7 @@
                 <div style="display:inline-block; vertical-align:middle;">
                     <div class="pseudo">✅ @Hyphtales</div>
                     <div style="color:#aaa; font-size:13px; margin-top:5px;">Connecté avec succès ✅</div>
+                    <!-- ✅ LIEN QUI OUVRE TON PROFIL X -->
                     <a href="https://x.com/Hyphtales" target="_blank" class="lien-chaine">🐦 Aller sur mon profil X</a>
                 </div>
             </div>
@@ -165,8 +168,8 @@ function connecterTikTok() {
 }
 
 function connecterX() {
-    const url = `https://x.com/i/oauth2/authorize?client_id=${X_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=tweet.read%20users.read&state=x`;
-    window.location.href = url;
+    alert("Pour X, on va d'abord se connecter directement sur X, puis on reviendra !");
+    window.open("https://x.com/login", "_blank");
 }
 
 function afficherConnecte(plateforme) {
