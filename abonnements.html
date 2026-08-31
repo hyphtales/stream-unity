@@ -33,6 +33,7 @@
         .carte.niv1 {border-color: rgba(145,71,255,0.35);}
         .carte.niv2 {border-color: rgba(145,71,255,0.55);}
         .carte.niv3 {border-color: rgba(145,71,255,0.85);}
+        .carte.libre {border-color: rgba(0,200,83,0.4); background: rgba(0,200,83,0.05);}
         .carte h3 {font-size: 20px; margin-bottom: 8px; color: #9147ff;}
         .prix {font-size: 32px; font-weight: bold; margin: 10px 0;}
         .prix span {font-size: 15px; color: #aaa;}
@@ -40,7 +41,10 @@
         
         .btn-paiement {display: block; padding: 12px 20px; background: #ffc439; color: #111; text-decoration: none; border-radius: 10px; font-size: 16px; font-weight: bold; transition: all 0.2s;}
         .btn-paiement:hover {background: #f8b700; transform: scale(1.03);}
+        .btn-libre {background: #00c853; color: white;}
+        .btn-libre:hover {background: #00a844;}
         
+        .info-paiement {font-size: 12px; color: #888; margin-top: 10px;}
         .info-bas {margin-top: 35px; padding: 18px; background: rgba(0,200,83,0.1); border-radius: 12px; text-align: center; color: #00c853; font-size: 14px; line-height: 1.6;}
     </style>
 </head>
@@ -59,7 +63,7 @@
     <div class="conteneur">
         <div class="entete">
             <h2>💜 Soutenir la chaîne</h2>
-            <p>Choisis ton niveau d'abonnement ou offre un soutien rapide !</p>
+            <p>Choisis ton niveau d'abonnement ou offre un soutien libre !</p>
         </div>
 
         <!-- 📑 ONGLETS -->
@@ -89,6 +93,13 @@
                     <div class="prix">24,99 €<span>/mois</span></div>
                     <p class="avantage">Tout Niveau 2 + Contenu exclusif + Remerciement en direct</p>
                     <a href="https://www.paypal.com/ncp/payment/J77V9HFHD62D4" target="_blank" class="btn-paiement">🅿️ S'abonner</a>
+                </div>
+                <!-- ➕ BOUTON DON LIBRE -->
+                <div class="carte libre">
+                    <h3>💚 Don Libre</h3>
+                    <div class="prix">Montant<span>de ton choix</span></div>
+                    <p class="avantage">Tu choisis librement le montant de ton soutien 💜</p>
+                    <a href="https://www.paypal.com/ncp/payment/HWCC3X7KN8WJA" target="_blank" class="btn-paiement btn-libre">💚 Faire un don</a>
                 </div>
             </div>
         </div>
@@ -171,9 +182,9 @@
             </div>
         </div>
 
-        <!-- ✅ INFO SÉCURITÉ -->
+        <!-- ✅ INFO SÉCURITÉ & MODES DE PAIEMENT -->
         <div class="info-bas">
-            ✅ Paiement sécurisé par PayPal — Redirection automatique vers ta page après paiement<br>
+            ✅ Paiement sécurisé par PayPal — Accepte : 🅿️ PayPal · 💳 Carte Bancaire · 🍏 Apple Pay · 📱 Google Pay<br>
             💜 Sans engagement, tu peux annuler à tout moment directement depuis ton compte PayPal
         </div>
     </div>
