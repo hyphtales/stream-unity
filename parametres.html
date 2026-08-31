@@ -72,12 +72,11 @@
             </div>
 
             <div id="profil-twitch" class="profil">
-                <img id="twitch-avatar" src="https://ui-avatars.com/api/?name=Twitch&background=00c853&color=fff" alt="Avatar" />
+                <img src="https://ui-avatars.com/api/?name=Hyphtales&background=00c853&color=fff" alt="Avatar" />
                 <div style="display:inline-block; vertical-align:middle;">
-                    <div class="pseudo">✅ <span id="twitch-pseudo">Compte Twitch</span></div>
+                    <div class="pseudo">✅ Hyphtales</div>
                     <div style="color:#aaa; font-size:13px; margin-top:5px;">Connecté avec succès ✅</div>
-                    <!-- ✅ LIEN VERS TA CHAÎNE -->
-                    <a id="lien-chaine-twitch" href="#" target="_blank" class="lien-chaine">📺 Aller sur ma chaîne Twitch</a>
+                    <a href="https://www.twitch.tv/Hyphtales" target="_blank" class="lien-chaine">📺 Aller sur ma chaîne Twitch</a>
                 </div>
             </div>
         </div>
@@ -97,11 +96,11 @@
             </div>
 
             <div id="profil-tiktok" class="profil">
-                <img src="https://ui-avatars.com/api/?name=TikTok&background=00c853&color=fff" alt="Avatar" />
+                <img src="https://ui-avatars.com/api/?name=Hyphtales&background=00c853&color=fff" alt="Avatar" />
                 <div style="display:inline-block; vertical-align:middle;">
-                    <div class="pseudo">✅ Compte TikTok</div>
+                    <div class="pseudo">✅ @Hyphtales</div>
                     <div style="color:#aaa; font-size:13px; margin-top:5px;">Connecté avec succès ✅</div>
-                    <a href="https://www.tiktok.com/" target="_blank" class="lien-chaine">🎵 Aller sur mon profil TikTok</a>
+                    <a href="https://www.tiktok.com/@Hyphtales" target="_blank" class="lien-chaine">🎵 Aller sur mon profil TikTok</a>
                 </div>
             </div>
         </div>
@@ -121,11 +120,11 @@
             </div>
 
             <div id="profil-x" class="profil">
-                <img src="https://ui-avatars.com/api/?name=X&background=00c853&color=fff" alt="Avatar" />
+                <img src="https://ui-avatars.com/api/?name=Hyphtales&background=00c853&color=fff" alt="Avatar" />
                 <div style="display:inline-block; vertical-align:middle;">
-                    <div class="pseudo">✅ Compte X</div>
+                    <div class="pseudo">✅ @Hyphtales</div>
                     <div style="color:#aaa; font-size:13px; margin-top:5px;">Connecté avec succès ✅</div>
-                    <a href="https://x.com/" target="_blank" class="lien-chaine">🐦 Aller sur mon profil X</a>
+                    <a href="https://x.com/Hyphtales" target="_blank" class="lien-chaine">🐦 Aller sur mon profil X</a>
                 </div>
             </div>
         </div>
@@ -143,7 +142,6 @@ window.onload = function() {
     const etat = urlParams.get('state');
     
     if (code) {
-        localStorage.setItem("dernier_code", code);
         if (etat === 'twitch') afficherConnecte('twitch');
         else if (etat === 'tiktok') afficherConnecte('tiktok');
         else if (etat === 'x') afficherConnecte('x');
@@ -180,12 +178,6 @@ function afficherConnecte(plateforme) {
     profil.classList.add("visible");
     
     localStorage.setItem(`${plateforme}_connecte`, "oui");
-    
-    // ✅ LIEN VERS TA CHAÎNE TWITCH
-    if (plateforme === 'twitch') {
-        const pseudo = localStorage.getItem("twitch_pseudo") || "ta-chaine";
-        document.getElementById("lien-chaine-twitch").href = `https://www.twitch.tv/${pseudo.toLowerCase()}`;
-    }
 }
 </script>
 
