@@ -7,45 +7,154 @@
     <link rel="stylesheet" href="style.css" />
     <style>
         * {outline: none; box-sizing: border-box; margin: 0; padding: 0;}
-        body {background: linear-gradient(135deg, #2a1060, #1a0840); color: white; font-family: sans-serif; min-height: 100vh;}
+        body {
+            background: #0f0f13;
+            color: #efeff1;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+        }
         
-        .menu {background: rgba(0,0,0,0.3); padding: 15px; text-align: center; position: sticky; top: 0; z-index: 100;}
-        .menu a {display: inline-block; color: #ddd; text-decoration: none; padding: 10px 18px; margin: 0 5px; border-radius: 8px; transition: all 0.2s; font-size: 15px;}
-        .menu a:hover, .menu a.actif {background: #9147ff; color: white; font-weight: bold;}
+        .menu {
+            background: #18181b;
+            padding: 14px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #2a2a32;
+        }
+        .menu a {
+            display: inline-block;
+            color: #adadb8;
+            text-decoration: none;
+            padding: 10px 16px;
+            margin: 0 4px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .menu a:hover, .menu a.actif {
+            background: #9147ff;
+            color: white;
+            font-weight: 600;
+        }
         
-        .conteneur {max-width: 900px; margin: 30px auto; padding: 20px;}
-        .entete {text-align: center; margin-bottom: 40px;}
-        .entete h2 {font-size: 30px; color: #9147ff; margin-bottom: 10px;}
-        .entete p {color: #aaa; font-size: 16px;}
+        .conteneur {max-width: 920px; margin: 30px auto; padding: 20px;}
+        .entete {text-align: center; margin-bottom: 35px;}
+        .entete h2 {
+            font-size: 28px;
+            color: #efeff1;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .entete p {color: #adadb8; font-size: 15px;}
         
-        .onglets {display: flex; gap: 5px; margin-bottom: 25px; border-bottom: 1px solid rgba(145,71,255,0.2); padding-bottom: 0; flex-wrap: wrap;}
-        .onglet {padding: 12px 20px; cursor: pointer; border-top-left-radius: 10px; border-top-right-radius: 10px; font-size: 15px; font-weight: 500; color: #aaa; transition: all 0.2s;}
-        .onglet:hover {background: rgba(145,71,255,0.1); color: #ddd;}
-        .onglet.actif {background: rgba(145,71,255,0.2); color: white; font-weight: bold; border-bottom: 2px solid #9147ff;}
+        .onglets {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #2a2a32;
+            padding-bottom: 0;
+            flex-wrap: wrap;
+        }
+        .onglet {
+            padding: 12px 22px;
+            cursor: pointer;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #adadb8;
+            transition: all 0.2s;
+        }
+        .onglet:hover {background: #1f1f23; color: #efeff1;}
+        .onglet.actif {
+            background: #2a2a32;
+            color: white;
+            border-bottom: 2px solid #9147ff;
+        }
         
         .contenu-onglet {display: none; animation: apparition 0.3s ease;}
         .contenu-onglet.actif {display: block;}
         @keyframes apparition {from {opacity:0; transform: translateY(5px);} to {opacity:1; transform: translateY(0);}}
         
-        .grille {display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;}
-        .carte {background: rgba(255,255,255,0.05); border-radius: 16px; padding: 25px; border: 2px solid rgba(145,71,255,0.2); transition: all 0.3s; text-align: center;}
-        .carte:hover {border-color: #9147ff; transform: translateY(-4px); box-shadow: 0 10px 25px rgba(145,71,255,0.15);}
-        .carte.niv1 {border-color: rgba(145,71,255,0.35);}
-        .carte.niv2 {border-color: rgba(145,71,255,0.55);}
-        .carte.niv3 {border-color: rgba(145,71,255,0.85);}
-        .carte.libre {border-color: rgba(0,200,83,0.4); background: rgba(0,200,83,0.05);}
-        .carte h3 {font-size: 20px; margin-bottom: 8px; color: #9147ff;}
-        .prix {font-size: 32px; font-weight: bold; margin: 10px 0;}
-        .prix span {font-size: 15px; color: #aaa;}
-        .avantage {font-size: 13px; color: #ccc; margin-bottom: 15px; line-height: 1.5; min-height: 55px;}
+        .grille {display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 16px;}
+        .carte {
+            background: #18181b;
+            border-radius: 10px;
+            padding: 24px;
+            border: 2px solid transparent;
+            transition: all 0.25s ease;
+            text-align: center;
+        }
+        .carte:hover {
+            border-color: #9147ff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(145,71,255,0.12);
+            background: #1f1f23;
+        }
+        .carte.niv1 {border-left: 4px solid #9147ff;}
+        .carte.niv2 {border-left: 4px solid #b67aff;}
+        .carte.niv3 {border-left: 4px solid #d0a0ff;}
+        .carte.libre {border-left: 4px solid #00c853;}
         
-        .btn-paiement {display: block; padding: 12px 20px; background: #ffc439; color: #111; text-decoration: none; border-radius: 10px; font-size: 16px; font-weight: bold; transition: all 0.2s;}
-        .btn-paiement:hover {background: #f8b700; transform: scale(1.03);}
-        .btn-libre {background: #00c853; color: white;}
+        .carte h3 {
+            font-size: 18px;
+            margin-bottom: 6px;
+            color: #efeff1;
+            font-weight: 600;
+        }
+        .prix {
+            font-size: 34px;
+            font-weight: 700;
+            margin: 12px 0;
+            color: white;
+        }
+        .prix span {font-size: 14px; color: #adadb8; font-weight: 400;}
+        .avantage {
+            font-size: 13px;
+            color: #adadb8;
+            margin-bottom: 16px;
+            line-height: 1.5;
+            min-height: 55px;
+        }
+        
+        .btn-paiement {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px 20px;
+            background: #9147ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: none;
+        }
+        .btn-paiement:hover {
+            background: #772ce8;
+            transform: scale(1.02);
+            color: white;
+        }
+        .btn-libre {background: #00c853;}
         .btn-libre:hover {background: #00a844;}
         
-        .info-paiement {font-size: 12px; color: #888; margin-top: 10px;}
-        .info-bas {margin-top: 35px; padding: 18px; background: rgba(0,200,83,0.1); border-radius: 12px; text-align: center; color: #00c853; font-size: 14px; line-height: 1.6;}
+        .info-bas {
+            margin-top: 35px;
+            padding: 16px 20px;
+            background: #1f1f23;
+            border-radius: 8px;
+            text-align: center;
+            color: #adadb8;
+            font-size: 13px;
+            line-height: 1.7;
+            border: 1px solid #2a2a32;
+        }
+        .info-bas strong {color: #9147ff;}
     </style>
 </head>
 <body>
@@ -62,11 +171,10 @@
 
     <div class="conteneur">
         <div class="entete">
-            <h2>💜 Soutenir la chaîne</h2>
-            <p>Choisis ton niveau d'abonnement ou offre un soutien libre !</p>
+            <h2>Soutenir la chaîne</h2>
+            <p>Choisis ton niveau — Paiement sécurisé : <strong>🅿️ PayPal · 💳 Carte · 🍏 Apple Pay · 📱 Google Pay</strong></p>
         </div>
 
-        <!-- 📑 ONGLETS -->
         <div class="onglets">
             <div class="onglet actif" onclick="afficherOnglet('abonnements')">💜 Abonnements</div>
             <div class="onglet" onclick="afficherOnglet('bits')">💎 Bits / Dons</div>
@@ -77,27 +185,26 @@
         <div id="onglet-abonnements" class="contenu-onglet actif">
             <div class="grille">
                 <div class="carte niv1">
-                    <h3>💜 Niveau 1</h3>
+                    <h3>Niveau 1</h3>
                     <div class="prix">4,99 €<span>/mois</span></div>
-                    <p class="avantage">Badge + Émojis + Accès salon Discord privé</p>
+                    <p class="avantage">Badge exclusif · Émojis personnalisés · Accès salon Discord</p>
                     <a href="https://www.paypal.com/ncp/payment/HWCC3X7KN8WJA" target="_blank" class="btn-paiement">🅿️ S'abonner</a>
                 </div>
                 <div class="carte niv2">
-                    <h3>💜 Niveau 2</h3>
+                    <h3>Niveau 2</h3>
                     <div class="prix">9,99 €<span>/mois</span></div>
                     <p class="avantage">Tout Niveau 1 + Émojis VIP + Accès avant-première</p>
                     <a href="https://www.paypal.com/ncp/payment/XTSLZJHFWTPX4" target="_blank" class="btn-paiement">🅿️ S'abonner</a>
                 </div>
                 <div class="carte niv3">
-                    <h3>💜 Niveau 3</h3>
+                    <h3>Niveau 3</h3>
                     <div class="prix">24,99 €<span>/mois</span></div>
                     <p class="avantage">Tout Niveau 2 + Contenu exclusif + Remerciement en direct</p>
                     <a href="https://www.paypal.com/ncp/payment/J77V9HFHD62D4" target="_blank" class="btn-paiement">🅿️ S'abonner</a>
                 </div>
-                <!-- ➕ BOUTON DON LIBRE -->
                 <div class="carte libre">
-                    <h3>💚 Don Libre</h3>
-                    <div class="prix">Montant<span>de ton choix</span></div>
+                    <h3>Don Libre</h3>
+                    <div class="prix">Montant<span>libre</span></div>
                     <p class="avantage">Tu choisis librement le montant de ton soutien 💜</p>
                     <a href="https://www.paypal.com/ncp/payment/HWCC3X7KN8WJA" target="_blank" class="btn-paiement btn-libre">💚 Faire un don</a>
                 </div>
@@ -108,37 +215,37 @@
         <div id="onglet-bits" class="contenu-onglet">
             <div class="grille">
                 <div class="carte">
-                    <h3>💚 100 Bits</h3>
+                    <h3>100 Bits</h3>
                     <div class="prix">1,99 €</div>
                     <p class="avantage">Petit geste de soutien à la chaîne</p>
                     <a href="https://www.paypal.com/ncp/payment/R8369AGPVYFLE" target="_blank" class="btn-paiement">🅿️ Soutenir</a>
                 </div>
                 <div class="carte">
-                    <h3>💜 300 Bits</h3>
+                    <h3>300 Bits</h3>
                     <div class="prix">3,35 €</div>
                     <p class="avantage">Merci pour le contenu !</p>
                     <a href="https://www.paypal.com/ncp/payment/NYN43AZA9Z2HE" target="_blank" class="btn-paiement">🅿️ Soutenir</a>
                 </div>
                 <div class="carte">
-                    <h3>💙 1 500 Bits</h3>
+                    <h3>1 500 Bits</h3>
                     <div class="prix">22,99 €</div>
                     <p class="avantage">Soutien pour continuer la création de contenu</p>
                     <a href="https://www.paypal.com/ncp/payment/5QYBJUCJG6DDJ" target="_blank" class="btn-paiement">🅿️ Soutenir</a>
                 </div>
                 <div class="carte">
-                    <h3>🧡 5 000 Bits</h3>
+                    <h3>5 000 Bits</h3>
                     <div class="prix">71,99 €</div>
                     <p class="avantage">Merci pour ton soutien important !</p>
                     <a href="https://www.paypal.com/ncp/payment/2M89QW45XS2LG" target="_blank" class="btn-paiement">🅿️ Soutenir</a>
                 </div>
                 <div class="carte">
-                    <h3>❤️ 10 000 Bits</h3>
+                    <h3>10 000 Bits</h3>
                     <div class="prix">140,99 €</div>
                     <p class="avantage">Un énorme merci pour ta générosité !</p>
                     <a href="https://www.paypal.com/ncp/payment/FEEAFNHJN99QY" target="_blank" class="btn-paiement">🅿️ Soutenir</a>
                 </div>
                 <div class="carte">
-                    <h3>🟪 25 000 Bits</h3>
+                    <h3>25 000 Bits</h3>
                     <div class="prix">345,99 €</div>
                     <p class="avantage">Tu es incroyable ! Merci pour tout !</p>
                     <a href="https://www.paypal.com/ncp/payment/GGFA8XWNGFPUA" target="_blank" class="btn-paiement">🅿️ Soutenir</a>
@@ -150,31 +257,31 @@
         <div id="onglet-offrir" class="contenu-onglet">
             <div class="grille">
                 <div class="carte">
-                    <h3>🎁 ×5</h3>
+                    <h3>×5 Abonnements</h3>
                     <div class="prix">19,95 €</div>
                     <p class="avantage">Offre 5 abonnements à la communauté</p>
                     <a href="https://www.paypal.com/ncp/payment/N97UG6GHMDC8W" target="_blank" class="btn-paiement">🅿️ Offrir</a>
                 </div>
                 <div class="carte">
-                    <h3>🎁 ×10</h3>
+                    <h3>×10 Abonnements</h3>
                     <div class="prix">39,99 €</div>
                     <p class="avantage">Offre 10 abonnements à la communauté</p>
                     <a href="https://www.paypal.com/ncp/payment/8LT6GPHWN3DDL" target="_blank" class="btn-paiement">🅿️ Offrir</a>
                 </div>
                 <div class="carte">
-                    <h3>🎁 ×20</h3>
+                    <h3>×20 Abonnements</h3>
                     <div class="prix">79,99 €</div>
                     <p class="avantage">Offre 20 abonnements à la communauté</p>
                     <a href="https://www.paypal.com/ncp/payment/Y5TT778BG64DA" target="_blank" class="btn-paiement">🅿️ Offrir</a>
                 </div>
                 <div class="carte">
-                    <h3>🎁 ×50</h3>
+                    <h3>×50 Abonnements</h3>
                     <div class="prix">199,99 €</div>
                     <p class="avantage">Offre 50 abonnements à la communauté</p>
                     <a href="https://www.paypal.com/ncp/payment/XYT5MLAYEP7UA" target="_blank" class="btn-paiement">🅿️ Offrir</a>
                 </div>
                 <div class="carte">
-                    <h3>🎁 ×100</h3>
+                    <h3>×100 Abonnements</h3>
                     <div class="prix">399,99 €</div>
                     <p class="avantage">Offre 100 abonnements à la communauté</p>
                     <a href="https://www.paypal.com/ncp/payment/G3H6U5SUCBDLY" target="_blank" class="btn-paiement">🅿️ Offrir</a>
@@ -182,10 +289,9 @@
             </div>
         </div>
 
-        <!-- ✅ INFO SÉCURITÉ & MODES DE PAIEMENT -->
         <div class="info-bas">
-            ✅ Paiement sécurisé par PayPal — Accepte : 🅿️ PayPal · 💳 Carte Bancaire · 🍏 Apple Pay · 📱 Google Pay<br>
-            💜 Sans engagement, tu peux annuler à tout moment directement depuis ton compte PayPal
+            💜 <strong>Paiement sécurisé par PayPal</strong> · Accepte : 🅿️ PayPal · 💳 Carte Bancaire · 🍏 Apple Pay · 📱 Google Pay<br>
+            Sans engagement · Tu peux annuler à tout moment directement depuis ton compte PayPal
         </div>
     </div>
 
