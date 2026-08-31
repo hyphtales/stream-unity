@@ -28,12 +28,11 @@
         .plateforme .desc {font-size: 12px; color: #888; margin-top: 2px;}
         
         .profil {margin-top: 15px; padding: 15px; background: rgba(0,200,83,0.1); border-radius: 10px; display: block;}
-        .profil img {width: 60px; height: 60px; border-radius: 50%; margin-right: 15px; vertical-align: middle;}
-        .profil .pseudo {font-weight: bold; font-size: 17px; color: #00c853;}
-        .lien-chaine {display: inline-block; margin-top: 10px; padding: 10px 20px; background: #9147ff; color: white; text-decoration: none; border-radius: 6px; font-size: 15px; font-weight: bold;}
+        .profil .pseudo {font-weight: bold; font-size: 17px; color: #00c853; margin-bottom: 8px;}
+        .lien-chaine {display: inline-block; padding: 10px 20px; background: #9147ff; color: white; text-decoration: none; border-radius: 6px; font-size: 15px; font-weight: bold;}
         .lien-chaine:hover {background: #772ce8; transform: scale(1.03);}
         
-        .btn-connecter {padding: 8px 18px; background: #772ce8; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px;}
+        .btn-connecter {padding: 8px 18px; background: #772ce8; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; text-decoration: none; display: inline-block; text-align: center;}
         .btn-connecter:hover {background: #9147ff;}
         .btn-connecter.connecte {background: #00c853;}
     </style>
@@ -53,7 +52,7 @@
     <div class="conteneur">
         <div class="entete">
             <h2>⚙️ Paramètres</h2>
-            <p>Tes liens sont TOUJOURS visibles, même sans se connecter ✅</p>
+            <p>Tous tes liens sont actifs et s'ouvrent en un clic ✅</p>
         </div>
 
         <!-- 🟪 TWITCH -->
@@ -64,20 +63,14 @@
                     <span class="icone">📱</span>
                     <div>
                         <div class="nom">Twitch — Hyphtales</div>
-                        <div class="desc">Ta chaîne est toujours accessible</div>
+                        <div class="desc">Ta chaîne en direct</div>
                     </div>
                 </div>
                 <button id="btn-twitch" class="btn-connecter" onclick="connecterTwitch()">Connecter</button>
             </div>
-
             <div class="profil">
-                <img src="https://ui-avatars.com/api/?name=Hyphtales&background=9147ff&color=fff" alt="Avatar" />
-                <div style="display:inline-block; vertical-align:middle;">
-                    <div class="pseudo">✅ Hyphtales</div>
-                    <div style="color:#aaa; font-size:13px; margin-top:5px;">Ton compte Twitch</div>
-                    <!-- ✅ LIEN TOUJOURS LÀ, JAMAIS DISPARU ! -->
-                    <a href="https://www.twitch.tv/Hyphtales" target="_blank" class="lien-chaine">📺 Aller sur ma chaîne Twitch</a>
-                </div>
+                <div class="pseudo">✅ Hyphtales</div>
+                <a href="https://www.twitch.tv/Hyphtales" target="_blank" class="lien-chaine">📺 Aller sur ma chaîne Twitch</a>
             </div>
         </div>
 
@@ -89,20 +82,14 @@
                     <span class="icone">🎵</span>
                     <div>
                         <div class="nom">TikTok — @Hyphtales</div>
-                        <div class="desc">Ton profil est toujours accessible</div>
+                        <div class="desc">Tes vidéos et ton profil</div>
                     </div>
                 </div>
                 <a href="https://www.tiktok.com/@Hyphtales" target="_blank" class="btn-connecter">🔗 Ouvrir</a>
             </div>
-
             <div class="profil">
-                <img src="https://ui-avatars.com/api/?name=Hyphtales&background=00f2ea&color=fff" alt="Avatar" />
-                <div style="display:inline-block; vertical-align:middle;">
-                    <div class="pseudo">✅ @Hyphtales</div>
-                    <div style="color:#aaa; font-size:13px; margin-top:5px;">Ton compte TikTok</div>
-                    <!-- ✅ LIEN DIRECT -->
-                    <a href="https://www.tiktok.com/@Hyphtales" target="_blank" class="lien-chaine">🎵 Aller sur mon profil TikTok</a>
-                </div>
+                <div class="pseudo">✅ @Hyphtales</div>
+                <a href="https://www.tiktok.com/@Hyphtales" target="_blank" class="lien-chaine">🎵 Aller sur mon profil TikTok</a>
             </div>
         </div>
 
@@ -114,22 +101,74 @@
                     <span class="icone">🐦</span>
                     <div>
                         <div class="nom">X — @Hyphtales</div>
-                        <div class="desc">Ton profil est toujours accessible</div>
+                        <div class="desc">Ton profil et tes posts</div>
                     </div>
                 </div>
                 <a href="https://x.com/Hyphtales" target="_blank" class="btn-connecter">🔗 Ouvrir</a>
             </div>
-
             <div class="profil">
-                <img src="https://ui-avatars.com/api/?name=Hyphtales&background=000&color=fff" alt="Avatar" />
-                <div style="display:inline-block; vertical-align:middle;">
-                    <div class="pseudo">✅ @Hyphtales</div>
-                    <div style="color:#aaa; font-size:13px; margin-top:5px;">Ton compte X</div>
-                    <!-- ✅ LIEN DIRECT -->
-                    <a href="https://x.com/Hyphtales" target="_blank" class="lien-chaine">🐦 Aller sur mon profil X</a>
-                </div>
+                <div class="pseudo">✅ @Hyphtales</div>
+                <a href="https://x.com/Hyphtales" target="_blank" class="lien-chaine">🐦 Aller sur mon profil X</a>
             </div>
         </div>
+
+        <!-- 💬 DISCORD -->
+        <div class="carte-section">
+            <h3>💬 Discord</h3>
+            <div class="plateforme">
+                <div class="info">
+                    <span class="icone">💬</span>
+                    <div>
+                        <div class="nom">Discord — Hyphtaes666</div>
+                        <div class="desc">Rejoindre ton serveur</div>
+                    </div>
+                </div>
+                <a href="https://discord.com/users/Hyphtaes666" target="_blank" class="btn-connecter">🔗 Ouvrir</a>
+            </div>
+            <div class="profil">
+                <div class="pseudo">✅ Hyphtaes666</div>
+                <a href="https://discord.com/users/Hyphtaes666" target="_blank" class="lien-chaine">💬 Aller sur mon Discord</a>
+            </div>
+        </div>
+
+        <!-- 🎯 XBOX -->
+        <div class="carte-section">
+            <h3>🎯 Xbox</h3>
+            <div class="plateforme">
+                <div class="info">
+                    <span class="icone">🎯</span>
+                    <div>
+                        <div class="nom">Xbox — Hyphtales</div>
+                        <div class="desc">Ton profil et tes jeux</div>
+                    </div>
+                </div>
+                <a href="https://www.xbox.com/fr-FR/user/Hyphtales" target="_blank" class="btn-connecter">🔗 Ouvrir</a>
+            </div>
+            <div class="profil">
+                <div class="pseudo">✅ Hyphtales</div>
+                <a href="https://www.xbox.com/fr-FR/user/Hyphtales" target="_blank" class="lien-chaine">🎯 Aller sur mon profil Xbox</a>
+            </div>
+        </div>
+
+        <!-- 🎮 PLAYSTATION -->
+        <div class="carte-section">
+            <h3>🎮 PlayStation</h3>
+            <div class="plateforme">
+                <div class="info">
+                    <span class="icone">🎮</span>
+                    <div>
+                        <div class="nom">PlayStation — Kratos-tg99</div>
+                        <div class="desc">Ton profil et tes trophées</div>
+                    </div>
+                </div>
+                <a href="https://psnprofiles.com/Kratos-tg99" target="_blank" class="btn-connecter">🔗 Ouvrir</a>
+            </div>
+            <div class="profil">
+                <div class="pseudo">✅ Kratos-tg99</div>
+                <a href="https://psnprofiles.com/Kratos-tg99" target="_blank" class="lien-chaine">🎮 Aller sur mon profil PlayStation</a>
+            </div>
+        </div>
+
     </div>
 
 <script>
