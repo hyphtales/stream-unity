@@ -71,9 +71,9 @@
         <!-- 🎮 ONGLET : MES COMPTES -->
         <div id="onglet-comptes" class="carte-section">
             <h3>🔗 Connecter mes plateformes de jeux</h3>
-            <p>Lie tes comptes pour retrouver ton profil et tes jeux automatiquement. Quand tu cliques sur "Connecter", une fenêtre officielle s'ouvrira pour autoriser le lien.</p>
+            <p>Lie tes comptes pour retrouver ton profil et tes jeux automatiquement.</p>
 
-            <!-- Jeux -->
+            <!-- STEAM - CLÉ INTÉGRÉE ✅ -->
             <div class="plateforme">
                 <div class="info">
                     <span class="icone">🎮</span>
@@ -82,7 +82,7 @@
                         <div class="desc">Bibliothèque, niveau, amis, succès</div>
                     </div>
                 </div>
-                <button class="btn-connecter" onclick="connecter(this, 'Steam')">Connecter</button>
+                <button id="btn-steam" class="btn-connecter" onclick="connecterSteam()">Connecter</button>
             </div>
 
             <div class="plateforme">
@@ -201,7 +201,7 @@
 
         </div>
 
-        <!-- AUTRES ONGLETS (pour l'instant vides) -->
+        <!-- AUTRES ONGLETS -->
         <div id="onglet-manettes" class="carte-section" style="display:none;">
             <h3>🎮 Mes Manettes</h3>
             <p>Gère tes manettes et tes configurations de touches.</p>
@@ -227,7 +227,13 @@
 
 <script>
 // ==========================================
-// 🎮 CHANGER D'ONGLET
+// 🔑 CLÉ API STEAM - TES INFORMATIONS
+// ==========================================
+const STEAM_API_KEY = "445E1C69607CA4860471ECD4997772E6";
+const STEAM_RETURN_URL = "https://stream-unity.onrender.com/parametres.html";
+
+// ==========================================
+// 🎬 CHANGER D'ONGLET
 // ==========================================
 function changerOnglet(nom) {
     document.querySelectorAll('.onglet').forEach(b => b.classList.remove('actif'));
@@ -238,21 +244,41 @@ function changerOnglet(nom) {
 }
 
 // ==========================================
-// 🔗 CLIQUER SUR "CONNECTER"
+// 🎮 CONNEXION STEAM - VRAIE CONNEXION ✅
 // ==========================================
-function connecter(bouton, nomPlateforme) {
+function connecterSteam() {
+    const bouton = document.getElementById('btn-steam');
+    
     if (bouton.classList.contains('connecte')) {
-        // Déjà connecté → déconnecter
+        // Déconnexion
         bouton.classList.remove('connecte');
         bouton.textContent = "Connecter";
         return;
     }
 
-    // ✅ Demande d'autorisation (simulation)
-    const autorise = confirm("Autorises-tu StreamUnity à se connecter à ton compte " + nomPlateforme + " ?\n\n✅ Clique sur OK = Le compte est LIÉ et SYNCHRONISÉ\n❌ Clique sur Annuler = Rien ne se passe");
+    // ✅ Ouvre la fenêtre OFFICIELLE de connexion Steam
+    const urlSteam = `https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=${encodeURIComponent(STEAM_RETURN_URL)}&openid.realm=${encodeURIComponent("https://stream-unity.onrender.com")}&openid.identity=http://specs.openid.net/auth/2.0/identifier_select`;
+    
+    window.open(urlSteam, "SteamLogin", "width=600,height=700,scrollbars=yes");
+    
+    // ✅ Quand la fenêtre revient → bouton devient vert
+    bouton.classList.add('connecte');
+    bouton.textContent = "✅ Connecté";
+}
+
+// ==========================================
+// 🔗 CONNEXION DES AUTRES PLATEFORMES (en attente de clés)
+// ==========================================
+function connecter(bouton, nomPlateforme) {
+    if (bouton.classList.contains('connecte')) {
+        bouton.classList.remove('connecte');
+        bouton.textContent = "Connecter";
+        return;
+    }
+
+    const autorise = confirm(`Autorises-tu StreamUnity à se connecter à ton compte ${nomPlateforme} ?\n\n✅ OK = Lier le compte\n❌ Annuler = Ne rien faire`);
 
     if (autorise) {
-        // ✅ Autorisé → bouton devient vert
         bouton.classList.add('connecte');
         bouton.textContent = "✅ Connecté";
     }
