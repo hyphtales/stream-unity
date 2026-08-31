@@ -73,7 +73,7 @@
             <h3>🔗 Connecter mes plateformes de jeux</h3>
             <p>Lie tes comptes pour retrouver ton profil et tes jeux automatiquement.</p>
 
-            <!-- STEAM - CLÉ INTÉGRÉE ✅ -->
+            <!-- STEAM ✅ CLÉ INTÉGRÉE -->
             <div class="plateforme">
                 <div class="info">
                     <span class="icone">🎮</span>
@@ -85,6 +85,43 @@
                 <button id="btn-steam" class="btn-connecter" onclick="connecterSteam()">Connecter</button>
             </div>
 
+            <!-- TWITCH ✅ CLÉS INTÉGRÉES -->
+            <div class="plateforme">
+                <div class="info">
+                    <span class="icone">📱</span>
+                    <div>
+                        <div class="nom">Twitch</div>
+                        <div class="desc">Abonnements, chaîne et statut</div>
+                    </div>
+                </div>
+                <button id="btn-twitch" class="btn-connecter" onclick="connecterTwitch()">Connecter</button>
+            </div>
+
+            <!-- TIKTOK ✅ CLÉS INTÉGRÉES -->
+            <div class="plateforme">
+                <div class="info">
+                    <span class="icone">🎵</span>
+                    <div>
+                        <div class="nom">TikTok</div>
+                        <div class="desc">Profil, vidéos et abonnés</div>
+                    </div>
+                </div>
+                <button id="btn-tiktok" class="btn-connecter" onclick="connecterTikTok()">Connecter</button>
+            </div>
+
+            <!-- X (TWITTER) ✅ CLÉS INTÉGRÉES -->
+            <div class="plateforme">
+                <div class="info">
+                    <span class="icone">🐦</span>
+                    <div>
+                        <div class="nom">X (Twitter)</div>
+                        <div class="desc">Profil, tweets et abonnés</div>
+                    </div>
+                </div>
+                <button id="btn-x" class="btn-connecter" onclick="connecterX()">Connecter</button>
+            </div>
+
+            <!-- AUTRES PLATEFORMES EN ATTENTE -->
             <div class="plateforme">
                 <div class="info">
                     <span class="icone">🟪</span>
@@ -129,63 +166,15 @@
                 <button class="btn-connecter" onclick="connecter(this, 'Nintendo Switch')">Connecter</button>
             </div>
 
-            <!-- Réseaux sociaux -->
-            <h3 style="margin-top:30px;">📱 Connecter mes réseaux sociaux</h3>
-            <p>Lie tes réseaux pour afficher tes liens et partager facilement.</p>
-
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">📱</span>
-                    <div>
-                        <div class="nom">Twitch</div>
-                        <div class="desc">Abonnements, chaîne et statut</div>
-                    </div>
-                </div>
-                <button class="btn-connecter" onclick="connecter(this, 'Twitch')">Connecter</button>
-            </div>
-
             <div class="plateforme">
                 <div class="info">
                     <span class="icone">📸</span>
                     <div>
-                        <div class="nom">Instagram</div>
+                        <div class="nom">Instagram / Facebook</div>
                         <div class="desc">Profil, publications et abonnés</div>
                     </div>
                 </div>
                 <button class="btn-connecter" onclick="connecter(this, 'Instagram')">Connecter</button>
-            </div>
-
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">🎵</span>
-                    <div>
-                        <div class="nom">TikTok</div>
-                        <div class="desc">Profil, vidéos et abonnés</div>
-                    </div>
-                </div>
-                <button class="btn-connecter" onclick="connecter(this, 'TikTok')">Connecter</button>
-            </div>
-
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">📘</span>
-                    <div>
-                        <div class="nom">Facebook</div>
-                        <div class="desc">Profil et informations publiques</div>
-                    </div>
-                </div>
-                <button class="btn-connecter" onclick="connecter(this, 'Facebook')">Connecter</button>
-            </div>
-
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">🐦</span>
-                    <div>
-                        <div class="nom">X (Twitter)</div>
-                        <div class="desc">Profil, tweets et abonnés</div>
-                    </div>
-                </div>
-                <button class="btn-connecter" onclick="connecter(this, 'X')">Connecter</button>
             </div>
 
             <div class="plateforme">
@@ -227,10 +216,27 @@
 
 <script>
 // ==========================================
-// 🔑 CLÉ API STEAM - TES INFORMATIONS
+// 🔑 TOUTES TES CLÉS INTÉGRÉES ICI ✅
 // ==========================================
+
+// STEAM
 const STEAM_API_KEY = "445E1C69607CA4860471ECD4997772E6";
 const STEAM_RETURN_URL = "https://stream-unity.onrender.com/parametres.html";
+
+// TWITCH
+const TWITCH_CLIENT_ID = "9a7yzs5amc2s6tkgt7a4pus3q8ufju";
+const TWITCH_CLIENT_SECRET = "17xsStB1It2RmOpAfW11O4jQVMm54RVh2ZnsItk2Wd516";
+const TWITCH_REDIRECT_URI = "https://stream-unity.onrender.com/parametres.html";
+
+// TIKTOK
+const TIKTOK_CLIENT_ID = "awvk3dtnmwo0sfiz";
+const TIKTOK_CLIENT_SECRET = "f1jnpklKZrS2KHzkBJhfY51LQfPUTZsD";
+const TIKTOK_REDIRECT_URI = "https://stream-unity.onrender.com/parametres.html";
+
+// X (TWITTER)
+const X_API_KEY = "AlxrE0DF2StyI34dfmlt4C5eo";
+const X_API_SECRET = "VSjqnu7XUj3NMmKAL4WFLkjReKUy7O90oxdnOtJuiOVn1zPOC8";
+const X_REDIRECT_URI = "https://stream-unity.onrender.com/parametres.html";
 
 // ==========================================
 // 🎬 CHANGER D'ONGLET
@@ -244,30 +250,71 @@ function changerOnglet(nom) {
 }
 
 // ==========================================
-// 🎮 CONNEXION STEAM - VRAIE CONNEXION ✅
+// 🎮 CONNEXION STEAM
 // ==========================================
 function connecterSteam() {
     const bouton = document.getElementById('btn-steam');
-    
     if (bouton.classList.contains('connecte')) {
-        // Déconnexion
         bouton.classList.remove('connecte');
         bouton.textContent = "Connecter";
         return;
     }
-
-    // ✅ Ouvre la fenêtre OFFICIELLE de connexion Steam
     const urlSteam = `https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.mode=checkid_setup&openid.return_to=${encodeURIComponent(STEAM_RETURN_URL)}&openid.realm=${encodeURIComponent("https://stream-unity.onrender.com")}&openid.identity=http://specs.openid.net/auth/2.0/identifier_select`;
-    
     window.open(urlSteam, "SteamLogin", "width=600,height=700,scrollbars=yes");
-    
-    // ✅ Quand la fenêtre revient → bouton devient vert
     bouton.classList.add('connecte');
     bouton.textContent = "✅ Connecté";
 }
 
 // ==========================================
-// 🔗 CONNEXION DES AUTRES PLATEFORMES (en attente de clés)
+// 📱 CONNEXION TWITCH
+// ==========================================
+function connecterTwitch() {
+    const bouton = document.getElementById('btn-twitch');
+    if (bouton.classList.contains('connecte')) {
+        bouton.classList.remove('connecte');
+        bouton.textContent = "Connecter";
+        return;
+    }
+    const urlTwitch = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(TWITCH_REDIRECT_URI)}&response_type=code&scope=user:read:email`;
+    window.open(urlTwitch, "TwitchLogin", "width=600,height=700,scrollbars=yes");
+    bouton.classList.add('connecte');
+    bouton.textContent = "✅ Connecté";
+}
+
+// ==========================================
+// 🎵 CONNEXION TIKTOK
+// ==========================================
+function connecterTikTok() {
+    const bouton = document.getElementById('btn-tiktok');
+    if (bouton.classList.contains('connecte')) {
+        bouton.classList.remove('connecte');
+        bouton.textContent = "Connecter";
+        return;
+    }
+    const urlTikTok = `https://www.tiktok.com/auth/authorize?client_id=${TIKTOK_CLIENT_ID}&redirect_uri=${encodeURIComponent(TIKTOK_REDIRECT_URI)}&response_type=code&scope=user.info.basic`;
+    window.open(urlTikTok, "TikTokLogin", "width=600,height=700,scrollbars=yes");
+    bouton.classList.add('connecte');
+    bouton.textContent = "✅ Connecté";
+}
+
+// ==========================================
+// 🐦 CONNEXION X (TWITTER)
+// ==========================================
+function connecterX() {
+    const bouton = document.getElementById('btn-x');
+    if (bouton.classList.contains('connecte')) {
+        bouton.classList.remove('connecte');
+        bouton.textContent = "Connecter";
+        return;
+    }
+    const urlX = `https://twitter.com/i/oauth2/authorize?client_id=${X_API_KEY}&redirect_uri=${encodeURIComponent(X_REDIRECT_URI)}&response_type=code&scope=tweet.read%20users.read&state=streamunity`;
+    window.open(urlX, "XLogin", "width=600,height=700,scrollbars=yes");
+    bouton.classList.add('connecte');
+    bouton.textContent = "✅ Connecté";
+}
+
+// ==========================================
+// 🔗 CONNEXION DES AUTRES PLATEFORMES
 // ==========================================
 function connecter(bouton, nomPlateforme) {
     if (bouton.classList.contains('connecte')) {
@@ -275,9 +322,7 @@ function connecter(bouton, nomPlateforme) {
         bouton.textContent = "Connecter";
         return;
     }
-
     const autorise = confirm(`Autorises-tu StreamUnity à se connecter à ton compte ${nomPlateforme} ?\n\n✅ OK = Lier le compte\n❌ Annuler = Ne rien faire`);
-
     if (autorise) {
         bouton.classList.add('connecte');
         bouton.textContent = "✅ Connecté";
