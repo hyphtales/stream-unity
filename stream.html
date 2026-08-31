@@ -1,154 +1,237 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StreamUnity - Streams en direct</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <style>
         * {outline: none; box-sizing: border-box; margin: 0; padding: 0;}
-        body {background: linear-gradient(135deg, #2a1060, #1a0840); color: white; font-family: sans-serif; min-height: 100vh;}
-
-        /* --- MENU DE NAVIGATION --- */
-        .menu {background: rgba(0,0,0,0.3); padding: 15px; text-align: center; position: sticky; top: 0; z-index: 100;}
-        .menu a {display: inline-block; color: #ddd; text-decoration: none; padding: 10px 18px; margin: 0 5px; border-radius: 8px; transition: all 0.2s; font-size: 15px;}
-        .menu a:hover, .menu a.actif {background: #9147ff; color: white; font-weight: bold;}
-
-        /* --- CONTENU --- */
-        .entete {text-align: center; margin: 30px 0;}
-        .entete h1 {font-size: 32px; margin-bottom: 8px;}
-        .entete p {color: #aaa; font-size: 16px;}
-
-        .grille-streams {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
+        body {
+            background: linear-gradient(135deg, #2a1060, #1a0840);
+            color: #efeff1;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
         }
-        .carte-stream {
-            background: rgba(123, 47, 253, 0.1);
-            border-radius: 12px;
-            padding: 0;
-            overflow: hidden;
-            border: 2px solid transparent;
+        
+        .menu {
+            background: rgba(0,0,0,0.4);
+            padding: 14px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(145,71,255,0.3);
+        }
+        .menu a {
+            display: inline-block;
+            color: #adadb8;
+            text-decoration: none;
+            padding: 10px 16px;
+            margin: 0 4px;
+            border-radius: 6px;
             transition: all 0.2s;
+            font-size: 14px;
+            font-weight: 500;
         }
-        .carte-stream:hover {
-            border-color: #7b2ffd;
-            transform: translateY(-3px);
+        .menu a:hover, .menu a.actif {
+            background: #9147ff;
+            color: white;
+            font-weight: 600;
         }
-        .vignette {
-            background: linear-gradient(135deg, #7b2ffd, #b72ffd);
-            height: 180px;
+        
+        .conteneur {max-width: 1000px; margin: 30px auto; padding: 20px;}
+        .entete {text-align: center; margin-bottom: 30px;}
+        .entete h2 {font-size: 28px; color: #9147ff; margin-bottom: 8px;}
+        .entete p {color: #adadb8; font-size: 15px;}
+        
+        .lecteur-boite {
+            background: #18181b;
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid rgba(145,71,255,0.25);
+            margin-bottom: 25px;
+        }
+        .lecteur-boite h3 {
+            font-size: 18px;
+            color: #efeff1;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 40px;
+            gap: 10px;
+            flex-wrap: wrap;
         }
-        .info { padding: 15px; }
-        .info h3 { margin: 0 0 8px 0; color: white; font-size: 16px; }
-        .info p { margin: 4px 0; color: #aaa; font-size: 13px; }
         .en-direct {
             display: inline-block;
-            background: #ff005c;
+            background: #e91916;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+        }
+        .badge-4k {
+            display: inline-block;
+            background: linear-gradient(90deg, #9147ff, #ff9500);
             color: white;
             font-size: 11px;
-            font-weight: bold;
-            padding: 2px 8px;
+            font-weight: 700;
+            padding: 3px 10px;
             border-radius: 4px;
-            margin-bottom: 8px;
         }
-        .hors-ligne {
-            background: #555;
-        }
-        .bouton {
+        
+        .conteneur-video {
+            position: relative;
             width: 100%;
-            padding: 10px;
-            background: linear-gradient(90deg, #7b2ffd, #b72ffd);
-            color: white;
-            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+        }
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #000;
+        }
+        
+        .info-lecteur {
+            margin-top: 15px;
+            padding: 15px;
+            background: #1f1f23;
             border-radius: 8px;
+            color: #adadb8;
             font-size: 14px;
-            font-weight: bold;
+            line-height: 1.7;
+        }
+        .info-lecteur strong {color: #9147ff;}
+        
+        .qualites {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .qualite {
+            padding: 6px 12px;
+            background: #2a2a32;
+            border-radius: 6px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.2s;
+            border: none;
+            color: #ccc;
         }
-        .bouton:hover {transform: scale(1.02);}
-        .bouton-vert {background: linear-gradient(90deg, #28a745, #20c997);}
-
-        .lien-retour {text-align: center; margin: 40px 0;}
-        .lien-retour a {color: #a970ff; text-decoration: none;}
+        .qualite:hover, .qualite.active {
+            background: #9147ff;
+            color: white;
+        }
+        
+        .zone-musique {margin-top: 10px;}
+        audio {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- 📌 MENU COMPLET -->
     <nav class="menu">
         <a href="accueil.html">🏠 Accueil</a>
         <a href="stream.html" class="actif">📺 Streams</a>
         <a href="salon.html">💬 Discussions</a>
         <a href="abonnements.html">💜 Abonnements</a>
         <a href="profil.html">👤 Profil</a>
-        <a href="partenaire.html">🏅 Partenaires</a>
+        <a href="test.html">🧪 Test & Avis</a>
         <a href="parametres.html">⚙️ Paramètres</a>
     </nav>
 
-    <!-- 📢 CONTENU PRINCIPAL -->
-    <div class="entete">
-        <h1>📺 Streams en direct</h1>
-        <p>Regarde ou diffuse du contenu</p>
+    <div class="conteneur">
+        <div class="entete">
+            <h2>📺 Streams en direct</h2>
+            <p>Regarde en HD / 4K — Tu choisis la qualité et tu règles tout toi-même !</p>
+        </div>
+
+        <!-- 🎥 LECTEUR VIDÉO HD / 4K -->
+        <div class="lecteur-boite">
+            <h3>
+                📺 Stream en direct
+                <span class="en-direct">EN DIRECT</span>
+                <span class="badge-4k">HD · 4K</span>
+            </h3>
+            
+            <div class="conteneur-video">
+                <video id="lecteurPrincipal" controls preload="metadata" poster="apercu.jpg">
+                    <!-- QUALITÉ 4K -->
+                    <source src="stream-4k.mp4" type="video/mp4" data-qualite="4K">
+                    <!-- QUALITÉ 1080p -->
+                    <source src="stream-1080p.mp4" type="video/mp4" data-qualite="1080p">
+                    <!-- QUALITÉ 720p -->
+                    <source src="stream-720p.mp4" type="video/mp4" data-qualite="720p">
+                    <!-- QUALITÉ 480p -->
+                    <source src="stream-480p.mp4" type="video/mp4" data-qualite="480p">
+                    <!-- QUALITÉ AUTO (par défaut) -->
+                    <source src="stream-auto.mp4" type="video/mp4" data-qualite="Auto">
+                    Ton navigateur ne peut pas lire cette vidéo.
+                </video>
+            </div>
+
+            <!-- ⚙️ CHOIX DE LA QUALITÉ -->
+            <div class="info-lecteur">
+                <strong>⚙️ Choisis ta qualité :</strong>
+                <div class="qualites">
+                    <button class="qualite active" data-src="stream-auto.mp4">🔄 Auto</button>
+                    <button class="qualite" data-src="stream-4k.mp4">🟪 4K Ultra</button>
+                    <button class="qualite" data-src="stream-1080p.mp4">💜 1080p HD</button>
+                    <button class="qualite" data-src="stream-720p.mp4">💙 720p</button>
+                    <button class="qualite" data-src="stream-480p.mp4">💚 480p</button>
+                </div>
+                <br>
+                💡 <strong>Contrôles du lecteur :</strong> ▶️ Lecture ⏸️ Pause 🔊 Volume ⤢ Plein écran ⏱️ Avancer/Reculer
+            </div>
+        </div>
+
+        <!-- 🎵 LECTEUR DE MUSIQUE -->
+        <div class="lecteur-boite zone-musique">
+            <h3>🎵 Musique</h3>
+            <audio controls>
+                <source src="musique-fond.mp3" type="audio/mpeg">
+                Ton navigateur ne peut pas lire cette musique.
+            
+            <div class="info-lecteur">
+                💡 <strong>Contrôles :</strong> ▶️ Lecture ⏸️ Pause 🔊 Volume ⏱️ Avancer/Reculer ⏺️ Vitesse de lecture
+            </div>
+        </div>
+
     </div>
 
-    <div class="grille-streams">
-        <div class="carte-stream">
-            <div class="vignette">🎮</div>
-            <div class="info">
-                <span class="en-direct">🔴 EN DIRECT</span>
-                <h3>Jeux en direct</h3>
-                <p>Par : StreamerPro</p>
-                <p>👀 128 spectateurs</p>
-                <button class="bouton">Regarder</button>
-            </div>
-        </div>
+<script>
+// ⚙️ CHANGER LA QUALITÉ DE LA VIDÉO
+const lecteur = document.getElementById('lecteurPrincipal');
+const boutonsQualite = document.querySelectorAll('.qualite');
 
-        <div class="carte-stream">
-            <div class="vignette">🎨</div>
-            <div class="info">
-                <span class="en-direct hors-ligne">⏳ HORS LIGNE</span>
-                <h3>Création & Arts</h3>
-                <p>Par : ArtisteDuNet</p>
-                <p>Dernière diffusion : hier</p>
-                <button class="bouton" style="background:#555;">Être prévenu</button>
-            </div>
-        </div>
-
-        <div class="carte-stream">
-            <div class="vignette">🎵</div>
-            <div class="info">
-                <span class="en-direct">🔴 EN DIRECT</span>
-                <h3>Musique & Ambiance</h3>
-                <p>Par : MelodyLive</p>
-                <p>👀 45 spectateurs</p>
-                <button class="bouton">Regarder</button>
-            </div>
-        </div>
-
-        <div class="carte-stream">
-            <div class="vignette">📡</div>
-            <div class="info">
-                <span class="en-direct hors-ligne">⏳ HORS LIGNE</span>
-                <h3>Ma chaîne</h3>
-                <p>Par : Moi</p>
-                <p>Tu n'as pas encore diffusé</p>
-                <button class="bouton bouton-vert">Diffuser</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="lien-retour">
-        <a href="accueil.html">← Retour à l'accueil</a>
-    </div>
+boutonsQualite.forEach(bouton => {
+    bouton.addEventListener('click', () => {
+        // Retirer "actif" de tous les boutons
+        boutonsQualite.forEach(b => b.classList.remove('active'));
+        // Mettre "actif" sur le bouton cliqué
+        bouton.classList.add('active');
+        
+        // Sauvegarder la position et la lecture
+        const positionActuelle = lecteur.currentTime;
+        const estEnLecture = !lecteur.paused;
+        
+        // Changer la source
+        const nouvelleSource = bouton.dataset.src;
+        lecteur.src = nouvelleSource;
+        
+        // Revenir à la même position
+        lecteur.load();
+        lecteur.currentTime = positionActuelle;
+        if (estEnLecture) lecteur.play();
+    });
+});
+</script>
 
 </body>
 </html>
