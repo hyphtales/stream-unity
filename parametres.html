@@ -27,12 +27,11 @@
         .plateforme .nom {font-weight: bold; font-size: 15px;}
         .plateforme .desc {font-size: 12px; color: #888; margin-top: 2px;}
         
-        .profil {margin-top: 15px; padding: 15px; background: rgba(0,200,83,0.1); border-radius: 10px; display: none;}
-        .profil.visible {display: block;}
+        .profil {margin-top: 15px; padding: 15px; background: rgba(0,200,83,0.1); border-radius: 10px; display: block;}
         .profil img {width: 60px; height: 60px; border-radius: 50%; margin-right: 15px; vertical-align: middle;}
         .profil .pseudo {font-weight: bold; font-size: 17px; color: #00c853;}
-        .lien-chaine {display: inline-block; margin-top: 10px; padding: 8px 15px; background: #9147ff; color: white; text-decoration: none; border-radius: 6px; font-size: 14px;}
-        .lien-chaine:hover {background: #772ce8;}
+        .lien-chaine {display: inline-block; margin-top: 10px; padding: 10px 20px; background: #9147ff; color: white; text-decoration: none; border-radius: 6px; font-size: 15px; font-weight: bold;}
+        .lien-chaine:hover {background: #772ce8; transform: scale(1.03);}
         
         .btn-connecter {padding: 8px 18px; background: #772ce8; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px;}
         .btn-connecter:hover {background: #9147ff;}
@@ -54,7 +53,7 @@
     <div class="conteneur">
         <div class="entete">
             <h2>⚙️ Paramètres</h2>
-            <p>Connecte tes comptes et accède à tes chaînes ✅</p>
+            <p>Tes liens sont TOUJOURS visibles, même sans se connecter ✅</p>
         </div>
 
         <!-- 🟪 TWITCH -->
@@ -64,19 +63,19 @@
                 <div class="info">
                     <span class="icone">📱</span>
                     <div>
-                        <div class="nom">Twitch</div>
-                        <div class="desc">Abonnements, chaîne et statut</div>
+                        <div class="nom">Twitch — Hyphtales</div>
+                        <div class="desc">Ta chaîne est toujours accessible</div>
                     </div>
                 </div>
                 <button id="btn-twitch" class="btn-connecter" onclick="connecterTwitch()">Connecter</button>
             </div>
 
-            <div id="profil-twitch" class="profil">
-                <img src="https://ui-avatars.com/api/?name=Hyphtales&background=00c853&color=fff" alt="Avatar" />
+            <div class="profil">
+                <img src="https://ui-avatars.com/api/?name=Hyphtales&background=9147ff&color=fff" alt="Avatar" />
                 <div style="display:inline-block; vertical-align:middle;">
                     <div class="pseudo">✅ Hyphtales</div>
-                    <div style="color:#aaa; font-size:13px; margin-top:5px;">Connecté avec succès ✅</div>
-                    <!-- ✅ LIEN QUI OUVRE TA CHAÎNE TWITCH -->
+                    <div style="color:#aaa; font-size:13px; margin-top:5px;">Ton compte Twitch</div>
+                    <!-- ✅ LIEN TOUJOURS LÀ, JAMAIS DISPARU ! -->
                     <a href="https://www.twitch.tv/Hyphtales" target="_blank" class="lien-chaine">📺 Aller sur ma chaîne Twitch</a>
                 </div>
             </div>
@@ -89,19 +88,19 @@
                 <div class="info">
                     <span class="icone">🎵</span>
                     <div>
-                        <div class="nom">TikTok</div>
-                        <div class="desc">Profil, vidéos et abonnés</div>
+                        <div class="nom">TikTok — @Hyphtales</div>
+                        <div class="desc">Ton profil est toujours accessible</div>
                     </div>
                 </div>
-                <button id="btn-tiktok" class="btn-connecter" onclick="connecterTikTok()">Connecter</button>
+                <a href="https://www.tiktok.com/@Hyphtales" target="_blank" class="btn-connecter">🔗 Ouvrir</a>
             </div>
 
-            <div id="profil-tiktok" class="profil">
-                <img src="https://ui-avatars.com/api/?name=Hyphtales&background=00c853&color=fff" alt="Avatar" />
+            <div class="profil">
+                <img src="https://ui-avatars.com/api/?name=Hyphtales&background=00f2ea&color=fff" alt="Avatar" />
                 <div style="display:inline-block; vertical-align:middle;">
                     <div class="pseudo">✅ @Hyphtales</div>
-                    <div style="color:#aaa; font-size:13px; margin-top:5px;">Connecté avec succès ✅</div>
-                    <!-- ✅ LIEN QUI OUVRE TON PROFIL TIKTOK -->
+                    <div style="color:#aaa; font-size:13px; margin-top:5px;">Ton compte TikTok</div>
+                    <!-- ✅ LIEN DIRECT -->
                     <a href="https://www.tiktok.com/@Hyphtales" target="_blank" class="lien-chaine">🎵 Aller sur mon profil TikTok</a>
                 </div>
             </div>
@@ -114,19 +113,19 @@
                 <div class="info">
                     <span class="icone">🐦</span>
                     <div>
-                        <div class="nom">X (Twitter)</div>
-                        <div class="desc">Profil, tweets et abonnés</div>
+                        <div class="nom">X — @Hyphtales</div>
+                        <div class="desc">Ton profil est toujours accessible</div>
                     </div>
                 </div>
-                <button id="btn-x" class="btn-connecter" onclick="connecterX()">Connecter</button>
+                <a href="https://x.com/Hyphtales" target="_blank" class="btn-connecter">🔗 Ouvrir</a>
             </div>
 
-            <div id="profil-x" class="profil">
-                <img src="https://ui-avatars.com/api/?name=Hyphtales&background=00c853&color=fff" alt="Avatar" />
+            <div class="profil">
+                <img src="https://ui-avatars.com/api/?name=Hyphtales&background=000&color=fff" alt="Avatar" />
                 <div style="display:inline-block; vertical-align:middle;">
                     <div class="pseudo">✅ @Hyphtales</div>
-                    <div style="color:#aaa; font-size:13px; margin-top:5px;">Connecté avec succès ✅</div>
-                    <!-- ✅ LIEN QUI OUVRE TON PROFIL X -->
+                    <div style="color:#aaa; font-size:13px; margin-top:5px;">Ton compte X</div>
+                    <!-- ✅ LIEN DIRECT -->
                     <a href="https://x.com/Hyphtales" target="_blank" class="lien-chaine">🐦 Aller sur mon profil X</a>
                 </div>
             </div>
@@ -135,8 +134,6 @@
 
 <script>
 const TWITCH_CLIENT_ID = "9a7yzs5amc2s6tkgt7a4pus3q8ufju";
-const TIKTOK_CLIENT_ID = "awvk3dtnmwo0sfiz";
-const X_CLIENT_ID = "AlxrE0DF2StyI34dfmlt4C5eo";
 const REDIRECT_URI = "https://stream-unity.onrender.com/parametres.html";
 
 window.onload = function() {
@@ -144,43 +141,22 @@ window.onload = function() {
     const code = urlParams.get('code');
     const etat = urlParams.get('state');
     
-    if (code) {
-        if (etat === 'twitch') afficherConnecte('twitch');
-        else if (etat === 'tiktok') afficherConnecte('tiktok');
-        else if (etat === 'x') afficherConnecte('x');
-        else afficherConnecte('twitch');
+    if (code && etat === 'twitch') {
+        document.getElementById("btn-twitch").textContent = "✅ Connecté";
+        document.getElementById("btn-twitch").classList.add("connecte");
+        localStorage.setItem("twitch_connecte", "oui");
         history.replaceState({}, document.title, REDIRECT_URI);
     }
     
-    if (localStorage.getItem("twitch_connecte") === "oui") afficherConnecte('twitch');
-    if (localStorage.getItem("tiktok_connecte") === "oui") afficherConnecte('tiktok');
-    if (localStorage.getItem("x_connecte") === "oui") afficherConnecte('x');
+    if (localStorage.getItem("twitch_connecte") === "oui") {
+        document.getElementById("btn-twitch").textContent = "✅ Connecté";
+        document.getElementById("btn-twitch").classList.add("connecte");
+    }
 };
 
 function connecterTwitch() {
     const url = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=user:read:email&state=twitch`;
     window.location.href = url;
-}
-
-function connecterTikTok() {
-    const url = `https://www.tiktok.com/auth/authorize?client_id=${TIKTOK_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=user.info.basic&state=tiktok`;
-    window.location.href = url;
-}
-
-function connecterX() {
-    alert("Pour X, on va d'abord se connecter directement sur X, puis on reviendra !");
-    window.open("https://x.com/login", "_blank");
-}
-
-function afficherConnecte(plateforme) {
-    const bouton = document.getElementById(`btn-${plateforme}`);
-    const profil = document.getElementById(`profil-${plateforme}`);
-    
-    bouton.textContent = "✅ Connecté";
-    bouton.classList.add("connecte");
-    profil.classList.add("visible");
-    
-    localStorage.setItem(`${plateforme}_connecte`, "oui");
 }
 </script>
 
