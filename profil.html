@@ -13,27 +13,41 @@
         .menu a {display: inline-block; color: #ddd; text-decoration: none; padding: 10px 18px; margin: 0 5px; border-radius: 8px; transition: all 0.2s; font-size: 15px;}
         .menu a:hover, .menu a.actif {background: #9147ff; color: white; font-weight: bold;}
         
-        .conteneur {max-width: 800px; margin: 30px auto; padding: 20px;}
-        .entete {text-align: center; margin-bottom: 40px;}
-        .entete h2 {font-size: 32px; color: #9147ff; margin-bottom: 10px;}
-        .entete p {color: #aaa; font-size: 16px;}
+        .conteneur {max-width: 850px; margin: 30px auto; padding: 20px;}
         
-        .carte-profil {background: rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; margin-bottom: 30px; text-align: center; border: 1px solid rgba(145,71,255,0.2);}
-        .avatar {width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #9147ff, #772ce8); display: flex; align-items: center; justify-content: center; font-size: 48px; margin: 0 auto 20px;}
-        .nom-utilisateur {font-size: 28px; font-weight: bold; margin-bottom: 5px;}
-        .texte-description {color: #aaa; margin-bottom: 30px;}
+        /* 🧑 EN-TÊTE PROFIL */
+        .entete-profil {background: rgba(255,255,255,0.05); border-radius: 16px; padding: 30px; margin-bottom: 25px; border: 1px solid rgba(145,71,255,0.2); display: flex; align-items: center; gap: 25px;}
+        .avatar {width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #9147ff, #772ce8); display: flex; align-items: center; justify-content: center; font-size: 42px; font-weight: bold; flex-shrink: 0;}
+        .infos-principales h1 {font-size: 26px; margin-bottom: 5px;}
+        .infos-principales .pseudo {color: #9147ff; font-size: 15px; margin-bottom: 10px;}
+        .infos-principales .bio {color: #ccc; font-size: 14px; line-height: 1.5;}
+        
+        /* 📑 ONGLETS COMME TWITCH */
+        .onglets {display: flex; gap: 5px; margin-bottom: 25px; border-bottom: 1px solid rgba(145,71,255,0.2); padding-bottom: 0;}
+        .onglet {padding: 12px 22px; cursor: pointer; border-top-left-radius: 10px; border-top-right-radius: 10px; font-size: 15px; font-weight: 500; color: #aaa; transition: all 0.2s;}
+        .onglet:hover {background: rgba(145,71,255,0.1); color: #ddd;}
+        .onglet.actif {background: rgba(145,71,255,0.2); color: white; font-weight: bold; border-bottom: 2px solid #9147ff;}
+        
+        /* 📦 CONTENU DES ONGLETS */
+        .contenu-onglet {display: none;}
+        .contenu-onglet.actif {display: block; animation: apparition 0.3s ease;}
+        @keyframes apparition {from {opacity:0; transform: translateY(5px);} to {opacity:1; transform: translateY(0);}}
         
         .carte-section {background: rgba(255,255,255,0.05); border-radius: 16px; padding: 25px; margin-bottom: 20px; border: 1px solid rgba(145,71,255,0.2);}
-        .carte-section h3 {color: #9147ff; margin-bottom: 20px; font-size: 18px;}
+        .carte-section h3 {color: #9147ff; margin-bottom: 20px; font-size: 17px; padding-bottom: 10px; border-bottom: 1px solid rgba(145,71,255,0.15);}
         
-        .plateforme {display: flex; align-items: center; justify-content: space-between; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px; margin-bottom: 12px;}
-        .plateforme .info {display: flex; align-items: center; gap: 12px;}
-        .plateforme .icone {font-size: 24px; width: 40px; text-align: center;}
-        .plateforme .nom {font-weight: bold; font-size: 15px;}
-        .plateforme .desc {font-size: 12px; color: #888; margin-top: 3px;}
+        /* 🔗 LIGNE PLATEFORME */
+        .ligne-reseau {display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(0,0,0,0.2); border-radius: 10px; margin-bottom: 10px; transition: background 0.2s;}
+        .ligne-reseau:hover {background: rgba(0,0,0,0.35);}
+        .gauche {display: flex; align-items: center; gap: 14px;}
+        .icone {font-size: 22px; width: 36px; text-align: center;}
+        .nom-plateforme {font-weight: bold; font-size: 15px;}
+        .sous-titre {font-size: 12px; color: #888; margin-top: 2px;}
+        .btn-lien {padding: 8px 16px; background: #9147ff; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: bold; transition: background 0.2s;}
+        .btn-lien:hover {background: #772ce8;}
         
-        .lien-plateforme {display: inline-block; padding: 8px 16px; background: #9147ff; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: bold;}
-        .lien-plateforme:hover {background: #772ce8; transform: scale(1.03);}
+        /* 📅 PROGRAMME */
+        .case-vide {text-align: center; padding: 40px; color: #666; font-style: italic;}
     </style>
 </head>
 <body>
@@ -50,92 +64,104 @@
 
     <div class="conteneur">
 
-        <!-- 🧑 CARTE PRINCIPALE DU PROFIL -->
-        <div class="carte-profil">
+        <!-- 🧑 EN-TÊTE PROFIL -->
+        <div class="entete-profil">
             <div class="avatar">H</div>
-            <h1 class="nom-utilisateur">Hyphtales</h1>
-            <p class="texte-description">Retrouve-moi sur toutes mes plateformes ! 👇</p>
+            <div class="infos-principales">
+                <h1>Hyphtales</h1>
+                <p class="pseudo">@Hyphtales — Créateur & Streamer</p>
+                <p class="bio">Retrouve-moi sur toutes mes plateformes et rejoins la communauté ! 🟪💜</p>
+            </div>
         </div>
 
-        <!-- 🔗 TES LIENS TOUTES PLATEFORMES -->
-        <div class="carte-section">
-            <h3>🔗 Mes liens & réseaux</h3>
+        <!-- 📑 ONGLETS COMME TWITCH -->
+        <div class="onglets">
+            <div class="onglet actif" onclick="afficherOnglet('profil')">👤 Profil</div>
+            <div class="onglet" onclick="afficherOnglet('reseaux')">🔗 Réseaux</div>
+            <div class="onglet" onclick="afficherOnglet('programme')">📅 Programme</div>
+        </div>
 
-            <!-- 🟪 TWITCH -->
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">🟪</span>
-                    <div>
-                        <div class="nom">Twitch — Hyphtales</div>
-                        <div class="desc">Ma chaîne en direct</div>
-                    </div>
-                </div>
-                <a href="https://www.twitch.tv/Hyphtales" target="_blank" class="lien-plateforme">📺 Voir</a>
+        <!-- 📄 CONTENU : ONGLET PROFIL -->
+        <div id="onglet-profil" class="contenu-onglet actif">
+            <div class="carte-section">
+                <h3>À propos de moi</h3>
+                <p style="color:#ccc; line-height:1.7;">
+                    Salut ! Moi c'est Hyphtales, streamer et créateur de contenu.<br><br>
+                    Je diffuse principalement sur Twitch et je partage mes vidéos sur TikTok.<br>
+                    Retrouve-moi aussi sur X, Discord, Xbox et PlayStation pour suivre mes actualités et jouer ensemble ! 🎮
+                </p>
             </div>
-
-            <!-- 🎵 TIKTOK -->
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">🎵</span>
-                    <div>
-                        <div class="nom">TikTok — @Hyphtales</div>
-                        <div class="desc">Mes vidéos</div>
-                    </div>
+            <div class="carte-section">
+                <h3>Informations</h3>
+                <div style="display:grid; gap:12px;">
+                    <div><strong style="color:#9147ff;">Pseudo :</strong> Hyphtales</div>
+                    <div><strong style="color:#9147ff;">Région :</strong> France</div>
+                    <div><strong style="color:#9147ff;">Langue :</strong> Français</div>
                 </div>
-                <a href="https://www.tiktok.com/@Hyphtales" target="_blank" class="lien-plateforme">🎵 Voir</a>
             </div>
+        </div>
 
-            <!-- 🐦 X -->
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">🐦</span>
-                    <div>
-                        <div class="nom">X — @Hyphtales</div>
-                        <div class="desc">Mes actualités</div>
-                    </div>
+        <!-- 🔗 CONTENU : ONGLET RÉSEAUX -->
+        <div id="onglet-reseaux" class="contenu-onglet">
+            <div class="carte-section">
+                <h3>Mes liens & réseaux sociaux</h3>
+
+                <div class="ligne-reseau">
+                    <div class="gauche"><span class="icone">🟪</span><div><div class="nom-plateforme">Twitch</div><div class="sous-titre">Ma chaîne en direct</div></div></div>
+                    <a href="https://www.twitch.tv/Hyphtales" target="_blank" class="btn-lien">📺 Voir</a>
                 </div>
-                <a href="https://x.com/Hyphtales" target="_blank" class="lien-plateforme">🐦 Voir</a>
-            </div>
 
-            <!-- 💬 DISCORD -->
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">💬</span>
-                    <div>
-                        <div class="nom">Discord — Hyphtaes666</div>
-                        <div class="desc">Rejoins la communauté</div>
-                    </div>
+                <div class="ligne-reseau">
+                    <div class="gauche"><span class="icone">🎵</span><div><div class="nom-plateforme">TikTok</div><div class="sous-titre">Mes vidéos</div></div></div>
+                    <a href="https://www.tiktok.com/@Hyphtales" target="_blank" class="btn-lien">🎵 Voir</a>
                 </div>
-                <a href="https://discord.com/users/Hyphtaes666" target="_blank" class="lien-plateforme">💬 Rejoindre</a>
-            </div>
 
-            <!-- 🎯 XBOX -->
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">🎯</span>
-                    <div>
-                        <div class="nom">Xbox — Hyphtales</div>
-                        <div class="desc">Mon profil joueur</div>
-                    </div>
+                <div class="ligne-reseau">
+                    <div class="gauche"><span class="icone">🐦</span><div><div class="nom-plateforme">X (Twitter)</div><div class="sous-titre">Mes actualités</div></div></div>
+                    <a href="https://x.com/Hyphtales" target="_blank" class="btn-lien">🐦 Voir</a>
                 </div>
-                <a href="https://www.xbox.com/fr-FR/user/Hyphtales" target="_blank" class="lien-plateforme">🎯 Voir</a>
-            </div>
 
-            <!-- 🎮 PLAYSTATION -->
-            <div class="plateforme">
-                <div class="info">
-                    <span class="icone">🎮</span>
-                    <div>
-                        <div class="nom">PlayStation — Kratos-tg99</div>
-                        <div class="desc">Mon profil PSN</div>
-                    </div>
+                <div class="ligne-reseau">
+                    <div class="gauche"><span class="icone">💬</span><div><div class="nom-plateforme">Discord</div><div class="sous-titre">Rejoindre la communauté</div></div></div>
+                    <a href="https://discord.com/users/Hyphtaes666" target="_blank" class="btn-lien">💬 Rejoindre</a>
                 </div>
-                <a href="https://psnprofiles.com/Kratos-tg99" target="_blank" class="lien-plateforme">🎮 Voir</a>
-            </div>
 
+                <div class="ligne-reseau">
+                    <div class="gauche"><span class="icone">🎯</span><div><div class="nom-plateforme">Xbox</div><div class="sous-titre">Mon profil joueur</div></div></div>
+                    <a href="https://www.xbox.com/fr-FR/user/Hyphtales" target="_blank" class="btn-lien">🎯 Voir</a>
+                </div>
+
+                <div class="ligne-reseau">
+                    <div class="gauche"><span class="icone">🎮</span><div><div class="nom-plateforme">PlayStation</div><div class="sous-titre">Mon profil PSN</div></div></div>
+                    <a href="https://psnprofiles.com/Kratos-tg99" target="_blank" class="btn-lien">🎮 Voir</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 📅 CONTENU : ONGLET PROGRAMME -->
+        <div id="onglet-programme" class="contenu-onglet">
+            <div class="carte-section">
+                <h3>Mon programme de streams</h3>
+                <div class="case-vide">
+                    📅 À venir...<br><br>
+                    Tu pourras bientôt voir ici mes horaires de diffusion !
+                </div>
+            </div>
         </div>
 
     </div>
+
+<script>
+function afficherOnglet(nom) {
+    // Retirer "actif" de TOUS les onglets et contenus
+    document.querySelectorAll('.onglet').forEach(o => o.classList.remove('actif'));
+    document.querySelectorAll('.contenu-onglet').forEach(c => c.classList.remove('actif'));
+    
+    // Mettre "actif" sur celui cliqué
+    event.currentTarget.classList.add('actif');
+    document.getElementById('onglet-' + nom).classList.add('actif');
+}
+</script>
 
 </body>
 </html>
