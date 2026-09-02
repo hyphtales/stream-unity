@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test & Avis — StreamUnity</title>
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif;}
+        body {background: linear-gradient(135deg, #2a1060, #1a0840); color: white; min-height: 100vh;}
+
+        /* --- BARRE DE NAVIGATION HAUTE --- */
+        .nav-haut {background: rgba(0,0,0,0.3); padding: 12px 20px; display: flex; align-items: center; gap: 15px; flex-wrap: wrap; border-bottom: 2px solid #5533aa; position: sticky; top: 0; z-index: 100;}
+        .nav-haut a {color: #ccc; text-decoration: none; padding: 6px 12px; border-radius: 6px; transition: all 0.2s; font-size: 14px;}
+        .nav-haut a:hover, .nav-haut a.actif {background: #9147ff; color: white;}
+
+        /* --- CONTENU PRINCIPAL --- */
+        .conteneur {max-width: 900px; margin: 40px auto; padding: 0 20px;}
+        h1 {text-align: center; font-size: 36px; margin-bottom: 10px; background: linear-gradient(90deg, #a970ff, #ff70c0); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+        .sous-titre {text-align: center; color: #aaa; margin-bottom: 40px;}
+
+        /* --- ONGLETS --- */
+        .onglets {display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;}
+        .onglet {padding: 10px 25px; background: rgba(255,255,255,0.05); border: 2px solid #5533aa; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 15px;}
+        .onglet:hover, .onglet.actif {background: #9147ff; border-color: #9147ff; font-weight: bold;}
+
+        /* --- ZONE DE CONTENU --- */
+        .zone {background: rgba(255,255,255,0.05); border: 2px solid #5533aa; border-radius: 15px; padding: 30px; margin-bottom: 30px; display: none;}
+        .zone.actif {display: block;}
+        .zone h2 {font-size: 22px; margin-bottom: 20px; color: #a970ff;}
+
+        /* --- ÉTOILES NOTE --- */
+        .etoiles {display: flex; gap: 5px; font-size: 30px; cursor: pointer; margin: 10px 0;}
+        .etoile {color: #444; transition: all 0.2s;}
+        .etoile.jaune {color: #ffcc00; text-shadow: 0 0 5px rgba(255,204,0,0.4);}
+
+        /* --- FORMULAIRE --- */
+        .groupe {margin-bottom: 18px;}
+        label {display: block; margin-bottom: 6px; color: #ccc;}
+        input, textarea, select {width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #5533aa; background: rgba(0,0,0,0.3); color: white; font-size: 15px;}
+        textarea {min-height: 120px; resize: vertical;}
+        button {padding: 12px 25px; background: #9147ff; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.2s;}
+        button:hover {background: #a970ff; transform: translateY(-2px);}
+
+        /* --- LISTE DES AVIS --- */
+        .avis {background: rgba(0,0,0,0.2); border-radius: 10px; padding: 20px; margin-bottom: 15px; border-left: 4px solid #9147ff;}
+        .avis-tete {display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;}
+        .avis-auteur {font-weight: bold; font-size: 16px;}
+        .avis-note {color: #ffcc00;}
+        .avis-date {color: #777; font-size: 13px;}
+        .avis-texte {color: #ddd; line-height: 1.6;}
+
+        /* --- MESSAGE --- */
+        .message {margin-top: 15px; padding: 12px; border-radius: 8px; display: none;}
+        .succes {background: rgba(0,200,100,0.2); color: #00ff88; display: block !important; text-align: center; font-weight: bold;}
+
+        /* --- RESPONSIVE --- */
+        @media(max-width: 600px) {
+            .avis-tete {flex-direction: column; align-items: flex-start; gap: 5px;}
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 📌 BARRE DE NAVIGATION -->
+    <nav class="nav-haut">
+        <a href="accueil.html">🏠 Accueil</a>
+        <a href="streams.html">📺 Streams & Musique</a>
+        <a href="salon.html">💬 Discussions</a>
+        <a href="abonnements.html">💜 Abonnements</a>
+        <a href="profil.html">👤 Profil</a>
+        <a href="test-avis.html" class="actif">📝 Test & Avis</a>
+        <a href="parametres.html">⚙️ Paramètres</a>
+    </nav>
+
+    <!-- 📢 CONTENU PRINCIPAL -->
+    <div class="conteneur">
+        <h1>📝 Test & Avis</h1>
+        <p class="sous-titre">Donne ton avis et note la plateforme StreamUnity</p>
+
+        <!-- ONGLETS -->
+        <div class="onglets">
+            <div class="onglet actif" onclick="afficherZone('donner-avis')">✍️ Donner un avis</div>
+            <div class="onglet" onclick="afficherZone('voir-avis')">📋 Voir les avis</div>
+        </div>
+
+        <!-- ZONE : DONNER UN AVIS -->
+        <div id="zone-donner-avis" class="zone actif">
+            <h2>Donne ton avis sur StreamUnity</h2>
+
+            <div class="groupe">
+                <label>Ton pseudo / nom d'utilisateur</label>
+                <input type="text" id="auteur" placeholder="Ex: PseudoStreamer">
+            </div>
+
+            <div class="groupe">
+                <label>Ta note</label>
+                <div class="etoiles" id="etoilesNote">
+                    <span class="etoile" data-valeur="1">★</span>
+                    <span class="etoile" data-valeur="2">★</span>
+                    <span class="etoile" data-valeur="3">★</span>
+                    <span class="etoile" data-valeur="4">★</span>
+                    <span class="etoile" data-valeur="5">★</span>
+                </div>
+                <input type="hidden" id="noteChoisie" value="0">
+            </div>
+
+            <div class="groupe">
+                <label>Ton avis / commentaire</label>
+                <textarea id="texteAvis" placeholder="Partage ton expérience, ce que tu aimes, ce qu'il faudrait améliorer..."></textarea>
+            </div>
+
+            <button onclick="envoyerAvis()">✅ Envoyer mon avis</button>
+            <div id="messageConfirmation" class="message succes"></div>
+        </div>
+
+        <!-- ZONE : VOIR LES AVIS -->
+        <div id="zone-voir-avis" class="zone">
+            <h2>Avis de la communauté</h2>
+            <div id="listeAvis">
+                <!-- LES AVIS S'AFFICHERONT ICI -->
+                <p style="color:#aaa;text-align:center;padding:20px;">Chargement des avis...</p>
+            </div>
+        </div>
+    </div>
+
+<script>
+let noteSelectionnee = 0;
+
+// === AFFICHER LA BONNE ZONE ===
+function afficherZone(nom) {
+    // Masque toutes les zones et onglets
+    document.querySelectorAll('.zone').forEach(z => z.classList.remove('actif'));
+    document.querySelectorAll('.onglet').forEach(o => o.classList.remove('actif'));
+    // Affiche la bonne zone
+    document.getElementById('zone-' + nom).classList.add('actif');
+    // Active le bon onglet
+    event.target.classList.add('actif');
+    // Si on affiche "Voir les avis" → on charge la liste
+    if (nom === 'voir-avis') afficherLesAvis();
+}
+
+// === CHOISIR LES ÉTOILES ===
+document.querySelectorAll('.etoile').forEach(etoile => {
+    etoile.addEventListener('click', function() {
+        noteSelectionnee = parseInt(this.dataset.valeur);
+        document.getElementById('noteChoisie').value = noteSelectionnee;
+        mettreAJourEtoiles(noteSelectionnee);
+    });
+    etoile.addEventListener('mouseover', function() {
+        mettreAJourEtoiles(parseInt(this.dataset.valeur));
+    });
+});
+document.getElementById('etoilesNote').addEventListener('mouseleave', function() {
+    mettreAJourEtoiles(noteSelectionnee);
+});
+
+function mettreAJourEtoiles(valeur) {
+    document.querySelectorAll('.etoile').forEach((etoile, index) => {
+        etoile.classList.toggle('jaune', index < valeur);
+    });
+}
+
+// === ENVOYER UN AVIS ===
+function envoyerAvis() {
+    const auteur = document.getElementById('auteur').value.trim();
+    const note = noteSelectionnee;
+    const texte = document.getElementById('texteAvis').value.trim();
+    const message = document.getElementById('messageConfirmation');
+
+    // Vérifications
+    if (!auteur) {
+        message.className = 'message';
+        message.style.background = 'rgba(255,50,50,0.2)';
+        message.style.color = '#ff6666';
+        message.textContent = "❌ Saisis ton pseudo !";
+        return;
+    }
+    if (note === 0) {
+        message.className = 'message';
+        message.style.background = 'rgba(255,50,50,0.2)';
+        message.style.color = '#ff6666';
+        message.textContent = "❌ Donne une note en cliquant sur les étoiles !";
+        return;
+    }
+    if (!texte) {
+        message.className = 'message';
+        message.style.background = 'rgba(255,50,50,0.2)';
+        message.style.color = '#ff6666';
+        message.textContent = "❌ Écris ton avis !";
+        return;
+    }
+
+    // Récupère les avis existants ou crée un tableau vide
+    const avis = JSON.parse(localStorage.getItem('avis') || '[]');
+    // Ajoute le nouvel avis
+    avis.unshift({
+        auteur: auteur,
+        note: note,
+        texte: texte,
+        date: new Date().toLocaleDateString('fr-FR')
+    });
+    // Sauvegarde
+    localStorage.setItem('avis', JSON.stringify(avis));
+
+    // ✅ Confirmation
+    message.className = 'message succes';
+    message.textContent = "✅ Merci pour ton avis ! Il a été enregistré.";
+
+    // Réinitialise le formulaire
+    document.getElementById('auteur').value = '';
+    document.getElementById('texteAvis').value = '';
+    noteSelectionnee = 0;
+    mettreAJourEtoiles(0);
+
+    // Efface le message après 4 secondes
+    setTimeout(() => message.textContent = "", 4000);
+}
+
+// === AFFICHER TOUS LES AVIS ===
+function afficherLesAvis() {
+    const conteneur = document.getElementById('listeAvis');
+    const avis = JSON.parse(localStorage.getItem('avis') || '[]');
+
+    if (avis.length === 0) {
+        conteneur.innerHTML = '<p style="color:#aaa;text-align:center;padding:20px;">Aucun avis pour l\'instant. Sois le premier à donner ton avis ! 💜</p>';
+        return;
+    }
+
+    // Génère le HTML pour chaque avis
+    conteneur.innerHTML = avis.map(a => `
+        <div class="avis">
+            <div class="avis-tete">
+                <span class="avis-auteur">${a.auteur}</span>
+                <span class="avis-note">${'★'.repeat(a.note)}${'☆'.repeat(5-a.note)}</span>
+                <span class="avis-date">${a.date}</span>
+            </div>
+            <div class="avis-texte">${a.texte}</div>
+        </div>
+    `).join('');
+}
+</script>
+
+</body>
+</html>
