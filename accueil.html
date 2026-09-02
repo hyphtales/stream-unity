@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <!-- ↓ BALISE DE VÉRIFICATION GOOGLE AJOUTÉE ICI ↓ -->
+    <!-- ↓ BALISE DE VÉRIFICATION GOOGLE ↓ -->
     <meta name="google-site-verification" content="XTlfiEq_sOwrLUF3bpz5X44njcf_AicFdv75aSf99w4" />
+    <!-- ↓ META DESCRIPTION pour Google ↓ -->
+    <meta name="description" content="StreamUnity — Ta plateforme de jeux, de streams et de communauté. Découvre nos contenus, nos jeux et rejoins-nous !" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StreamUnity — Accueil</title>
     <link rel="stylesheet" href="style.css">
     <style>
@@ -16,6 +19,7 @@
         .menu a:hover, .menu a.actif {background: #9147ff; color: white; font-weight: bold;}
 
         /* --- CONTENU PRINCIPAL --- */
+        main {display: block;}
         .conteneur {max-width: 900px; margin: 40px auto; padding: 20px; text-align: center;}
         .conteneur h1 {font-size: 42px; margin-bottom: 10px; background: linear-gradient(90deg, #a970ff, #ff70c0); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
         .sous-titre {color: #aaa; font-size: 18px; margin-bottom: 40px;}
@@ -41,36 +45,38 @@
     </nav>
 
     <!-- 📢 CONTENU PRINCIPAL -->
-    <div class="conteneur">
-        <h1>🎮 StreamUnity</h1>
-        <p class="sous-titre">Ta plateforme de jeux, de streams et de communauté</p>
-        <div class="grille">
-            <a href="profil.html" class="carte">
-                <div class="carte-icone">👤</div>
-                <div class="carte-titre">Ton Profil</div>
-                <div class="carte-texte">Modifie tes infos, ton avatar et tes réseaux</div>
-            </a>
-            <a href="abonnements.html" class="carte">
-                <div class="carte-icone">💜</div>
-                <div class="carte-titre">Abonnements</div>
-                <div class="carte-texte">Soutiens la plateforme et débloque des avantages</div>
-            </a>
-            <a href="partenaire.html" class="carte">
-                <div class="carte-icone">🏅</div>
-                <div class="carte-titre">Partenaires</div>
-                <div class="carte-texte">Découvre nos partenaires ou rejoins-nous</div>
-            </a>
-            <a href="parametres.html" class="carte">
-                <div class="carte-icone">⚙️</div>
-                <div class="carte-titre">Paramètres</div>
-                <div class="carte-texte">Connecte tes comptes, manettes et règle l'affichage</div>
-            </a>
-            <a href="salon.html" class="carte">
-                <div class="carte-icone">💬</div>
-                <div class="carte-titre">Discussions</div>
-                <div class="carte-texte">Viens discuter avec la communauté</div>
-            </a>
+    <main>
+        <div class="conteneur">
+            <h1>🎮 StreamUnity</h1>
+            <p class="sous-titre">Ta plateforme de jeux, de streams et de communauté</p>
+            <div class="grille">
+                <a href="profil.html" class="carte">
+                    <div class="carte-icone">👤</div>
+                    <div class="carte-titre">Ton Profil</div>
+                    <div class="carte-texte">Modifie tes infos, ton avatar et tes réseaux</div>
+                </a>
+                <a href="abonnements.html" class="carte">
+                    <div class="carte-icone">💜</div>
+                    <div class="carte-titre">Abonnements</div>
+                    <div class="carte-texte">Soutiens la plateforme et débloque des avantages</div>
+                </a>
+                <a href="partenaire.html" class="carte">
+                    <div class="carte-icone">🏅</div>
+                    <div class="carte-titre">Partenaires</div>
+                    <div class="carte-texte">Découvre nos partenaires ou rejoins-nous</div>
+                </a>
+                <a href="parametres.html" class="carte">
+                    <div class="carte-icone">⚙️</div>
+                    <div class="carte-titre">Paramètres</div>
+                    <div class="carte-texte">Connecte tes comptes, manettes et règle l'affichage</div>
+                </a>
+                <a href="salon.html" class="carte">
+                    <div class="carte-icone">💬</div>
+                    <div class="carte-titre">Discussions</div>
+                    <div class="carte-texte">Viens discuter avec la communauté</div>
+                </a>
+            </div>
         </div>
-    </div>
+    </main>
 </body>
 </html>
