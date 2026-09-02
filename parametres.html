@@ -1,548 +1,306 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StreamUnity — Paramètres</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramètres — StreamUnity</title>
     <style>
-        * {outline: none; box-sizing: border-box; margin: 0; padding: 0;}
-        body {
-            background: #0f0f13;
-            color: #efeff1;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            min-height: 100vh;
-        }
-        
-        .menu {
-            background: #18181b;
-            padding: 14px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid #2a2a32;
-        }
-        .menu a {
-            display: inline-block;
-            color: #adadb8;
-            text-decoration: none;
-            padding: 10px 16px;
-            margin: 0 4px;
-            border-radius: 6px;
-            transition: all 0.2s;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        .menu a:hover, .menu a.actif {
-            background: #9147ff;
-            color: white;
-            font-weight: 600;
-        }
-        
-        .conteneur {max-width: 1000px; margin: 30px auto; padding: 20px;}
-        .entete-page {
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #2a2a32;
-        }
-        .entete-page h1 {font-size: 26px; color: #efeff1; margin-bottom: 5px;}
-        .entete-page p {color: #adadb8; font-size: 14px;}
-        
-        .layout {display: flex; gap: 25px;}
-        
-        /* 📂 MENU DES PARAMÈTRES À GAUCHE */
-        .menu-param {
-            width: 240px;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .lien-param {
-            padding: 12px 16px;
-            border-radius: 6px;
-            color: #adadb8;
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 0.15s;
-            cursor: pointer;
-        }
-        .lien-param:hover {background: #1f1f23; color: #efeff1;}
-        .lien-param.actif {background: #9147ff; color: white; font-weight: 600;}
-        
-        /* 📄 CONTENU À DROITE */
-        .contenu-param {flex: 1;}
-        .section {
-            display: none;
-            background: #18181b;
-            border-radius: 10px;
-            padding: 25px;
-            border: 1px solid #2a2a32;
-        }
-        .section.actif {display: block;}
-        .section h2 {font-size: 18px; color: #efeff1; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #2a2a32;}
-        
-        .groupe {margin-bottom: 20px;}
-        label {display: block; margin-bottom: 6px; color: #ccc; font-size: 14px;}
-        input, select, textarea {
-            width: 100%;
-            padding: 10px 14px;
-            background: #0f0f13;
-            border: 1px solid #2a2a32;
-            border-radius: 6px;
-            color: white;
-            font-size: 14px;
-        }
-        input:focus, select:focus {border-color: #9147ff;}
-        
-        .ligne {display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #2a2a32;}
-        .ligne:last-child {border-bottom: none;}
-        .basique {color: #adadb8; font-size: 14px;}
-        .valeur {color: #efeff1; font-weight: 500;}
-        .btn-modif {
-            padding: 6px 12px;
-            background: #2a2a32;
-            color: #ddd;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 13px;
-            transition: all 0.15s;
-        }
-        .btn-modif:hover {background: #9147ff; color: white;}
-        
-        /* 💰 SOLDE BITS & MONNAIE */
-        .boite-solde {
-            background: linear-gradient(135deg, #9147ff, #772ce8);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .solde-titre {font-size: 14px; color: #ddd; margin-bottom: 8px;}
-        .solde-montant {font-size: 32px; font-weight: 700; color: white;}
-        .solde-bis {font-size: 15px; color: #efeff1; margin-top: 5px;}
-        
-        .grille-monnaie {display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;}
-        .carte-monnaie {
-            background: #1f1f23;
-            border-radius: 8px;
-            padding: 15px;
-            border: 1px solid #2a2a32;
-        }
-        .carte-monnaie h3 {font-size: 14px; color: #adadb8; margin-bottom: 8px;}
-        .carte-monnaie .valeur {font-size: 22px; font-weight: 700; color: #ffc107;}
-        
-        .historique {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        .historique th {
-            text-align: left;
-            padding: 10px;
-            color: #adadb8;
-            font-size: 13px;
-            border-bottom: 1px solid #2a2a32;
-        }
-        .historique td {
-            padding: 10px;
-            border-bottom: 1px solid #2a2a32;
-            font-size: 14px;
-            color: #ccc;
-        }
-        .historique .positif {color: #00c853; font-weight: 500;}
-        .historique .negatif {color: #ff5252; font-weight: 500;}
-        
-        /* Interrupteurs */
-        .interrupteur {
-            position: relative;
-            width: 44px;
-            height: 24px;
-            background: #333;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
+        * {margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif;}
+        body {background: #12121f; color: white; min-height: 100vh;}
+
+        /* --- BARRE DE NAVIGATION HAUTE --- */
+        .nav-haut {background: #1a1a2e; padding: 12px 20px; display: flex; align-items: center; gap: 15px; flex-wrap: wrap; border-bottom: 2px solid #333366;}
+        .nav-haut a {color: #ccc; text-decoration: none; padding: 6px 12px; border-radius: 6px; transition: all 0.2s; font-size: 14px;}
+        .nav-haut a:hover, .nav-haut a.actif {background: #9147ff; color: white;}
+
+        /* --- CONTENU PRINCIPAL --- */
+        .conteneur {max-width: 1000px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: 220px 1fr; gap: 25px;}
+
+        /* --- MENU LATÉRAL --- */
+        .menu-lat {display: flex; flex-direction: column; gap: 8px;}
+        .menu-lat a {padding: 12px 15px; color: #ccc; text-decoration: none; border-radius: 8px; transition: all 0.2s; font-size: 15px;}
+        .menu-lat a:hover, .menu-lat a.actif {background: #9147ff; color: white; font-weight: bold;}
+
+        /* --- ZONE DE CONTENU --- */
+        .zone-contenu {background: #1e1e2f; border-radius: 15px; padding: 25px; border: 2px solid #333366;}
+        .zone-contenu h2 {font-size: 20px; margin-bottom: 25px; color: #a970ff;}
+
+        /* --- FORMULAIRE --- */
+        .groupe {margin-bottom: 18px;}
+        label {display: block; margin-bottom: 6px; color: #aaa; font-size: 14px;}
+        input, textarea, select {width: 100%; padding: 10px 12px; border-radius: 6px; border: 1px solid #444488; background: #252538; color: white; font-size: 15px;}
+        textarea {resize: vertical; min-height: 80px;}
+        .btn {padding: 10px 20px; background: #9147ff; color: white; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; transition: all 0.2s;}
+        .btn:hover {background: #a970ff; transform: translateY(-2px);}
+        .btn-petit {padding: 6px 12px; font-size: 13px; margin-left: 10px;}
+        .ligne {display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #333366;}
+        .interrupteur {width: 44px; height: 24px; background: #555; border-radius: 12px; position: relative; cursor: pointer; transition: all 0.2s;}
         .interrupteur.actif {background: #9147ff;}
-        .interrupteur::after {
-            content: '';
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 18px;
-            height: 18px;
-            background: white;
-            border-radius: 50%;
-            transition: all 0.2s;
+        .interrupteur::after {content: ''; position: absolute; width: 18px; height: 18px; background: white; border-radius: 50%; top: 3px; left: 3px; transition: all 0.2s;}
+        .interrupteur.actif::after {left: 23px;}
+        .couleur-pseudo {width: 30px; height: 30px; border-radius: 4px; border: 2px solid white; cursor: pointer;}
+        .message {margin-top: 15px; padding: 10px; border-radius: 6px; display: none;}
+        .succes {background: rgba(0,200,100,0.15); color: #00ff88; display: block !important;}
+
+        /* --- RESPONSIVE --- */
+        @media(max-width: 768px) {
+            .conteneur {grid-template-columns: 1fr;}
+            .menu-lat {flex-direction: row; flex-wrap: wrap;}
         }
-        .interrupteur.actif::after {transform: translateX(20px);}
     </style>
 </head>
 <body>
 
-    <nav class="menu">
+    <!-- 📌 BARRE DE NAVIGATION HAUTE -->
+    <nav class="nav-haut">
         <a href="accueil.html">🏠 Accueil</a>
-        <a href="stream.html">📺 Streams & Musique</a>
+        <a href="streams.html">📺 Streams & Musique</a>
         <a href="salon.html">💬 Discussions</a>
         <a href="abonnements.html">💜 Abonnements</a>
         <a href="profil.html">👤 Profil</a>
-        <a href="test.html">🧪 Test & Avis</a>
+        <a href="test-avis.html">📝 Test & Avis</a>
         <a href="parametres.html" class="actif">⚙️ Paramètres</a>
     </nav>
 
+    <!-- 📋 CONTENU PRINCIPAL -->
     <div class="conteneur">
-        <div class="entete-page">
-            <h1>⚙️ Paramètres du compte</h1>
-            <p>Gère ton profil, ta sécurité, tes préférences, tes Bits et ta monnaie</p>
-        </div>
+        <!-- MENU LATÉRAL -->
+        <nav class="menu-lat">
+            <a href="#profil" class="actif" onclick="afficherSection('profil')">👤 Profil</a>
+            <a href="#securite" onclick="afficherSection('securite')">🔒 Sécurité</a>
+            <a href="#apparence" onclick="afficherSection('apparence')">🎨 Apparence</a>
+            <a href="#notifications" onclick="afficherSection('notifications')">🔔 Notifications</a>
+            <a href="#monnaie" onclick="afficherSection('monnaie')">💜 Bits & Monnaie</a>
+            <a href="#confidentialite" onclick="afficherSection('confidentialite')">🔒 Confidentialité</a>
+            <a href="#abonnements" onclick="afficherSection('abonnements')">💜 Abonnements</a>
+        </nav>
 
-        <div class="layout">
-            <!-- 📂 MENU À GAUCHE -->
-            <nav class="menu-param">
-                <div class="lien-param actif" data-section="profil">👤 Profil</div>
-                <div class="lien-param" data-section="securite">🔐 Sécurité</div>
-                <div class="lien-param" data-section="apparence">🎨 Apparence</div>
-                <div class="lien-param" data-section="notifications">🔔 Notifications</div>
-                <div class="lien-param" data-section="monnaie">💰 Bits & Monnaie</div>
-                <div class="lien-param" data-section="confidentialite">🔒 Confidentialité</div>
-                <div class="lien-param" data-section="abonnements">💜 Abonnements</div>
-            </nav>
+        <!-- ZONE DE CONTENU -->
+        <main class="zone-contenu">
 
-            <!-- 📄 CONTENU DES SECTIONS -->
-            <div class="contenu-param">
-
-                <!-- 👤 PROFIL -->
-                <div id="section-profil" class="section actif">
-                    <h2>Informations du profil</h2>
-                    <div class="groupe">
-                        <label>Photo de profil</label>
-                        <div style="display:flex;align-items:center;gap:15px;">
-                            <div style="width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#9147ff,#772ce8);display:flex;align-items:center;justify-content:center;font-size:30px;">👤</div>
-                            <a href="#" class="btn-modif">Changer la photo</a>
-                        </div>
-                    </div>
-                    <div class="groupe">
-                        <label>Nom d'utilisateur</label>
-                        <input type="text" value="PseudoStreamer">
-                    </div>
-                    <div class="groupe">
-                        <label>Nom affiché</label>
-                        <input type="text" value="PseudoStreamer">
-                    </div>
-                    <div class="groupe">
-                        <label>Bio / Description</label>
-                        <textarea rows="3" placeholder="Présente-toi...">Bienvenue sur ma page ! 💜</textarea>
-                    </div>
-                    <div class="groupe">
-                        <label>Couleur de mon pseudo dans le chat</label>
-                        <input type="color" value="#9147ff" style="width:80px;height:40px;cursor:pointer;">
-                    </div>
-                    <div style="margin-top:10px;">
-                        <button style="padding:10px 20px;background:#9147ff;color:white;border:none;border-radius:6px;font-weight:600;cursor:pointer;">💾 Enregistrer les modifications</button>
+            <!-- === PROFIL === -->
+            <section id="sec-profil">
+                <h2>Informations du profil</h2>
+                <div class="groupe">
+                    <label>Photo de profil</label>
+                    <div style="display:flex;align-items:center;gap:15px;">
+                        <div style="width:60px;height:60px;background:#9147ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;">👤</div>
+                        <button class="btn btn-petit">Changer la photo</button>
                     </div>
                 </div>
+                <div class="groupe">
+                    <label>Nom d'utilisateur</label>
+                    <input type="text" id="pseudo" value="PseudoStreamer">
+                </div>
+                <div class="groupe">
+                    <label>Nom affiché</label>
+                    <input type="text" id="nomAffiche" value="PseudoStreamer">
+                </div>
+                <div class="groupe">
+                    <label>Bio / Description</label>
+                    <textarea id="bio">Bienvenue sur ma page ! 💜</textarea>
+                </div>
+                <div class="groupe">
+                    <label>Couleur de mon pseudo dans le chat</label>
+                    <input type="color" id="couleurPseudo" value="#9147ff" onchange="changerCouleurPseudo(this.value)">
+                </div>
+                <button class="btn" onclick="enregistrerProfil()">💾 Enregistrer les modifications</button>
+                <div id="msgProfil" class="message succes"></div>
+            </section>
 
-                <!-- 🔐 SÉCURITÉ -->
-                <div id="section-securite" class="section">
-                    <h2>Sécurité et connexion</h2>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Adresse e-mail</div>
-                            <div class="valeur">mon******@email.com</div>
-                        </div>
-                        <a href="#" class="btn-modif">Modifier</a>
+            <!-- === SÉCURITÉ === -->
+            <section id="sec-securite" style="display:none;">
+                <h2>Sécurité et connexion</h2>
+                <div class="ligne">
+                    <span>Adresse e-mail</span>
+                    <div>mon*******@email.com <a href="#" class="btn btn-petit">Modifier</a></div>
+                </div>
+                <div class="ligne">
+                    <span>Mot de passe</span>
+                    <a href="securite.html" class="btn btn-petit">🔑 Changer / Réinitialiser</a>
+                </div>
+                <div class="ligne">
+                    <span>Connexion en 2 étapes (SMS / Code)</span>
+                    <button class="btn btn-petit" style="background:#666;">Désactivée</button>
+                </div>
+                <div class="ligne">
+                    <span>Appareils connectés</span>
+                    <a href="#" class="btn btn-petit">Voir (2 appareils)</a>
+                </div>
+                <div class="ligne">
+                    <span>Se déconnecter de tous les appareils</span>
+                    <button class="btn btn-petit" style="background:#cc3333;">Déconnecter tout</button>
+                </div>
+            </section>
+
+            <!-- === APPARENCE === -->
+            <section id="sec-apparence" style="display:none;">
+                <h2>Apparence et thème</h2>
+                <div class="groupe">
+                    <label>Thème de l'interface</label>
+                    <select id="theme" onchange="changerTheme(this.value)">
+                        <option value="sombre">🌙 Sombre (par défaut)</option>
+                        <option value="clair">☀️ Clair</option>
+                        <option value="violet">💜 StreamUnity Violet</option>
+                    </select>
+                </div>
+                <div class="groupe">
+                    <label>Taille du texte</label>
+                    <select id="tailleTexte" onchange="changerTailleTexte(this.value)">
+                        <option value="normale">Normale</option>
+                        <option value="grande">Grande</option>
+                        <option value="tres-grande">Très grande</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="enregistrerApparence()">💾 Enregistrer l'apparence</button>
+                <div id="msgApparence" class="message succes"></div>
+            </section>
+
+            <!-- === NOTIFICATIONS === -->
+            <section id="sec-notifications" style="display:none;">
+                <h2>Notifications et alertes</h2>
+                <div class="ligne">
+                    <span>Un streamer que je suis commence son stream</span>
+                    <div class="interrupteur actif" onclick="this.classList.toggle('actif')"></div>
+                </div>
+                <div class="ligne">
+                    <span>Annonces et mises à jour de la plateforme</span>
+                    <div class="interrupteur actif" onclick="this.classList.toggle('actif')"></div>
+                </div>
+                <div class="ligne">
+                    <span>Réponses et messages privés</span>
+                    <div class="interrupteur actif" onclick="this.classList.toggle('actif')"></div>
+                </div>
+                <div class="ligne">
+                    <span>Recevoir par e-mail</span>
+                    <div class="interrupteur actif" onclick="this.classList.toggle('actif')"></div>
+                </div>
+            </section>
+
+            <!-- === BITS & MONNAIE === -->
+            <section id="sec-monnaie" style="display:none;">
+                <h2>Bits et Monnaie</h2>
+                <div style="background:linear-gradient(135deg,#5533aa,#9147ff);padding:20px;border-radius:10px;text-align:center;margin-bottom:20px;">
+                    <div style="font-size:32px;font-weight:bold;">💜 4 580 Bits</div>
+                    <div style="opacity:0.8;">≈ 45,80 €</div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:20px;">
+                    <div style="background:#252538;padding:15px;border-radius:8px;text-align:center;">
+                        <div style="font-size:24px;">💜 4 580</div>
+                        <div style="color:#aaa;font-size:13px;">Bits</div>
                     </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Mot de passe</div>
-                            <div class="valeur">••••••••••</div>
-                        </div>
-                        <a href="#" class="btn-modif">Changer</a>
-                    </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Connexion en 2 étapes (SMS / Code)</div>
-                            <div class="valeur">Désactivée</div>
-                        </div>
-                        <a href="#" class="btn-modif">Activer</a>
-                    </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Appareils connectés</div>
-                            <div class="valeur">2 appareils</div>
-                        </div>
-                        <a href="#" class="btn-modif">Voir</a>
-                    </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Se déconnecter de tous les appareils</div>
-                            <div class="valeur">—</div>
-                        </div>
-                        <a href="#" class="btn-modif">Déconnecter</a>
+                    <div style="background:#252538;padding:15px;border-radius:8px;text-align:center;">
+                        <div style="font-size:24px;">🪙 1 250</div>
+                        <div style="color:#aaa;font-size:13px;">Pièces</div>
                     </div>
                 </div>
-
-                <!-- 🎨 APPARENCE -->
-                <div id="section-apparence" class="section">
-                    <h2>Apparence et lecture</h2>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Thème</div>
-                            <div class="valeur">🌙 Mode sombre</div>
-                        </div>
-                        <select style="width:140px;">
-                            <option selected>Sombre</option>
-                            <option>Clair</option>
-                        </select>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:25px;">
+                    <button class="btn">💜 Acheter des Bits</button>
+                    <button class="btn">🪙 Acheter des Pièces</button>
+                    <button class="btn">🔄 Convertir</button>
+                </div>
+                <h3 style="margin-bottom:12px;color:#a970ff;">Historique des transactions</h3>
+                <div style="width:100%;border-collapse:collapse;font-size:14px;">
+                    <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333;">
+                        <span>31 août 2026</span><span>Don à StreamerX</span><span style="color:#ff6666;">-500 Bits</span>
                     </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Qualité vidéo par défaut</div>
-                            <div class="valeur">🔄 Auto</div>
-                        </div>
-                        <select style="width:140px;">
-                            <option selected>Auto</option>
-                            <option>1080p</option>
-                            <option>720p</option>
-                            <option>480p</option>
-                        </select>
+                    <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333;">
+                        <span>30 août 2026</span><span>Achat de Pièces</span><span style="color:#00ff88;">+1 000 Pièces</span>
                     </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Lecture automatique des streams</div>
-                            <div class="valeur">Démarrer tout seul</div>
-                        </div>
-                        <div class="interrupteur actif"></div>
+                    <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333;">
+                        <span>28 août 2026</span><span>Achat de Bits</span><span style="color:#00ff88;">+2 000 Bits</span>
                     </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Lecture en arrière-plan</div>
-                            <div class="valeur">Continuer si je change d'onglet</div>
-                        </div>
-                        <div class="interrupteur"></div>
-                    </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Taille du texte</div>
-                            <div class="valeur">Normale</div>
-                        </div>
-                        <select style="width:140px;">
-                            <option>Petit</option>
-                            <option selected>Normal</option>
-                            <option>Grand</option>
-                        </select>
+                    <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #333;">
+                        <span>25 août 2026</span><span>Abonnement offert</span><span style="color:#ff6666;">-1 500 Bits</span>
                     </div>
                 </div>
+            </section>
 
-                <!-- 🔔 NOTIFICATIONS -->
-                <div id="section-notifications" class="section">
-                    <h2>Notifications et alertes</h2>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Un streamer que je suis commence son stream</div>
-                            <div class="valeur">M'alerter</div>
-                        </div>
-                        <div class="interrupteur actif"></div>
-                    </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Annonces et mises à jour de la plateforme</div>
-                            <div class="valeur">Je veux être prévenu</div>
-                        </div>
-                        <div class="interrupteur"></div>
-                    </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Réponses et messages privés</div>
-                            <div class="valeur">M'alerter</div>
-                        </div>
-                        <div class="interrupteur actif"></div>
-                    </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Recevoir par e-mail</div>
-                            <div class="valeur">Oui</div>
-                        </div>
-                        <div class="interrupteur actif"></div>
-                    </div>
+            <!-- === CONFIDENTIALITÉ === -->
+            <section id="sec-confidentialite" style="display:none;">
+                <h2>Confidentialité</h2>
+                <p style="color:#aaa;line-height:1.6;">Gère ce que les autres peuvent voir de ton profil, tes activités et tes informations.</p>
+                <div class="ligne" style="margin-top:15px;">
+                    <span>Profil visible par tout le monde</span>
+                    <div class="interrupteur actif" onclick="this.classList.toggle('actif')"></div>
                 </div>
-
-                <!-- 💰 BITS & MONNAIE -->
-                <div id="section-monnaie" class="section">
-                    <h2>💰 Bits et Monnaie</h2>
-                    
-                    <div class="boite-solde">
-                        <div class="solde-titre">Solde total actuel</div>
-                        <div class="solde-montant">💜 4 580 Bits</div>
-                        <div class="solde-bis">≈ 45,80 €</div>
-                    </div>
-
-                    <div class="grille-monnaie">
-                        <div class="carte-monnaie">
-                            <h3>💜 Bits</h3>
-                            <div class="valeur">4 580</div>
-                        </div>
-                        <div class="carte-monnaie">
-                            <h3>🪙 Pièces</h3>
-                            <div class="valeur">1 250</div>
-                        </div>
-                    </div>
-
-                    <div style="display:flex;gap:10px;margin-bottom:20px;">
-                        <button style="padding:10px 18px;background:linear-gradient(135deg,#9147ff,#772ce8);color:white;border:none;border-radius:6px;font-weight:600;cursor:pointer;">💜 Acheter des Bits</button>
-                        <button style="padding:10px 18px;background:#2a2a32;color:white;border:none;border-radius:6px;font-weight:600;cursor:pointer;">🪙 Acheter des Pièces</button>
-                        <button style="padding:10px 18px;background:#2a2a32;color:white;border:none;border-radius:6px;font-weight:600;cursor:pointer;">💵 Convertir</button>
-                    </div>
-
-                    <h3 style="font-size:15px; margin:20px 0 10px; color:#efeff1;">📋 Historique des transactions</h3>
-                    <table class="historique">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Description</th>
-                                <th>Montant</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>31 août 2026</td>
-                                <td>💜 Don à StreamerX</td>
-                                <td class="negatif">-500 Bits</td>
-                            </tr>
-                            <tr>
-                                <td>30 août 2026</td>
-                                <td>🪙 Achat de Pièces</td>
-                                <td class="positif">+1 000 Pièces</td>
-                            </tr>
-                            <tr>
-                                <td>28 août 2026</td>
-                                <td>💜 Achat de Bits</td>
-                                <td class="positif">+2 000 Bits</td>
-                            </tr>
-                            <tr>
-                                <td>25 août 2026</td>
-                                <td>💜 Abonnement offert</td>
-                                <td class="negatif">-1 500 Bits</td>
-                            </tr>
-                            <tr>
-                                <td>20 août 2026</td>
-                                <td>🎁 Récompense quotidienne</td>
-                                <td class="positif">+100 Bits</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="ligne">
+                    <span>Afficher mon statut en ligne</span>
+                    <div class="interrupteur actif" onclick="this.classList.toggle('actif')"></div>
                 </div>
-
-                <!-- 🔒 CONFIDENTIALITÉ -->
-                <div id="section-confidentialite" class="section">
-                    <h2>Confidentialité</h2>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Qui peut voir ce que je regarde</div>
-                            <div class="valeur">Tout le monde</div>
-                        </div>
-                        <select style="width:140px;">
-                            <option selected>Tout le monde</option>
-                            <option>Mes abonnés</option>
-                            <option>Personne</option>
-                        </select>
-                    </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Afficher ma position / mon pays</div>
-                            <div class="valeur">Afficher</div>
-                        </div>
-                        <div class="interrupteur actif"></div>
-                    </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Qui peut m'envoyer des messages</div>
-                            <div class="valeur">Tout le monde</div>
-                        </div>
-                        <select style="width:140px;">
-                            <option selected>Tout le monde</option>
-                            <option>Les streamers que je suis</option>
-                            <option>Personne</option>
-                        </select>
-                    </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Historique des vues et recherches</div>
-                            <div class="valeur">Enregistré</div>
-                        </div>
-                        <div class="interrupteur actif"></div>
-                    </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Supprimer mon historique</div>
-                            <div class="valeur">Effacer tout</div>
-                        </div>
-                        <a href="#" class="btn-modif">Supprimer</a>
-                    </div>
+                <div class="ligne">
+                    <span>Autoriser les messages privés</span>
+                    <div class="interrupteur actif" onclick="this.classList.toggle('actif')"></div>
                 </div>
+            </section>
 
-                <!-- 💜 ABONNEMENTS -->
-                <div id="section-abonnements" class="section">
-                    <h2>Mes abonnements et paiements</h2>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Abonnements actifs</div>
-                            <div class="valeur">3 abonnements en cours</div>
-                        </div>
-                        <a href="#" class="btn-modif">Voir tout</a>
-                    </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Moyens de paiement enregistrés</div>
-                            <div class="valeur">1 carte bancaire</div>
-                        </div>
-                        <a href="#" class="btn-modif">Gérer</a>
-                    </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Reçus et factures</div>
-                            <div class="valeur">Télécharger mes factures</div>
-                        </div>
-                        <a href="#" class="btn-modif">Accéder</a>
-                    </div>
-                    <div class="ligne">
-                        <div>
-                            <div class="basique">Renouvellement automatique</div>
-                            <div class="valeur">Activé</div>
-                        </div>
-                        <div class="interrupteur actif"></div>
-                    </div>
+            <!-- === ABONNEMENTS === -->
+            <section id="sec-abonnements" style="display:none;">
+                <h2>Abonnements</h2>
+                <p style="color:#aaa;line-height:1.6;">Gère tes abonnements, tes soutiens et tes avantages sur la plateforme.</p>
+                <div style="background:#252538;padding:15px;border-radius:8px;margin-top:15px;">
+                    <div style="font-weight:bold;margin-bottom:5px;">💜 Streamer — Niveau 1</div>
+                    <div style="color:#aaa;font-size:14px;">Abonnement actif • Renouvellement automatique</div>
                 </div>
+            </section>
 
-            </div>
-        </div>
+        </main>
     </div>
 
 <script>
-// 📂 CHANGER DE SECTION DANS LES PARAMÈTRES
-const liensMenu = document.querySelectorAll('.lien-param');
-const sections = document.querySelectorAll('.section');
+// === AFFICHER LA BONNE SECTION ===
+function afficherSection(nom) {
+    // Masque toutes les sections
+    document.querySelectorAll('[id^="sec-"]').forEach(s => s.style.display = 'none');
+    // Désactive tous les liens du menu
+    document.querySelectorAll('.menu-lat a').forEach(a => a.classList.remove('actif'));
+    // Affiche la section demandée
+    document.getElementById('sec-' + nom).style.display = 'block';
+    // Active le lien cliqué
+    event.target.classList.add('actif');
+}
 
-liensMenu.forEach(lien => {
-    lien.addEventListener('click', function() {
-        const nomSection = this.dataset.section;
-        
-        // Retirer "actif" partout
-        liensMenu.forEach(l => l.classList.remove('actif'));
-        sections.forEach(s => s.classList.remove('actif'));
-        
-        // Mettre "actif" sur la bonne section
-        this.classList.add('actif');
-        document.getElementById('section-' + nomSection).classList.add('actif');
-    });
-});
+// === CHANGER COULEUR PSEUDO ===
+function changerCouleurPseudo(couleur) {
+    localStorage.setItem('couleurPseudo', couleur);
+}
 
-// ⚡ INTERRUPTEURS CLIQUABLES
-document.addEventListener('click', e => {
-    if (e.target.classList.contains('interrupteur')) {
-        e.target.classList.toggle('actif');
-    }
-});
+// === ENREGISTRER LE PROFIL ===
+function enregistrerProfil() {
+    localStorage.setItem('pseudo', document.getElementById('pseudo').value);
+    localStorage.setItem('nomAffiche', document.getElementById('nomAffiche').value);
+    localStorage.setItem('bio', document.getElementById('bio').value);
+    const msg = document.getElementById('msgProfil');
+    msg.textContent = "✅ Profil enregistré avec succès !";
+    setTimeout(() => msg.textContent = "", 3000);
+}
+
+// === CHANGER THÈME ===
+function changerTheme(nom) {
+    localStorage.setItem('theme', nom);
+}
+
+// === CHANGER TAILLE TEXTE ===
+function changerTailleTexte(taille) {
+    localStorage.setItem('tailleTexte', taille);
+}
+
+// === ENREGISTRER APPARENCE ===
+function enregistrerApparence() {
+    const msg = document.getElementById('msgApparence');
+    msg.textContent = "✅ Apparence enregistrée !";
+    setTimeout(() => msg.textContent = "", 3000);
+}
+
+// === CHARGER LES VALEURS SAUVEGARDÉES AU CHARGEMENT ===
+window.onload = function() {
+    if (localStorage.getItem('pseudo')) document.getElementById('pseudo').value = localStorage.getItem('pseudo');
+    if (localStorage.getItem('nomAffiche')) document.getElementById('nomAffiche').value = localStorage.getItem('nomAffiche');
+    if (localStorage.getItem('bio')) document.getElementById('bio').value = localStorage.getItem('bio');
+    if (localStorage.getItem('couleurPseudo')) document.getElementById('couleurPseudo').value = localStorage.getItem('couleurPseudo');
+    if (localStorage.getItem('theme')) document.getElementById('theme').value = localStorage.getItem('theme');
+    if (localStorage.getItem('tailleTexte')) document.getElementById('tailleTexte').value = localStorage.getItem('tailleTexte');
+}
 </script>
 
 </body>
