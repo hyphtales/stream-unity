@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StreamUnity - Streams & Musique</title>
-    <link rel="stylesheet" href="style.css" />
     <style>
         * {outline: none; box-sizing: border-box; margin: 0; padding: 0;}
         body {
@@ -38,6 +37,12 @@
             background: #9147ff;
             color: white;
             font-weight: 600;
+        }
+        /* 🌐 BOUTON LANGUE SPÉCIAL */
+        .btn-langue {
+            font-size: 20px !important;
+            padding: 6px 12px !important;
+            vertical-align: middle;
         }
         
         .conteneur {max-width: 1000px; margin: 30px auto; padding: 20px;}
@@ -130,9 +135,6 @@
             transition: all 0.2s;
             border: none;
             color: #ccc;
-            pointer-events: auto;
-            position: relative;
-            z-index: 10;
         }
         .qualite:hover {
             background: #9147ff;
@@ -143,6 +145,29 @@
             background: #9147ff;
             color: white;
             box-shadow: 0 0 10px rgba(145,71,255,0.35);
+        }
+        
+        /* 📝 RÉGLAGE SOUS-TITRES DANS STREAMS */
+        .re-glage-st {
+            margin-top: 15px;
+            padding: 15px;
+            background: #1f1f23;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .re-glage-st label {font-weight: 600; color: #9147ff;}
+        .re-glage-st select {
+            flex: 1;
+            min-width: 180px;
+            padding: 8px 12px;
+            background: #0f0f13;
+            border: 1px solid #2a2a32;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
         }
         
         .info-lecteur {
@@ -156,7 +181,6 @@
         }
         .info-lecteur strong {color: #9147ff;}
         
-        /* 🎵 MUSIQUE */
         .plateformes {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -185,9 +209,7 @@
         .soundcloud {background: #ff5500;}
         .soundcloud:hover {background: #ff6600;}
         
-        .recherche-artiste {
-            margin-top: 20px;
-        }
+        .recherche-artiste {margin-top: 20px;}
         .recherche-artiste input {
             width: 100%;
             padding: 14px 18px;
@@ -198,11 +220,7 @@
             font-size: 15px;
             margin-bottom: 12px;
         }
-        .liens-resultats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
+        .liens-resultats {display: flex; flex-wrap: wrap; gap: 8px;}
         .lien-artiste {
             padding: 10px 16px;
             background: #2a2a32;
@@ -217,39 +235,44 @@
 </head>
 <body>
     <nav class="menu">
-        <a href="accueil.html">🏠 Accueil</a>
-        <a href="streams.html" class="actif">📺 Streams & Musique</a>
-        <a href="salon.html">💬 Discussions</a>
-        <a href="abonnements.html">💜 Abonnements</a>
-        <a href="profil.html">👤 Profil</a>
-        <a href="test.html">🧪 Test & Avis</a>
-        <a href="parametres.html">⚙️ Paramètres</a>
-        <!-- 🌐 BOUTON LANGUE --->
-        <a href="parametres.html#langue">🌐</a>
+        <a href="accueil.html" data-trad="menu_accueil">🏠 Accueil</a>
+        <a href="streams.html" class="actif" data-trad="menu_streams">📺 Streams & Musique</a>
+        <a href="salon.html" data-trad="menu_discussions">💬 Discussions</a>
+        <a href="abonnements.html" data-trad="menu_abonnements">💜 Abonnements</a>
+        <a href="profil.html" data-trad="menu_profil">👤 Profil</a>
+        <a href="test.html" data-trad="menu_test">🧪 Test & Avis</a>
+        <a href="parametres.html" data-trad="menu_parametres">⚙️ Paramètres</a>
+        <!-- 🌐 BOUTON TERRE — FONCTIONNEL ✅ -->
+        <a href="parametres.html#langue" class="btn-langue" title="Changer la langue">🌐</a>
     </nav>
+
     <div class="conteneur">
         <div class="entete">
-            <h2>📺 Streams & 🎵 Musique</h2>
-            <p>Vidéo en HD / 4K · Écoute n'importe quel artiste sur tes applis préférées !</p>
+            <h2 data-trad="titre">📺 Streams & 🎵 Musique</h2>
+            <p data-trad="sous_titre">Vidéo en HD / 4K · Écoute n'importe quel artiste sur tes applis préférées !</p>
         </div>
-        <!-- 📑 ONGLETS -->
+
         <div class="onglets">
-            <div class="onglet actif" onclick="afficherOnglet('video')">📺 Vidéo / Stream</div>
-            <div class="onglet" onclick="afficherOnglet('musique')">🎵 Musique</div>
+            <div class="onglet actif" onclick="afficherOnglet('video')" data-trad="onglet_video">📺 Vidéo / Stream</div>
+            <div class="onglet" onclick="afficherOnglet('musique')" data-trad="onglet_musique">🎵 Musique</div>
         </div>
+
         <!-- 🎥 VIDÉO / STREAM -->
         <div id="onglet-video" class="contenu-onglet actif">
             <div class="lecteur-boite">
                 <h3>
-                    📺 Stream en direct
-                    <span class="en-direct">EN DIRECT</span>
+                    📺 <span data-trad="stream_direct">Stream en direct</span>
+                    <span class="en-direct" data-trad="en_direct">EN DIRECT</span>
                     <span class="badge-4k">HD · 4K</span>
                 </h3>
-                
+
                 <video id="lecteurPrincipal" controls preload="metadata">
                     <source src="stream-auto.mp4" type="video/mp4">
-                    Ton navigateur ne peut pas lire cette vidéo.
+                    <!-- 📝 SOUS-TITRES LIÉS AUX RÉGLAGES -->
+                    <track kind="subtitles" id="pisteSousTitres" src="" srclang="fr" label="Français">
+                    <span data-trad="video_non_supportee">Ton navigateur ne peut pas lire cette vidéo.</span>
                 </video>
+
                 <div class="qualites">
                     <button class="qualite active" data-src="stream-auto.mp4">🔄 Auto</button>
                     <button class="qualite" data-src="stream-4k.mp4">🟪 4K Ultra</button>
@@ -257,27 +280,83 @@
                     <button class="qualite" data-src="stream-720p.mp4">💙 720p</button>
                     <button class="qualite" data-src="stream-480p.mp4">💚 480p</button>
                 </div>
+
+                <!-- 📝 CHOIX DES SOUS-TITRES DIRECTEMENT DANS STREAMS ✅ -->
+                <div class="re-glage-st">
+                    <label for="choixSousTitres" data-trad="label_st">📝 Sous-titres :</label>
+                    <select id="choixSousTitres" onchange="changerSousTitresIci()">
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="en">🇬🇧 Anglais</option>
+                        <option value="es">🇪🇸 Espagnol</option>
+                        <option value="de">🇩🇪 Allemand</option>
+                        <option value="it">🇮🇹 Italien</option>
+                        <option value="pt">🇵🇹 Portugais</option>
+                        <option value="pt-BR">🇧🇷 Portugais (Brésil)</option>
+                        <option value="nl">🇳🇱 Néerlandais</option>
+                        <option value="ru">🇷🇺 Russe</option>
+                        <option value="ja">🇯🇵 Japonais</option>
+                        <option value="zh-CN">🇨🇳 Chinois (simplifié)</option>
+                        <option value="zh-TW">🇭🇰 Chinois (traditionnel)</option>
+                        <option value="ko">🇰🇷 Coréen</option>
+                        <option value="ar">🇸🇦 Arabe</option>
+                        <option value="tr">🇹🇷 Turc</option>
+                        <option value="pl">🇵🇱 Polonais</option>
+                        <option value="sv">🇸🇪 Suédois</option>
+                        <option value="da">🇩🇰 Danois</option>
+                        <option value="no">🇳🇴 Norvégien</option>
+                        <option value="fi">🇫🇮 Finnois</option>
+                        <option value="hu">🇭🇺 Hongrois</option>
+                        <option value="cs">🇨🇿 Tchèque</option>
+                        <option value="sk">🇸🇰 Slovaque</option>
+                        <option value="ro">🇷🇴 Roumain</option>
+                        <option value="bg">🇧🇬 Bulgare</option>
+                        <option value="uk">🇺🇦 Ukrainien</option>
+                        <option value="el">🇬🇷 Grec</option>
+                        <option value="hi">🇭🇮 Hindi</option>
+                        <option value="bn">🇧🇩 Bengali</option>
+                        <option value="vi">🇻🇳 Vietnamien</option>
+                        <option value="th">🇹🇭 Thaï</option>
+                        <option value="id">🇮🇩 Indonésien</option>
+                        <option value="ms">🇲🇾 Malais</option>
+                        <option value="tl">🇵🇭 Tagalog</option>
+                        <option value="fa">🇮🇷 Persan</option>
+                        <option value="uz">🇺🇿 Ouzbek</option>
+                        <option value="kk">🇰🇿 Kazakh</option>
+                        <option value="he">🇮🇱 Hébreu</option>
+                        <option value="ta">🇱🇰 Tamoul</option>
+                        <option value="sw">🇸🇿 Swahili</option>
+                        <option value="sr">🇷🇸 Serbe</option>
+                        <option value="hr">🇭🇷 Croate</option>
+                        <option value="sl">🇸🇮 Slovène</option>
+                        <option value="lt">🇱🇹 Lituanien</option>
+                        <option value="off" data-trad="st_off">❌ Sans sous-titres</option>
+                    </select>
+                </div>
+
                 <div class="info-lecteur">
-                    <strong>💡 Règles tout toi-même :</strong> ▶️ Lecture ⏸️ Pause 🔊 Volume ⤢ Plein écran ⏱️ Avancer/Reculer<br>
-                    <strong>⚙️ Changer la qualité :</strong> Clique simplement sur un bouton ci-dessus !
+                    <strong data-trad="info_titre">💡 Règles tout toi-même :</strong>
+                    <span data-trad="info_texte"> Lecture ⏸️ Pause 🔊 Volume ⤢ Plein écran ⏱️ Avancer/Reculer</span><br>
+                    <strong data-trad="info_qualite">⚙️ Changer la qualité :</strong>
+                    <span data-trad="info_qualite_txt"> Clique simplement sur un bouton ci-dessus !</span>
                 </div>
             </div>
         </div>
+
         <!-- 🎵 MUSIQUE -->
         <div id="onglet-musique" class="contenu-onglet">
             <div class="lecteur-boite">
-                <h3>🎵 Écouter de la musique</h3>
-                <p style="color:#adadb8; margin-bottom:15px;">Recherche un artiste ou une chanson, et écoute-la directement sur l'application de ton choix !</p>
-                <!-- 🔍 RECHERCHE D'ARTISTE -->
+                <h3>🎵 <span data-trad="musique_titre">Écouter de la musique</span></h3>
+                <p style="color:#adadb8; margin-bottom:15px;" data-trad="musique_desc">Recherche un artiste ou une chanson, et écoute-la directement sur l'application de ton choix !</p>
+
                 <div class="recherche-artiste">
-                    <input type="text" id="nomArtiste" placeholder="🔍 Écris le nom d'un artiste ou d'une chanson..." oninput="mettreAJourLiens()">
-                    
+                    <input type="text" id="nomArtiste" data-trad-placeholder="recherche_artiste" placeholder="🔍 Écris le nom d'un artiste ou d'une chanson..." oninput="mettreAJourLiens()">
                     <div class="liens-resultats" id="liensMusique">
-                        <span style="color:#888; font-size:13px;">Écris un nom ci-dessus → les liens apparaîtront ici</span>
+                        <span style="color:#888; font-size:13px;" data-trad="ecris_nom">Écris un nom ci-dessus → les liens apparaîtront ici</span>
                     </div>
                 </div>
+
                 <div style="margin-top:25px; border-top:1px solid #2a2a32; padding-top:20px;">
-                    <h4 style="margin-bottom:12px; color:#efeff1;">Ou choisis directement une plateforme :</h4>
+                    <h4 style="margin-bottom:12px; color:#efeff1;" data-trad="choisir_plateforme">Ou choisis directement une plateforme :</h4>
                     <div class="plateformes">
                         <a href="https://open.spotify.com/search" target="_blank" class="btn-musique spotify">🎧 Spotify</a>
                         <a href="https://www.deezer.com/search" target="_blank" class="btn-musique deezer">🎵 Deezer</a>
@@ -285,15 +364,146 @@
                         <a href="https://soundcloud.com/search" target="_blank" class="btn-musique soundcloud">☁️ SoundCloud</a>
                     </div>
                 </div>
+
                 <div class="info-lecteur" style="margin-top:20px;">
-                    ✅ <strong>Comment ça marche :</strong><br>
-                    1. Tu écris le nom de l'artiste → 2. Tu cliques sur Spotify / Deezer / YouTube Music → 3. La chanson s'ouvre dans l'appli ou le site !<br>
-                    💜 Tu restes sur StreamUnity, la musique se joue à côté !
+                    ✅ <strong data-trad="comment_marche">Comment ça marche :</strong><br>
+                    <span data-trad="etapes">1. Tu écris le nom de l'artiste → 2. Tu cliques sur Spotify / Deezer / YouTube Music → 3. La chanson s'ouvre dans l'appli ou le site !</span><br>
+                    💜 <span data-trad="rester">Tu restes sur StreamUnity, la musique se joue à côté !</span>
                 </div>
             </div>
         </div>
     </div>
+
 <script>
+// 🌐 TRADUCTIONS — QUAND ON CHANGE DE LANGUE, TOUTE LA PAGE CHANGE ✅
+const traductions = {
+    fr: {
+        menu_accueil: "🏠 Accueil",
+        menu_streams: "📺 Streams & Musique",
+        menu_discussions: "💬 Discussions",
+        menu_abonnements: "💜 Abonnements",
+        menu_profil: "👤 Profil",
+        menu_test: "🧪 Test & Avis",
+        menu_parametres: "⚙️ Paramètres",
+        titre: "📺 Streams & 🎵 Musique",
+        sous_titre: "Vidéo en HD / 4K · Écoute n'importe quel artiste sur tes applis préférées !",
+        onglet_video: "📺 Vidéo / Stream",
+        onglet_musique: "🎵 Musique",
+        stream_direct: "Stream en direct",
+        en_direct: "EN DIRECT",
+        video_non_supportee: "Ton navigateur ne peut pas lire cette vidéo.",
+        label_st: "📝 Sous-titres :",
+        st_off: "❌ Sans sous-titres",
+        info_titre: "💡 Règles tout toi-même :",
+        info_texte: "Lecture ⏸️ Pause 🔊 Volume ⤢ Plein écran ⏱️ Avancer/Reculer",
+        info_qualite: "⚙️ Changer la qualité :",
+        info_qualite_txt: "Clique simplement sur un bouton ci-dessus !",
+        musique_titre: "Écouter de la musique",
+        musique_desc: "Recherche un artiste ou une chanson, et écoute-la directement sur l'application de ton choix !",
+        recherche_artiste: "🔍 Écris le nom d'un artiste ou d'une chanson...",
+        ecris_nom: "Écris un nom ci-dessus → les liens apparaîtront ici",
+        choisir_plateforme: "Ou choisis directement une plateforme :",
+        comment_marche: "Comment ça marche :",
+        etapes: "1. Tu écris le nom de l'artiste → 2. Tu cliques sur Spotify / Deezer → 3. La chanson s'ouvre !",
+        rester: "Tu restes sur StreamUnity, la musique se joue à côté !"
+    },
+    en: {
+        menu_accueil: "🏠 Home",
+        menu_streams: "📺 Streams & Music",
+        menu_discussions: "💬 Chat",
+        menu_abonnements: "💜 Subscriptions",
+        menu_profil: "👤 Profile",
+        menu_test: "🧪 Test & Reviews",
+        menu_parametres: "⚙️ Settings",
+        titre: "📺 Streams & 🎵 Music",
+        sous_titre: "HD / 4K Video · Listen to any artist on your favorite apps!",
+        onglet_video: "📺 Video / Stream",
+        onglet_musique: "🎵 Music",
+        stream_direct: "Live Stream",
+        en_direct: "LIVE",
+        video_non_supportee: "Your browser cannot play this video.",
+        label_st: "📝 Subtitles:",
+        st_off: "❌ No subtitles",
+        info_titre: "💡 Controls:",
+        info_texte: "Play ⏸️ Pause 🔊 Volume ⤢ Fullscreen ⏱️ Seek",
+        info_qualite: "⚙️ Change quality:",
+        info_qualite_txt: "Simply click a button above!",
+        musique_titre: "Listen to Music",
+        musique_desc: "Search for an artist or song and listen on your favorite platform!",
+        recherche_artiste: "🔍 Type an artist or song name...",
+        ecris_nom: "Type a name above → links will appear here",
+        choisir_plateforme: "Or choose a platform:",
+        comment_marche: "How it works:",
+        etapes: "1. Type the name → 2. Click a platform → 3. Music opens!",
+        rester: "Stay on StreamUnity while music plays!"
+    },
+    es: {
+        menu_accueil: "🏠 Inicio",
+        menu_streams: "📺 Streams y Música",
+        menu_discussions: "💬 Chat",
+        menu_abonnements: "💜 Suscripciones",
+        menu_profil: "👤 Perfil",
+        menu_test: "🧪 Prueba y Opiniones",
+        menu_parametres: "⚙️ Configuración",
+        titre: "📺 Streams y 🎵 Música",
+        sous_titre: "Vídeo HD / 4K · ¡Escucha cualquier artista en tus apps favoritas!",
+        onglet_video: "📺 Vídeo / Stream",
+        onglet_musique: "🎵 Música",
+        stream_direct: "Emisión en directo",
+        en_direct: "EN DIRECTO",
+        video_non_supportee: "Tu navegador no puede reproducir este vídeo.",
+        label_st: "📝 Subtítulos:",
+        st_off: "❌ Sin subtítulos",
+        info_titre: "💡 Controles:",
+        info_texte: "Reproducir ⏸️ Pausa 🔊 Volumen ⤢ Pantalla completa ⏱️ Avanzar/Retroceder",
+        info_qualite: "⚙️ Cambiar calidad:",
+        info_qualite_txt: "¡Simplemente haz clic en un botón!",
+        musique_titre: "Escuchar música",
+        musique_desc: "Busca un artista o canción y escúchalo en tu plataforma favorita!",
+        recherche_artiste: "🔍 Escribe el nombre de un artista o canción...",
+        ecris_nom: "Escribe un nombre → aparecerán enlaces",
+        choisir_plateforme: "O elige una plataforma:",
+        comment_marche: "Cómo funciona:",
+        etapes: "1. Escribe el nombre → 2. Haz clic en la plataforma → 3. ¡Se abre!",
+        rester: "¡Te quedas en StreamUnity mientras suena la música!"
+    }
+};
+
+// 🌐 APPLIQUER LA LANGUE SUR TOUTE LA PAGE ✅
+function appliquerLanguePage(langue) {
+    const t = traductions[langue] || traductions.fr;
+    document.documentElement.lang = langue;
+
+    // Tous les textes changent ✅
+    document.querySelectorAll('[data-trad]').forEach(el => {
+        const cle = el.getAttribute('data-trad');
+        if (t[cle]) el.textContent = t[cle];
+    });
+
+    // Les textes dans les champs de saisie
+    document.querySelectorAll('[data-trad-placeholder]').forEach(el => {
+        const cle = el.getAttribute('data-trad-placeholder');
+        if (t[cle]) el.placeholder = t[cle];
+    });
+}
+
+// 📝 SOUS-TITRES — CHOIX DANS STREAMS + SAUVEGARDE ✅
+function changerSousTitresIci() {
+    const st = document.getElementById('choixSousTitres').value;
+    localStorage.setItem('sousTitresDefaut', st);
+
+    const piste = document.getElementById('pisteSousTitres');
+    if (!piste || !piste.track) return;
+
+    if (st === 'off') {
+        piste.track.mode = 'hidden'; // ❌ Cacher
+    } else {
+        piste.track.mode = 'showing'; // ✅ Afficher
+        piste.srclang = st;
+        // Quand tu auras tes fichiers .vtt : piste.src = "sous-titres/" + st + ".vtt"
+    }
+}
+
 // 📑 ONGLETS
 function afficherOnglet(nom) {
     document.querySelectorAll('.onglet').forEach(o => o.classList.remove('actif'));
@@ -302,43 +512,31 @@ function afficherOnglet(nom) {
     document.getElementById('onglet-' + nom).classList.add('actif');
 }
 
-// ⚙️ CHANGER LA QUALITÉ VIDÉO — RÉPARÉE ✅
+// ⚙️ CHANGER QUALITÉ VIDÉO
 const lecteur = document.getElementById('lecteurPrincipal');
-
-window.addEventListener('DOMContentLoaded', function() {
-    const boutonsQualite = document.querySelectorAll('.qualite');
-    
-    boutonsQualite.forEach(bouton => {
-        bouton.addEventListener('click', function() {
-            boutonsQualite.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            
-            const position = lecteur.currentTime;
-            const enLecture = !lecteur.paused;
-            
-            lecteur.src = this.dataset.src;
-            lecteur.load();
-            lecteur.currentTime = position;
-            
-            if (enLecture) {
-                lecteur.play().catch(err => {
-                    console.log('ℹ️ Clique sur la vidéo pour reprendre');
-                });
-            }
-        });
+document.querySelectorAll('.qualite').forEach(bouton => {
+    bouton.addEventListener('click', function() {
+        document.querySelectorAll('.qualite').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const pos = lecteur.currentTime;
+        const enLecture = !lecteur.paused;
+        lecteur.src = this.dataset.src;
+        lecteur.load();
+        lecteur.currentTime = pos;
+        if (enLecture) lecteur.play().catch(() => {});
     });
 });
 
-// 🎵 LIENS MUSIQUE AUTOMATIQUES
+// 🎵 LIENS MUSIQUE
 function mettreAJourLiens() {
     const nom = document.getElementById('nomArtiste').value.trim();
     const conteneur = document.getElementById('liensMusique');
-    
     if (nom.length < 2) {
-        conteneur.innerHTML = '<span style="color:#888; font-size:13px;">Écris un nom ci-dessus → les liens apparaîtront ici</span>';
+        const langue = localStorage.getItem('langueSite') || 'fr';
+        const t = traductions[langue] || traductions.fr;
+        conteneur.innerHTML = `<span style="color:#888; font-size:13px;">${t.ecris_nom}</span>`;
         return;
     }
-    
     const recherche = encodeURIComponent(nom);
     conteneur.innerHTML = `
         <a href="https://open.spotify.com/search/${recherche}" target="_blank" class="lien-artiste">🎧 Spotify : ${nom}</a>
@@ -347,6 +545,23 @@ function mettreAJourLiens() {
         <a href="https://soundcloud.com/search?q=${recherche}" target="_blank" class="lien-artiste">☁️ SoundCloud : ${nom}</a>
     `;
 }
+
+// 💾 AU CHARGEMENT : APPLIQUER LANGUE + SOUS-TITRES SAUVEGARDÉS ✅
+window.addEventListener('DOMContentLoaded', function() {
+    // Appliquer la langue sauvegardée
+    const langue = localStorage.getItem('langueSite') || 'fr';
+    appliquerLanguePage(langue);
+
+    // Appliquer les sous-titres sauvegardés
+    const st = localStorage.getItem('sousTitresDefaut') || 'fr';
+    document.getElementById('choixSousTitres').value = st;
+
+    const piste = document.getElementById('pisteSousTitres');
+    if (piste && piste.track) {
+        piste.srclang = st;
+        piste.track.mode = (st === 'off') ? 'hidden' : 'showing';
+    }
+});
 </script>
 </body>
 </html>
