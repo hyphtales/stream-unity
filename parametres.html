@@ -39,7 +39,7 @@
             font-weight: 600;
         }
         
-        /* 🟣 ICÔNE FLOTTANTE À DROITE — SUR TOUTES LES PAGES */
+        /* 🟣 ICÔNE FLOTTANTE À DROITE */
         .icone-flottante {
             position: fixed;
             right: 20px;
@@ -119,7 +119,7 @@
 </head>
 <body>
 
-    <!-- 🟣 ICÔNE FLOTTANTE — CLIQUABLE VERS LANGUE -->
+    <!-- 🟣 ICÔNE FLOTTANTE -->
     <a href="#langue" class="icone-flottante" title="Changer la langue">🌐</a>
 
     <nav class="menu">
@@ -138,7 +138,7 @@
             <p data-trad="sous_titre">Personnalise ta plateforme comme tu veux !</p>
         </div>
 
-        <!-- 🌐 CHANGER DE LANGUE -->
+        <!-- 🌐 CHOIX DE LA LANGUE -->
         <div class="bloc-reglage" id="langue">
             <h3>🌐 <span data-trad="bloc_langue">Langue de la plateforme</span></h3>
             <p class="description" data-trad="desc_langue">Choisis la langue dans laquelle s'affiche tout le site.</p>
@@ -151,7 +151,6 @@
                 <option value="pt">🇵🇹 Portugais</option>
                 <option value="pt-BR">🇧🇷 Portugais (Brésil)</option>
                 <option value="nl">🇳🇱 Néerlandais</option>
-                <option value="nl-BE">🇧🇪 Néerlandais (Belgique)</option>
                 <option value="ru">🇷🇺 Russe</option>
                 <option value="ja">🇯🇵 Japonais</option>
                 <option value="zh-CN">🇨🇳 Chinois (simplifié)</option>
@@ -177,7 +176,7 @@
                 <option value="th">🇹🇭 Thaï</option>
                 <option value="id">🇮🇩 Indonésien</option>
                 <option value="ms">🇲🇾 Malais</option>
-                <option value="tl">🇵🇭 Tagalog (Philippines)</option>
+                <option value="tl">🇵🇭 Tagalog</option>
                 <option value="fa">🇮🇷 Persan</option>
                 <option value="uz">🇺🇿 Ouzbek</option>
                 <option value="kk">🇰🇿 Kazakh</option>
@@ -192,7 +191,7 @@
             <div class="sauvegarde" id="etatLangue">✅ <span data-trad="actuel">Actuel</span> : 🇫🇷 Français</div>
         </div>
 
-        <!-- 📝 SOUS-TITRES POUR LES LIVES ET VIDÉOS -->
+        <!-- 📝 CHOIX DES SOUS-TITRES -->
         <div class="bloc-reglage">
             <h3>📝 <span data-trad="bloc_soustitres">Sous-titres par défaut</span></h3>
             <p class="description" data-trad="desc_soustitres">Sous-titres automatiquement activés pour les lives et les vidéos.</p>
@@ -248,7 +247,7 @@
     </div>
 
 <script>
-// 🌐 TRADUCTIONS
+// 🌐 TRADUCTIONS COMPLÈTES
 const traductions = {
     fr: {
         menu_accueil: "🏠 Accueil",
@@ -338,15 +337,15 @@ const traductions = {
     pt: {
         menu_accueil: "🏠 Início",
         menu_streams: "📺 Streams & Música",
-        menu_discussions: "💬 Chat",
+        menu_discussions: "💬 Conversas",
         menu_abonnements: "💜 Subscrições",
         menu_profil: "👤 Perfil",
         menu_test: "🧪 Teste & Avaliações",
         menu_parametres: "⚙️ Definições",
         titre: "⚙️ Definições",
-        sous_titre: "Personalize a sua plataforma!",
+        sous_titre: "Personaliza a tua plataforma!",
         bloc_langue: "Idioma da plataforma",
-        desc_langue: "Escolha o idioma de todo o site.",
+        desc_langue: "Escolhe o idioma de todo o site.",
         bloc_soustitres: "Legendas por defeito",
         desc_soustitres: "Legendas ativadas para transmissões ao vivo e vídeos.",
         actuel: "Atual",
@@ -354,6 +353,7 @@ const traductions = {
     }
 };
 
+// 📛 NOMS DES LANGUES POUR L'AFFICHAGE
 const nomsLangues = {
     fr: "🇫🇷 Français",
     en: "🇬🇧 Anglais",
@@ -363,7 +363,6 @@ const nomsLangues = {
     pt: "🇵🇹 Portugais",
     "pt-BR": "🇧🇷 Portugais (Brésil)",
     nl: "🇳🇱 Néerlandais",
-    "nl-BE": "🇧🇪 Néerlandais (Belgique)",
     ru: "🇷🇺 Russe",
     ja: "🇯🇵 Japonais",
     "zh-CN": "🇨🇳 Chinois (simplifié)",
@@ -403,25 +402,28 @@ const nomsLangues = {
     off: "❌ Sans sous-titres"
 };
 
-// 🌐 APPLIQUER LA LANGUE SUR TOUTE LA PAGE
+// 🌐 APPLIQUER LA LANGUE — SI LA LANGUE N'EXISTE PAS → ANGLAIS PAR DÉFAUT
 function appliquerLangue(langue) {
-    const t = traductions[langue] || traductions.fr;
+    // Si la langue n'a pas de traduction → on prend l'anglais
+    const t = traductions[langue] || traductions.en;
     document.documentElement.lang = langue;
     
+    // Met à jour TOUS les textes de la page
     document.querySelectorAll('[data-trad]').forEach(el => {
         const cle = el.getAttribute('data-trad');
         if (t[cle]) el.textContent = t[cle];
     });
     
-    const texteActuel = t.actuel || "Actuel";
+    // Met à jour l'affichage de la langue actuelle
+    const texteActuel = t.actuel || "Current";
     document.getElementById('etatLangue').innerHTML = `✅ ${texteActuel} : ${nomsLangues[langue]}`;
 }
 
 // 📝 METTRE À JOUR L'AFFICHAGE SOUS-TITRES
 function mettreAJourAffichageSousTitres(codeLangue) {
     const langue = localStorage.getItem('langueSite') || 'fr';
-    const t = traductions[langue] || traductions.fr;
-    const texteActuel = t.actuel || "Actuel";
+    const t = traductions[langue] || traductions.en;
+    const texteActuel = t.actuel || "Current";
     document.getElementById('etatSousTitres').innerHTML = `✅ ${texteActuel} : ${nomsLangues[codeLangue]}`;
 }
 
@@ -440,7 +442,7 @@ function changerSousTitres() {
     mettreAJourAffichageSousTitres(st);
 }
 
-// 💾 CHARGER AU DÉMARRAGE
+// 💾 CHARGER LES RÉGLAGES SAUVEGARDÉS AU DÉMARRAGE
 window.addEventListener('DOMContentLoaded', function() {
     const langueSauvegardee = localStorage.getItem('langueSite') || 'fr';
     const stSauvegardes = localStorage.getItem('sousTitresDefaut') || 'fr';
