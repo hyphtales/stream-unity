@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StreamUnity - Streams & Musique</title>
+    <title>StreamUnity - Accueil</title>
     <style>
         * {outline: none; box-sizing: border-box; margin: 0; padding: 0;}
         body {
@@ -38,530 +38,121 @@
             color: white;
             font-weight: 600;
         }
-        /* 🌐 BOUTON LANGUE SPÉCIAL */
-        .btn-langue {
-            font-size: 20px !important;
-            padding: 6px 12px !important;
-            vertical-align: middle;
-        }
         
-        .conteneur {max-width: 1000px; margin: 30px auto; padding: 20px;}
-        .entete {text-align: center; margin-bottom: 30px;}
-        .entete h2 {font-size: 28px; color: #9147ff; margin-bottom: 8px;}
-        .entete p {color: #adadb8; font-size: 15px;}
-        
-        .onglets {
+        /* 🟣 ICÔNE FLOTTANTE À DROITE SUR TOUTES LES PAGES */
+        .icone-flottante {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #9147ff, #772ce8);
+            border-radius: 50%;
             display: flex;
-            gap: 5px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(145,71,255,0.2);
-            flex-wrap: wrap;
-        }
-        .onglet {
-            padding: 10px 18px;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(145,71,255,0.4);
             cursor: pointer;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #adadb8;
-            transition: all 0.2s;
-        }
-        .onglet:hover {background: rgba(145,71,255,0.1); color: #efeff1;}
-        .onglet.actif {
-            background: rgba(145,71,255,0.2);
-            color: white;
-            border-bottom: 2px solid #9147ff;
-        }
-        
-        .contenu-onglet {display: none; animation: apparition 0.3s ease;}
-        .contenu-onglet.actif {display: block;}
-        @keyframes apparition {from {opacity:0; transform: translateY(5px);} to {opacity:1; transform: translateY(0);}}
-        
-        .lecteur-boite {
-            background: #18181b;
-            border-radius: 12px;
-            padding: 22px;
-            border: 2px solid rgba(145,71,255,0.25);
-            margin-bottom: 25px;
-        }
-        .lecteur-boite h3 {
-            font-size: 18px;
-            color: #efeff1;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .en-direct {
-            display: inline-block;
-            background: #e91916;
-            color: white;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 4px;
-        }
-        .badge-4k {
-            display: inline-block;
-            background: linear-gradient(90deg, #9147ff, #ff9500);
-            color: white;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 4px;
-        }
-        
-        video {
-            width: 100%;
-            border-radius: 10px;
-            background: #000;
-        }
-        
-        .qualites {
-            display: flex;
-            gap: 8px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-        .qualite {
-            padding: 8px 14px;
-            background: #2a2a32;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-            color: #ccc;
-        }
-        .qualite:hover {
-            background: #9147ff;
-            color: white;
-            transform: scale(1.05);
-        }
-        .qualite.active {
-            background: #9147ff;
-            color: white;
-            box-shadow: 0 0 10px rgba(145,71,255,0.35);
-        }
-        
-        /* 📝 RÉGLAGE SOUS-TITRES DANS STREAMS */
-        .re-glage-st {
-            margin-top: 15px;
-            padding: 15px;
-            background: #1f1f23;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .re-glage-st label {font-weight: 600; color: #9147ff;}
-        .re-glage-st select {
-            flex: 1;
-            min-width: 180px;
-            padding: 8px 12px;
-            background: #0f0f13;
-            border: 1px solid #2a2a32;
-            border-radius: 6px;
-            color: white;
-            font-size: 14px;
-        }
-        
-        .info-lecteur {
-            margin-top: 15px;
-            padding: 15px;
-            background: #1f1f23;
-            border-radius: 8px;
-            color: #adadb8;
-            font-size: 14px;
-            line-height: 1.7;
-        }
-        .info-lecteur strong {color: #9147ff;}
-        
-        .plateformes {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 12px;
-            margin-top: 15px;
-        }
-        .btn-musique {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 18px;
-            border-radius: 10px;
+            z-index: 9999;
+            transition: all 0.3s ease;
             text-decoration: none;
-            color: white;
-            font-weight: 600;
-            font-size: 15px;
-            transition: all 0.2s;
         }
-        .btn-musique:hover {transform: scale(1.03);}
-        .spotify {background: #1DB954;}
-        .spotify:hover {background: #1ed760;}
-        .deezer {background: #ffaa00; color: #000;}
-        .deezer:hover {background: #ffbb00;}
-        .youtube {background: #ff0000;}
-        .youtube:hover {background: #ff2222;}
-        .soundcloud {background: #ff5500;}
-        .soundcloud:hover {background: #ff6600;}
+        .icone-flottante:hover {
+            transform: translateY(-50%) scale(1.15);
+            box-shadow: 0 6px 20px rgba(145,71,255,0.6);
+        }
         
-        .recherche-artiste {margin-top: 20px;}
-        .recherche-artiste input {
-            width: 100%;
-            padding: 14px 18px;
-            background: #0f0f13;
-            border: 1px solid #2a2a32;
-            border-radius: 10px;
-            color: white;
-            font-size: 15px;
-            margin-bottom: 12px;
-        }
-        .liens-resultats {display: flex; flex-wrap: wrap; gap: 8px;}
-        .lien-artiste {
-            padding: 10px 16px;
-            background: #2a2a32;
-            border-radius: 6px;
-            color: #ddd;
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-        .lien-artiste:hover {background: #9147ff; color: white;}
+        .conteneur {max-width: 900px; margin: 30px auto; padding: 20px;}
+        .conteneur h1 {text-align: center; color: #9147ff; margin-bottom: 30px;}
     </style>
 </head>
 <body>
+
+    <!-- 🟣 ICÔNE FLOTTANTE VERS PARAMÈTRES -->
+    <a href="parametres.html#langue" class="icone-flottante" title="Changer la langue">🌐</a>
+
+    <!-- 📋 MENU TRADUIT AUTOMATIQUEMENT -->
     <nav class="menu">
-        <a href="accueil.html" data-trad="menu_accueil">🏠 Accueil</a>
-        <a href="streams.html" class="actif" data-trad="menu_streams">📺 Streams & Musique</a>
+        <a href="accueil.html" data-trad="menu_accueil" class="actif">🏠 Accueil</a>
+        <a href="streams.html" data-trad="menu_streams">📺 Streams & Musique</a>
         <a href="salon.html" data-trad="menu_discussions">💬 Discussions</a>
         <a href="abonnements.html" data-trad="menu_abonnements">💜 Abonnements</a>
         <a href="profil.html" data-trad="menu_profil">👤 Profil</a>
         <a href="test.html" data-trad="menu_test">🧪 Test & Avis</a>
         <a href="parametres.html" data-trad="menu_parametres">⚙️ Paramètres</a>
-        <!-- 🌐 BOUTON TERRE — FONCTIONNEL ✅ -->
-        <a href="parametres.html#langue" class="btn-langue" title="Changer la langue">🌐</a>
     </nav>
 
+    <!-- 📝 CONTENU DE LA PAGE -->
     <div class="conteneur">
-        <div class="entete">
-            <h2 data-trad="titre">📺 Streams & 🎵 Musique</h2>
-            <p data-trad="sous_titre">Vidéo en HD / 4K · Écoute n'importe quel artiste sur tes applis préférées !</p>
-        </div>
-
-        <div class="onglets">
-            <div class="onglet actif" onclick="afficherOnglet('video')" data-trad="onglet_video">📺 Vidéo / Stream</div>
-            <div class="onglet" onclick="afficherOnglet('musique')" data-trad="onglet_musique">🎵 Musique</div>
-        </div>
-
-        <!-- 🎥 VIDÉO / STREAM -->
-        <div id="onglet-video" class="contenu-onglet actif">
-            <div class="lecteur-boite">
-                <h3>
-                    📺 <span data-trad="stream_direct">Stream en direct</span>
-                    <span class="en-direct" data-trad="en_direct">EN DIRECT</span>
-                    <span class="badge-4k">HD · 4K</span>
-                </h3>
-
-                <video id="lecteurPrincipal" controls preload="metadata">
-                    <source src="stream-auto.mp4" type="video/mp4">
-                    <!-- 📝 SOUS-TITRES LIÉS AUX RÉGLAGES -->
-                    <track kind="subtitles" id="pisteSousTitres" src="" srclang="fr" label="Français">
-                    <span data-trad="video_non_supportee">Ton navigateur ne peut pas lire cette vidéo.</span>
-                </video>
-
-                <div class="qualites">
-                    <button class="qualite active" data-src="stream-auto.mp4">🔄 Auto</button>
-                    <button class="qualite" data-src="stream-4k.mp4">🟪 4K Ultra</button>
-                    <button class="qualite" data-src="stream-1080p.mp4">💜 1080p HD</button>
-                    <button class="qualite" data-src="stream-720p.mp4">💙 720p</button>
-                    <button class="qualite" data-src="stream-480p.mp4">💚 480p</button>
-                </div>
-
-                <!-- 📝 CHOIX DES SOUS-TITRES DIRECTEMENT DANS STREAMS ✅ -->
-                <div class="re-glage-st">
-                    <label for="choixSousTitres" data-trad="label_st">📝 Sous-titres :</label>
-                    <select id="choixSousTitres" onchange="changerSousTitresIci()">
-                        <option value="fr">🇫🇷 Français</option>
-                        <option value="en">🇬🇧 Anglais</option>
-                        <option value="es">🇪🇸 Espagnol</option>
-                        <option value="de">🇩🇪 Allemand</option>
-                        <option value="it">🇮🇹 Italien</option>
-                        <option value="pt">🇵🇹 Portugais</option>
-                        <option value="pt-BR">🇧🇷 Portugais (Brésil)</option>
-                        <option value="nl">🇳🇱 Néerlandais</option>
-                        <option value="ru">🇷🇺 Russe</option>
-                        <option value="ja">🇯🇵 Japonais</option>
-                        <option value="zh-CN">🇨🇳 Chinois (simplifié)</option>
-                        <option value="zh-TW">🇭🇰 Chinois (traditionnel)</option>
-                        <option value="ko">🇰🇷 Coréen</option>
-                        <option value="ar">🇸🇦 Arabe</option>
-                        <option value="tr">🇹🇷 Turc</option>
-                        <option value="pl">🇵🇱 Polonais</option>
-                        <option value="sv">🇸🇪 Suédois</option>
-                        <option value="da">🇩🇰 Danois</option>
-                        <option value="no">🇳🇴 Norvégien</option>
-                        <option value="fi">🇫🇮 Finnois</option>
-                        <option value="hu">🇭🇺 Hongrois</option>
-                        <option value="cs">🇨🇿 Tchèque</option>
-                        <option value="sk">🇸🇰 Slovaque</option>
-                        <option value="ro">🇷🇴 Roumain</option>
-                        <option value="bg">🇧🇬 Bulgare</option>
-                        <option value="uk">🇺🇦 Ukrainien</option>
-                        <option value="el">🇬🇷 Grec</option>
-                        <option value="hi">🇭🇮 Hindi</option>
-                        <option value="bn">🇧🇩 Bengali</option>
-                        <option value="vi">🇻🇳 Vietnamien</option>
-                        <option value="th">🇹🇭 Thaï</option>
-                        <option value="id">🇮🇩 Indonésien</option>
-                        <option value="ms">🇲🇾 Malais</option>
-                        <option value="tl">🇵🇭 Tagalog</option>
-                        <option value="fa">🇮🇷 Persan</option>
-                        <option value="uz">🇺🇿 Ouzbek</option>
-                        <option value="kk">🇰🇿 Kazakh</option>
-                        <option value="he">🇮🇱 Hébreu</option>
-                        <option value="ta">🇱🇰 Tamoul</option>
-                        <option value="sw">🇸🇿 Swahili</option>
-                        <option value="sr">🇷🇸 Serbe</option>
-                        <option value="hr">🇭🇷 Croate</option>
-                        <option value="sl">🇸🇮 Slovène</option>
-                        <option value="lt">🇱🇹 Lituanien</option>
-                        <option value="off" data-trad="st_off">❌ Sans sous-titres</option>
-                    </select>
-                </div>
-
-                <div class="info-lecteur">
-                    <strong data-trad="info_titre">💡 Règles tout toi-même :</strong>
-                    <span data-trad="info_texte"> Lecture ⏸️ Pause 🔊 Volume ⤢ Plein écran ⏱️ Avancer/Reculer</span><br>
-                    <strong data-trad="info_qualite">⚙️ Changer la qualité :</strong>
-                    <span data-trad="info_qualite_txt"> Clique simplement sur un bouton ci-dessus !</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 🎵 MUSIQUE -->
-        <div id="onglet-musique" class="contenu-onglet">
-            <div class="lecteur-boite">
-                <h3>🎵 <span data-trad="musique_titre">Écouter de la musique</span></h3>
-                <p style="color:#adadb8; margin-bottom:15px;" data-trad="musique_desc">Recherche un artiste ou une chanson, et écoute-la directement sur l'application de ton choix !</p>
-
-                <div class="recherche-artiste">
-                    <input type="text" id="nomArtiste" data-trad-placeholder="recherche_artiste" placeholder="🔍 Écris le nom d'un artiste ou d'une chanson..." oninput="mettreAJourLiens()">
-                    <div class="liens-resultats" id="liensMusique">
-                        <span style="color:#888; font-size:13px;" data-trad="ecris_nom">Écris un nom ci-dessus → les liens apparaîtront ici</span>
-                    </div>
-                </div>
-
-                <div style="margin-top:25px; border-top:1px solid #2a2a32; padding-top:20px;">
-                    <h4 style="margin-bottom:12px; color:#efeff1;" data-trad="choisir_plateforme">Ou choisis directement une plateforme :</h4>
-                    <div class="plateformes">
-                        <a href="https://open.spotify.com/search" target="_blank" class="btn-musique spotify">🎧 Spotify</a>
-                        <a href="https://www.deezer.com/search" target="_blank" class="btn-musique deezer">🎵 Deezer</a>
-                        <a href="https://music.youtube.com/search" target="_blank" class="btn-musique youtube">▶️ YouTube Music</a>
-                        <a href="https://soundcloud.com/search" target="_blank" class="btn-musique soundcloud">☁️ SoundCloud</a>
-                    </div>
-                </div>
-
-                <div class="info-lecteur" style="margin-top:20px;">
-                    ✅ <strong data-trad="comment_marche">Comment ça marche :</strong><br>
-                    <span data-trad="etapes">1. Tu écris le nom de l'artiste → 2. Tu cliques sur Spotify / Deezer / YouTube Music → 3. La chanson s'ouvre dans l'appli ou le site !</span><br>
-                    💜 <span data-trad="rester">Tu restes sur StreamUnity, la musique se joue à côté !</span>
-                </div>
-            </div>
-        </div>
+        <h1>Bienvenue sur StreamUnity</h1>
+        <!-- Ton contenu ici -->
     </div>
 
 <script>
-// 🌐 TRADUCTIONS — QUAND ON CHANGE DE LANGUE, TOUTE LA PAGE CHANGE ✅
-const traductions = {
-    fr: {
-        menu_accueil: "🏠 Accueil",
-        menu_streams: "📺 Streams & Musique",
-        menu_discussions: "💬 Discussions",
-        menu_abonnements: "💜 Abonnements",
-        menu_profil: "👤 Profil",
-        menu_test: "🧪 Test & Avis",
-        menu_parametres: "⚙️ Paramètres",
-        titre: "📺 Streams & 🎵 Musique",
-        sous_titre: "Vidéo en HD / 4K · Écoute n'importe quel artiste sur tes applis préférées !",
-        onglet_video: "📺 Vidéo / Stream",
-        onglet_musique: "🎵 Musique",
-        stream_direct: "Stream en direct",
-        en_direct: "EN DIRECT",
-        video_non_supportee: "Ton navigateur ne peut pas lire cette vidéo.",
-        label_st: "📝 Sous-titres :",
-        st_off: "❌ Sans sous-titres",
-        info_titre: "💡 Règles tout toi-même :",
-        info_texte: "Lecture ⏸️ Pause 🔊 Volume ⤢ Plein écran ⏱️ Avancer/Reculer",
-        info_qualite: "⚙️ Changer la qualité :",
-        info_qualite_txt: "Clique simplement sur un bouton ci-dessus !",
-        musique_titre: "Écouter de la musique",
-        musique_desc: "Recherche un artiste ou une chanson, et écoute-la directement sur l'application de ton choix !",
-        recherche_artiste: "🔍 Écris le nom d'un artiste ou d'une chanson...",
-        ecris_nom: "Écris un nom ci-dessus → les liens apparaîtront ici",
-        choisir_plateforme: "Ou choisis directement une plateforme :",
-        comment_marche: "Comment ça marche :",
-        etapes: "1. Tu écris le nom de l'artiste → 2. Tu cliques sur Spotify / Deezer → 3. La chanson s'ouvre !",
-        rester: "Tu restes sur StreamUnity, la musique se joue à côté !"
-    },
-    en: {
-        menu_accueil: "🏠 Home",
-        menu_streams: "📺 Streams & Music",
-        menu_discussions: "💬 Chat",
-        menu_abonnements: "💜 Subscriptions",
-        menu_profil: "👤 Profile",
-        menu_test: "🧪 Test & Reviews",
-        menu_parametres: "⚙️ Settings",
-        titre: "📺 Streams & 🎵 Music",
-        sous_titre: "HD / 4K Video · Listen to any artist on your favorite apps!",
-        onglet_video: "📺 Video / Stream",
-        onglet_musique: "🎵 Music",
-        stream_direct: "Live Stream",
-        en_direct: "LIVE",
-        video_non_supportee: "Your browser cannot play this video.",
-        label_st: "📝 Subtitles:",
-        st_off: "❌ No subtitles",
-        info_titre: "💡 Controls:",
-        info_texte: "Play ⏸️ Pause 🔊 Volume ⤢ Fullscreen ⏱️ Seek",
-        info_qualite: "⚙️ Change quality:",
-        info_qualite_txt: "Simply click a button above!",
-        musique_titre: "Listen to Music",
-        musique_desc: "Search for an artist or song and listen on your favorite platform!",
-        recherche_artiste: "🔍 Type an artist or song name...",
-        ecris_nom: "Type a name above → links will appear here",
-        choisir_plateforme: "Or choose a platform:",
-        comment_marche: "How it works:",
-        etapes: "1. Type the name → 2. Click a platform → 3. Music opens!",
-        rester: "Stay on StreamUnity while music plays!"
-    },
-    es: {
-        menu_accueil: "🏠 Inicio",
-        menu_streams: "📺 Streams y Música",
-        menu_discussions: "💬 Chat",
-        menu_abonnements: "💜 Suscripciones",
-        menu_profil: "👤 Perfil",
-        menu_test: "🧪 Prueba y Opiniones",
-        menu_parametres: "⚙️ Configuración",
-        titre: "📺 Streams y 🎵 Música",
-        sous_titre: "Vídeo HD / 4K · ¡Escucha cualquier artista en tus apps favoritas!",
-        onglet_video: "📺 Vídeo / Stream",
-        onglet_musique: "🎵 Música",
-        stream_direct: "Emisión en directo",
-        en_direct: "EN DIRECTO",
-        video_non_supportee: "Tu navegador no puede reproducir este vídeo.",
-        label_st: "📝 Subtítulos:",
-        st_off: "❌ Sin subtítulos",
-        info_titre: "💡 Controles:",
-        info_texte: "Reproducir ⏸️ Pausa 🔊 Volumen ⤢ Pantalla completa ⏱️ Avanzar/Retroceder",
-        info_qualite: "⚙️ Cambiar calidad:",
-        info_qualite_txt: "¡Simplemente haz clic en un botón!",
-        musique_titre: "Escuchar música",
-        musique_desc: "Busca un artista o canción y escúchalo en tu plataforma favorita!",
-        recherche_artiste: "🔍 Escribe el nombre de un artista o canción...",
-        ecris_nom: "Escribe un nombre → aparecerán enlaces",
-        choisir_plateforme: "O elige una plataforma:",
-        comment_marche: "Cómo funciona:",
-        etapes: "1. Escribe el nombre → 2. Haz clic en la plataforma → 3. ¡Se abre!",
-        rester: "¡Te quedas en StreamUnity mientras suena la música!"
-    }
+// 🌐 TOUTES LES TRADUCTIONS — CHAQUE LANGUE CHANGE TOUTE LA PLATEFORME
+const traductionsDispo = {
+    fr: { menu_accueil:"🏠 Accueil",menu_streams:"📺 Streams & Musique",menu_discussions:"💬 Discussions",menu_abonnements:"💜 Abonnements",menu_profil:"👤 Profil",menu_test:"🧪 Test & Avis",menu_parametres:"⚙️ Paramètres" },
+    en: { menu_accueil:"🏠 Home",menu_streams:"📺 Streams & Music",menu_discussions:"💬 Chat",menu_abonnements:"💜 Subscriptions",menu_profil:"👤 Profile",menu_test:"🧪 Test & Reviews",menu_parametres:"⚙️ Settings" },
+    es: { menu_accueil:"🏠 Inicio",menu_streams:"📺 Transmisiones & Música",menu_discussions:"💬 Chat",menu_abonnements:"💜 Suscripciones",menu_profil:"👤 Perfil",menu_test:"🧪 Prueba y Opiniones",menu_parametres:"⚙️ Configuración" },
+    de: { menu_accueil:"🏠 Startseite",menu_streams:"📺 Streams & Musik",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abonnements",menu_profil:"👤 Profil",menu_test:"🧪 Test & Bewertungen",menu_parametres:"⚙️ Einstellungen" },
+    it: { menu_accueil:"🏠 Home",menu_streams:"📺 Stream & Musica",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abbonamenti",menu_profil:"👤 Profilo",menu_test:"🧪 Test e Recensioni",menu_parametres:"⚙️ Impostazioni" },
+    pt: { menu_accueil:"🏠 Início",menu_streams:"📺 Transmissões & Música",menu_discussions:"💬 Conversas",menu_abonnements:"💜 Subscrições",menu_profil:"👤 Perfil",menu_test:"🧪 Teste & Avaliações",menu_parametres:"⚙️ Definições" },
+    "pt-BR": { menu_accueil:"🏠 Início",menu_streams:"📺 Transmissões & Música",menu_discussions:"💬 Conversas",menu_abonnements:"💜 Assinaturas",menu_profil:"👤 Perfil",menu_test:"🧪 Testes & Avaliações",menu_parametres:"⚙️ Configurações" },
+    nl: { menu_accueil:"🏠 Startpagina",menu_streams:"📺 Streams & Muziek",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abonnementen",menu_profil:"👤 Profiel",menu_test:"🧪 Test & Recensies",menu_parametres:"⚙️ Instellingen" },
+    ru: { menu_accueil:"🏠 Главная",menu_streams:"📺 Трансляции & Музыка",menu_discussions:"💬 Чат",menu_abonnements:"💜 Подписки",menu_profil:"👤 Профиль",menu_test:"🧪 Тест & Отзывы",menu_parametres:"⚙️ Настройки" },
+    ja: { menu_accueil:"🏠 ホーム",menu_streams:"📺 ストリーム & 音楽",menu_discussions:"💬 チャット",menu_abonnements:"💜 サブスクリプション",menu_profil:"👤 プロフィール",menu_test:"🧪 テスト & レビュー",menu_parametres:"⚙️ 設定" },
+    "zh-CN": { menu_accueil:"🏠 首页",menu_streams:"📺 直播 & 音乐",menu_discussions:"💬 聊天",menu_abonnements:"💜 订阅",menu_profil:"👤 个人资料",menu_test:"🧪 测试 & 评论",menu_parametres:"⚙️ 设置" },
+    "zh-TW": { menu_accueil:"🏠 首頁",menu_streams:"📺 直播 & 音樂",menu_discussions:"💬 聊天",menu_abonnements:"💜 訂閱",menu_profil:"👤 個人資料",menu_test:"🧪 測試 & 評論",menu_parametres:"⚙️ 設定" },
+    ko: { menu_accueil:"🏠 홈",menu_streams:"📺 스트림 & 음악",menu_discussions:"💬 채팅",menu_abonnements:"💜 구독",menu_profil:"👤 프로필",menu_test:"🧪 테스트 & 리뷰",menu_parametres:"⚙️ 설정" },
+    ar: { menu_accueil:"🏠 الرئيسية",menu_streams:"📺 البثوث والموسيقى",menu_discussions:"💬 المحادثات",menu_abonnements:"💜 الاشتراكات",menu_profil:"👤 الملف الشخصي",menu_test:"🧪 الاختبار والتقييمات",menu_parametres:"⚙️ الإعدادات" },
+    tr: { menu_accueil:"🏠 Ana Sayfa",menu_streams:"📺 Yayınlar & Müzik",menu_discussions:"💬 Sohbet",menu_abonnements:"💜 Abonelikler",menu_profil:"👤 Profil",menu_test:"🧪 Test & Değerlendirmeler",menu_parametres:"⚙️ Ayarlar" },
+    pl: { menu_accueil:"🏠 Strona główna",menu_streams:"📺 Transmisje & Muzyka",menu_discussions:"💬 Czat",menu_abonnements:"💜 Subskrypcje",menu_profil:"👤 Profil",menu_test:"🧪 Test & Recenzje",menu_parametres:"⚙️ Ustawienia" },
+    sv: { menu_accueil:"🏠 Hem",menu_streams:"📺 Streams & Musik",menu_discussions:"💬 Chatt",menu_abonnements:"💜 Prenumerationer",menu_profil:"👤 Profil",menu_test:"🧪 Test & Recensioner",menu_parametres:"⚙️ Inställningar" },
+    da: { menu_accueil:"🏠 Hjem",menu_streams:"📺 Streams & Musik",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abonnementer",menu_profil:"👤 Profil",menu_test:"🧪 Test & Anmeldelser",menu_parametres:"⚙️ Indstillinger" },
+    no: { menu_accueil:"🏠 Hjem",menu_streams:"📺 Strømmer & Musikk",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abonnementer",menu_profil:"👤 Profil",menu_test:"🧪 Test & Anmeldelser",menu_parametres:"⚙️ Innstillinger" },
+    fi: { menu_accueil:"🏠 Etusivu",menu_streams:"📺 Striimit & Musiikki",menu_discussions:"💬 Keskustelu",menu_abonnements:"💜 Tilaukset",menu_profil:"👤 Profiili",menu_test:"🧪 Test & Arvostelut",menu_parametres:"⚙️ Asetukset" },
+    hu: { menu_accueil:"🏠 Főoldal",menu_streams:"📺 Közvetítések & Zene",menu_discussions:"💬 Csevegés",menu_abonnements:"💜 Feliratkozások",menu_profil:"👤 Profil",menu_test:"🧪 Teszt & Vélemények",menu_parametres:"⚙️ Beállítások" },
+    cs: { menu_accueil:"🏠 Domů",menu_streams:"📺 Streamy & Hudba",menu_discussions:"💬 Diskuse",menu_abonnements:"💜 Odběry",menu_profil:"👤 Profil",menu_test:"🧪 Test & Recenze",menu_parametres:"⚙️ Nastavení" },
+    sk: { menu_accueil:"🏠 Domov",menu_streams:"📺 Streamy & Hudba",menu_discussions:"💬 Diskusia",menu_abonnements:"💜 Odbery",menu_profil:"👤 Profil",menu_test:"🧪 Test & Hodnotenia",menu_parametres:"⚙️ Nastavenia" },
+    ro: { menu_accueil:"🏠 Acasă",menu_streams:"📺 Transmisiuni & Muzică",menu_discussions:"💬 Discuții",menu_abonnements:"💜 Abonamente",menu_profil:"👤 Profil",menu_test:"🧪 Test & Recenzii",menu_parametres:"⚙️ Setări" },
+    bg: { menu_accueil:"🏠 Начало",menu_streams:"📺 Стриймове & Музика",menu_discussions:"💬 Чат",menu_abonnements:"💜 Абонаменти",menu_profil:"👤 Профил",menu_test:"🧪 Тест & Отзиви",menu_parametres:"⚙️ Настройки" },
+    uk: { menu_accueil:"🏠 Головна",menu_streams:"📺 Трансляції & Музика",menu_discussions:"💬 Чат",menu_abonnements:"💜 Підписки",menu_profil:"👤 Профіль",menu_test:"🧪 Тест & Відгуки",menu_parametres:"⚙️ Налаштування" },
+    el: { menu_accueil:"🏠 Αρχική",menu_streams:"📺 Μεταδόσεις & Μουσική",menu_discussions:"💬 Συζήτηση",menu_abonnements:"💜 Συνδρομές",menu_profil:"👤 Προφίλ",menu_test:"🧪 Δοκιμή & Αξιολογήσεις",menu_parametres:"⚙️ Ρυθμίσεις" },
+    hi: { menu_accueil:"🏠 होम",menu_streams:"📺 स्ट्रीम & संगीत",menu_discussions:"💬 चैट",menu_abonnements:"💜 सदस्यताएं",menu_profil:"👤 प्रोफ़ाइल",menu_test:"🧪 परीक्षण & समीक्षाएं",menu_parametres:"⚙️ सेटिंग" },
+    bn: { menu_accueil:"🏠 হোম",menu_streams:"📺 স্ট্রীম & সঙ্গীত",menu_discussions:"💬 আলোচনা",menu_abonnements:"💜 সাবস্ক্রিপশন",menu_profil:"👤 প্রোফাইল",menu_test:"🧪 পরীক্ষা & মতামত",menu_parametres:"⚙️ সেটিংস" },
+    vi: { menu_accueil:"🏠 Trang chủ",menu_streams:"📺 Trực tiếp & Nhạc",menu_discussions:"💬 Trò chuyện",menu_abonnements:"💜 Đăng ký",menu_profil:"👤 Hồ sơ",menu_test:"🧪 Kiểm tra & Đánh giá",menu_parametres:"⚙️ Cài đặt" },
+    th: { menu_accueil:"🏠 หน้าแรก",menu_streams:"📺 สตรีม & เพลง",menu_discussions:"💬 แชท",menu_abonnements:"💜 การสมัคร",menu_profil:"👤 โปรไฟล์",menu_test:"🧪 ทดสอบ & รีวิว",menu_parametres:"⚙️ การตั้งค่า" },
+    id: { menu_accueil:"🏠 Beranda",menu_streams:"📺 Siaran & Musik",menu_discussions:"💬 Obrolan",menu_abonnements:"💜 Langganan",menu_profil:"👤 Profil",menu_test:"🧪 Uji & Ulasan",menu_parametres:"⚙️ Pengaturan" },
+    ms: { menu_accueil:"🏠 Laman Utama",menu_streams:"📺 Siaran & Muzik",menu_discussions:"💬 Perbualan",menu_abonnements:"💜 Langganan",menu_profil:"👤 Profil",menu_test:"🧪 Ujian & Ulasan",menu_parametres:"⚙️ Tetapan" },
+    tl: { menu_accueil:"🏠 Tahanan",menu_streams:"📺 Stream & Musika",menu_discussions:"💬 Usapan",menu_abonnements:"💜 Mga Subskripsyon",menu_profil:"👤 Profile",menu_test:"🧪 Pagsusuri & Pagsusuri",menu_parametres:"⚙️ Mga Setting" },
+    fa: { menu_accueil:"🏠 خانه",menu_streams:"📺 پخش‌ها & موسیقی",menu_discussions:"💬 گفتگو",menu_abonnements:"💜 اشتراک‌ها",menu_profil:"👤 پروفایل",menu_test:"🧪 آزمون & نظرات",menu_parametres:"⚙️ تنظیمات" },
+    uz: { menu_accueil:"🏠 Bosh sahifa",menu_streams:"📺 Translyatsiyalar & Musiqa",menu_discussions:"💬 Suhbat",menu_abonnements:"💜 Obunalar",menu_profil:"👤 Profil",menu_test:"🧪 Sinov & Fikrlar",menu_parametres:"⚙️ Sozlamalar" },
+    kk: { menu_accueil:"🏠 Басты бет",menu_streams:"📺 Трансляциялар & Музыка",menu_discussions:"💬 Сөйлесу",menu_abonnements:"💜 Жазылулар",menu_profil:"👤 Профиль",menu_test:"🧪 Сынақ & Пікірлер",menu_parametres:"⚙️ Параметрлер" },
+    he: { menu_accueil:"🏠 דף הבית",menu_streams:"📺 שידורים & מוזיקה",menu_discussions:"💬 צ'אט",menu_abonnements:"💜 מינויים",menu_profil:"👤 פרופיל",menu_test:"🧪 בדיקה & ביקורות",menu_parametres:"⚙️ הגדרות" },
+    ta: { menu_accueil:"🏠 முகப்பு",menu_streams:"📺 ஸ்ட்ரீம் & இசை",menu_discussions:"💬 அரட்டை",menu_abonnements:"💜 சந்தாக்கள்",menu_profil:"👤 சுயவிவரம்",menu_test:"🧪 சோதனை & மதிப்புரைகள்",menu_parametres:"⚙️ அமைப்புகள்" },
+    sw: { menu_accueil:"🏠 Mwanzo",menu_streams:"📺 Matangazo & Muziki",menu_discussions:"💬 Ongea",menu_abonnements:"💜 Usajili",menu_profil:"👤 Wasifu",menu_test:"🧪 Jaribio & Maoni",menu_parametres:"⚙️ Mipangilio" },
+    sr: { menu_accueil:"🏠 Почетна",menu_streams:"📺 Стримови & Музика",menu_discussions:"💬 Ћаскање",menu_abonnements:"💜 Претплате",menu_profil:"👤 Профил",menu_test:"🧪 Тест & Рецензије",menu_parametres:"⚙️ Подешавања" },
+    hr: { menu_accueil:"🏠 Početna",menu_streams:"📺 Streamovi & Glazba",menu_discussions:"💬 Razgovor",menu_abonnements:"💜 Pretplate",menu_profil:"👤 Profil",menu_test:"🧪 Test & Recenzije",menu_parametres:"⚙️ Postavke" },
+    sl: { menu_accueil:"🏠 Domov",menu_streams:"📺 Pretakanje & Glasba",menu_discussions:"💬 Klepet",menu_abonnements:"💜 Naročnine",menu_profil:"👤 Profil",menu_test:"🧪 Preizkus & Ocene",menu_parametres:"⚙️ Nastavitve" },
+    lt: { menu_accueil:"🏠 Pagrindinis",menu_streams:"📺 Transliacijos & Muzika",menu_discussions:"💬 Pokalbis",menu_abonnements:"💜 Prenumeratos",menu_profil:"👤 Profilis",menu_test:"🧪 Bandymas & Atsiliepimai",menu_parametres:"⚙️ Nustatymai" }
 };
 
-// 🌐 APPLIQUER LA LANGUE SUR TOUTE LA PAGE ✅
-function appliquerLanguePage(langue) {
-    const t = traductions[langue] || traductions.fr;
+// 🌐 APPLIQUER LA LANGUE CHOISIE SUR TOUTE LA PAGE
+function appliquerLangueGlobale() {
+    const langue = localStorage.getItem('langueSite') || 'fr';
+    const t = traductionsDispo[langue] || traductionsDispo.en;
     document.documentElement.lang = langue;
-
-    // Tous les textes changent ✅
     document.querySelectorAll('[data-trad]').forEach(el => {
         const cle = el.getAttribute('data-trad');
         if (t[cle]) el.textContent = t[cle];
     });
-
-    // Les textes dans les champs de saisie
-    document.querySelectorAll('[data-trad-placeholder]').forEach(el => {
-        const cle = el.getAttribute('data-trad-placeholder');
-        if (t[cle]) el.placeholder = t[cle];
-    });
 }
 
-// 📝 SOUS-TITRES — CHOIX DANS STREAMS + SAUVEGARDE ✅
-function changerSousTitresIci() {
-    const st = document.getElementById('choixSousTitres').value;
-    localStorage.setItem('sousTitresDefaut', st);
-
-    const piste = document.getElementById('pisteSousTitres');
-    if (!piste || !piste.track) return;
-
-    if (st === 'off') {
-        piste.track.mode = 'hidden'; // ❌ Cacher
-    } else {
-        piste.track.mode = 'showing'; // ✅ Afficher
-        piste.srclang = st;
-        // Quand tu auras tes fichiers .vtt : piste.src = "sous-titres/" + st + ".vtt"
-    }
-}
-
-// 📑 ONGLETS
-function afficherOnglet(nom) {
-    document.querySelectorAll('.onglet').forEach(o => o.classList.remove('actif'));
-    document.querySelectorAll('.contenu-onglet').forEach(c => c.classList.remove('actif'));
-    event.currentTarget.classList.add('actif');
-    document.getElementById('onglet-' + nom).classList.add('actif');
-}
-
-// ⚙️ CHANGER QUALITÉ VIDÉO
-const lecteur = document.getElementById('lecteurPrincipal');
-document.querySelectorAll('.qualite').forEach(bouton => {
-    bouton.addEventListener('click', function() {
-        document.querySelectorAll('.qualite').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        const pos = lecteur.currentTime;
-        const enLecture = !lecteur.paused;
-        lecteur.src = this.dataset.src;
-        lecteur.load();
-        lecteur.currentTime = pos;
-        if (enLecture) lecteur.play().catch(() => {});
-    });
-});
-
-// 🎵 LIENS MUSIQUE
-function mettreAJourLiens() {
-    const nom = document.getElementById('nomArtiste').value.trim();
-    const conteneur = document.getElementById('liensMusique');
-    if (nom.length < 2) {
-        const langue = localStorage.getItem('langueSite') || 'fr';
-        const t = traductions[langue] || traductions.fr;
-        conteneur.innerHTML = `<span style="color:#888; font-size:13px;">${t.ecris_nom}</span>`;
-        return;
-    }
-    const recherche = encodeURIComponent(nom);
-    conteneur.innerHTML = `
-        <a href="https://open.spotify.com/search/${recherche}" target="_blank" class="lien-artiste">🎧 Spotify : ${nom}</a>
-        <a href="https://www.deezer.com/search?q=${recherche}" target="_blank" class="lien-artiste">🎵 Deezer : ${nom}</a>
-        <a href="https://music.youtube.com/search?q=${recherche}" target="_blank" class="lien-artiste">▶️ YouTube Music : ${nom}</a>
-        <a href="https://soundcloud.com/search?q=${recherche}" target="_blank" class="lien-artiste">☁️ SoundCloud : ${nom}</a>
-    `;
-}
-
-// 💾 AU CHARGEMENT : APPLIQUER LANGUE + SOUS-TITRES SAUVEGARDÉS ✅
-window.addEventListener('DOMContentLoaded', function() {
-    // Appliquer la langue sauvegardée
-    const langue = localStorage.getItem('langueSite') || 'fr';
-    appliquerLanguePage(langue);
-
-    // Appliquer les sous-titres sauvegardés
-    const st = localStorage.getItem('sousTitresDefaut') || 'fr';
-    document.getElementById('choixSousTitres').value = st;
-
-    const piste = document.getElementById('pisteSousTitres');
-    if (piste && piste.track) {
-        piste.srclang = st;
-        piste.track.mode = (st === 'off') ? 'hidden' : 'showing';
-    }
-});
+// ✅ Exécuter automatiquement au chargement
+appliquerLangueGlobale();
 </script>
 </body>
 </html>

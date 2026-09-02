@@ -1,278 +1,158 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Profil — StreamUnity</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreamUnity - Accueil</title>
     <style>
-        * {margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif;}
-        body {background: linear-gradient(135deg, #2a1060, #1a0840); color: white; min-height: 100vh;}
-
-        /* --- BARRE DE NAVIGATION HAUTE --- */
-        .nav-haut {background: rgba(0,0,0,0.3); padding: 12px 20px; display: flex; align-items: center; gap: 15px; flex-wrap: wrap; border-bottom: 2px solid #5533aa; position: sticky; top: 0; z-index: 100;}
-        .nav-haut a {color: #ccc; text-decoration: none; padding: 6px 12px; border-radius: 6px; transition: all 0.2s; font-size: 14px;}
-        .nav-haut a:hover, .nav-haut a.actif {background: #9147ff; color: white;}
-
-        /* --- CONTENU PRINCIPAL --- */
-        .conteneur {max-width: 800px; margin: 30px auto; padding: 0 20px;}
-        h1 {text-align: center; font-size: 32px; margin-bottom: 30px; color: #a970ff;}
-
-        /* --- CARTE PROFIL --- */
-        .carte {background: rgba(255,255,255,0.05); border: 2px solid #5533aa; border-radius: 15px; padding: 30px; margin-bottom: 25px;}
-        .carte h2 {font-size: 18px; margin-bottom: 20px; color: #a970ff;}
-
-        /* --- AVATAR --- */
-        .avatar-section {text-align: center; margin-bottom: 30px;}
-        .avatar-grand {width: 120px; height: 120px; border-radius: 50%; background: #9147ff; display: flex; align-items: center; justify-content: center; font-size: 60px; margin: 0 auto 15px; border: 3px solid #a970ff; overflow: hidden;}
-        .avatar-grand img {width: 100%; height: 100%; object-fit: cover;}
-        .galerie-avatars {display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 15px;}
-        .avatar-petit {width: 50px; height: 50px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s;}
-        .avatar-petit:hover, .avatar-petit.actif {border-color: #9147ff; transform: scale(1.1); box-shadow: 0 0 10px rgba(145,71,255,0.5);}
-
-        /* --- FORMULAIRE --- */
-        .groupe {margin-bottom: 18px;}
-        label {display: block; margin-bottom: 6px; color: #ccc;}
-        input, textarea, select {width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #5533aa; background: rgba(0,0,0,0.3); color: white; font-size: 15px;}
-        textarea {min-height: 100px; resize: vertical;}
-        input[type="file"] {padding: 8px; font-size: 14px;}
-
-        /* --- BOUTONS --- */
-        .btn {padding: 12px 25px; background: #9147ff; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.2s; width: 100%; margin-top: 10px;}
-        .btn:hover {background: #a970ff; transform: translateY(-2px);}
-        .btn-petit {width: auto; padding: 8px 15px; font-size: 14px; margin-right: 10px;}
-
-        /* --- MESSAGE --- */
-        .message {margin-top: 15px; padding: 12px; border-radius: 8px; display: none; text-align: center; font-weight: bold;}
-        .succes {background: rgba(0,200,100,0.2); color: #00ff88; display: block !important;}
-
-        /* --- THÈMES --- */
-        .choix-theme {display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px;}
-        .theme {padding: 15px 20px; border-radius: 8px; border: 2px solid #5533aa; cursor: pointer; transition: all 0.2s; text-align: center; min-width: 100px;}
-        .theme:hover, .theme.actif {border-color: #9147ff; background: rgba(145,71,255,0.2);}
-
-        /* --- RÉSEAUX SOCIAUX --- */
-        .ligne-reseau {display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(0,0,0,0.2); border-radius: 10px; margin-bottom: 10px; transition: background 0.2s;}
-        .ligne-reseau:hover {background: rgba(0,0,0,0.35);}
-        .gauche {display: flex; align-items: center; gap: 14px;}
-        .icone {font-size: 22px; width: 36px; text-align: center;}
-        .nom-plateforme {font-weight: bold; font-size: 15px;}
-        .sous-titre {font-size: 12px; color: #888; margin-top: 2px;}
-        .btn-lien {padding: 8px 16px; background: #9147ff; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: bold; transition: background 0.2s;}
-        .btn-lien:hover {background: #772ce8;}
-
-        /* --- RESPONSIVE --- */
-        @media(max-width: 600px) {
-            .galerie-avatars {gap: 8px;}
+        * {outline: none; box-sizing: border-box; margin: 0; padding: 0;}
+        body {
+            background: linear-gradient(135deg, #2a1060, #1a0840);
+            color: #efeff1;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
         }
+        
+        .menu {
+            background: rgba(0,0,0,0.4);
+            padding: 14px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(145,71,255,0.3);
+        }
+        .menu a {
+            display: inline-block;
+            color: #adadb8;
+            text-decoration: none;
+            padding: 10px 16px;
+            margin: 0 4px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .menu a:hover, .menu a.actif {
+            background: #9147ff;
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* 🟣 ICÔNE FLOTTANTE À DROITE SUR TOUTES LES PAGES */
+        .icone-flottante {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #9147ff, #772ce8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(145,71,255,0.4);
+            cursor: pointer;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .icone-flottante:hover {
+            transform: translateY(-50%) scale(1.15);
+            box-shadow: 0 6px 20px rgba(145,71,255,0.6);
+        }
+        
+        .conteneur {max-width: 900px; margin: 30px auto; padding: 20px;}
+        .conteneur h1 {text-align: center; color: #9147ff; margin-bottom: 30px;}
     </style>
 </head>
 <body>
 
-    <!-- 📌 BARRE DE NAVIGATION -->
-    <nav class="nav-haut">
-        <a href="accueil.html">🏠 Accueil</a>
-        <a href="streams.html">📺 Streams & Musique</a>
-        <a href="salon.html">💬 Discussions</a>
-        <a href="abonnements.html">💜 Abonnements</a>
-        <a href="profil.html" class="actif">👤 Profil</a>
-        <a href="test-avis.html">📝 Test & Avis</a>
-        <a href="parametres.html">⚙️ Paramètres</a>
+    <!-- 🟣 ICÔNE FLOTTANTE VERS PARAMÈTRES -->
+    <a href="parametres.html#langue" class="icone-flottante" title="Changer la langue">🌐</a>
+
+    <!-- 📋 MENU TRADUIT AUTOMATIQUEMENT -->
+    <nav class="menu">
+        <a href="accueil.html" data-trad="menu_accueil" class="actif">🏠 Accueil</a>
+        <a href="streams.html" data-trad="menu_streams">📺 Streams & Musique</a>
+        <a href="salon.html" data-trad="menu_discussions">💬 Discussions</a>
+        <a href="abonnements.html" data-trad="menu_abonnements">💜 Abonnements</a>
+        <a href="profil.html" data-trad="menu_profil">👤 Profil</a>
+        <a href="test.html" data-trad="menu_test">🧪 Test & Avis</a>
+        <a href="parametres.html" data-trad="menu_parametres">⚙️ Paramètres</a>
     </nav>
 
-    <!-- 📢 CONTENU PRINCIPAL -->
+    <!-- 📝 CONTENU DE LA PAGE -->
     <div class="conteneur">
-        <h1>👤 Mon Profil</h1>
-
-        <!-- 🖼️ SECTION AVATAR -->
-        <div class="carte">
-            <h2>🖼️ Photo de profil / Avatar</h2>
-            <div class="avatar-section">
-                <div class="avatar-grand" id="avatarAffiche">👤</div>
-                <p style="color:#aaa; margin-bottom:10px;">Choisis un avatar ou télécharge ta propre photo</p>
-
-                <!-- GALERIE D'AVATARS PROPOSÉS -->
-                <div class="galerie-avatars">
-                    <div class="avatar-petit" data-avatar="👤" onclick="choisirAvatar('👤', this)">👤</div>
-                    <div class="avatar-petit" data-avatar="🦊" onclick="choisirAvatar('🦊', this)">🦊</div>
-                    <div class="avatar-petit" data-avatar="🐱" onclick="choisirAvatar('🐱', this)">🐱</div>
-                    <div class="avatar-petit" data-avatar="🐉" onclick="choisirAvatar('🐉', this)">🐉</div>
-                    <div class="avatar-petit" data-avatar="🎮" onclick="choisirAvatar('🎮', this)">🎮</div>
-                    <div class="avatar-petit" data-avatar="👾" onclick="choisirAvatar('👾', this)">👾</div>
-                    <div class="avatar-petit" data-avatar="🦄" onclick="choisirAvatar('🦄', this)">🦄</div>
-                    <div class="avatar-petit" data-avatar="🔥" onclick="choisirAvatar('🔥', this)">🔥</div>
-                </div>
-
-                <div class="groupe" style="margin-top:20px;">
-                    <label>📸 Ou télécharge une photo de ton choix :</label>
-                    <input type="file" id="photoProfil" accept="image/*" onchange="telechargerPhoto(this)">
-                </div>
-            </div>
-        </div>
-
-        <!-- 🎬 SECTION VIDÉO -->
-        <div class="carte">
-            <h2>🎬 Vidéo de présentation</h2>
-            <div class="groupe">
-                <label>Lien vers ta vidéo (YouTube, Twitch, etc.)</label>
-                <input type="url" id="lienVideo" placeholder="https://www.youtube.com/watch?v=...">
-            </div>
-            <div class="groupe">
-                <label>Ou télécharge une vidéo :</label>
-                <input type="file" id="videoProfil" accept="video/*">
-            </div>
-        </div>
-
-        <!-- ✏️ SECTION INFOS PROFIL -->
-        <div class="carte">
-            <h2>✏️ Mes informations</h2>
-            <div class="groupe">
-                <label>Nom d'utilisateur</label>
-                <input type="text" id="pseudo" placeholder="Ton pseudo">
-            </div>
-            <div class="groupe">
-                <label>Nom affiché</label>
-                <input type="text" id="nomAffiche" placeholder="Nom qui s'affiche">
-            </div>
-            <div class="groupe">
-                <label>Bio / Présentation</label>
-                <textarea id="bio" placeholder="Présente-toi en quelques lignes..."></textarea>
-            </div>
-        </div>
-
-        <!-- 🎨 SECTION THÈME -->
-        <div class="carte">
-            <h2>🎨 Choix du thème</h2>
-            <div class="choix-theme">
-                <div class="theme" data-theme="sombre" onclick="choisirTheme('sombre', this)">
-                    🌙<br>Sombre
-                </div>
-                <div class="theme" data-theme="clair" onclick="choisirTheme('clair', this)">
-                    ☀️<br>Clair
-                </div>
-                <div class="theme" data-theme="violet" onclick="choisirTheme('violet', this)">
-                    💜<br>Violet
-                </div>
-            </div>
-        </div>
-
-        <!-- 🔗 RÉSEAUX SOCIAUX -->
-        <div class="carte">
-            <h2>🔗 Mes liens & réseaux sociaux</h2>
-            <div class="ligne-reseau">
-                <div class="gauche"><span class="icone">🟪</span><div><div class="nom-plateforme">Twitch</div><div class="sous-titre">Ma chaîne en direct</div></div></div>
-                <a href="https://www.twitch.tv/Hyphtales" target="_blank" class="btn-lien">📺 Voir</a>
-            </div>
-            <div class="ligne-reseau">
-                <div class="gauche"><span class="icone">🎵</span><div><div class="nom-plateforme">TikTok</div><div class="sous-titre">Mes vidéos</div></div></div>
-                <a href="https://www.tiktok.com/@Hyphtales" target="_blank" class="btn-lien">🎵 Voir</a>
-            </div>
-            <div class="ligne-reseau">
-                <div class="gauche"><span class="icone">🐦</span><div><div class="nom-plateforme">X (Twitter)</div><div class="sous-titre">Mes actualités</div></div></div>
-                <a href="https://x.com/Hyphtales" target="_blank" class="btn-lien">🐦 Voir</a>
-            </div>
-            <div class="ligne-reseau">
-                <div class="gauche"><span class="icone">💬</span><div><div class="nom-plateforme">Discord</div><div class="sous-titre">Rejoindre la communauté</div></div></div>
-                <a href="#" class="btn-lien" onclick="alert('Discord : Hyphtaes666\n\n⚠️ Copie cet identifiant et colle-le dans Discord !'); return false;">💬 Rejoindre</a>
-            </div>
-            <div class="ligne-reseau">
-                <div class="gauche"><span class="icone">🎯</span><div><div class="nom-plateforme">Xbox</div><div class="sous-titre">Mon profil joueur</div></div></div>
-                <a href="#" class="btn-lien" onclick="alert('Xbox : Hyphtales\n\n⚠️ Recherche ce pseudo directement sur Xbox !'); return false;">🎯 Voir</a>
-            </div>
-            <div class="ligne-reseau">
-                <div class="gauche"><span class="icone">🎮</span><div><div class="nom-plateforme">PlayStation</div><div class="sous-titre">Mon profil PSN</div></div></div>
-                <a href="https://psnprofiles.com/Kratos-tg99" target="_blank" class="btn-lien">🎮 Voir</a>
-            </div>
-        </div>
-
-        <!-- 💾 BOUTON ENREGISTRER -->
-        <button class="btn" onclick="enregistrerTout()">💾 Enregistrer mon profil</button>
-        <div id="messageProfil" class="message succes"></div>
+        <h1>Bienvenue sur StreamUnity</h1>
+        <!-- Ton contenu ici -->
     </div>
 
 <script>
-// === CHOISIR UN AVATAR DANS LA GALERIE ===
-function choisirAvatar(icone, element) {
-    document.getElementById('avatarAffiche').innerHTML = icone;
-    localStorage.setItem('avatarChoisi', icone);
-    localStorage.removeItem('photoProfil');
-    document.querySelectorAll('.avatar-petit').forEach(a => a.classList.remove('actif'));
-    element.classList.add('actif');
+// 🌐 TOUTES LES TRADUCTIONS — CHAQUE LANGUE CHANGE TOUTE LA PLATEFORME
+const traductionsDispo = {
+    fr: { menu_accueil:"🏠 Accueil",menu_streams:"📺 Streams & Musique",menu_discussions:"💬 Discussions",menu_abonnements:"💜 Abonnements",menu_profil:"👤 Profil",menu_test:"🧪 Test & Avis",menu_parametres:"⚙️ Paramètres" },
+    en: { menu_accueil:"🏠 Home",menu_streams:"📺 Streams & Music",menu_discussions:"💬 Chat",menu_abonnements:"💜 Subscriptions",menu_profil:"👤 Profile",menu_test:"🧪 Test & Reviews",menu_parametres:"⚙️ Settings" },
+    es: { menu_accueil:"🏠 Inicio",menu_streams:"📺 Transmisiones & Música",menu_discussions:"💬 Chat",menu_abonnements:"💜 Suscripciones",menu_profil:"👤 Perfil",menu_test:"🧪 Prueba y Opiniones",menu_parametres:"⚙️ Configuración" },
+    de: { menu_accueil:"🏠 Startseite",menu_streams:"📺 Streams & Musik",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abonnements",menu_profil:"👤 Profil",menu_test:"🧪 Test & Bewertungen",menu_parametres:"⚙️ Einstellungen" },
+    it: { menu_accueil:"🏠 Home",menu_streams:"📺 Stream & Musica",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abbonamenti",menu_profil:"👤 Profilo",menu_test:"🧪 Test e Recensioni",menu_parametres:"⚙️ Impostazioni" },
+    pt: { menu_accueil:"🏠 Início",menu_streams:"📺 Transmissões & Música",menu_discussions:"💬 Conversas",menu_abonnements:"💜 Subscrições",menu_profil:"👤 Perfil",menu_test:"🧪 Teste & Avaliações",menu_parametres:"⚙️ Definições" },
+    "pt-BR": { menu_accueil:"🏠 Início",menu_streams:"📺 Transmissões & Música",menu_discussions:"💬 Conversas",menu_abonnements:"💜 Assinaturas",menu_profil:"👤 Perfil",menu_test:"🧪 Testes & Avaliações",menu_parametres:"⚙️ Configurações" },
+    nl: { menu_accueil:"🏠 Startpagina",menu_streams:"📺 Streams & Muziek",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abonnementen",menu_profil:"👤 Profiel",menu_test:"🧪 Test & Recensies",menu_parametres:"⚙️ Instellingen" },
+    ru: { menu_accueil:"🏠 Главная",menu_streams:"📺 Трансляции & Музыка",menu_discussions:"💬 Чат",menu_abonnements:"💜 Подписки",menu_profil:"👤 Профиль",menu_test:"🧪 Тест & Отзывы",menu_parametres:"⚙️ Настройки" },
+    ja: { menu_accueil:"🏠 ホーム",menu_streams:"📺 ストリーム & 音楽",menu_discussions:"💬 チャット",menu_abonnements:"💜 サブスクリプション",menu_profil:"👤 プロフィール",menu_test:"🧪 テスト & レビュー",menu_parametres:"⚙️ 設定" },
+    "zh-CN": { menu_accueil:"🏠 首页",menu_streams:"📺 直播 & 音乐",menu_discussions:"💬 聊天",menu_abonnements:"💜 订阅",menu_profil:"👤 个人资料",menu_test:"🧪 测试 & 评论",menu_parametres:"⚙️ 设置" },
+    "zh-TW": { menu_accueil:"🏠 首頁",menu_streams:"📺 直播 & 音樂",menu_discussions:"💬 聊天",menu_abonnements:"💜 訂閱",menu_profil:"👤 個人資料",menu_test:"🧪 測試 & 評論",menu_parametres:"⚙️ 設定" },
+    ko: { menu_accueil:"🏠 홈",menu_streams:"📺 스트림 & 음악",menu_discussions:"💬 채팅",menu_abonnements:"💜 구독",menu_profil:"👤 프로필",menu_test:"🧪 테스트 & 리뷰",menu_parametres:"⚙️ 설정" },
+    ar: { menu_accueil:"🏠 الرئيسية",menu_streams:"📺 البثوث والموسيقى",menu_discussions:"💬 المحادثات",menu_abonnements:"💜 الاشتراكات",menu_profil:"👤 الملف الشخصي",menu_test:"🧪 الاختبار والتقييمات",menu_parametres:"⚙️ الإعدادات" },
+    tr: { menu_accueil:"🏠 Ana Sayfa",menu_streams:"📺 Yayınlar & Müzik",menu_discussions:"💬 Sohbet",menu_abonnements:"💜 Abonelikler",menu_profil:"👤 Profil",menu_test:"🧪 Test & Değerlendirmeler",menu_parametres:"⚙️ Ayarlar" },
+    pl: { menu_accueil:"🏠 Strona główna",menu_streams:"📺 Transmisje & Muzyka",menu_discussions:"💬 Czat",menu_abonnements:"💜 Subskrypcje",menu_profil:"👤 Profil",menu_test:"🧪 Test & Recenzje",menu_parametres:"⚙️ Ustawienia" },
+    sv: { menu_accueil:"🏠 Hem",menu_streams:"📺 Streams & Musik",menu_discussions:"💬 Chatt",menu_abonnements:"💜 Prenumerationer",menu_profil:"👤 Profil",menu_test:"🧪 Test & Recensioner",menu_parametres:"⚙️ Inställningar" },
+    da: { menu_accueil:"🏠 Hjem",menu_streams:"📺 Streams & Musik",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abonnementer",menu_profil:"👤 Profil",menu_test:"🧪 Test & Anmeldelser",menu_parametres:"⚙️ Indstillinger" },
+    no: { menu_accueil:"🏠 Hjem",menu_streams:"📺 Strømmer & Musikk",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abonnementer",menu_profil:"👤 Profil",menu_test:"🧪 Test & Anmeldelser",menu_parametres:"⚙️ Innstillinger" },
+    fi: { menu_accueil:"🏠 Etusivu",menu_streams:"📺 Striimit & Musiikki",menu_discussions:"💬 Keskustelu",menu_abonnements:"💜 Tilaukset",menu_profil:"👤 Profiili",menu_test:"🧪 Test & Arvostelut",menu_parametres:"⚙️ Asetukset" },
+    hu: { menu_accueil:"🏠 Főoldal",menu_streams:"📺 Közvetítések & Zene",menu_discussions:"💬 Csevegés",menu_abonnements:"💜 Feliratkozások",menu_profil:"👤 Profil",menu_test:"🧪 Teszt & Vélemények",menu_parametres:"⚙️ Beállítások" },
+    cs: { menu_accueil:"🏠 Domů",menu_streams:"📺 Streamy & Hudba",menu_discussions:"💬 Diskuse",menu_abonnements:"💜 Odběry",menu_profil:"👤 Profil",menu_test:"🧪 Test & Recenze",menu_parametres:"⚙️ Nastavení" },
+    sk: { menu_accueil:"🏠 Domov",menu_streams:"📺 Streamy & Hudba",menu_discussions:"💬 Diskusia",menu_abonnements:"💜 Odbery",menu_profil:"👤 Profil",menu_test:"🧪 Test & Hodnotenia",menu_parametres:"⚙️ Nastavenia" },
+    ro: { menu_accueil:"🏠 Acasă",menu_streams:"📺 Transmisiuni & Muzică",menu_discussions:"💬 Discuții",menu_abonnements:"💜 Abonamente",menu_profil:"👤 Profil",menu_test:"🧪 Test & Recenzii",menu_parametres:"⚙️ Setări" },
+    bg: { menu_accueil:"🏠 Начало",menu_streams:"📺 Стриймове & Музика",menu_discussions:"💬 Чат",menu_abonnements:"💜 Абонаменти",menu_profil:"👤 Профил",menu_test:"🧪 Тест & Отзиви",menu_parametres:"⚙️ Настройки" },
+    uk: { menu_accueil:"🏠 Головна",menu_streams:"📺 Трансляції & Музика",menu_discussions:"💬 Чат",menu_abonnements:"💜 Підписки",menu_profil:"👤 Профіль",menu_test:"🧪 Тест & Відгуки",menu_parametres:"⚙️ Налаштування" },
+    el: { menu_accueil:"🏠 Αρχική",menu_streams:"📺 Μεταδόσεις & Μουσική",menu_discussions:"💬 Συζήτηση",menu_abonnements:"💜 Συνδρομές",menu_profil:"👤 Προφίλ",menu_test:"🧪 Δοκιμή & Αξιολογήσεις",menu_parametres:"⚙️ Ρυθμίσεις" },
+    hi: { menu_accueil:"🏠 होम",menu_streams:"📺 स्ट्रीम & संगीत",menu_discussions:"💬 चैट",menu_abonnements:"💜 सदस्यताएं",menu_profil:"👤 प्रोफ़ाइल",menu_test:"🧪 परीक्षण & समीक्षाएं",menu_parametres:"⚙️ सेटिंग" },
+    bn: { menu_accueil:"🏠 হোম",menu_streams:"📺 স্ট্রীম & সঙ্গীত",menu_discussions:"💬 আলোচনা",menu_abonnements:"💜 সাবস্ক্রিপশন",menu_profil:"👤 প্রোফাইল",menu_test:"🧪 পরীক্ষা & মতামত",menu_parametres:"⚙️ সেটিংস" },
+    vi: { menu_accueil:"🏠 Trang chủ",menu_streams:"📺 Trực tiếp & Nhạc",menu_discussions:"💬 Trò chuyện",menu_abonnements:"💜 Đăng ký",menu_profil:"👤 Hồ sơ",menu_test:"🧪 Kiểm tra & Đánh giá",menu_parametres:"⚙️ Cài đặt" },
+    th: { menu_accueil:"🏠 หน้าแรก",menu_streams:"📺 สตรีม & เพลง",menu_discussions:"💬 แชท",menu_abonnements:"💜 การสมัคร",menu_profil:"👤 โปรไฟล์",menu_test:"🧪 ทดสอบ & รีวิว",menu_parametres:"⚙️ การตั้งค่า" },
+    id: { menu_accueil:"🏠 Beranda",menu_streams:"📺 Siaran & Musik",menu_discussions:"💬 Obrolan",menu_abonnements:"💜 Langganan",menu_profil:"👤 Profil",menu_test:"🧪 Uji & Ulasan",menu_parametres:"⚙️ Pengaturan" },
+    ms: { menu_accueil:"🏠 Laman Utama",menu_streams:"📺 Siaran & Muzik",menu_discussions:"💬 Perbualan",menu_abonnements:"💜 Langganan",menu_profil:"👤 Profil",menu_test:"🧪 Ujian & Ulasan",menu_parametres:"⚙️ Tetapan" },
+    tl: { menu_accueil:"🏠 Tahanan",menu_streams:"📺 Stream & Musika",menu_discussions:"💬 Usapan",menu_abonnements:"💜 Mga Subskripsyon",menu_profil:"👤 Profile",menu_test:"🧪 Pagsusuri & Pagsusuri",menu_parametres:"⚙️ Mga Setting" },
+    fa: { menu_accueil:"🏠 خانه",menu_streams:"📺 پخش‌ها & موسیقی",menu_discussions:"💬 گفتگو",menu_abonnements:"💜 اشتراک‌ها",menu_profil:"👤 پروفایل",menu_test:"🧪 آزمون & نظرات",menu_parametres:"⚙️ تنظیمات" },
+    uz: { menu_accueil:"🏠 Bosh sahifa",menu_streams:"📺 Translyatsiyalar & Musiqa",menu_discussions:"💬 Suhbat",menu_abonnements:"💜 Obunalar",menu_profil:"👤 Profil",menu_test:"🧪 Sinov & Fikrlar",menu_parametres:"⚙️ Sozlamalar" },
+    kk: { menu_accueil:"🏠 Басты бет",menu_streams:"📺 Трансляциялар & Музыка",menu_discussions:"💬 Сөйлесу",menu_abonnements:"💜 Жазылулар",menu_profil:"👤 Профиль",menu_test:"🧪 Сынақ & Пікірлер",menu_parametres:"⚙️ Параметрлер" },
+    he: { menu_accueil:"🏠 דף הבית",menu_streams:"📺 שידורים & מוזיקה",menu_discussions:"💬 צ'אט",menu_abonnements:"💜 מינויים",menu_profil:"👤 פרופיל",menu_test:"🧪 בדיקה & ביקורות",menu_parametres:"⚙️ הגדרות" },
+    ta: { menu_accueil:"🏠 முகப்பு",menu_streams:"📺 ஸ்ட்ரீம் & இசை",menu_discussions:"💬 அரட்டை",menu_abonnements:"💜 சந்தாக்கள்",menu_profil:"👤 சுயவிவரம்",menu_test:"🧪 சோதனை & மதிப்புரைகள்",menu_parametres:"⚙️ அமைப்புகள்" },
+    sw: { menu_accueil:"🏠 Mwanzo",menu_streams:"📺 Matangazo & Muziki",menu_discussions:"💬 Ongea",menu_abonnements:"💜 Usajili",menu_profil:"👤 Wasifu",menu_test:"🧪 Jaribio & Maoni",menu_parametres:"⚙️ Mipangilio" },
+    sr: { menu_accueil:"🏠 Почетна",menu_streams:"📺 Стримови & Музика",menu_discussions:"💬 Ћаскање",menu_abonnements:"💜 Претплате",menu_profil:"👤 Профил",menu_test:"🧪 Тест & Рецензије",menu_parametres:"⚙️ Подешавања" },
+    hr: { menu_accueil:"🏠 Početna",menu_streams:"📺 Streamovi & Glazba",menu_discussions:"💬 Razgovor",menu_abonnements:"💜 Pretplate",menu_profil:"👤 Profil",menu_test:"🧪 Test & Recenzije",menu_parametres:"⚙️ Postavke" },
+    sl: { menu_accueil:"🏠 Domov",menu_streams:"📺 Pretakanje & Glasba",menu_discussions:"💬 Klepet",menu_abonnements:"💜 Naročnine",menu_profil:"👤 Profil",menu_test:"🧪 Preizkus & Ocene",menu_parametres:"⚙️ Nastavitve" },
+    lt: { menu_accueil:"🏠 Pagrindinis",menu_streams:"📺 Transliacijos & Muzika",menu_discussions:"💬 Pokalbis",menu_abonnements:"💜 Prenumeratos",menu_profil:"👤 Profilis",menu_test:"🧪 Bandymas & Atsiliepimai",menu_parametres:"⚙️ Nustatymai" }
+};
+
+// 🌐 APPLIQUER LA LANGUE CHOISIE SUR TOUTE LA PAGE
+function appliquerLangueGlobale() {
+    const langue = localStorage.getItem('langueSite') || 'fr';
+    const t = traductionsDispo[langue] || traductionsDispo.en;
+    document.documentElement.lang = langue;
+    document.querySelectorAll('[data-trad]').forEach(el => {
+        const cle = el.getAttribute('data-trad');
+        if (t[cle]) el.textContent = t[cle];
+    });
 }
 
-// === TÉLÉCHARGER UNE PHOTO PERSONNELLE ===
-function telechargerPhoto(input) {
-    if (input.files && input.files[0]) {
-        const lecteur = new FileReader();
-        lecteur.onload = function(e) {
-            document.getElementById('avatarAffiche').innerHTML = '<img src="' + e.target.result + '" alt="Ma photo">';
-            localStorage.setItem('photoProfil', e.target.result);
-            localStorage.removeItem('avatarChoisi');
-            document.querySelectorAll('.avatar-petit').forEach(a => a.classList.remove('actif'));
-        };
-        lecteur.readAsDataURL(input.files[0]);
-    }
-}
-
-// === CHOISIR LE THÈME ===
-function choisirTheme(nomTheme, element) {
-    localStorage.setItem('themeChoisi', nomTheme);
-    document.querySelectorAll('.theme').forEach(t => t.classList.remove('actif'));
-    element.classList.add('actif');
-    appliquerTheme(nomTheme);
-}
-
-// === APPLIQUER LE THÈME ===
-function appliquerTheme(nom) {
-    const body = document.body;
-    if (nom === 'clair') {
-        body.style.background = 'linear-gradient(135deg, #e8e8ff, #d0d0ff)';
-        body.style.color = '#1a1a30';
-    } else if (nom === 'violet') {
-        body.style.background = 'linear-gradient(135deg, #4b1090, #2a0860)';
-        body.style.color = 'white';
-    } else {
-        body.style.background = 'linear-gradient(135deg, #2a1060, #1a0840)';
-        body.style.color = 'white';
-    }
-}
-
-// === ENREGISTRER TOUT LE PROFIL ===
-function enregistrerTout() {
-    localStorage.setItem('pseudo', document.getElementById('pseudo').value);
-    localStorage.setItem('nomAffiche', document.getElementById('nomAffiche').value);
-    localStorage.setItem('bio', document.getElementById('bio').value);
-    localStorage.setItem('lienVideo', document.getElementById('lienVideo').value);
-    const msg = document.getElementById('messageProfil');
-    msg.textContent = "✅ Profil enregistré avec succès !";
-    setTimeout(() => msg.textContent = "", 4000);
-}
-
-// === CHARGER LES CHOIX SAUVEGARDÉS AU CHARGEMENT ===
-window.onload = function() {
-    if (localStorage.getItem('pseudo')) document.getElementById('pseudo').value = localStorage.getItem('pseudo');
-    if (localStorage.getItem('nomAffiche')) document.getElementById('nomAffiche').value = localStorage.getItem('nomAffiche');
-    if (localStorage.getItem('bio')) document.getElementById('bio').value = localStorage.getItem('bio');
-    if (localStorage.getItem('lienVideo')) document.getElementById('lienVideo').value = localStorage.getItem('lienVideo');
-
-    if (localStorage.getItem('photoProfil')) {
-        document.getElementById('avatarAffiche').innerHTML = '<img src="' + localStorage.getItem('photoProfil') + '" alt="Ma photo">';
-    } else if (localStorage.getItem('avatarChoisi')) {
-        document.getElementById('avatarAffiche').innerHTML = localStorage.getItem('avatarChoisi');
-        const av = localStorage.getItem('avatarChoisi');
-        document.querySelectorAll('.avatar-petit').forEach(el => {
-            if (el.dataset.avatar === av) el.classList.add('actif');
-        });
-    }
-
-    if (localStorage.getItem('themeChoisi')) {
-        const th = localStorage.getItem('themeChoisi');
-        appliquerTheme(th);
-        document.querySelectorAll('.theme').forEach(el => {
-            if (el.dataset.theme === th) el.classList.add('actif');
-        });
-    }
-}
+// ✅ Exécuter automatiquement au chargement
+appliquerLangueGlobale();
 </script>
-
 </body>
 </html>

@@ -1,82 +1,158 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ↓ BALISE DE VÉRIFICATION GOOGLE ↓ -->
-    <meta name="google-site-verification" content="XTlfiEq_sOwrLUF3bpz5X44njcf_AicFdv75aSf99w4" />
-    <meta name="description" content="StreamUnity — Ta plateforme de jeux, de streams et de communauté. Découvre nos contenus, nos jeux et rejoins-nous !" />
-    <title>StreamUnity — Accueil</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreamUnity - Accueil</title>
     <style>
         * {outline: none; box-sizing: border-box; margin: 0; padding: 0;}
-        body {background: linear-gradient(135deg, #2a1060, #1a0840); color: white; font-family: sans-serif; min-height: 100vh;}
+        body {
+            background: linear-gradient(135deg, #2a1060, #1a0840);
+            color: #efeff1;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+        }
         
-        /* --- MENU DE NAVIGATION --- */
-        .menu {background: rgba(0,0,0,0.3); padding: 15px; text-align: center; position: sticky; top: 0; z-index: 100;}
-        .menu a {display: inline-block; color: #ddd; text-decoration: none; padding: 10px 18px; margin: 0 5px; border-radius: 8px; transition: all 0.2s; font-size: 15px;}
-        .menu a:hover, .menu a.actif {background: #9147ff; color: white; font-weight: bold;}
-
-        /* --- CONTENU PRINCIPAL --- */
-        main {display: block;}
-        .conteneur {max-width: 900px; margin: 40px auto; padding: 20px; text-align: center;}
-        .conteneur h1 {font-size: 42px; margin-bottom: 10px; background: linear-gradient(90deg, #a970ff, #ff70c0); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
-        .sous-titre {color: #aaa; font-size: 18px; margin-bottom: 40px;}
+        .menu {
+            background: rgba(0,0,0,0.4);
+            padding: 14px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(145,71,255,0.3);
+        }
+        .menu a {
+            display: inline-block;
+            color: #adadb8;
+            text-decoration: none;
+            padding: 10px 16px;
+            margin: 0 4px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .menu a:hover, .menu a.actif {
+            background: #9147ff;
+            color: white;
+            font-weight: 600;
+        }
         
-        /* --- CARTES --- */
-        .grille {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;}
-        .carte {background: rgba(255,255,255,0.05); border: 2px solid #5533aa; border-radius: 15px; padding: 25px; transition: all 0.3s; text-decoration: none; color: white; display: block;}
-        .carte:hover {border-color: #9147ff; transform: translateY(-5px); box-shadow: 0 0 20px rgba(145,71,255,0.3);}
-        .carte-icone {font-size: 40px; margin-bottom: 15px;}
-        .carte-titre {font-size: 20px; font-weight: bold; margin-bottom: 8px;}
-        .carte-texte {color: #aaa; font-size: 14px;}
+        /* 🟣 ICÔNE FLOTTANTE À DROITE SUR TOUTES LES PAGES */
+        .icone-flottante {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #9147ff, #772ce8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(145,71,255,0.4);
+            cursor: pointer;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .icone-flottante:hover {
+            transform: translateY(-50%) scale(1.15);
+            box-shadow: 0 6px 20px rgba(145,71,255,0.6);
+        }
+        
+        .conteneur {max-width: 900px; margin: 30px auto; padding: 20px;}
+        .conteneur h1 {text-align: center; color: #9147ff; margin-bottom: 30px;}
     </style>
 </head>
 <body>
-    <!-- 📌 MENU DE NAVIGATION -->
+
+    <!-- 🟣 ICÔNE FLOTTANTE VERS PARAMÈTRES -->
+    <a href="parametres.html#langue" class="icone-flottante" title="Changer la langue">🌐</a>
+
+    <!-- 📋 MENU TRADUIT AUTOMATIQUEMENT -->
     <nav class="menu">
-        <a href="accueil.html" class="actif">🏠 Accueil</a>
-        <a href="streams.html">📺 Streams & Musique</a>
-        <a href="salon.html">💬 Discussions</a>
-        <a href="abonnements.html">💜 Abonnements</a>
-        <a href="profil.html">👤 Profil</a>
-        <a href="test-avis.html">📝 Test & Avis</a>
-        <a href="parametres.html">⚙️ Paramètres</a>
+        <a href="accueil.html" data-trad="menu_accueil" class="actif">🏠 Accueil</a>
+        <a href="streams.html" data-trad="menu_streams">📺 Streams & Musique</a>
+        <a href="salon.html" data-trad="menu_discussions">💬 Discussions</a>
+        <a href="abonnements.html" data-trad="menu_abonnements">💜 Abonnements</a>
+        <a href="profil.html" data-trad="menu_profil">👤 Profil</a>
+        <a href="test.html" data-trad="menu_test">🧪 Test & Avis</a>
+        <a href="parametres.html" data-trad="menu_parametres">⚙️ Paramètres</a>
     </nav>
 
-    <!-- 📢 CONTENU PRINCIPAL -->
-    <main>
-        <div class="conteneur">
-            <h1>🎮 StreamUnity</h1>
-            <p class="sous-titre">Ta plateforme de jeux, de streams et de communauté</p>
-            <div class="grille">
-                <a href="profil.html" class="carte">
-                    <div class="carte-icone">👤</div>
-                    <div class="carte-titre">Ton Profil</div>
-                    <div class="carte-texte">Modifie tes infos, ton avatar et tes réseaux</div>
-                </a>
-                <a href="abonnements.html" class="carte">
-                    <div class="carte-icone">💜</div>
-                    <div class="carte-titre">Abonnements</div>
-                    <div class="carte-texte">Soutiens la plateforme et débloque des avantages</div>
-                </a>
-                <a href="partenaire.html" class="carte">
-                    <div class="carte-icone">🏅</div>
-                    <div class="carte-titre">Partenaires</div>
-                    <div class="carte-texte">Découvre nos partenaires ou rejoins-nous</div>
-                </a>
-                <a href="parametres.html" class="carte">
-                    <div class="carte-icone">⚙️</div>
-                    <div class="carte-titre">Paramètres</div>
-                    <div class="carte-texte">Connecte tes comptes, manettes et règle l'affichage</div>
-                </a>
-                <a href="salon.html" class="carte">
-                    <div class="carte-icone">💬</div>
-                    <div class="carte-titre">Discussions</div>
-                    <div class="carte-texte">Viens discuter avec la communauté</div>
-                </a>
-            </div>
-        </div>
-    </main>
+    <!-- 📝 CONTENU DE LA PAGE -->
+    <div class="conteneur">
+        <h1>Bienvenue sur StreamUnity</h1>
+        <!-- Ton contenu ici -->
+    </div>
+
+<script>
+// 🌐 TOUTES LES TRADUCTIONS — CHAQUE LANGUE CHANGE TOUTE LA PLATEFORME
+const traductionsDispo = {
+    fr: { menu_accueil:"🏠 Accueil",menu_streams:"📺 Streams & Musique",menu_discussions:"💬 Discussions",menu_abonnements:"💜 Abonnements",menu_profil:"👤 Profil",menu_test:"🧪 Test & Avis",menu_parametres:"⚙️ Paramètres" },
+    en: { menu_accueil:"🏠 Home",menu_streams:"📺 Streams & Music",menu_discussions:"💬 Chat",menu_abonnements:"💜 Subscriptions",menu_profil:"👤 Profile",menu_test:"🧪 Test & Reviews",menu_parametres:"⚙️ Settings" },
+    es: { menu_accueil:"🏠 Inicio",menu_streams:"📺 Transmisiones & Música",menu_discussions:"💬 Chat",menu_abonnements:"💜 Suscripciones",menu_profil:"👤 Perfil",menu_test:"🧪 Prueba y Opiniones",menu_parametres:"⚙️ Configuración" },
+    de: { menu_accueil:"🏠 Startseite",menu_streams:"📺 Streams & Musik",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abonnements",menu_profil:"👤 Profil",menu_test:"🧪 Test & Bewertungen",menu_parametres:"⚙️ Einstellungen" },
+    it: { menu_accueil:"🏠 Home",menu_streams:"📺 Stream & Musica",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abbonamenti",menu_profil:"👤 Profilo",menu_test:"🧪 Test e Recensioni",menu_parametres:"⚙️ Impostazioni" },
+    pt: { menu_accueil:"🏠 Início",menu_streams:"📺 Transmissões & Música",menu_discussions:"💬 Conversas",menu_abonnements:"💜 Subscrições",menu_profil:"👤 Perfil",menu_test:"🧪 Teste & Avaliações",menu_parametres:"⚙️ Definições" },
+    "pt-BR": { menu_accueil:"🏠 Início",menu_streams:"📺 Transmissões & Música",menu_discussions:"💬 Conversas",menu_abonnements:"💜 Assinaturas",menu_profil:"👤 Perfil",menu_test:"🧪 Testes & Avaliações",menu_parametres:"⚙️ Configurações" },
+    nl: { menu_accueil:"🏠 Startpagina",menu_streams:"📺 Streams & Muziek",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abonnementen",menu_profil:"👤 Profiel",menu_test:"🧪 Test & Recensies",menu_parametres:"⚙️ Instellingen" },
+    ru: { menu_accueil:"🏠 Главная",menu_streams:"📺 Трансляции & Музыка",menu_discussions:"💬 Чат",menu_abonnements:"💜 Подписки",menu_profil:"👤 Профиль",menu_test:"🧪 Тест & Отзывы",menu_parametres:"⚙️ Настройки" },
+    ja: { menu_accueil:"🏠 ホーム",menu_streams:"📺 ストリーム & 音楽",menu_discussions:"💬 チャット",menu_abonnements:"💜 サブスクリプション",menu_profil:"👤 プロフィール",menu_test:"🧪 テスト & レビュー",menu_parametres:"⚙️ 設定" },
+    "zh-CN": { menu_accueil:"🏠 首页",menu_streams:"📺 直播 & 音乐",menu_discussions:"💬 聊天",menu_abonnements:"💜 订阅",menu_profil:"👤 个人资料",menu_test:"🧪 测试 & 评论",menu_parametres:"⚙️ 设置" },
+    "zh-TW": { menu_accueil:"🏠 首頁",menu_streams:"📺 直播 & 音樂",menu_discussions:"💬 聊天",menu_abonnements:"💜 訂閱",menu_profil:"👤 個人資料",menu_test:"🧪 測試 & 評論",menu_parametres:"⚙️ 設定" },
+    ko: { menu_accueil:"🏠 홈",menu_streams:"📺 스트림 & 음악",menu_discussions:"💬 채팅",menu_abonnements:"💜 구독",menu_profil:"👤 프로필",menu_test:"🧪 테스트 & 리뷰",menu_parametres:"⚙️ 설정" },
+    ar: { menu_accueil:"🏠 الرئيسية",menu_streams:"📺 البثوث والموسيقى",menu_discussions:"💬 المحادثات",menu_abonnements:"💜 الاشتراكات",menu_profil:"👤 الملف الشخصي",menu_test:"🧪 الاختبار والتقييمات",menu_parametres:"⚙️ الإعدادات" },
+    tr: { menu_accueil:"🏠 Ana Sayfa",menu_streams:"📺 Yayınlar & Müzik",menu_discussions:"💬 Sohbet",menu_abonnements:"💜 Abonelikler",menu_profil:"👤 Profil",menu_test:"🧪 Test & Değerlendirmeler",menu_parametres:"⚙️ Ayarlar" },
+    pl: { menu_accueil:"🏠 Strona główna",menu_streams:"📺 Transmisje & Muzyka",menu_discussions:"💬 Czat",menu_abonnements:"💜 Subskrypcje",menu_profil:"👤 Profil",menu_test:"🧪 Test & Recenzje",menu_parametres:"⚙️ Ustawienia" },
+    sv: { menu_accueil:"🏠 Hem",menu_streams:"📺 Streams & Musik",menu_discussions:"💬 Chatt",menu_abonnements:"💜 Prenumerationer",menu_profil:"👤 Profil",menu_test:"🧪 Test & Recensioner",menu_parametres:"⚙️ Inställningar" },
+    da: { menu_accueil:"🏠 Hjem",menu_streams:"📺 Streams & Musik",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abonnementer",menu_profil:"👤 Profil",menu_test:"🧪 Test & Anmeldelser",menu_parametres:"⚙️ Indstillinger" },
+    no: { menu_accueil:"🏠 Hjem",menu_streams:"📺 Strømmer & Musikk",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abonnementer",menu_profil:"👤 Profil",menu_test:"🧪 Test & Anmeldelser",menu_parametres:"⚙️ Innstillinger" },
+    fi: { menu_accueil:"🏠 Etusivu",menu_streams:"📺 Striimit & Musiikki",menu_discussions:"💬 Keskustelu",menu_abonnements:"💜 Tilaukset",menu_profil:"👤 Profiili",menu_test:"🧪 Test & Arvostelut",menu_parametres:"⚙️ Asetukset" },
+    hu: { menu_accueil:"🏠 Főoldal",menu_streams:"📺 Közvetítések & Zene",menu_discussions:"💬 Csevegés",menu_abonnements:"💜 Feliratkozások",menu_profil:"👤 Profil",menu_test:"🧪 Teszt & Vélemények",menu_parametres:"⚙️ Beállítások" },
+    cs: { menu_accueil:"🏠 Domů",menu_streams:"📺 Streamy & Hudba",menu_discussions:"💬 Diskuse",menu_abonnements:"💜 Odběry",menu_profil:"👤 Profil",menu_test:"🧪 Test & Recenze",menu_parametres:"⚙️ Nastavení" },
+    sk: { menu_accueil:"🏠 Domov",menu_streams:"📺 Streamy & Hudba",menu_discussions:"💬 Diskusia",menu_abonnements:"💜 Odbery",menu_profil:"👤 Profil",menu_test:"🧪 Test & Hodnotenia",menu_parametres:"⚙️ Nastavenia" },
+    ro: { menu_accueil:"🏠 Acasă",menu_streams:"📺 Transmisiuni & Muzică",menu_discussions:"💬 Discuții",menu_abonnements:"💜 Abonamente",menu_profil:"👤 Profil",menu_test:"🧪 Test & Recenzii",menu_parametres:"⚙️ Setări" },
+    bg: { menu_accueil:"🏠 Начало",menu_streams:"📺 Стриймове & Музика",menu_discussions:"💬 Чат",menu_abonnements:"💜 Абонаменти",menu_profil:"👤 Профил",menu_test:"🧪 Тест & Отзиви",menu_parametres:"⚙️ Настройки" },
+    uk: { menu_accueil:"🏠 Головна",menu_streams:"📺 Трансляції & Музика",menu_discussions:"💬 Чат",menu_abonnements:"💜 Підписки",menu_profil:"👤 Профіль",menu_test:"🧪 Тест & Відгуки",menu_parametres:"⚙️ Налаштування" },
+    el: { menu_accueil:"🏠 Αρχική",menu_streams:"📺 Μεταδόσεις & Μουσική",menu_discussions:"💬 Συζήτηση",menu_abonnements:"💜 Συνδρομές",menu_profil:"👤 Προφίλ",menu_test:"🧪 Δοκιμή & Αξιολογήσεις",menu_parametres:"⚙️ Ρυθμίσεις" },
+    hi: { menu_accueil:"🏠 होम",menu_streams:"📺 स्ट्रीम & संगीत",menu_discussions:"💬 चैट",menu_abonnements:"💜 सदस्यताएं",menu_profil:"👤 प्रोफ़ाइल",menu_test:"🧪 परीक्षण & समीक्षाएं",menu_parametres:"⚙️ सेटिंग" },
+    bn: { menu_accueil:"🏠 হোম",menu_streams:"📺 স্ট্রীম & সঙ্গীত",menu_discussions:"💬 আলোচনা",menu_abonnements:"💜 সাবস্ক্রিপশন",menu_profil:"👤 প্রোফাইল",menu_test:"🧪 পরীক্ষা & মতামত",menu_parametres:"⚙️ সেটিংস" },
+    vi: { menu_accueil:"🏠 Trang chủ",menu_streams:"📺 Trực tiếp & Nhạc",menu_discussions:"💬 Trò chuyện",menu_abonnements:"💜 Đăng ký",menu_profil:"👤 Hồ sơ",menu_test:"🧪 Kiểm tra & Đánh giá",menu_parametres:"⚙️ Cài đặt" },
+    th: { menu_accueil:"🏠 หน้าแรก",menu_streams:"📺 สตรีม & เพลง",menu_discussions:"💬 แชท",menu_abonnements:"💜 การสมัคร",menu_profil:"👤 โปรไฟล์",menu_test:"🧪 ทดสอบ & รีวิว",menu_parametres:"⚙️ การตั้งค่า" },
+    id: { menu_accueil:"🏠 Beranda",menu_streams:"📺 Siaran & Musik",menu_discussions:"💬 Obrolan",menu_abonnements:"💜 Langganan",menu_profil:"👤 Profil",menu_test:"🧪 Uji & Ulasan",menu_parametres:"⚙️ Pengaturan" },
+    ms: { menu_accueil:"🏠 Laman Utama",menu_streams:"📺 Siaran & Muzik",menu_discussions:"💬 Perbualan",menu_abonnements:"💜 Langganan",menu_profil:"👤 Profil",menu_test:"🧪 Ujian & Ulasan",menu_parametres:"⚙️ Tetapan" },
+    tl: { menu_accueil:"🏠 Tahanan",menu_streams:"📺 Stream & Musika",menu_discussions:"💬 Usapan",menu_abonnements:"💜 Mga Subskripsyon",menu_profil:"👤 Profile",menu_test:"🧪 Pagsusuri & Pagsusuri",menu_parametres:"⚙️ Mga Setting" },
+    fa: { menu_accueil:"🏠 خانه",menu_streams:"📺 پخش‌ها & موسیقی",menu_discussions:"💬 گفتگو",menu_abonnements:"💜 اشتراک‌ها",menu_profil:"👤 پروفایل",menu_test:"🧪 آزمون & نظرات",menu_parametres:"⚙️ تنظیمات" },
+    uz: { menu_accueil:"🏠 Bosh sahifa",menu_streams:"📺 Translyatsiyalar & Musiqa",menu_discussions:"💬 Suhbat",menu_abonnements:"💜 Obunalar",menu_profil:"👤 Profil",menu_test:"🧪 Sinov & Fikrlar",menu_parametres:"⚙️ Sozlamalar" },
+    kk: { menu_accueil:"🏠 Басты бет",menu_streams:"📺 Трансляциялар & Музыка",menu_discussions:"💬 Сөйлесу",menu_abonnements:"💜 Жазылулар",menu_profil:"👤 Профиль",menu_test:"🧪 Сынақ & Пікірлер",menu_parametres:"⚙️ Параметрлер" },
+    he: { menu_accueil:"🏠 דף הבית",menu_streams:"📺 שידורים & מוזיקה",menu_discussions:"💬 צ'אט",menu_abonnements:"💜 מינויים",menu_profil:"👤 פרופיל",menu_test:"🧪 בדיקה & ביקורות",menu_parametres:"⚙️ הגדרות" },
+    ta: { menu_accueil:"🏠 முகப்பு",menu_streams:"📺 ஸ்ட்ரீம் & இசை",menu_discussions:"💬 அரட்டை",menu_abonnements:"💜 சந்தாக்கள்",menu_profil:"👤 சுயவிவரம்",menu_test:"🧪 சோதனை & மதிப்புரைகள்",menu_parametres:"⚙️ அமைப்புகள்" },
+    sw: { menu_accueil:"🏠 Mwanzo",menu_streams:"📺 Matangazo & Muziki",menu_discussions:"💬 Ongea",menu_abonnements:"💜 Usajili",menu_profil:"👤 Wasifu",menu_test:"🧪 Jaribio & Maoni",menu_parametres:"⚙️ Mipangilio" },
+    sr: { menu_accueil:"🏠 Почетна",menu_streams:"📺 Стримови & Музика",menu_discussions:"💬 Ћаскање",menu_abonnements:"💜 Претплате",menu_profil:"👤 Профил",menu_test:"🧪 Тест & Рецензије",menu_parametres:"⚙️ Подешавања" },
+    hr: { menu_accueil:"🏠 Početna",menu_streams:"📺 Streamovi & Glazba",menu_discussions:"💬 Razgovor",menu_abonnements:"💜 Pretplate",menu_profil:"👤 Profil",menu_test:"🧪 Test & Recenzije",menu_parametres:"⚙️ Postavke" },
+    sl: { menu_accueil:"🏠 Domov",menu_streams:"📺 Pretakanje & Glasba",menu_discussions:"💬 Klepet",menu_abonnements:"💜 Naročnine",menu_profil:"👤 Profil",menu_test:"🧪 Preizkus & Ocene",menu_parametres:"⚙️ Nastavitve" },
+    lt: { menu_accueil:"🏠 Pagrindinis",menu_streams:"📺 Transliacijos & Muzika",menu_discussions:"💬 Pokalbis",menu_abonnements:"💜 Prenumeratos",menu_profil:"👤 Profilis",menu_test:"🧪 Bandymas & Atsiliepimai",menu_parametres:"⚙️ Nustatymai" }
+};
+
+// 🌐 APPLIQUER LA LANGUE CHOISIE SUR TOUTE LA PAGE
+function appliquerLangueGlobale() {
+    const langue = localStorage.getItem('langueSite') || 'fr';
+    const t = traductionsDispo[langue] || traductionsDispo.en;
+    document.documentElement.lang = langue;
+    document.querySelectorAll('[data-trad]').forEach(el => {
+        const cle = el.getAttribute('data-trad');
+        if (t[cle]) el.textContent = t[cle];
+    });
+}
+
+// ✅ Exécuter automatiquement au chargement
+appliquerLangueGlobale();
+</script>
 </body>
 </html>
