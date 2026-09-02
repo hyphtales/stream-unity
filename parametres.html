@@ -39,6 +39,32 @@
             font-weight: 600;
         }
         
+        /* 🟣 ICÔNE FLOTTANTE À DROITE — SUR TOUTES LES PAGES */
+        .icone-flottante {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #9147ff, #772ce8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(145,71,255,0.4);
+            cursor: pointer;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .icone-flottante:hover {
+            transform: translateY(-50%) scale(1.15);
+            box-shadow: 0 6px 20px rgba(145,71,255,0.6);
+        }
+        
         .conteneur {max-width: 700px; margin: 30px auto; padding: 20px;}
         .entete {text-align: center; margin-bottom: 30px;}
         .entete h2 {font-size: 28px; color: #9147ff; margin-bottom: 8px;}
@@ -92,27 +118,30 @@
     </style>
 </head>
 <body>
+
+    <!-- 🟣 ICÔNE FLOTTANTE — CLIQUABLE VERS LANGUE -->
+    <a href="#langue" class="icone-flottante" title="Changer la langue">🌐</a>
+
     <nav class="menu">
-        <a href="accueil.html">🏠 Accueil</a>
-        <a href="streams.html">📺 Streams & Musique</a>
-        <a href="salon.html">💬 Discussions</a>
-        <a href="abonnements.html">💜 Abonnements</a>
-        <a href="profil.html">👤 Profil</a>
-        <a href="test.html">🧪 Test & Avis</a>
-        <a href="parametres.html" class="actif">⚙️ Paramètres</a>
-        <a href="parametres.html#langue">🌐</a>
+        <a href="accueil.html" data-trad="menu_accueil">🏠 Accueil</a>
+        <a href="streams.html" data-trad="menu_streams">📺 Streams & Musique</a>
+        <a href="salon.html" data-trad="menu_discussions">💬 Discussions</a>
+        <a href="abonnements.html" data-trad="menu_abonnements">💜 Abonnements</a>
+        <a href="profil.html" data-trad="menu_profil">👤 Profil</a>
+        <a href="test.html" data-trad="menu_test">🧪 Test & Avis</a>
+        <a href="parametres.html" class="actif" data-trad="menu_parametres">⚙️ Paramètres</a>
     </nav>
 
     <div class="conteneur">
         <div class="entete">
-            <h2>⚙️ Paramètres & Réglages</h2>
-            <p>Personnalise ta plateforme comme tu veux !</p>
+            <h2 data-trad="titre">⚙️ Paramètres & Réglages</h2>
+            <p data-trad="sous_titre">Personnalise ta plateforme comme tu veux !</p>
         </div>
 
         <!-- 🌐 CHANGER DE LANGUE -->
         <div class="bloc-reglage" id="langue">
-            <h3>🌐 Langue de la plateforme</h3>
-            <p class="description">Choisis la langue dans laquelle s'affiche tout le site.</p>
+            <h3>🌐 <span data-trad="bloc_langue">Langue de la plateforme</span></h3>
+            <p class="description" data-trad="desc_langue">Choisis la langue dans laquelle s'affiche tout le site.</p>
             <select id="choixLangue" onchange="changerLangue()">
                 <option value="fr">🇫🇷 Français</option>
                 <option value="en">🇬🇧 Anglais</option>
@@ -160,13 +189,13 @@
                 <option value="sl">🇸🇮 Slovène</option>
                 <option value="lt">🇱🇹 Lituanien</option>
             </select>
-            <div class="sauvegarde" id="etatLangue">✅ Actuel : 🇫🇷 Français</div>
+            <div class="sauvegarde" id="etatLangue">✅ <span data-trad="actuel">Actuel</span> : 🇫🇷 Français</div>
         </div>
 
-        <!-- 📝 SOUS-TITRES -->
+        <!-- 📝 SOUS-TITRES POUR LES LIVES ET VIDÉOS -->
         <div class="bloc-reglage">
-            <h3>📝 Sous-titres par défaut</h3>
-            <p class="description">Choisis la langue des sous-titres pour les vidéos et streams.</p>
+            <h3>📝 <span data-trad="bloc_soustitres">Sous-titres par défaut</span></h3>
+            <p class="description" data-trad="desc_soustitres">Sous-titres automatiquement activés pour les lives et les vidéos.</p>
             <select id="choixSousTitres" onchange="changerSousTitres()">
                 <option value="fr">🇫🇷 Français</option>
                 <option value="en">🇬🇧 Anglais</option>
@@ -212,3 +241,216 @@
                 <option value="hr">🇭🇷 Croate</option>
                 <option value="sl">🇸🇮 Slovène</option>
                 <option value="lt">🇱🇹 Lituanien</option>
+                <option value="off" data-trad="sous_off">❌ Sans sous-titres</option>
+            </select>
+            <div class="sauvegarde" id="etatSousTitres">✅ <span data-trad="actuel">Actuel</span> : 🇫🇷 Français</div>
+        </div>
+    </div>
+
+<script>
+// 🌐 TRADUCTIONS
+const traductions = {
+    fr: {
+        menu_accueil: "🏠 Accueil",
+        menu_streams: "📺 Streams & Musique",
+        menu_discussions: "💬 Discussions",
+        menu_abonnements: "💜 Abonnements",
+        menu_profil: "👤 Profil",
+        menu_test: "🧪 Test & Avis",
+        menu_parametres: "⚙️ Paramètres",
+        titre: "⚙️ Paramètres & Réglages",
+        sous_titre: "Personnalise ta plateforme comme tu veux !",
+        bloc_langue: "Langue de la plateforme",
+        desc_langue: "Choisis la langue dans laquelle s'affiche tout le site.",
+        bloc_soustitres: "Sous-titres par défaut",
+        desc_soustitres: "Sous-titres automatiquement activés pour les lives et les vidéos.",
+        actuel: "Actuel",
+        sous_off: "❌ Sans sous-titres"
+    },
+    en: {
+        menu_accueil: "🏠 Home",
+        menu_streams: "📺 Streams & Music",
+        menu_discussions: "💬 Chat",
+        menu_abonnements: "💜 Subscriptions",
+        menu_profil: "👤 Profile",
+        menu_test: "🧪 Test & Reviews",
+        menu_parametres: "⚙️ Settings",
+        titre: "⚙️ Settings & Preferences",
+        sous_titre: "Customize your platform as you like!",
+        bloc_langue: "Platform Language",
+        desc_langue: "Choose the language for the entire site.",
+        bloc_soustitres: "Default Subtitles",
+        desc_soustitres: "Subtitles automatically enabled for live streams and videos.",
+        actuel: "Current",
+        sous_off: "❌ Disabled"
+    },
+    es: {
+        menu_accueil: "🏠 Inicio",
+        menu_streams: "📺 Streams y Música",
+        menu_discussions: "💬 Chat",
+        menu_abonnements: "💜 Suscripciones",
+        menu_profil: "👤 Perfil",
+        menu_test: "🧪 Prueba y Opiniones",
+        menu_parametres: "⚙️ Configuración",
+        titre: "⚙️ Configuración y Ajustes",
+        sous_titre: "¡Personaliza tu plataforma a tu gusto!",
+        bloc_langue: "Idioma de la plataforma",
+        desc_langue: "Elige el idioma de todo el sitio.",
+        bloc_soustitres: "Subtítulos por defecto",
+        desc_soustitres: "Subtítulos activados automáticamente para directos y vídeos.",
+        actuel: "Actual",
+        sous_off: "❌ Desactivados"
+    },
+    de: {
+        menu_accueil: "🏠 Startseite",
+        menu_streams: "📺 Streams & Musik",
+        menu_discussions: "💬 Chat",
+        menu_abonnements: "💜 Abonnements",
+        menu_profil: "👤 Profil",
+        menu_test: "🧪 Test & Bewertungen",
+        menu_parametres: "⚙️ Einstellungen",
+        titre: "⚙️ Einstellungen",
+        sous_titre: "Passe deine Plattform nach Wunsch an!",
+        bloc_langue: "Plattform-Sprache",
+        desc_langue: "Wähle die Sprache für die gesamte Seite.",
+        bloc_soustitres: "Standard-Untertitel",
+        desc_soustitres: "Untertitel automatisch aktiv für Livestreams und Videos.",
+        actuel: "Aktuell",
+        sous_off: "❌ Deaktiviert"
+    },
+    it: {
+        menu_accueil: "🏠 Home",
+        menu_streams: "📺 Stream & Musica",
+        menu_discussions: "💬 Chat",
+        menu_abonnements: "💜 Abbonamenti",
+        menu_profil: "👤 Profilo",
+        menu_test: "🧪 Test e Recensioni",
+        menu_parametres: "⚙️ Impostazioni",
+        titre: "⚙️ Impostazioni",
+        sous_titre: "Personalizza la tua piattaforma!",
+        bloc_langue: "Lingua della piattaforma",
+        desc_langue: "Scegli la lingua del sito.",
+        bloc_soustitres: "Sottotitoli predefiniti",
+        desc_soustitres: "Sottotitoli attivi per dirette e video.",
+        actuel: "Attuale",
+        sous_off: "❌ Disattivati"
+    },
+    pt: {
+        menu_accueil: "🏠 Início",
+        menu_streams: "📺 Streams & Música",
+        menu_discussions: "💬 Chat",
+        menu_abonnements: "💜 Subscrições",
+        menu_profil: "👤 Perfil",
+        menu_test: "🧪 Teste & Avaliações",
+        menu_parametres: "⚙️ Definições",
+        titre: "⚙️ Definições",
+        sous_titre: "Personalize a sua plataforma!",
+        bloc_langue: "Idioma da plataforma",
+        desc_langue: "Escolha o idioma de todo o site.",
+        bloc_soustitres: "Legendas por defeito",
+        desc_soustitres: "Legendas ativadas para transmissões ao vivo e vídeos.",
+        actuel: "Atual",
+        sous_off: "❌ Desativadas"
+    }
+};
+
+const nomsLangues = {
+    fr: "🇫🇷 Français",
+    en: "🇬🇧 Anglais",
+    es: "🇪🇸 Espagnol",
+    de: "🇩🇪 Allemand",
+    it: "🇮🇹 Italien",
+    pt: "🇵🇹 Portugais",
+    "pt-BR": "🇧🇷 Portugais (Brésil)",
+    nl: "🇳🇱 Néerlandais",
+    "nl-BE": "🇧🇪 Néerlandais (Belgique)",
+    ru: "🇷🇺 Russe",
+    ja: "🇯🇵 Japonais",
+    "zh-CN": "🇨🇳 Chinois (simplifié)",
+    "zh-TW": "🇭🇰 Chinois (traditionnel)",
+    ko: "🇰🇷 Coréen",
+    ar: "🇸🇦 Arabe",
+    tr: "🇹🇷 Turc",
+    pl: "🇵🇱 Polonais",
+    sv: "🇸🇪 Suédois",
+    da: "🇩🇰 Danois",
+    no: "🇳🇴 Norvégien",
+    fi: "🇫🇮 Finnois",
+    hu: "🇭🇺 Hongrois",
+    cs: "🇨🇿 Tchèque",
+    sk: "🇸🇰 Slovaque",
+    ro: "🇷🇴 Roumain",
+    bg: "🇧🇬 Bulgare",
+    uk: "🇺🇦 Ukrainien",
+    el: "🇬🇷 Grec",
+    hi: "🇭🇮 Hindi",
+    bn: "🇧🇩 Bengali",
+    vi: "🇻🇳 Vietnamien",
+    th: "🇹🇭 Thaï",
+    id: "🇮🇩 Indonésien",
+    ms: "🇲🇾 Malais",
+    tl: "🇵🇭 Tagalog",
+    fa: "🇮🇷 Persan",
+    uz: "🇺🇿 Ouzbek",
+    kk: "🇰🇿 Kazakh",
+    he: "🇮🇱 Hébreu",
+    ta: "🇱🇰 Tamoul",
+    sw: "🇸🇿 Swahili",
+    sr: "🇷🇸 Serbe",
+    hr: "🇭🇷 Croate",
+    sl: "🇸🇮 Slovène",
+    lt: "🇱🇹 Lituanien",
+    off: "❌ Sans sous-titres"
+};
+
+// 🌐 APPLIQUER LA LANGUE SUR TOUTE LA PAGE
+function appliquerLangue(langue) {
+    const t = traductions[langue] || traductions.fr;
+    document.documentElement.lang = langue;
+    
+    document.querySelectorAll('[data-trad]').forEach(el => {
+        const cle = el.getAttribute('data-trad');
+        if (t[cle]) el.textContent = t[cle];
+    });
+    
+    const texteActuel = t.actuel || "Actuel";
+    document.getElementById('etatLangue').innerHTML = `✅ ${texteActuel} : ${nomsLangues[langue]}`;
+}
+
+// 📝 METTRE À JOUR L'AFFICHAGE SOUS-TITRES
+function mettreAJourAffichageSousTitres(codeLangue) {
+    const langue = localStorage.getItem('langueSite') || 'fr';
+    const t = traductions[langue] || traductions.fr;
+    const texteActuel = t.actuel || "Actuel";
+    document.getElementById('etatSousTitres').innerHTML = `✅ ${texteActuel} : ${nomsLangues[codeLangue]}`;
+}
+
+// 🌐 CHANGER LA LANGUE
+function changerLangue() {
+    const langue = document.getElementById('choixLangue').value;
+    localStorage.setItem('langueSite', langue);
+    appliquerLangue(langue);
+    mettreAJourAffichageSousTitres(localStorage.getItem('sousTitresDefaut') || 'fr');
+}
+
+// 📝 CHANGER LES SOUS-TITRES
+function changerSousTitres() {
+    const st = document.getElementById('choixSousTitres').value;
+    localStorage.setItem('sousTitresDefaut', st);
+    mettreAJourAffichageSousTitres(st);
+}
+
+// 💾 CHARGER AU DÉMARRAGE
+window.addEventListener('DOMContentLoaded', function() {
+    const langueSauvegardee = localStorage.getItem('langueSite') || 'fr';
+    const stSauvegardes = localStorage.getItem('sousTitresDefaut') || 'fr';
+    
+    document.getElementById('choixLangue').value = langueSauvegardee;
+    document.getElementById('choixSousTitres').value = stSauvegardes;
+    
+    appliquerLangue(langueSauvegardee);
+    mettreAJourAffichageSousTitres(stSauvegardes);
+});
+</script>
+</body>
+</html>
