@@ -224,6 +224,8 @@
         <a href="profil.html">👤 Profil</a>
         <a href="test.html">🧪 Test & Avis</a>
         <a href="parametres.html">⚙️ Paramètres</a>
+        <!-- 🌐 BOUTON LANGUE --->
+        <a href="parametres.html#langue">🌐</a>
     </nav>
     <div class="conteneur">
         <div class="entete">
@@ -308,23 +310,16 @@ window.addEventListener('DOMContentLoaded', function() {
     
     boutonsQualite.forEach(bouton => {
         bouton.addEventListener('click', function() {
-            // Retirer "actif" de TOUS les boutons
             boutonsQualite.forEach(b => b.classList.remove('active'));
-            // Mettre "actif" SUR LE BOUTON CLIQUÉ
             this.classList.add('active');
             
-            // Sauvegarder où on en était dans la vidéo
             const position = lecteur.currentTime;
             const enLecture = !lecteur.paused;
             
-            // Changer la source
             lecteur.src = this.dataset.src;
             lecteur.load();
-            
-            // Reprendre à la même position
             lecteur.currentTime = position;
             
-            // Si ça lisait, reprendre
             if (enLecture) {
                 lecteur.play().catch(err => {
                     console.log('ℹ️ Clique sur la vidéo pour reprendre');
