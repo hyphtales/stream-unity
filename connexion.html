@@ -21,10 +21,11 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            padding-top: 80px;
             transition: background 0.4s ease, color 0.4s ease;
         }
 
-        /* === 🎨 TROIS THÈMES — LIBRE CHOIX UTILISATEUR === */
+        /* === 🎨 TROIS THÈMES === */
         body.clair {
             background: linear-gradient(135deg, #f0efff, #dcd6ff);
             color: #2b1055;
@@ -36,6 +37,169 @@
         body.violet {
             background: linear-gradient(135deg, #4b0096, #2a0060);
             color: #ffffff;
+        }
+
+        /* === 🌐 BOUTON LANGUE — EN HAUT À DROITE === */
+        .bouton-langue {
+            position: fixed;
+            top: 15px;
+            right: 110px;
+            z-index: 999;
+        }
+        .btn-terre {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid rgba(160, 110, 255, 0.4);
+            background: rgba(30, 15, 60, 0.5);
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+        }
+        .btn-terre:hover {
+            border-color: #b070ff;
+            background: rgba(145, 71, 255, 0.2);
+            transform: scale(1.08);
+        }
+
+        /* === LISTE DES LANGUES === */
+        .liste-langue {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            width: 280px;
+            max-height: 70vh;
+            overflow-y: auto;
+            background: rgba(30, 15, 60, 0.95);
+            border: 2px solid rgba(160, 110, 255, 0.35);
+            border-radius: 14px;
+            padding: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            display: none;
+            backdrop-filter: blur(10px);
+        }
+        .liste-langue.ouvert {
+            display: block;
+        }
+        .liste-langue button {
+            width: 100%;
+            padding: 10px 12px;
+            text-align: left;
+            border: none;
+            background: transparent;
+            color: #d0c0f0;
+            font-size: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            margin-bottom: 2px;
+        }
+        .liste-langue button:hover {
+            background: rgba(145, 71, 255, 0.2);
+        }
+        .liste-langue button.actif {
+            background: #9050ff;
+            color: white;
+        }
+
+        /* === ⚙️ BOUTON RÉGLAGES === */
+        .bouton-reglages {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            z-index: 999;
+        }
+        .btn-reglages {
+            padding: 8px 14px;
+            border: 2px solid rgba(160, 110, 255, 0.4);
+            background: rgba(30, 15, 60, 0.5);
+            color: #d0c0f0;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+        .btn-reglages:hover {
+            border-color: #b070ff;
+            background: rgba(145, 71, 255, 0.2);
+        }
+
+        /* === PANNEAU RÉGLAGES === */
+        .panneau-reglages {
+            position: absolute;
+            top: 45px;
+            right: 0;
+            width: 300px;
+            background: rgba(30, 15, 60, 0.95);
+            border: 2px solid rgba(160, 110, 255, 0.35);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            display: none;
+            backdrop-filter: blur(10px);
+        }
+        .panneau-reglages.ouvert {
+            display: block;
+        }
+        .panneau-reglages h4 {
+            color: #c090ff;
+            font-size: 15px;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(120, 80, 200, 0.3);
+        }
+        .ligne-param {
+            margin-bottom: 14px;
+        }
+        .ligne-param label {
+            display: block;
+            color: #d0c0f0;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+        select {
+            width: 100%;
+            padding: 9px 12px;
+            border-radius: 8px;
+            border: 2px solid rgba(110, 70, 180, 0.4);
+            background: rgba(50, 25, 90, 0.5);
+            color: #e0d8ff;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+        }
+        select:focus {
+            border-color: #b070ff;
+        }
+        .choix-theme {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .btn-theme {
+            padding: 6px 12px;
+            border: 2px solid rgba(160, 110, 255, 0.4);
+            background: rgba(50, 25, 90, 0.5);
+            color: #d0c0f0;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+        .btn-theme:hover {
+            border-color: #b070ff;
+        }
+        .btn-theme.actif {
+            background: #9050ff;
+            border-color: #a060ff;
+            color: white;
+            box-shadow: 0 0 8px rgba(145, 71, 255, 0.35);
         }
 
         /* === CADRE PRINCIPAL === */
@@ -59,7 +223,6 @@
             font-weight: 800;
             letter-spacing: -0.5px;
         }
-
         .sous-titre {
             text-align: center;
             color: #b0a0d0;
@@ -95,7 +258,6 @@
 
         /* === FORMULAIRE === */
         .groupe {margin-bottom: 18px;}
-
         label {
             display: block;
             margin-bottom: 7px;
@@ -103,7 +265,6 @@
             font-size: 14px;
             font-weight: 500;
         }
-
         input {
             width: 100%;
             padding: 13px 15px;
@@ -115,9 +276,7 @@
             outline: none;
             transition: all 0.25s ease;
         }
-        input::placeholder {
-            color: #8070a0;
-        }
+        input::placeholder { color: #8070a0; }
         input:focus {
             border-color: #b070ff;
             box-shadow: 0 0 0 3px rgba(160, 100, 255, 0.2);
@@ -167,45 +326,27 @@
         }
         .btn-apple:hover {background: #f0f0f0;}
 
-        /* === SÉPARATEUR === */
+        /* === SÉPARATEUR & LIENS === */
         .separateur {
             display: flex; align-items: center; gap: 12px; margin: 22px 0;
-            color: #8070a0;
-            font-size: 14px;
+            color: #8070a0; font-size: 14px;
         }
         .separateur::before, .separateur::after {
             content: ''; flex: 1; height: 1px;
             background: linear-gradient(90deg, transparent, rgba(120, 90, 180, 0.4), transparent);
         }
-
-        /* === LIENS === */
         .lien {
             text-align: center; margin-top: 20px; font-size: 14px;
         }
         .lien a {
-            color: #c090ff;
-            text-decoration: none;
-            font-weight: 500;
+            color: #c090ff; text-decoration: none; font-weight: 500;
         }
         .lien a:hover {
-            color: #e0c0ff;
-            text-decoration: underline;
+            color: #e0c0ff; text-decoration: underline;
         }
 
-        /* === TITRE SECTION MOT DE PASSE OUBLIÉ === */
-        h3 {
-            color: #d0b0ff;
-            font-size: 20px;
-            margin-bottom: 12px;
-        }
-
-        /* === PARAGRAPHES === */
-        p {
-            color: #b0a0d0;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 18px;
-        }
+        h3 { color: #d0b0ff; font-size: 20px; margin-bottom: 12px; }
+        p { color: #b0a0d0; font-size: 14px; line-height: 1.6; margin-bottom: 18px; }
 
         /* === MESSAGES === */
         .message {
@@ -222,23 +363,96 @@
             color: #ff9090;
             display: block !important;
         }
-
         .cache {display: none !important;}
     </style>
 </head>
 <body class="violet">
 
+    <!-- 🌐 BOUTON LANGUE (LA TERRE) -->
+    <div class="bouton-langue">
+        <button class="btn-terre" onclick="basculerListeLangue()">🌐</button>
+        <div class="liste-langue" id="liste-langue">
+            <button onclick="choisirLangue('fr')" data-langue="fr">🇫🇷 Français</button>
+            <button onclick="choisirLangue('en')" data-langue="en">🇬🇧 Anglais</button>
+            <button onclick="choisirLangue('es')" data-langue="es">🇪🇸 Espagnol</button>
+            <button onclick="choisirLangue('de')" data-langue="de">🇩🇪 Allemand</button>
+            <button onclick="choisirLangue('it')" data-langue="it">🇮🇹 Italien</button>
+            <button onclick="choisirLangue('pt')" data-langue="pt">🇵🇹 Portugais</button>
+            <button onclick="choisirLangue('pt-br')" data-langue="pt-br">🇧🇷 Portugais (Brésil)</button>
+            <button onclick="choisirLangue('nl')" data-langue="nl">🇳🇱 Néerlandais</button>
+            <button onclick="choisirLangue('nl-be')" data-langue="nl-be">🇧🇪 Néerlandais (Belgique)</button>
+            <button onclick="choisirLangue('ru')" data-langue="ru">🇷🇺 Russe</button>
+            <button onclick="choisirLangue('ja')" data-langue="ja">🇯🇵 Japonais</button>
+            <button onclick="choisirLangue('zh')" data-langue="zh">🇨🇳 Chinois (simplifié)</button>
+            <button onclick="choisirLangue('zh-hk')" data-langue="zh-hk">🇭🇰 Chinois (traditionnel)</button>
+            <button onclick="choisirLangue('ko')" data-langue="ko">🇰🇷 Coréen</button>
+            <button onclick="choisirLangue('ar')" data-langue="ar">🇸🇦 Arabe</button>
+            <button onclick="choisirLangue('tr')" data-langue="tr">🇹🇷 Turc</button>
+            <button onclick="choisirLangue('pl')" data-langue="pl">🇵🇱 Polonais</button>
+            <button onclick="choisirLangue('sv')" data-langue="sv">🇸🇪 Suédois</button>
+            <button onclick="choisirLangue('da')" data-langue="da">🇩🇰 Danois</button>
+            <button onclick="choisirLangue('no')" data-langue="no">🇳🇴 Norvégien</button>
+            <button onclick="choisirLangue('fi')" data-langue="fi">🇫🇮 Finnois</button>
+            <button onclick="choisirLangue('hu')" data-langue="hu">🇭🇺 Hongrois</button>
+            <button onclick="choisirLangue('cs')" data-langue="cs">🇨🇿 Tchèque</button>
+            <button onclick="choisirLangue('sk')" data-langue="sk">🇸🇰 Slovaque</button>
+            <button onclick="choisirLangue('ro')" data-langue="ro">🇷🇴 Roumain</button>
+            <button onclick="choisirLangue('bg')" data-langue="bg">🇧🇬 Bulgare</button>
+            <button onclick="choisirLangue('uk')" data-langue="uk">🇺🇦 Ukrainien</button>
+            <button onclick="choisirLangue('el')" data-langue="el">🇬🇷 Grec</button>
+            <button onclick="choisirLangue('hi')" data-langue="hi">🇭🇮 Hindi</button>
+            <button onclick="choisirLangue('bn')" data-langue="bn">🇧🇩 Bengali</button>
+            <button onclick="choisirLangue('vi')" data-langue="vi">🇻🇳 Vietnamien</button>
+            <button onclick="choisirLangue('th')" data-langue="th">🇹🇭 Thaï</button>
+            <button onclick="choisirLangue('id')" data-langue="id">🇮🇩 Indonésien</button>
+            <button onclick="choisirLangue('ms')" data-langue="ms">🇲🇾 Malais</button>
+            <button onclick="choisirLangue('tl')" data-langue="tl">🇵🇭 Tagalog (Philippines)</button>
+            <button onclick="choisirLangue('fa')" data-langue="fa">🇮🇷 Persan</button>
+            <button onclick="choisirLangue('uz')" data-langue="uz">🇺🇿 Ouzbek</button>
+            <button onclick="choisirLangue('kk')" data-langue="kk">🇰🇿 Kazakh</button>
+            <button onclick="choisirLangue('he')" data-langue="he">🇮🇱 Hébreu</button>
+            <button onclick="choisirLangue('ta')" data-langue="ta">🇱🇰 Tamoul</button>
+            <button onclick="choisirLangue('sw')" data-langue="sw">🇸🇿 Swahili</button>
+            <button onclick="choisirLangue('sr')" data-langue="sr">🇷🇸 Serbe</button>
+            <button onclick="choisirLangue('hr')" data-langue="hr">🇭🇷 Croate</button>
+            <button onclick="choisirLangue('sl')" data-langue="sl">🇸🇮 Slovène</button>
+            <button onclick="choisirLangue('lt')" data-langue="lt">🇱🇹 Lituanien</button>
+        </div>
+    </div>
+
+    <!-- ⚙️ BOUTON RÉGLAGES -->
+    <div class="bouton-reglages">
+        <button class="btn-reglages" onclick="basculerReglages()">⚙️ Réglages</button>
+        <div class="panneau-reglages" id="panneau-reglages">
+            <h4>📝 Sous-titres</h4>
+            <div class="ligne-param">
+                <select id="choix-sous-titres" onchange="sauvegarderReglages()">
+                    <option value="toujours">✅ Toujours affichés</option>
+                    <option value="etrangers">🌐 Seulement en langue étrangère</option>
+                    <option value="desactive">❌ Désactivés</option>
+                </select>
+            </div>
+            <h4>🎨 Thème</h4>
+            <div class="ligne-param">
+                <div class="choix-theme">
+                    <button class="btn-theme" data-theme="sombre" onclick="choisirTheme('sombre', this)">🌙 Sombre</button>
+                    <button class="btn-theme" data-theme="clair" onclick="choisirTheme('clair', this)">☀️ Clair</button>
+                    <button class="btn-theme" data-theme="violet" onclick="choisirTheme('violet', this)">💜 Violet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === CADRE CONNEXION === -->
     <div class="cadre">
         <h1>StreamUnity</h1>
         <p class="sous-titre">Communauté & Streaming</p>
 
-        <!-- ONGLETS -->
         <div class="onglets">
             <div class="onglet actif" onclick="changerOnglet('connexion')">Connexion</div>
             <div class="onglet" onclick="changerOnglet('inscription')">S'inscrire</div>
         </div>
 
-        <!-- FORMULAIRE CONNEXION -->
         <div id="form-connexion">
             <div class="groupe">
                 <label>E-mail ou identifiant</label>
@@ -253,130 +467,144 @@
 
             <div class="separateur">ou</div>
 
-            <button class="btn btn-google" onclick="alert('🔵 Connexion avec Google en cours...')">
-                🔵 Continuer avec Google
-            </button>
-            <button class="btn btn-amazon" onclick="alert('📦 Connexion avec Amazon en cours...')">
-                📦 Continuer avec Amazon
-            </button>
-            <button class="btn btn-apple" onclick="alert('🍏 Connexion avec Apple en cours...')">
-                🍏 Continuer avec Apple
-            </button>
+            <button class="btn btn-google" onclick="alert('🔵 Connexion avec Google en cours...')">🔵 Continuer avec Google</button>
+            <button class="btn btn-amazon" onclick="alert('📦 Connexion avec Amazon en cours...')">📦 Continuer avec Amazon</button>
+            <button class="btn btn-apple" onclick="alert('🍏 Connexion avec Apple en cours...')">🍏 Continuer avec Apple</button>
 
             <div class="lien">
                 <a href="#" onclick="afficherMdpOublie(); return false;">Problèmes de connexion ?</a>
             </div>
         </div>
 
-        <!-- FORMULAIRE MOT DE PASSE OUBLIÉ -->
         <div id="form-mdp-oublie" class="cache">
             <h3>Mot de passe oublié ?</h3>
             <p>Réinitialise ton mot de passe en choisissant une méthode :</p>
-
-            <div style="margin-bottom:12px;">
+            <div class="groupe">
                 <label>📧 Par e-mail</label>
                 <input type="email" id="recup-email" placeholder="ton@email.com">
-                <button class="btn btn-principal" style="margin-top:8px;" onclick="envoyerEmail()">Envoyer le lien</button>
+                <button class="btn btn-principal" onclick="envoyerEmail()">Envoyer le lien</button>
             </div>
-
             <div class="separateur">ou</div>
-
-            <div>
+            <div class="groupe">
                 <label>📱 Par numéro de téléphone</label>
                 <input type="tel" id="recup-tel" placeholder="+33 6 00 00 00 00">
-                <button class="btn btn-principal" style="margin-top:8px;" onclick="envoyerSMS()">Envoyer le code par SMS</button>
+                <button class="btn btn-principal" onclick="envoyerSMS()">Envoyer le code par SMS</button>
             </div>
-
-            <div class="lien" style="margin-top:20px;">
+            <div class="lien">
                 <a href="#" onclick="retourConnexion(); return false;">← Retour à la connexion</a>
             </div>
         </div>
 
-        <!-- MESSAGE -->
         <div id="message" class="message"></div>
     </div>
 
 <script>
-// === GESTION DES ONGLETS ===
+// === 🌐 OUVRIR/FERMER LA LISTE DES LANGUES ===
+function basculerListeLangue() {
+    document.getElementById('liste-langue').classList.toggle('ouvert');
+}
+
+// === 🌐 CHOISIR LA LANGUE (PAGE DE CONNEXION SEULEMENT) ===
+function choisirLangue(code, element) {
+    localStorage.setItem('langueConnexion', code);
+    document.querySelectorAll('.liste-langue button').forEach(b => b.classList.remove('actif'));
+    event.currentTarget.classList.add('actif');
+    basculerListeLangue();
+    afficherMessage('✅ Langue changée pour cette page !', 'succes');
+}
+
+// === ⚙️ OUVRIR/FERMER RÉGLAGES ===
+function basculerReglages() {
+    document.getElementById('panneau-reglages').classList.toggle('ouvert');
+}
+
+// === 🎨 CHOISIR LE THÈME ===
+function choisirTheme(nomTheme, element) {
+    localStorage.setItem('themeChoisi', nomTheme);
+    document.querySelectorAll('.btn-theme').forEach(t => t.classList.remove('actif'));
+    element.classList.add('actif');
+    appliquerTheme(nomTheme);
+}
+function appliquerTheme(nom) {
+    document.body.className = nom;
+}
+
+// === 📝 SAUVEGARDER RÉGLAGES ===
+function sauvegarderReglages() {
+    const sousTitres = document.getElementById('choix-sous-titres').value;
+    localStorage.setItem('sousTitres', sousTitres);
+    afficherMessage('✅ Réglages sauvegardés !', 'succes');
+}
+
+// === CHARGER LES CHOIX SAUVEGARDÉS ===
+function chargerChoix() {
+    // Langue
+    if (localStorage.getItem('langueConnexion')) {
+        const code = localStorage.getItem('langueConnexion');
+        document.querySelectorAll('.liste-langue button').forEach(b => {
+            if (b.dataset.langue === code) b.classList.add('actif');
+        });
+    }
+    // Thème
+    if (localStorage.getItem('themeChoisi')) {
+        const theme = localStorage.getItem('themeChoisi');
+        appliquerTheme(theme);
+        document.querySelectorAll('.btn-theme').forEach(el => {
+            if (el.dataset.theme === theme) el.classList.add('actif');
+        });
+    }
+    // Sous-titres
+    if (localStorage.getItem('sousTitres')) {
+        document.getElementById('choix-sous-titres').value = localStorage.getItem('sousTitres');
+    }
+}
+
+// === GESTION CONNEXION ===
 function changerOnglet(nom) {
     document.querySelectorAll('.onglet').forEach(o => o.classList.remove('actif'));
     event.currentTarget.classList.add('actif');
-    if (nom === 'inscription') {
-        afficherMessage('📝 Inscription bientôt disponible !', 'succes');
-    } else {
-        cacherMessage();
-    }
+    if (nom === 'inscription') afficherMessage('📝 Inscription bientôt disponible !', 'succes');
+    else cacherMessage();
 }
-
-// === AFFICHER MOT DE PASSE OUBLIÉ ===
 function afficherMdpOublie() {
     document.getElementById('form-connexion').classList.add('cache');
     document.getElementById('form-mdp-oublie').classList.remove('cache');
-    cacherMessage();
 }
-
-// === RETOUR CONNEXION ===
 function retourConnexion() {
     document.getElementById('form-mdp-oublie').classList.add('cache');
     document.getElementById('form-connexion').classList.remove('cache');
-    cacherMessage();
 }
-
-// === SE CONNECTER ===
 function seConnecter() {
     const identifiant = document.getElementById('login-identifiant').value;
     const mdp = document.getElementById('login-mdp').value;
-
-    if (!identifiant || !mdp) {
-        afficherMessage('⚠️ Remplis tous les champs !', 'erreur');
-        return;
-    }
-
+    if (!identifiant || !mdp) return afficherMessage('⚠️ Remplis tous les champs !', 'erreur');
     localStorage.setItem('utilisateurConnecte', identifiant);
     afficherMessage('✅ Connexion réussie ! Redirection...', 'succes');
-
-    setTimeout(() => {
-        window.location.href = 'accueil.html';
-    }, 2000);
+    setTimeout(() => window.location.href = 'accueil.html', 2000);
 }
-
-// === ENVOYER EMAIL ===
 function envoyerEmail() {
     const email = document.getElementById('recup-email').value;
-    if (!email) {
-        afficherMessage('⚠️ Saisis ton adresse e-mail !', 'erreur');
-        return;
-    }
-    afficherMessage('✅ Lien envoyé par e-mail ! Vérifie ta boîte de réception.', 'succes');
+    if (!email) return afficherMessage('⚠️ Saisis ton adresse e-mail !', 'erreur');
+    afficherMessage('✅ Lien envoyé par e-mail !', 'succes');
 }
-
-// === ENVOYER SMS ===
 function envoyerSMS() {
     const tel = document.getElementById('recup-tel').value;
-    if (!tel) {
-        afficherMessage('⚠️ Saisis ton numéro de téléphone !', 'erreur');
-        return;
-    }
+    if (!tel) return afficherMessage('⚠️ Saisis ton numéro !', 'erreur');
     afficherMessage('✅ Code envoyé par SMS !', 'succes');
 }
-
-// === AFFICHER / CACHER MESSAGE ===
 function afficherMessage(texte, type) {
     const msg = document.getElementById('message');
     msg.textContent = texte;
     msg.className = 'message ' + type;
+    setTimeout(cacherMessage, 4000);
 }
 function cacherMessage() {
     document.getElementById('message').className = 'message';
 }
 
-// === 🎨 CHARGER AUTOMATIQUEMENT LE THÈME CHOISI PAR L'UTILISATEUR ===
+// === AU CHARGEMENT ===
 window.onload = function() {
-    // Si l'utilisateur a choisi un thème sur une autre page → il s'applique ICI aussi !
-    if (localStorage.getItem('themeChoisi')) {
-        const theme = localStorage.getItem('themeChoisi');
-        document.body.className = theme;
-    }
+    chargerChoix();
 }
 </script>
 
