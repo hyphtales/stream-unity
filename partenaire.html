@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>StreamUnity - Partenaires</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {outline: none; box-sizing: border-box;}
+        body {background: linear-gradient(135deg, #2a1060, #1a0840); color: white; font-family: sans-serif; margin: 0; padding: 0; min-height: 100vh;}
+        .conteneur {max-width: 900px; margin: 30px auto; padding: 20px;}
+        .entete {text-align: center; margin-bottom: 40px;}
+        .entete h2 {font-size: 32px; margin-bottom: 10px;}
+        .entete p {color: #aaa; font-size: 18px;}
+        .grille-partenaires {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin: 30px 0;}
+        .carte-partenaire {background: rgba(255,255,255,0.05); border: 2px solid #9147ff; border-radius: 15px; padding: 25px; text-align: center; transition: all 0.3s;}
+        .carte-partenaire:hover {transform: translateY(-5px); box-shadow: 0 0 20px rgba(145,71,255,0.4);}
+        .badge-partenaire {display: inline-block; background: linear-gradient(90deg, #ffd700, #ffec8b); color: #000; font-weight: bold; padding: 4px 12px; border-radius: 20px; font-size: 13px; margin-bottom: 15px;}
+        .avatar {width: 100px; height: 100px; border-radius: 50%; background: #9147ff; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 40px;}
+        .nom {font-size: 22px; font-weight: bold; margin-bottom: 5px; color: #ffd700;}
+        .description {color: #ccc; font-size: 14px; margin-bottom: 15px;}
+        .reseaux {display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;}
+        .btn-reseau {padding: 8px 12px; background: #2f2f35; color: white; border-radius: 8px; text-decoration: none; font-size: 13px; transition: all 0.2s;}
+        .btn-reseau:hover {background: #9147ff;}
+        .formulaire {background: rgba(255,255,255,0.05); border-radius: 15px; padding: 30px; margin-top: 50px;}
+        .formulaire h3 {text-align: center; margin-bottom: 25px; font-size: 24px;}
+        .champ {width: 100%; padding: 12px 15px; background: #2a1060; border: 2px solid #5533aa; border-radius: 8px; color: white; margin-bottom: 15px; font-size: 15px;}
+        .bouton-envoyer {width: 100%; padding: 15px; background: linear-gradient(90deg, #ffd700, #ffb300); color: #000; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; transition: all 0.2s;}
+        .bouton-envoyer:hover {transform: scale(1.02);}
+        .lien-retour {text-align: center; margin-top: 40px;}
+        .lien-retour a {color: #a970ff; text-decoration: none;}
+    </style>
+</head>
+<body>
+    <div class="conteneur">
+        <div class="entete">
+            <h2>🏅 Nos Partenaires</h2>
+            <p>Découvre nos créateurs et partenaires officiels</p>
+        </div>
+
+        <div class="grille-partenaires">
+            <!-- Exemple Partenaire 1 -->
+            <div class="carte-partenaire">
+                <span class="badge-partenaire">⭐ PARTENAIRE OFFICIEL</span>
+                <div class="avatar">🎮</div>
+                <div class="nom">StreamUnity</div>
+                <div class="description">Créateur de la plateforme — Jeux et streaming</div>
+                <div class="reseaux">
+                    <a href="#" class="btn-reseau">🟪 Twitch</a>
+                    <a href="#" class="btn-reseau">🟦 Discord</a>
+                    <a href="#" class="btn-reseau">🎵 TikTok</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORMULAIRE DEVENIR PARTENAIRE -->
+        <div class="formulaire">
+            <h3>📝 Devenir Partenaire</h3>
+            <p style="text-align:center; color:#ccc; margin-bottom:20px;">Tu es créateur et tu veux nous rejoindre ? Remplis le formulaire :</p>
+            <input type="text" class="champ" placeholder="Ton pseudo / Nom de chaîne">
+            <input type="url" class="champ" placeholder="Lien vers ta chaîne (Twitch, YouTube, TikTok...)">
+            <input type="number" class="champ" placeholder="Nombre d'abonnés / followers">
+            <textarea class="champ" rows="4" placeholder="Présente-toi brièvement et explique pourquoi tu veux devenir partenaire..."></textarea>
+            <button class="bouton-envoyer" onclick="alert('✅ Demande envoyée ! Je te répondrai rapidement !')">Envoyer ma demande</button>
+        </div>
+
+        <div class="lien-retour">
+            <a href="accueil.html">← Retour à l'accueil</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreamUnity - Paramètres</title>
+    <style>
+        * {margin:0; padding:0; box-sizing:border-box;}
+        body {
+            background: linear-gradient(135deg, #2a1060, #1a0840);
+            color: #efeff1;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+        }
+        .menu {
+            background: rgba(0,0,0,0.4);
+            padding:14px;
+            text-align:center;
+            position:sticky;
+            top:0;
+            border-bottom:1px solid rgba(145,71,255,0.3);
+        }
+        .menu a {
+            display:inline-block;
+            color:#adadb8;
+            text-decoration:none;
+            padding:10px 16px;
+            margin:0 4px;
+            border-radius:6px;
+            font-size:14px;
+        }
+        .menu a:hover, .menu a.actif {
+            background:#9147ff;
+            color:white;
+        }
+        .icone-flottante {
+            position:fixed;
+            right:20px;
+            top:50%;
+            transform:translateY(-50%);
+            width:50px;
+            height:50px;
+            background:linear-gradient(135deg,#9147ff,#772ce8);
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:24px;
+            color:white;
+            text-decoration:none;
+            z-index:9999;
+        }
+        .conteneur {
+            max-width:600px;
+            margin:40px auto;
+            padding:30px;
+            background:rgba(0,0,0,0.3);
+            border-radius:12px;
+            border:1px solid rgba(145,71,255,0.3);
+        }
+        .conteneur h1 {
+            color:#9147ff;
+            text-align:center;
+            margin-bottom:30px;
+        }
+        .bloc {margin-bottom:25px;}
+        label {display:block; margin-bottom:8px; font-weight:500;}
+        select, button {
+            width:100%;
+            padding:12px;
+            border-radius:6px;
+            border:1px solid rgba(145,71,255,0.5);
+            background:rgba(0,0,0,0.4);
+            color:white;
+            font-size:15px;
+        }
+        button {
+            background:linear-gradient(135deg,#9147ff,#772ce8);
+            border:none;
+            cursor:pointer;
+            font-weight:600;
+            margin-top:10px;
+        }
+        button:hover {opacity:0.9;}
+        .message {
+            margin-top:15px;
+            padding:10px;
+            border-radius:6px;
+            text-align:center;
+            display:none;
+        }
+        .message.vert {background:rgba(0,180,0,0.2); color:#90ee90; display:block;}
+    </style>
+</head>
+<body>
+
+    <a href="accueil.html" class="icone-flottante" title="Retour à l'accueil">🏠</a>
+
+    <nav class="menu">
+        <a href="accueil.html" data-trad="menu_accueil">🏠 Accueil</a>
+        <a href="streams.html" data-trad="menu_streams">📺 Streams & Musique</a>
+        <a href="salon.html" data-trad="menu_discussions">💬 Discussions</a>
+        <a href="abonnements.html" data-trad="menu_abonnements">💜 Abonnements</a>
+        <a href="profil.html" data-trad="menu_profil">👤 Profil</a>
+        <a href="test.html" data-trad="menu_test">🧪 Test & Avis</a>
+        <a href="parametres.html" data-trad="menu_parametres" class="actif">⚙️ Paramètres</a>
+    </nav>
+
+    <div class="conteneur" id="langue">
+        <h1 data-trad="titre_page">⚙️ Paramètres</h1>
+
+        <div class="bloc">
+            <label data-trad="choisir_langue">🌐 Choisis ta langue :</label>
+            <select id="listeLangue">
+                <option value="fr">🇫🇷 Français</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="de">🇩🇪 Deutsch</option>
+                <option value="it">🇮🇹 Italiano</option>
+                <option value="pt">🇵🇹 Português</option>
+                <option value="pt-BR">🇧🇷 Português (Brésil)</option>
+                <option value="ru">🇷🇺 Русский</option>
+                <option value="ja">🇯🇵 日本語</option>
+                <option value="zh-CN">🇨🇳 中文</option>
+                <option value="ko">🇰🇷 한국어</option>
+                <option value="ar">🇸🇦 العربية</option>
+                <option value="tr">🇹🇷 Türkçe</option>
+            </select>
+            <button onclick="sauvegarderLangue()" data-trad="bouton_sauvegarder">💾 Sauvegarder la langue</button>
+            <div id="confirmation" class="message"></div>
+        </div>
+    </div>
+
+<script>
+const traductionsDispo = {
+    fr: { menu_accueil:"🏠 Accueil",menu_streams:"📺 Streams & Musique",menu_discussions:"💬 Discussions",menu_abonnements:"💜 Abonnements",menu_profil:"👤 Profil",menu_test:"🧪 Test & Avis",menu_parametres:"⚙️ Paramètres",titre_page:"⚙️ Paramètres",choisir_langue:"🌐 Choisis ta langue :",bouton_sauvegarder:"💾 Sauvegarder la langue",confirme:"✅ Langue sauvegardée !" },
+    en: { menu_accueil:"🏠 Home",menu_streams:"📺 Streams & Music",menu_discussions:"💬 Chat",menu_abonnements:"💜 Subscriptions",menu_profil:"👤 Profile",menu_test:"🧪 Test & Reviews",menu_parametres:"⚙️ Settings",titre_page:"⚙️ Settings",choisir_langue:"🌐 Choose your language :",bouton_sauvegarder:"💾 Save language",confirme:"✅ Language saved!" },
+    es: { menu_accueil:"🏠 Inicio",menu_streams:"📺 Transmisiones & Música",menu_discussions:"💬 Chat",menu_abonnements:"💜 Suscripciones",menu_profil:"👤 Perfil",menu_test:"🧪 Prueba y Opiniones",menu_parametres:"⚙️ Configuración",titre_page:"⚙️ Configuración",choisir_langue:"🌐 Elige tu idioma :",bouton_sauvegarder:"💾 Guardar idioma",confirme:"✅ ¡Idioma guardado!" },
+    de: { menu_accueil:"🏠 Startseite",menu_streams:"📺 Streams & Musik",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abonnements",menu_profil:"👤 Profil",menu_test:"🧪 Test & Bewertungen",menu_parametres:"⚙️ Einstellungen",titre_page:"⚙️ Einstellungen",choisir_langue:"🌐 Wähle deine Sprache :",bouton_sauvegarder:"💾 Sprache speichern",confirme:"✅ Sprache gespeichert!" },
+    it: { menu_accueil:"🏠 Home",menu_streams:"📺 Stream & Musica",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abbonamenti",menu_profil:"👤 Profilo",menu_test:"🧪 Test e Recensioni",menu_parametres:"⚙️ Impostazioni",titre_page:"⚙️ Impostazioni",choisir_langue:"🌐 Scegli la tua lingua :",bouton_sauvegarder:"💾 Salva lingua",confirme:"✅ Lingua salvata!" },
+    pt: { menu_accueil:"🏠 Início",menu_streams:"📺 Transmissões & Música",menu_discussions:"💬 Conversas",menu_abonnements:"💜 Subscrições",menu_profil:"👤 Perfil",menu_test:"🧪 Teste & Avaliações",menu_parametres:"⚙️ Definições",titre_page:"⚙️ Definições",choisir_langue:"🌐 Escolha o seu idioma :",bouton_sauvegarder:"💾 Salvar idioma",confirme:"✅ Idioma salvo!" },
+    "pt-BR": { menu_accueil:"🏠 Início",menu_streams:"📺 Transmissões & Música",menu_discussions:"💬 Conversas",menu_abonnements:"💜 Assinaturas",menu_profil:"👤 Perfil",menu_test:"🧪 Testes & Avaliações",menu_parametres:"⚙️ Configurações",titre_page:"⚙️ Configurações",choisir_langue:"🌐 Escolha seu idioma :",bouton_sauvegarder:"💾 Salvar idioma",confirme:"✅ Idioma salvo!" },
+    ru: { menu_accueil:"🏠 Главная",menu_streams:"📺 Трансляции & Музыка",menu_discussions:"💬 Чат",menu_abonnements:"💜 Подписки",menu_profil:"👤 Профиль",menu_test:"🧪 Тест & Отзывы",menu_parametres:"⚙️ Настройки",titre_page:"⚙️ Настройки",choisir_langue:"🌐 Выберите язык :",bouton_sauvegarder:"💾 Сохранить язык",confirme:"✅ Язык сохранён!" },
+    ja: { menu_accueil:"🏠 ホーム",menu_streams:"📺 ストリーム & 音楽",menu_discussions:"💬 チャット",menu_abonnements:"💜 サブスクリプション",menu_profil:"👤 プロフィール",menu_test:"🧪 テスト & レビュー",menu_parametres:"⚙️ 設定",titre_page:"⚙️ 設定",choisir_langue:"🌐 言語を選択 :",bouton_sauvegarder:"💾 言語を保存",confirme:"✅ 言語を保存しました！" },
+    "zh-CN": { menu_accueil:"🏠 首页",menu_streams:"📺 直播 & 音乐",menu_discussions:"💬 聊天",menu_abonnements:"💜 订阅",menu_profil:"👤 个人资料",menu_test:"🧪 测试 & 评论",menu_parametres:"⚙️ 设置",titre_page:"⚙️ 设置",choisir_langue:"🌐 选择语言 :",bouton_sauvegarder:"💾 保存语言",confirme:"✅ 语言已保存！" },
+    ko: { menu_accueil:"🏠 홈",menu_streams:"📺 스트림 & 음악",menu_discussions:"💬 채팅",menu_abonnements:"💜 구독",menu_profil:"👤 프로필",menu_test:"🧪 테스트 & 리뷰",menu_parametres:"⚙️ 설정",titre_page:"⚙️ 설정",choisir_langue:"🌐 언어 선택 :",bouton_sauvegarder:"💾 언어 저장",confirme:"✅ 언어가 저장되었습니다!" },
+    ar: { menu_accueil:"🏠 الرئيسية",menu_streams:"📺 البثوث والموسيقى",menu_discussions:"💬 المحادثات",menu_abonnements:"💜 الاشتراكات",menu_profil:"👤 الملف الشخصي",menu_test:"🧪 الاختبار والتقييمات",menu_parametres:"⚙️ الإعدادات",titre_page:"⚙️ الإعدادات",choisir_langue:"🌐 اختر لغتك :",bouton_sauvegarder:"💾 حفظ اللغة",confirme:"✅ تم حفظ اللغة!" },
+    tr: { menu_accueil:"🏠 Ana Sayfa",menu_streams:"📺 Yayınlar & Müzik",menu_discussions:"💬 Sohbet",menu_abonnements:"💜 Abonelikler",menu_profil:"👤 Profil",menu_test:"🧪 Test & Değerlendirmeler",menu_parametres:"⚙️ Ayarlar",titre_page:"⚙️ Ayarlar",choisir_langue:"🌐 Dilini seç :",bouton_sauvegarder:"💾 Dili kaydet",confirme:"✅ Dil kaydedildi!" }
+};
+
+function appliquerLangueGlobale() {
+    const langue = localStorage.getItem('langueSite') || 'fr';
+    document.getElementById('listeLangue').value = langue;
+    const t = traductionsDispo[langue] || traductionsDispo.en;
+    document.documentElement.lang = langue;
+    document.querySelectorAll('[data-trad]').forEach(el => {
+        const cle = el.getAttribute('data-trad');
+        if (t[cle]) el.textContent = t[cle];
+    });
+}
+
+function sauvegarderLangue() {
+    const langue = document.getElementById('listeLangue').value;
+    localStorage.setItem('langueSite', langue);
+    const t = traductionsDispo[langue] || traductionsDispo.en;
+    appliquerLangueGlobale();
+    const msg = document.getElementById('confirmation');
+    msg.textContent = t.confirme;
+    msg.className = 'message vert';
+    setTimeout(() => { msg.style.display = 'none'; }, 3000);
+}
+
+appliquerLangueGlobale();
+</script>
+</body>
+</html>

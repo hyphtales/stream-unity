@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreamUnity - TITRE DE LA PAGE</title>StreamUnity - Profil</title>
+    <style>
+        * {margin:0; padding:0; box-sizing:border-box;}
+        body {
+            background: linear-gradient(135deg, #2a1060, #1a0840);
+            color: #efeff1;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+        }
+        .menu {
+            background: rgba(0,0,0,0.4);
+            padding:14px;
+            text-align:center;
+            position:sticky;
+            top:0;
+            border-bottom:1px solid rgba(145,71,255,0.3);
+        }
+        .menu a {
+            display:inline-block;
+            color:#adadb8;
+            text-decoration:none;
+            padding:10px 16px;
+            margin:0 4px;
+            border-radius:6px;
+            font-size:14px;
+        }
+        .menu a:hover, .menu a.actif {
+            background:#9147ff;
+            color:white;
+        }
+        .icone-flottante {
+            position:fixed;
+            right:20px;
+            top:50%;
+            transform:translateY(-50%);
+            width:50px;
+            height:50px;
+            background:linear-gradient(135deg,#9147ff,#772ce8);
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:24px;
+            color:white;
+            text-decoration:none;
+            z-index:9999;
+        }
+        .conteneur {
+            max-width:900px;
+            margin:30px auto;
+            padding:20px;
+            text-align:center;
+        }
+        h1 {color:#9147ff; margin-top:50px;}
+    </style>
+</head>
+<body>
+
+    <a href="parametres.html#langue" class="icone-flottante" title="Changer la langue">🌐</a>
+
+    <nav class="menu">
+        <a href="accueil.html" data-trad="menu_accueil" class="actif">🏠 Accueil</a>
+        <a href="streams.html" data-trad="menu_streams">📺 Streams & Musique</a>
+        <a href="salon.html" data-trad="menu_discussions">💬 Discussions</a>
+        <a href="abonnements.html" data-trad="menu_abonnements">💜 Abonnements</a>
+        <a href="profil.html" data-trad="menu_profil">👤 Profil</a>
+        <a href="test.html" data-trad="menu_test">🧪 Test & Avis</a>
+        <a href="parametres.html" data-trad="menu_parametres">⚙️ Paramètres</a>
+    </nav>
+
+    <div class="conteneur">
+        <h1 data-trad="bienvenue">Bienvenue sur StreamUnity</h1>
+    </div>
+
+<script>
+const traductionsDispo = {
+    fr: { menu_accueil:"🏠 Accueil",menu_streams:"📺 Streams & Musique",menu_discussions:"💬 Discussions",menu_abonnements:"💜 Abonnements",menu_profil:"👤 Profil",menu_test:"🧪 Test & Avis",menu_parametres:"⚙️ Paramètres",bienvenue:"Bienvenue sur StreamUnity" },
+    en: { menu_accueil:"🏠 Home",menu_streams:"📺 Streams & Music",menu_discussions:"💬 Chat",menu_abonnements:"💜 Subscriptions",menu_profil:"👤 Profile",menu_test:"🧪 Test & Reviews",menu_parametres:"⚙️ Settings",bienvenue:"Welcome to StreamUnity" },
+    es: { menu_accueil:"🏠 Inicio",menu_streams:"📺 Transmisiones & Música",menu_discussions:"💬 Chat",menu_abonnements:"💜 Suscripciones",menu_profil:"👤 Perfil",menu_test:"🧪 Prueba y Opiniones",menu_parametres:"⚙️ Configuración",bienvenue:"Bienvenido a StreamUnity" },
+    de: { menu_accueil:"🏠 Startseite",menu_streams:"📺 Streams & Musik",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abonnements",menu_profil:"👤 Profil",menu_test:"🧪 Test & Bewertungen",menu_parametres:"⚙️ Einstellungen",bienvenue:"Willkommen bei StreamUnity" },
+    it: { menu_accueil:"🏠 Home",menu_streams:"📺 Stream & Musica",menu_discussions:"💬 Chat",menu_abonnements:"💜 Abbonamenti",menu_profil:"👤 Profilo",menu_test:"🧪 Test e Recensioni",menu_parametres:"⚙️ Impostazioni",bienvenue:"Benvenuto su StreamUnity" },
+    pt: { menu_accueil:"🏠 Início",menu_streams:"📺 Transmissões & Música",menu_discussions:"💬 Conversas",menu_abonnements:"💜 Subscrições",menu_profil:"👤 Perfil",menu_test:"🧪 Teste & Avaliações",menu_parametres:"⚙️ Definições",bienvenue:"Bem-vindo ao StreamUnity" },
+    "pt-BR": { menu_accueil:"🏠 Início",menu_streams:"📺 Transmissões & Música",menu_discussions:"💬 Conversas",menu_abonnements:"💜 Assinaturas",menu_profil:"👤 Perfil",menu_test:"🧪 Testes & Avaliações",menu_parametres:"⚙️ Configurações",bienvenue:"Bem-vindo ao StreamUnity" },
+    ru: { menu_accueil:"🏠 Главная",menu_streams:"📺 Трансляции & Музыка",menu_discussions:"💬 Чат",menu_abonnements:"💜 Подписки",menu_profil:"👤 Профиль",menu_test:"🧪 Тест & Отзывы",menu_parametres:"⚙️ Настройки",bienvenue:"Добро пожаловать в StreamUnity" },
+    ja: { menu_accueil:"🏠 ホーム",menu_streams:"📺 ストリーム & 音楽",menu_discussions:"💬 チャット",menu_abonnements:"💜 サブスクリプション",menu_profil:"👤 プロフィール",menu_test:"🧪 テスト & レビュー",menu_parametres:"⚙️ 設定",bienvenue:"StreamUnity へようこそ" },
+    "zh-CN": { menu_accueil:"🏠 首页",menu_streams:"📺 直播 & 音乐",menu_discussions:"💬 聊天",menu_abonnements:"💜 订阅",menu_profil:"👤 个人资料",menu_test:"🧪 测试 & 评论",menu_parametres:"⚙️ 设置",bienvenue:"欢迎来到 StreamUnity" },
+    ko: { menu_accueil:"🏠 홈",menu_streams:"📺 스트림 & 음악",menu_discussions:"💬 채팅",menu_abonnements:"💜 구독",menu_profil:"👤 프로필",menu_test:"🧪 테스트 & 리뷰",menu_parametres:"⚙️ 설정",bienvenue:"StreamUnity에 오신 것을 환영합니다" },
+    ar: { menu_accueil:"🏠 الرئيسية",menu_streams:"📺 البثوث والموسيقى",menu_discussions:"💬 المحادثات",menu_abonnements:"💜 الاشتراكات",menu_profil:"👤 الملف الشخصي",menu_test:"🧪 الاختبار والتقييمات",menu_parametres:"⚙️ الإعدادات",bienvenue:"مرحباً بك في StreamUnity" },
+    tr: { menu_accueil:"🏠 Ana Sayfa",menu_streams:"📺 Yayınlar & Müzik",menu_discussions:"💬 Sohbet",menu_abonnements:"💜 Abonelikler",menu_profil:"👤 Profil",menu_test:"🧪 Test & Değerlendirmeler",menu_parametres:"⚙️ Ayarlar",bienvenue:"StreamUnity'ye Hoş Geldiniz" }
+};
+
+function appliquerLangueGlobale() {
+    const langue = localStorage.getItem('langueSite') || 'fr';
+    const t = traductionsDispo[langue] || traductionsDispo.en;
+    document.documentElement.lang = langue;
+    document.querySelectorAll('[data-trad]').forEach(el => {
+        const cle = el.getAttribute('data-trad');
+        if (t[cle]) el.textContent = t[cle];
+    });
+}
+
+appliquerLangueGlobale();
+</script>
+</body>
+</html>
